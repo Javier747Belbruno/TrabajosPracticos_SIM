@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajosPracticosSIM.TP_1.Entidades;
 using TrabajosPracticosSIM.TP_1.InterfacesDeUsuario;
 
 namespace TrabajosPracticosSIM
@@ -13,10 +14,8 @@ namespace TrabajosPracticosSIM
 
         //Instancia Unica - Patron Singleton
         private static readonly ControladorTP1 _instance = new ControladorTP1();
-        
         //Lista de Vistas / Pantallas que controla el ControladorTP1
         private List<Form> Views = new List<Form>();
-
 
         //Constructor Privado.
         private ControladorTP1()
@@ -56,14 +55,28 @@ namespace TrabajosPracticosSIM
         }
 
         //Viene de Pantalla GenDeNumerosAleat.
-        public void opcionGeneracionDeNumerosAleatorios(Frm_PantallaGeneracionDeNumerosAleatorios frm_PantallaGeneracionDeNumerosAleatorios)
+        public void opcionGeneracionDeNumerosAleatorios(Frm_PantallaGeneracionDeNumerosAleatorios frm, int a, int c, int semilla)
         {
-            var mapa = GeneracionDeNumerosAleatorios();
-            frm_PantallaGeneracionDeNumerosAleatorios.LlenarTablaInicial(mapa);
+            if(frm.getMetodo() == 0)
+            {
+                GeneradorCongruenteMixto genCMixto = new GeneradorCongruenteMixto(x:semilla,a:a,c:c);
+                var lista = genCMixto.getLista();
+                frm.LlenarTablaInicial(lista);
+            }
+            if (frm.getMetodo() == 1)
+            {
+                GeneradorCongruenteMultiplicativo genCMult = new GeneradorCongruenteMultiplicativo(x: semilla, a: a);
+                var lista = genCMult.getLista();
+                frm.LlenarTablaInicial(lista);
+            }
         }
 
         public SortedDictionary<int, double> GeneracionDeNumerosAleatorios()
         {
+            
+            
+            
+            
             //Prueba Con 5 Valores de llenado de Tabla.
             SortedDictionary<int, double> numeros = new SortedDictionary<int, double>();
 

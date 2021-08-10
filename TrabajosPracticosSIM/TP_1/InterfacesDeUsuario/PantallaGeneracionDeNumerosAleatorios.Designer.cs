@@ -34,6 +34,8 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.btn_listar_todo = new System.Windows.Forms.Button();
             this.btn_desde_hasta = new System.Windows.Forms.Button();
             this.dgv_numeros = new System.Windows.Forms.DataGridView();
+            this.Posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numero_Aleatorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_semilla = new System.Windows.Forms.Label();
             this.tb_semilla = new System.Windows.Forms.TextBox();
             this.tb_a = new System.Windows.Forms.TextBox();
@@ -51,11 +53,9 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.label6 = new System.Windows.Forms.Label();
             this.tb_hasta = new System.Windows.Forms.TextBox();
             this.pnl_tabla = new System.Windows.Forms.Panel();
-            this.btn_Prox = new System.Windows.Forms.Button();
-            this.Posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numero_Aleatorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_Prox = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_numeros)).BeginInit();
             this.pnl_IngresoDatos.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -70,6 +70,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.btn_cerrar_ventana.TabIndex = 0;
             this.btn_cerrar_ventana.Text = "Cerrar ventana";
             this.btn_cerrar_ventana.UseVisualStyleBackColor = true;
+            this.btn_cerrar_ventana.Click += new System.EventHandler(this.btn_cerrar_ventana_Click);
             // 
             // btn_Prox_20
             // 
@@ -114,6 +115,20 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.dgv_numeros.RowTemplate.Height = 24;
             this.dgv_numeros.Size = new System.Drawing.Size(400, 490);
             this.dgv_numeros.TabIndex = 4;
+            // 
+            // Posicion
+            // 
+            this.Posicion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Posicion.HeaderText = "Posicion";
+            this.Posicion.MinimumWidth = 6;
+            this.Posicion.Name = "Posicion";
+            // 
+            // Numero_Aleatorio
+            // 
+            this.Numero_Aleatorio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Numero_Aleatorio.HeaderText = "Número Aleatorio";
+            this.Numero_Aleatorio.MinimumWidth = 6;
+            this.Numero_Aleatorio.Name = "Numero_Aleatorio";
             // 
             // lbl_semilla
             // 
@@ -279,29 +294,14 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.pnl_tabla.Size = new System.Drawing.Size(733, 506);
             this.pnl_tabla.TabIndex = 19;
             // 
-            // btn_Prox
+            // label2
             // 
-            this.btn_Prox.Location = new System.Drawing.Point(74, 38);
-            this.btn_Prox.Name = "btn_Prox";
-            this.btn_Prox.Size = new System.Drawing.Size(139, 49);
-            this.btn_Prox.TabIndex = 20;
-            this.btn_Prox.Text = "Próximo";
-            this.btn_Prox.UseVisualStyleBackColor = true;
-            this.btn_Prox.Click += new System.EventHandler(this.btn_Prox_Click_1);
-            // 
-            // Posicion
-            // 
-            this.Posicion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Posicion.HeaderText = "Posicion";
-            this.Posicion.MinimumWidth = 6;
-            this.Posicion.Name = "Posicion";
-            // 
-            // Numero_Aleatorio
-            // 
-            this.Numero_Aleatorio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Numero_Aleatorio.HeaderText = "Número Aleatorio";
-            this.Numero_Aleatorio.MinimumWidth = 6;
-            this.Numero_Aleatorio.Name = "Numero_Aleatorio";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 384);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Hasta";
             // 
             // label1
             // 
@@ -312,14 +312,15 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.label1.TabIndex = 21;
             this.label1.Text = "Desde";
             // 
-            // label2
+            // btn_Prox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 384);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 17);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Hasta";
+            this.btn_Prox.Location = new System.Drawing.Point(74, 38);
+            this.btn_Prox.Name = "btn_Prox";
+            this.btn_Prox.Size = new System.Drawing.Size(139, 49);
+            this.btn_Prox.TabIndex = 20;
+            this.btn_Prox.Text = "Próximo";
+            this.btn_Prox.UseVisualStyleBackColor = true;
+            this.btn_Prox.Click += new System.EventHandler(this.btn_Prox_Click_1);
             // 
             // Frm_PantallaGeneracionDeNumerosAleatorios
             // 
