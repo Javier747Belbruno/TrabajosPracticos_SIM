@@ -62,6 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TP_1\ControladorTP1.cs" />
+    <Compile Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.Designer.cs">
+      <DependentUpon>PantallaGeneracionDeNumerosAleatorios.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_1\InterfacesDeUsuario\PantallaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +76,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.resx">
+      <DependentUpon>PantallaGeneracionDeNumerosAleatorios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TP_1\InterfacesDeUsuario\PantallaPrincipal.resx">
       <DependentUpon>PantallaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +90,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -109,6 +119,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SH9q-yOc_400x400.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,17 +6,18 @@ using System.Windows.Forms;
 
 namespace TrabajosPracticosSIM
 {
+    
     static class Program
     {
+        
         /// <summary>
         /// Punto de entrada para la aplicacion.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            //Creamos controlador de TP1
-            var c = new ControladorTP1();
-            c.Start();
+            //Inicio Controlador TP 1
+            ControladorTP1.GetInstance().Start();
         }
     }
 }

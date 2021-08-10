@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajosPracticosSIM.TP_1.InterfacesDeUsuario;
 
 namespace TrabajosPracticosSIM
 {
@@ -11,19 +12,22 @@ namespace TrabajosPracticosSIM
     {
 
         //Instancia Unica - Patron Singleton
-        private ControladorTP1 mInstance;
+        private static readonly ControladorTP1 _instance = new ControladorTP1();
         //Lista de Vistas / Pantallas
         private List<Form> Views = new List<Form>();
 
 
-        //Constructor
-        public ControladorTP1()
+        //Constructor Privado.
+        private ControladorTP1()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            mInstance = this;
         }
-        public ControladorTP1 Instance { get { return mInstance; } }
+        
+        // Devolver instancia estática única.
+        public static ControladorTP1 GetInstance() { return _instance; }
+
+
         public void Start()
         {
             IniciarFuncionalidad();
@@ -37,8 +41,19 @@ namespace TrabajosPracticosSIM
 
         public void HabilitarPantallaPrincipal()
         {
-            CreateView(new PantallaPrincipal());
+            CreateView(new Frm_PantallaPrincipal());
         }
+
+        public void opcionGeneracionDeNumerosAleatorios()
+        {
+            HabilitarPantallaGeneracionDeNumerosAleatorios();
+        }
+
+        public void HabilitarPantallaGeneracionDeNumerosAleatorios()
+        {
+            CreateView(new Frm_PantallaGeneracionDeNumerosAleatorios());
+        }
+
 
         public void Exit()
         {
@@ -46,15 +61,25 @@ namespace TrabajosPracticosSIM
         }
         public void CreateView(Form frm)
         {
-            Views.Add(frm);
-            frm.FormClosed += FormClosed;
-            frm.Show();
+            //Pregunto si ya existe este Tipo de Pantalla, si no existe la creo.
+            bool EstaRepetidaLaVista = false;
+            foreach (var v in Views)
+            {
+                if (frm.GetType() == v.GetType())
+                    EstaRepetidaLaVista = true;
+            }
+            if (!EstaRepetidaLaVista) { 
+                Views.Add(frm);
+                frm.FormClosed += FormClosed;
+                frm.Show();
+            }
         }
         private void FormClosed(object sender, FormClosedEventArgs e)
         {
+            //Remover Pantalla de la lista de Pantallas.
             Views.Remove(sender as Form);
-            // NOTE: Terminar programa si no quedan mas Vistas/Forms
-            if (Views.Count == 0) Exit();
+            // NOTE: Terminar programa si no quedan mas Vistas/Forms o si se está cerrando la ventana principal.
+            if (Views.Count == 0 || sender.GetType() == typeof(Frm_PantallaPrincipal)) Exit();
         }
 
     }
