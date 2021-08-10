@@ -22,6 +22,11 @@ namespace TrabajosPracticosSIM
             ControladorTP1.GetInstance().opcionPantallaGeneracionDeNumerosAleatorios();
         }
 
+        private void btn_pruebaDeFrec_Click(object sender, EventArgs e)
+        {
+            ControladorTP1.GetInstance().opcionPantallaPruebaDeFrecuencia();
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -46,5 +51,7 @@ namespace TrabajosPracticosSIM
         {
 
         }
+
+
     }
 }

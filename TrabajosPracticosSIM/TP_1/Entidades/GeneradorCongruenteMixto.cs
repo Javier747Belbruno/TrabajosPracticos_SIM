@@ -12,13 +12,22 @@ namespace TrabajosPracticosSIM.TP_1.Entidades
         private int a;
         private int c;
         private int x; //semilla
-        private int m = 5000; //Cantidad
+        private int m; //Cantidad
 
         public GeneradorCongruenteMixto(int a,int c, int x)
         {
             this.a = a;
             this.c = c;
             this.x = x;
+            this.m = 50000; //Por defecto
+        }
+
+        public GeneradorCongruenteMixto(int a, int c, int x, int m)
+        {
+            this.a = a;
+            this.c = c;
+            this.x = x;
+            this.m = m;
         }
 
         private void LlenarLista()

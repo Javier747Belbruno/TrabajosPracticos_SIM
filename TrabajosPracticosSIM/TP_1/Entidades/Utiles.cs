@@ -8,17 +8,15 @@ namespace TrabajosPracticosSIM.TP_1
 {
     public static class Utiles
     {
-    public static double Dividir(int xi, double m)
-    {
-        double valor = (double)(xi / m);
-        return Redondear4Decimales(valor);
+        public static double Dividir(int xi, double m)
+        {
+            double valor = (double)(xi / m);
+            return Redondear4Decimales(valor);
+        }
+        public static double Redondear4Decimales(double valor)
+        {
+            double valorRedondeado = Math.Round(valor, 4, MidpointRounding.AwayFromZero);
+            return valorRedondeado;
+        }
     }
-    public static double Redondear4Decimales(double valor)
-    {
-        double valorRedondeado = Math.Round(valor, 4, MidpointRounding.AwayFromZero);
-        return valorRedondeado;
-    }
-
-
-}
 }

@@ -11,7 +11,6 @@ namespace TrabajosPracticosSIM
 {
     public class ControladorTP1 : ApplicationContext
     {
-
         //Instancia Unica - Patron Singleton
         private static readonly ControladorTP1 _instance = new ControladorTP1();
         //Lista de Vistas / Pantallas que controla el ControladorTP1
@@ -26,7 +25,6 @@ namespace TrabajosPracticosSIM
         
         // Devolver instancia estática única.
         public static ControladorTP1 GetInstance() { return _instance; }
-
 
         public void Start()
         {
@@ -63,7 +61,7 @@ namespace TrabajosPracticosSIM
                 var lista = genCMixto.getLista();
                 frm.LlenarTablaInicial(lista);
             }
-            if (frm.getMetodo() == 1)
+            if(frm.getMetodo() == 1)
             {
                 GeneradorCongruenteMultiplicativo genCMult = new GeneradorCongruenteMultiplicativo(x: semilla, a: a);
                 var lista = genCMult.getLista();
@@ -71,29 +69,19 @@ namespace TrabajosPracticosSIM
             }
         }
 
-        public SortedDictionary<int, double> GeneracionDeNumerosAleatorios()
+        public void opcionPantallaPruebaDeFrecuencia()
         {
-            
-            
-            
-            
-            //Prueba Con 5 Valores de llenado de Tabla.
-            SortedDictionary<int, double> numeros = new SortedDictionary<int, double>();
+            HabilitarPantallaPruebaDeFrecuencia();
+        }
 
-            for (int i = 1; i < 51; i++)
-            {
-                numeros.Add(i, ((double)i/50));
-            }
-            
-
-            return numeros;
+        public void HabilitarPantallaPruebaDeFrecuencia()
+        {
+            CreateView(new Frm_PantallaPruebaDeFrecuencia());
         }
 
 
-        public void Exit()
-        {
-            this.ExitThread();
-        }
+
+        //Crear una ventana
         public void CreateView(Form frm)
         {
             //Pregunto si ya existe este Tipo de Pantalla, si no existe la creo.
@@ -109,12 +97,20 @@ namespace TrabajosPracticosSIM
                 frm.Show();
             }
         }
+
+        //Evento Cerrar un Form
         private void FormClosed(object sender, FormClosedEventArgs e)
         {
             //Remover Pantalla de la lista de Pantallas.
             Views.Remove(sender as Form);
             // NOTE: Terminar programa si no quedan mas Vistas/Forms o si se está cerrando la ventana principal.
             if (Views.Count == 0 || sender.GetType() == typeof(Frm_PantallaPrincipal)) Exit();
+        }
+
+        //Finalizar Programa
+        public void Exit()
+        {
+            this.ExitThread();
         }
 
     }

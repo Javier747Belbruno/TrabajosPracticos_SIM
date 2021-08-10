@@ -29,6 +29,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_cerrar_ventana = new System.Windows.Forms.Button();
             this.btn_Prox_20 = new System.Windows.Forms.Button();
             this.btn_listar_todo = new System.Windows.Forms.Button();
@@ -64,17 +65,19 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_cerrar_ventana
             // 
-            this.btn_cerrar_ventana.Location = new System.Drawing.Point(684, 800);
+            this.btn_cerrar_ventana.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cerrar_ventana.Location = new System.Drawing.Point(669, 765);
             this.btn_cerrar_ventana.Name = "btn_cerrar_ventana";
             this.btn_cerrar_ventana.Size = new System.Drawing.Size(113, 51);
             this.btn_cerrar_ventana.TabIndex = 0;
-            this.btn_cerrar_ventana.Text = "Cerrar ventana";
+            this.btn_cerrar_ventana.Text = "Cerrar";
             this.btn_cerrar_ventana.UseVisualStyleBackColor = true;
             this.btn_cerrar_ventana.Click += new System.EventHandler(this.btn_cerrar_ventana_Click);
             // 
             // btn_Prox_20
             // 
-            this.btn_Prox_20.Location = new System.Drawing.Point(74, 130);
+            this.btn_Prox_20.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Prox_20.Location = new System.Drawing.Point(74, 106);
             this.btn_Prox_20.Name = "btn_Prox_20";
             this.btn_Prox_20.Size = new System.Drawing.Size(139, 68);
             this.btn_Prox_20.TabIndex = 1;
@@ -84,7 +87,8 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_listar_todo
             // 
-            this.btn_listar_todo.Location = new System.Drawing.Point(74, 236);
+            this.btn_listar_todo.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_listar_todo.Location = new System.Drawing.Point(74, 193);
             this.btn_listar_todo.Name = "btn_listar_todo";
             this.btn_listar_todo.Size = new System.Drawing.Size(139, 68);
             this.btn_listar_todo.TabIndex = 2;
@@ -94,7 +98,8 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_desde_hasta
             // 
-            this.btn_desde_hasta.Location = new System.Drawing.Point(74, 424);
+            this.btn_desde_hasta.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_desde_hasta.Location = new System.Drawing.Point(74, 381);
             this.btn_desde_hasta.Name = "btn_desde_hasta";
             this.btn_desde_hasta.Size = new System.Drawing.Size(139, 69);
             this.btn_desde_hasta.TabIndex = 3;
@@ -111,9 +116,17 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.Numero_Aleatorio});
             this.dgv_numeros.Location = new System.Drawing.Point(295, 3);
             this.dgv_numeros.Name = "dgv_numeros";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_numeros.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_numeros.RowHeadersWidth = 51;
             this.dgv_numeros.RowTemplate.Height = 24;
-            this.dgv_numeros.Size = new System.Drawing.Size(400, 490);
+            this.dgv_numeros.Size = new System.Drawing.Size(400, 447);
             this.dgv_numeros.TabIndex = 4;
             // 
             // Posicion
@@ -133,9 +146,10 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // lbl_semilla
             // 
             this.lbl_semilla.AutoSize = true;
-            this.lbl_semilla.Location = new System.Drawing.Point(48, 47);
+            this.lbl_semilla.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_semilla.Location = new System.Drawing.Point(35, 47);
             this.lbl_semilla.Name = "lbl_semilla";
-            this.lbl_semilla.Size = new System.Drawing.Size(51, 17);
+            this.lbl_semilla.Size = new System.Drawing.Size(53, 18);
             this.lbl_semilla.TabIndex = 5;
             this.lbl_semilla.Text = "semilla";
             // 
@@ -181,15 +195,17 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(14, 15);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 17);
+            this.label4.Size = new System.Drawing.Size(169, 21);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Ingrese los datos";
+            this.label4.Text = "Ingrese los parámetros";
             // 
             // btn_sel_Congr_Mixto
             // 
             this.btn_sel_Congr_Mixto.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_sel_Congr_Mixto.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sel_Congr_Mixto.Location = new System.Drawing.Point(90, 42);
             this.btn_sel_Congr_Mixto.Name = "btn_sel_Congr_Mixto";
             this.btn_sel_Congr_Mixto.Size = new System.Drawing.Size(173, 47);
@@ -201,6 +217,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // btn_sel_Congr_Mult
             // 
             this.btn_sel_Congr_Mult.BackColor = System.Drawing.Color.LightGray;
+            this.btn_sel_Congr_Mult.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sel_Congr_Mult.Location = new System.Drawing.Point(439, 42);
             this.btn_sel_Congr_Mult.Name = "btn_sel_Congr_Mult";
             this.btn_sel_Congr_Mult.Size = new System.Drawing.Size(176, 47);
@@ -226,6 +243,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_Generar
             // 
+            this.btn_Generar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Generar.Location = new System.Drawing.Point(264, 87);
             this.btn_Generar.Name = "btn_Generar";
             this.btn_Generar.Size = new System.Drawing.Size(190, 36);
@@ -247,16 +265,17 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(14, 12);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(143, 17);
+            this.label5.Size = new System.Drawing.Size(158, 21);
             this.label5.TabIndex = 16;
             this.label5.Text = "Seleccione el Método";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // tb_desde
             // 
-            this.tb_desde.Location = new System.Drawing.Point(87, 339);
+            this.tb_desde.Location = new System.Drawing.Point(87, 296);
             this.tb_desde.Name = "tb_desde";
             this.tb_desde.Size = new System.Drawing.Size(114, 22);
             this.tb_desde.TabIndex = 16;
@@ -264,7 +283,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(141, 364);
+            this.label6.Location = new System.Drawing.Point(141, 321);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(13, 17);
             this.label6.TabIndex = 17;
@@ -272,7 +291,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // tb_hasta
             // 
-            this.tb_hasta.Location = new System.Drawing.Point(87, 384);
+            this.tb_hasta.Location = new System.Drawing.Point(87, 341);
             this.tb_hasta.Name = "tb_hasta";
             this.tb_hasta.Size = new System.Drawing.Size(114, 22);
             this.tb_hasta.TabIndex = 18;
@@ -291,29 +310,32 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.pnl_tabla.Controls.Add(this.btn_listar_todo);
             this.pnl_tabla.Location = new System.Drawing.Point(87, 288);
             this.pnl_tabla.Name = "pnl_tabla";
-            this.pnl_tabla.Size = new System.Drawing.Size(733, 506);
+            this.pnl_tabla.Size = new System.Drawing.Size(733, 471);
             this.pnl_tabla.TabIndex = 19;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 384);
+            this.label2.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(14, 341);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.Size = new System.Drawing.Size(50, 21);
             this.label2.TabIndex = 22;
             this.label2.Text = "Hasta";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 344);
+            this.label1.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 301);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 17);
+            this.label1.Size = new System.Drawing.Size(52, 21);
             this.label1.TabIndex = 21;
             this.label1.Text = "Desde";
             // 
             // btn_Prox
             // 
+            this.btn_Prox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Prox.Location = new System.Drawing.Point(74, 38);
             this.btn_Prox.Name = "btn_Prox";
             this.btn_Prox.Size = new System.Drawing.Size(139, 49);
