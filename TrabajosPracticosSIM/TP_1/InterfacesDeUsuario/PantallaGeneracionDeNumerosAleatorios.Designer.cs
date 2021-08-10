@@ -29,10 +29,10 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_cerrar_ventana = new System.Windows.Forms.Button();
+            this.btn_Prox_20 = new System.Windows.Forms.Button();
+            this.btn_listar_todo = new System.Windows.Forms.Button();
+            this.btn_desde_hasta = new System.Windows.Forms.Button();
             this.dgv_numeros = new System.Windows.Forms.DataGridView();
             this.lbl_semilla = new System.Windows.Forms.Label();
             this.tb_semilla = new System.Windows.Forms.TextBox();
@@ -47,66 +47,78 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.btn_Generar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tb_desde = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.tb_hasta = new System.Windows.Forms.TextBox();
             this.pnl_tabla = new System.Windows.Forms.Panel();
+            this.btn_Prox = new System.Windows.Forms.Button();
+            this.Posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numero_Aleatorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_numeros)).BeginInit();
             this.pnl_IngresoDatos.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnl_tabla.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // btn_cerrar_ventana
             // 
-            this.button1.Location = new System.Drawing.Point(703, 827);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 51);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Cerrar ventana";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_cerrar_ventana.Location = new System.Drawing.Point(684, 800);
+            this.btn_cerrar_ventana.Name = "btn_cerrar_ventana";
+            this.btn_cerrar_ventana.Size = new System.Drawing.Size(113, 51);
+            this.btn_cerrar_ventana.TabIndex = 0;
+            this.btn_cerrar_ventana.Text = "Cerrar ventana";
+            this.btn_cerrar_ventana.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_Prox_20
             // 
-            this.button2.Location = new System.Drawing.Point(40, 406);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(139, 68);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Continuar con los próx. 20";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Prox_20.Location = new System.Drawing.Point(74, 130);
+            this.btn_Prox_20.Name = "btn_Prox_20";
+            this.btn_Prox_20.Size = new System.Drawing.Size(139, 68);
+            this.btn_Prox_20.TabIndex = 1;
+            this.btn_Prox_20.Text = "Continuar con los próx. 20";
+            this.btn_Prox_20.UseVisualStyleBackColor = true;
+            this.btn_Prox_20.Click += new System.EventHandler(this.btn_Prox_20_Click);
             // 
-            // button3
+            // btn_listar_todo
             // 
-            this.button3.Location = new System.Drawing.Point(275, 406);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(139, 68);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Listar todo";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_listar_todo.Location = new System.Drawing.Point(74, 236);
+            this.btn_listar_todo.Name = "btn_listar_todo";
+            this.btn_listar_todo.Size = new System.Drawing.Size(139, 68);
+            this.btn_listar_todo.TabIndex = 2;
+            this.btn_listar_todo.Text = "Listar todo";
+            this.btn_listar_todo.UseVisualStyleBackColor = true;
+            this.btn_listar_todo.Click += new System.EventHandler(this.btn_listar_todo_Click);
             // 
-            // button4
+            // btn_desde_hasta
             // 
-            this.button4.Location = new System.Drawing.Point(487, 440);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(199, 34);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Listar Desde Hasta";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_desde_hasta.Location = new System.Drawing.Point(74, 424);
+            this.btn_desde_hasta.Name = "btn_desde_hasta";
+            this.btn_desde_hasta.Size = new System.Drawing.Size(139, 69);
+            this.btn_desde_hasta.TabIndex = 3;
+            this.btn_desde_hasta.Text = "Listar con Rango";
+            this.btn_desde_hasta.UseVisualStyleBackColor = true;
+            this.btn_desde_hasta.Click += new System.EventHandler(this.btn_desde_hasta_Click);
             // 
             // dgv_numeros
             // 
+            this.dgv_numeros.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgv_numeros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_numeros.Location = new System.Drawing.Point(12, 23);
+            this.dgv_numeros.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Posicion,
+            this.Numero_Aleatorio});
+            this.dgv_numeros.Location = new System.Drawing.Point(295, 3);
             this.dgv_numeros.Name = "dgv_numeros";
             this.dgv_numeros.RowHeadersWidth = 51;
             this.dgv_numeros.RowTemplate.Height = 24;
-            this.dgv_numeros.Size = new System.Drawing.Size(699, 349);
+            this.dgv_numeros.Size = new System.Drawing.Size(400, 490);
             this.dgv_numeros.TabIndex = 4;
             // 
             // lbl_semilla
             // 
             this.lbl_semilla.AutoSize = true;
-            this.lbl_semilla.Location = new System.Drawing.Point(52, 60);
+            this.lbl_semilla.Location = new System.Drawing.Point(48, 47);
             this.lbl_semilla.Name = "lbl_semilla";
             this.lbl_semilla.Size = new System.Drawing.Size(51, 17);
             this.lbl_semilla.TabIndex = 5;
@@ -114,14 +126,14 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // tb_semilla
             // 
-            this.tb_semilla.Location = new System.Drawing.Point(109, 60);
+            this.tb_semilla.Location = new System.Drawing.Point(105, 47);
             this.tb_semilla.Name = "tb_semilla";
             this.tb_semilla.Size = new System.Drawing.Size(100, 22);
             this.tb_semilla.TabIndex = 6;
             // 
             // tb_a
             // 
-            this.tb_a.Location = new System.Drawing.Point(310, 60);
+            this.tb_a.Location = new System.Drawing.Point(306, 47);
             this.tb_a.Name = "tb_a";
             this.tb_a.Size = new System.Drawing.Size(100, 22);
             this.tb_a.TabIndex = 8;
@@ -129,7 +141,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // lbl_a
             // 
             this.lbl_a.AutoSize = true;
-            this.lbl_a.Location = new System.Drawing.Point(288, 60);
+            this.lbl_a.Location = new System.Drawing.Point(284, 47);
             this.lbl_a.Name = "lbl_a";
             this.lbl_a.Size = new System.Drawing.Size(16, 17);
             this.lbl_a.TabIndex = 7;
@@ -137,7 +149,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // tb_c
             // 
-            this.tb_c.Location = new System.Drawing.Point(533, 60);
+            this.tb_c.Location = new System.Drawing.Point(529, 47);
             this.tb_c.Name = "tb_c";
             this.tb_c.Size = new System.Drawing.Size(100, 22);
             this.tb_c.TabIndex = 10;
@@ -145,7 +157,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // lbl_c
             // 
             this.lbl_c.AutoSize = true;
-            this.lbl_c.Location = new System.Drawing.Point(512, 60);
+            this.lbl_c.Location = new System.Drawing.Point(508, 47);
             this.lbl_c.Name = "lbl_c";
             this.lbl_c.Size = new System.Drawing.Size(15, 17);
             this.lbl_c.TabIndex = 9;
@@ -194,12 +206,12 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.pnl_IngresoDatos.Controls.Add(this.lbl_a);
             this.pnl_IngresoDatos.Location = new System.Drawing.Point(87, 143);
             this.pnl_IngresoDatos.Name = "pnl_IngresoDatos";
-            this.pnl_IngresoDatos.Size = new System.Drawing.Size(729, 158);
+            this.pnl_IngresoDatos.Size = new System.Drawing.Size(729, 139);
             this.pnl_IngresoDatos.TabIndex = 14;
             // 
             // btn_Generar
             // 
-            this.btn_Generar.Location = new System.Drawing.Point(261, 111);
+            this.btn_Generar.Location = new System.Drawing.Point(264, 87);
             this.btn_Generar.Name = "btn_Generar";
             this.btn_Generar.Size = new System.Drawing.Size(190, 36);
             this.btn_Generar.TabIndex = 12;
@@ -227,53 +239,98 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.label5.Text = "Seleccione el Método";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // textBox4
+            // tb_desde
             // 
-            this.textBox4.Location = new System.Drawing.Point(487, 412);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(87, 22);
-            this.textBox4.TabIndex = 16;
+            this.tb_desde.Location = new System.Drawing.Point(87, 339);
+            this.tb_desde.Name = "tb_desde";
+            this.tb_desde.Size = new System.Drawing.Size(114, 22);
+            this.tb_desde.TabIndex = 16;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(580, 415);
+            this.label6.Location = new System.Drawing.Point(141, 364);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(13, 17);
             this.label6.TabIndex = 17;
             this.label6.Text = "-";
             // 
-            // textBox5
+            // tb_hasta
             // 
-            this.textBox5.Location = new System.Drawing.Point(599, 412);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(87, 22);
-            this.textBox5.TabIndex = 18;
+            this.tb_hasta.Location = new System.Drawing.Point(87, 384);
+            this.tb_hasta.Name = "tb_hasta";
+            this.tb_hasta.Size = new System.Drawing.Size(114, 22);
+            this.tb_hasta.TabIndex = 18;
             // 
             // pnl_tabla
             // 
+            this.pnl_tabla.Controls.Add(this.label2);
+            this.pnl_tabla.Controls.Add(this.label1);
+            this.pnl_tabla.Controls.Add(this.btn_Prox);
             this.pnl_tabla.Controls.Add(this.dgv_numeros);
-            this.pnl_tabla.Controls.Add(this.textBox5);
-            this.pnl_tabla.Controls.Add(this.button4);
+            this.pnl_tabla.Controls.Add(this.tb_hasta);
+            this.pnl_tabla.Controls.Add(this.btn_desde_hasta);
             this.pnl_tabla.Controls.Add(this.label6);
-            this.pnl_tabla.Controls.Add(this.button2);
-            this.pnl_tabla.Controls.Add(this.textBox4);
-            this.pnl_tabla.Controls.Add(this.button3);
-            this.pnl_tabla.Location = new System.Drawing.Point(83, 307);
+            this.pnl_tabla.Controls.Add(this.btn_Prox_20);
+            this.pnl_tabla.Controls.Add(this.tb_desde);
+            this.pnl_tabla.Controls.Add(this.btn_listar_todo);
+            this.pnl_tabla.Location = new System.Drawing.Point(87, 288);
             this.pnl_tabla.Name = "pnl_tabla";
-            this.pnl_tabla.Size = new System.Drawing.Size(733, 499);
+            this.pnl_tabla.Size = new System.Drawing.Size(733, 506);
             this.pnl_tabla.TabIndex = 19;
+            // 
+            // btn_Prox
+            // 
+            this.btn_Prox.Location = new System.Drawing.Point(74, 38);
+            this.btn_Prox.Name = "btn_Prox";
+            this.btn_Prox.Size = new System.Drawing.Size(139, 49);
+            this.btn_Prox.TabIndex = 20;
+            this.btn_Prox.Text = "Próximo";
+            this.btn_Prox.UseVisualStyleBackColor = true;
+            this.btn_Prox.Click += new System.EventHandler(this.btn_Prox_Click_1);
+            // 
+            // Posicion
+            // 
+            this.Posicion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Posicion.HeaderText = "Posicion";
+            this.Posicion.MinimumWidth = 6;
+            this.Posicion.Name = "Posicion";
+            // 
+            // Numero_Aleatorio
+            // 
+            this.Numero_Aleatorio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Numero_Aleatorio.HeaderText = "Número Aleatorio";
+            this.Numero_Aleatorio.MinimumWidth = 6;
+            this.Numero_Aleatorio.Name = "Numero_Aleatorio";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 344);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 17);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Desde";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 384);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Hasta";
             // 
             // Frm_PantallaGeneracionDeNumerosAleatorios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(920, 890);
+            this.ClientSize = new System.Drawing.Size(920, 940);
             this.Controls.Add(this.pnl_tabla);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnl_IngresoDatos);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_cerrar_ventana);
             this.Name = "Frm_PantallaGeneracionDeNumerosAleatorios";
             this.Text = "PantallaGeneracionDeNumerosAleatorios";
             this.Load += new System.EventHandler(this.Frm_PantallaGeneracionDeNumerosAleatorios_Load);
@@ -290,10 +347,10 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_cerrar_ventana;
+        private System.Windows.Forms.Button btn_Prox_20;
+        private System.Windows.Forms.Button btn_listar_todo;
+        private System.Windows.Forms.Button btn_desde_hasta;
         private System.Windows.Forms.DataGridView dgv_numeros;
         private System.Windows.Forms.Label lbl_semilla;
         private System.Windows.Forms.TextBox tb_semilla;
@@ -307,10 +364,15 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         private System.Windows.Forms.Panel pnl_IngresoDatos;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tb_desde;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox tb_hasta;
         private System.Windows.Forms.Button btn_Generar;
         private System.Windows.Forms.Panel pnl_tabla;
+        private System.Windows.Forms.Button btn_Prox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Posicion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Aleatorio;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

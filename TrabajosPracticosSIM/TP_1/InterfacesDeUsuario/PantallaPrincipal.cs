@@ -19,7 +19,7 @@ namespace TrabajosPracticosSIM
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ControladorTP1.GetInstance().opcionGeneracionDeNumerosAleatorios();
+            ControladorTP1.GetInstance().opcionPantallaGeneracionDeNumerosAleatorios();
         }
 
         private void label1_Click(object sender, EventArgs e)
