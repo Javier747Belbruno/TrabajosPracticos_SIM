@@ -6,16 +6,18 @@ using System.Windows.Forms;
 
 namespace TrabajosPracticosSIM
 {
+    
     static class Program
     {
+        
         /// <summary>
-        /// The main entry point for the application.
+        /// Punto de entrada para la aplicacion.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            var c = new ControladorTP1();
-            c.Start();
+            //Inicio Controlador TP 1
+            ControladorTP1.GetInstance().Start();
         }
     }
 }
