@@ -13,6 +13,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
     public partial class Frm_PantallaGeneracionDeNumerosAleatorios : Form
     {
         private SortedDictionary<int, double> mapa;
+        private int metodo = 0; // Si 0 = Congr. Mixto , Si 1 = Congr. Mult.
         public Frm_PantallaGeneracionDeNumerosAleatorios()
         {
             InitializeComponent();
@@ -47,13 +48,16 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         private void btn_Generar_Click(object sender, EventArgs e)
         {
+            LimpiarTabla();
             //Chequear que todo se encuentre bien.
-            
+            int a = (tb_a.Text.Length != 0 ? Convert.ToInt32(tb_a.Text) : 0); 
+            int c = (tb_c.Text.Length != 0 ? Convert.ToInt32(tb_c.Text) :  0);
+            int semilla = (tb_semilla.Text.Length != 0 ? Convert.ToInt32(tb_semilla.Text) : 0);
             //Habilitamos Panel.
             habitarPanelTabla();
 
             //Mandar Datos al Gestor.
-            ControladorTP1.GetInstance().opcionGeneracionDeNumerosAleatorios(this);
+            ControladorTP1.GetInstance().opcionGeneracionDeNumerosAleatorios(this,a,c,semilla);
         }
 
         public void LlenarTablaInicial(SortedDictionary<int, double> mapa)
@@ -70,6 +74,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         private void btn_sel_Congr_Mixto_Click(object sender, EventArgs e)
         {
+            metodo = 0;
             Iniciar(); 
             limpiarPantalla();
             CambiarColorBtnSeleccionado(sender);
@@ -78,6 +83,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         private void btn_sel_Congr_Mult_Click(object sender, EventArgs e)
         {
+            metodo = 1;
             Iniciar();
             limpiarPantalla();
             CambiarColorBtnSeleccionado(sender);
@@ -132,13 +138,21 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         }
 
-     
-
+        // Si 0 = Congr. Mixto , Si 1 = Congr. Mult.
+        public int getMetodo()
+        {
+            return metodo;
+        }
 
         private int getUltimaPosicionActual()
         {
-            int ultimo = Convert.ToInt32(dgv_numeros.Rows[dgv_numeros.Rows.Count-2].Cells[0].Value);
+            if (dgv_numeros.Rows.Count > 1)
+            {
+            int ultimo = Convert.ToInt32(dgv_numeros.Rows[dgv_numeros.Rows.Count - 2].Cells[0].Value);
             return ultimo;
+            }
+            return 0;
+
         }
 
         private void btn_Prox_Click_1(object sender, EventArgs e)
@@ -174,14 +188,19 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         {
             //Hacer validaciones de RANGO
             //Hacer que lo que entre sea solo tipo Numerico.
-
-            var desde = Convert.ToInt32(tb_desde.Text);
-            var hasta = Convert.ToInt32(tb_hasta.Text);
-            foreach (KeyValuePair<int, double> kvp in mapa)
-            {
-                if (kvp.Key >= desde && kvp.Key <= hasta)
-                    dgv_numeros.Rows.Add(kvp.Key, kvp.Value);
+            if(tb_desde.Text.Length != 0 && tb_hasta.Text.Length != 0){ 
+                var desde = Convert.ToInt32(tb_desde.Text);
+                var hasta = Convert.ToInt32(tb_hasta.Text);
+                foreach (KeyValuePair<int, double> kvp in mapa){
+                    if (kvp.Key >= desde && kvp.Key <= hasta)
+                        dgv_numeros.Rows.Add(kvp.Key, kvp.Value);
+                }
             }
+        }
+
+        private void btn_cerrar_ventana_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
