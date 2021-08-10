@@ -47,6 +47,7 @@ namespace TrabajosPracticosSIM
             // 
             // btn_generar
             // 
+            this.btn_generar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_generar.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_generar.Location = new System.Drawing.Point(55, 673);
             this.btn_generar.Name = "btn_generar";
@@ -161,6 +162,7 @@ namespace TrabajosPracticosSIM
             // 
             // btn_pruebaDeFrec
             // 
+            this.btn_pruebaDeFrec.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_pruebaDeFrec.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_pruebaDeFrec.Location = new System.Drawing.Point(558, 673);
             this.btn_pruebaDeFrec.Name = "btn_pruebaDeFrec";

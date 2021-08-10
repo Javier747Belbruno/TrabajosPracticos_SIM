@@ -57,6 +57,8 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Prox = new System.Windows.Forms.Button();
+            this.tb_m = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_numeros)).BeginInit();
             this.pnl_IngresoDatos.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -65,6 +67,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_cerrar_ventana
             // 
+            this.btn_cerrar_ventana.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_cerrar_ventana.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cerrar_ventana.Location = new System.Drawing.Point(669, 765);
             this.btn_cerrar_ventana.Name = "btn_cerrar_ventana";
@@ -76,6 +79,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_Prox_20
             // 
+            this.btn_Prox_20.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Prox_20.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Prox_20.Location = new System.Drawing.Point(74, 106);
             this.btn_Prox_20.Name = "btn_Prox_20";
@@ -87,6 +91,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_listar_todo
             // 
+            this.btn_listar_todo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_listar_todo.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_listar_todo.Location = new System.Drawing.Point(74, 193);
             this.btn_listar_todo.Name = "btn_listar_todo";
@@ -98,6 +103,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_desde_hasta
             // 
+            this.btn_desde_hasta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_desde_hasta.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_desde_hasta.Location = new System.Drawing.Point(74, 381);
             this.btn_desde_hasta.Name = "btn_desde_hasta";
@@ -162,7 +168,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // tb_a
             // 
-            this.tb_a.Location = new System.Drawing.Point(306, 47);
+            this.tb_a.Location = new System.Drawing.Point(420, 45);
             this.tb_a.Name = "tb_a";
             this.tb_a.Size = new System.Drawing.Size(100, 22);
             this.tb_a.TabIndex = 8;
@@ -170,7 +176,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // lbl_a
             // 
             this.lbl_a.AutoSize = true;
-            this.lbl_a.Location = new System.Drawing.Point(284, 47);
+            this.lbl_a.Location = new System.Drawing.Point(398, 45);
             this.lbl_a.Name = "lbl_a";
             this.lbl_a.Size = new System.Drawing.Size(16, 17);
             this.lbl_a.TabIndex = 7;
@@ -178,7 +184,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // tb_c
             // 
-            this.tb_c.Location = new System.Drawing.Point(529, 47);
+            this.tb_c.Location = new System.Drawing.Point(582, 45);
             this.tb_c.Name = "tb_c";
             this.tb_c.Size = new System.Drawing.Size(100, 22);
             this.tb_c.TabIndex = 10;
@@ -186,7 +192,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // lbl_c
             // 
             this.lbl_c.AutoSize = true;
-            this.lbl_c.Location = new System.Drawing.Point(508, 47);
+            this.lbl_c.Location = new System.Drawing.Point(561, 45);
             this.lbl_c.Name = "lbl_c";
             this.lbl_c.Size = new System.Drawing.Size(15, 17);
             this.lbl_c.TabIndex = 9;
@@ -205,6 +211,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // btn_sel_Congr_Mixto
             // 
             this.btn_sel_Congr_Mixto.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_sel_Congr_Mixto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_sel_Congr_Mixto.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sel_Congr_Mixto.Location = new System.Drawing.Point(90, 42);
             this.btn_sel_Congr_Mixto.Name = "btn_sel_Congr_Mixto";
@@ -217,6 +224,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // btn_sel_Congr_Mult
             // 
             this.btn_sel_Congr_Mult.BackColor = System.Drawing.Color.LightGray;
+            this.btn_sel_Congr_Mult.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_sel_Congr_Mult.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sel_Congr_Mult.Location = new System.Drawing.Point(439, 42);
             this.btn_sel_Congr_Mult.Name = "btn_sel_Congr_Mult";
@@ -228,6 +236,8 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // pnl_IngresoDatos
             // 
+            this.pnl_IngresoDatos.Controls.Add(this.tb_m);
+            this.pnl_IngresoDatos.Controls.Add(this.label3);
             this.pnl_IngresoDatos.Controls.Add(this.btn_Generar);
             this.pnl_IngresoDatos.Controls.Add(this.label4);
             this.pnl_IngresoDatos.Controls.Add(this.tb_a);
@@ -243,6 +253,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_Generar
             // 
+            this.btn_Generar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Generar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Generar.Location = new System.Drawing.Point(264, 87);
             this.btn_Generar.Name = "btn_Generar";
@@ -335,6 +346,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             // 
             // btn_Prox
             // 
+            this.btn_Prox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Prox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Prox.Location = new System.Drawing.Point(74, 38);
             this.btn_Prox.Name = "btn_Prox";
@@ -343,6 +355,22 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.btn_Prox.Text = "Próximo";
             this.btn_Prox.UseVisualStyleBackColor = true;
             this.btn_Prox.Click += new System.EventHandler(this.btn_Prox_Click_1);
+            // 
+            // tb_m
+            // 
+            this.tb_m.Location = new System.Drawing.Point(264, 45);
+            this.tb_m.Name = "tb_m";
+            this.tb_m.Size = new System.Drawing.Size(100, 22);
+            this.tb_m.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(242, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(19, 17);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "m";
             // 
             // Frm_PantallaGeneracionDeNumerosAleatorios
             // 
@@ -397,5 +425,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Aleatorio;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tb_m;
+        private System.Windows.Forms.Label label3;
     }
 }
