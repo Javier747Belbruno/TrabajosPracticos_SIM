@@ -19,7 +19,6 @@ namespace TrabajosPracticosSIM
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ControladorTP1.GetInstance().sumar();
             ControladorTP1.GetInstance().opcionGeneracionDeNumerosAleatorios();
         }
 

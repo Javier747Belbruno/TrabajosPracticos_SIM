@@ -13,7 +13,8 @@ namespace TrabajosPracticosSIM
 
         //Instancia Unica - Patron Singleton
         private static readonly ControladorTP1 _instance = new ControladorTP1();
-        //Lista de Vistas / Pantallas
+        
+        //Lista de Vistas / Pantallas que controla el ControladorTP1
         private List<Form> Views = new List<Form>();
 
 
