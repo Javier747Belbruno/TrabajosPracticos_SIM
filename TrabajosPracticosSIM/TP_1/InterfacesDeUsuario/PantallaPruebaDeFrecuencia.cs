@@ -22,6 +22,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         private int semilla;
         private int m;
         private SortedDictionary<double, Subintervalo> estructuraFrecObservada;
+        private SortedDictionary<int, double> lista;
 
         public Frm_PantallaPruebaDeFrecuencia()
         {
@@ -112,9 +113,11 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         public void GenerarGrafico(ArrayList mediaInterFE, ArrayList FE
                         ,ArrayList mediaInterFO , ArrayList FO, 
-                         SortedDictionary<double, Subintervalo> estructuraFrecObservada)
+                         SortedDictionary<double, Subintervalo> estructuraFrecObservada,
+                         SortedDictionary<int, double>  lista)
         {
             this.estructuraFrecObservada = estructuraFrecObservada;
+            this.lista = lista;
 
             chart1.Series[0].Points.DataBindXY(mediaInterFO,FO);
             chart1.Series[1].Points.DataBindXY(mediaInterFE,FE);
@@ -138,7 +141,26 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
                 nueva["Frec_Obs"] = kvp.Value.getFrecuencia();
                 dt.Rows.Add(nueva);
             }
-            
+
+            for (int i = 0; i < 4; i++)
+            {
+                DataRow nueva = dt.NewRow();
+                nueva["Int_Inf"] = "";
+                nueva["Int_Sup"] = "";
+                dt.Rows.Add(nueva);
+            }
+            DataRow nueva1 = dt.NewRow();
+            nueva1["Int_Inf"] = "Posicion";
+            nueva1["Int_Sup"] = "NroRandom";
+            dt.Rows.Add(nueva1);
+
+            foreach (KeyValuePair<int, double> kvp in lista)
+            {
+                DataRow nueva = dt.NewRow();
+                nueva["Int_Inf"] = kvp.Key;
+                nueva["Int_Sup"] = kvp.Value;
+                dt.Rows.Add(nueva);
+            }
 
 
             StringBuilder sb = new StringBuilder();
@@ -153,8 +175,6 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
                 sb.AppendLine(string.Join(",", fields));
             }
 
-
-
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "csv files (*.csv)|*.csv";
             DialogResult result = dialog.ShowDialog();
@@ -165,7 +185,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             {
                 selectedPath = dialog.FileName;
             }
-            //METER TRY CATCH AHORA .
+            //METER TRY-CATCHA.
             File.WriteAllText(selectedPath, sb.ToString());
 
         }

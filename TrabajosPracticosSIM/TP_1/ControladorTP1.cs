@@ -114,7 +114,7 @@ namespace TrabajosPracticosSIM
             }
 
 
-            frm.GenerarGrafico(mediaInterFE, FE, mediaInterFO, FO, EstructuraFrecObservada);
+            frm.GenerarGrafico(mediaInterFE, FE, mediaInterFO, FO, EstructuraFrecObservada, lista);
         }
 
         public void opcionPantallaPruebaDeFrecuencia()
