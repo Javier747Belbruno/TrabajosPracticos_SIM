@@ -177,7 +177,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         {
             foreach (KeyValuePair<int, double> kvp in mapa)
             {
-                    dgv_numeros.Rows.Add(kvp.Key, kvp.Value);
+                dgv_numeros.Rows.Add(kvp.Key, kvp.Value);
             }
         }
 
