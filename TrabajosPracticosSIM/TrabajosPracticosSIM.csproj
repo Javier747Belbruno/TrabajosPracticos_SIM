@@ -48,6 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -63,9 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TP_1\ControladorTP1.cs" />
+    <Compile Include="TP_1\Entidades\EstructuraFrecuencias.cs" />
     <Compile Include="TP_1\Entidades\GeneradorCongruenteMixto.cs" />
     <Compile Include="TP_1\Entidades\GeneradorCongruenteMultiplicativo.cs" />
     <Compile Include="TP_1\Entidades\GeneradorLenguaje.cs" />
+    <Compile Include="TP_1\Entidades\Subintervalo.cs" />
     <Compile Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.cs">
       <SubType>Form</SubType>
     </Compile>

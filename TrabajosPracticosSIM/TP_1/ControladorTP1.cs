@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,20 +54,67 @@ namespace TrabajosPracticosSIM
         }
 
         //Viene de Pantalla GenDeNumerosAleat.
-        public void opcionGeneracionDeNumerosAleatorios(Frm_PantallaGeneracionDeNumerosAleatorios frm, int a, int c, int semilla)
+        public void opcionGeneracionDeNumerosAleatorios(Frm_PantallaGeneracionDeNumerosAleatorios frm, 
+                                int a, int c, int semilla, int m)
         {
             if(frm.getMetodo() == 0)
             {
-                GeneradorCongruenteMixto genCMixto = new GeneradorCongruenteMixto(x:semilla,a:a,c:c);
+                GeneradorCongruenteMixto genCMixto = new GeneradorCongruenteMixto(x:semilla,a:a,c:c,m:m);
                 var lista = genCMixto.getLista();
                 frm.LlenarTablaInicial(lista);
             }
             if(frm.getMetodo() == 1)
             {
-                GeneradorCongruenteMultiplicativo genCMult = new GeneradorCongruenteMultiplicativo(x: semilla, a: a);
+                GeneradorCongruenteMultiplicativo genCMult = new GeneradorCongruenteMultiplicativo(x: semilla, a: a, m: m);
                 var lista = genCMult.getLista();
                 frm.LlenarTablaInicial(lista);
             }
+        }
+
+        public void opcionNumerosAleatoriosLenguaje(Frm_PantallaPruebaDeFrecuencia frm, int cantNros, int cantIntervs)
+        {
+            GeneradorLenguaje genLenguaje = new GeneradorLenguaje(m: cantNros);
+            var lista = genLenguaje.getLista();
+            EstructuraFrecuencias(frm, lista, cantNros, cantIntervs);
+        }
+
+        public void opcionNumerosAleatoriosMixtos(Frm_PantallaPruebaDeFrecuencia frm, 
+                                int cantNros, int cantIntervs, int a, int c, int semilla, int m)
+        {
+            GeneradorCongruenteMixto genCM = new GeneradorCongruenteMixto(a: a,x:semilla,c:c,m:m, cant:cantNros);
+            var lista = genCM.getLista();
+            EstructuraFrecuencias(frm, lista, cantNros, cantIntervs);
+
+        }
+
+        public void EstructuraFrecuencias(Frm_PantallaPruebaDeFrecuencia frm
+                        , SortedDictionary<int, double> lista,int cantNros,int cantIntervs)
+        {
+            EstructuraFrecuencias estruc = new EstructuraFrecuencias(lista: lista, cant_Nros: cantNros, cant_intervalos: cantIntervs);
+            estruc.construirEstructura();
+            var EstructuraFrecEsperada = estruc.getIntervalosEsperados();
+            var EstructuraFrecObservada = estruc.getIntervalosObservados();
+
+            //Crear arrays para meter los datos.
+            ArrayList mediaInterFE = new ArrayList();
+            ArrayList mediaInterFO = new ArrayList();
+            ArrayList FE = new ArrayList();
+            ArrayList FO = new ArrayList();
+
+
+            foreach (KeyValuePair<double, Subintervalo> kvp in EstructuraFrecEsperada)
+            {
+                mediaInterFE.Add(kvp.Key);
+                FE.Add(kvp.Value.getFrecuencia());
+            }
+            foreach (KeyValuePair<double, Subintervalo> kvp in EstructuraFrecObservada)
+            {
+                mediaInterFO.Add(kvp.Key);
+                FO.Add(kvp.Value.getFrecuencia());
+            }
+
+
+            frm.GenerarGrafico(mediaInterFE, FE, mediaInterFO, FO, EstructuraFrecObservada);
         }
 
         public void opcionPantallaPruebaDeFrecuencia()

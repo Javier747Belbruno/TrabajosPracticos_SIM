@@ -53,11 +53,12 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             int a = (tb_a.Text.Length != 0 ? Convert.ToInt32(tb_a.Text) : 0); 
             int c = (tb_c.Text.Length != 0 ? Convert.ToInt32(tb_c.Text) :  0);
             int semilla = (tb_semilla.Text.Length != 0 ? Convert.ToInt32(tb_semilla.Text) : 0);
+            int m = (tb_m.Text.Length != 0 ? Convert.ToInt32(tb_m.Text) : 1);
             //Habilitamos Panel.
             habitarPanelTabla();
 
             //Mandar Datos al Gestor.
-            ControladorTP1.GetInstance().opcionGeneracionDeNumerosAleatorios(this,a,c,semilla);
+            ControladorTP1.GetInstance().opcionGeneracionDeNumerosAleatorios(this,a,c,semilla,m);
         }
 
         public void LlenarTablaInicial(SortedDictionary<int, double> mapa)
@@ -114,6 +115,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             tb_semilla.Clear();
             tb_a.Clear();
             tb_c.Clear();
+            tb_m.Clear();
         }
         private void deshabitarC()
         {
