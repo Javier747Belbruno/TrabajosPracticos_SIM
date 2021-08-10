@@ -13,7 +13,8 @@ namespace TrabajosPracticosSIM
 
         //Instancia Unica - Patron Singleton
         private static readonly ControladorTP1 _instance = new ControladorTP1();
-        //Lista de Vistas / Pantallas
+        
+        //Lista de Vistas / Pantallas que controla el ControladorTP1
         private List<Form> Views = new List<Form>();
 
 
@@ -44,7 +45,7 @@ namespace TrabajosPracticosSIM
             CreateView(new Frm_PantallaPrincipal());
         }
 
-        public void opcionGeneracionDeNumerosAleatorios()
+        public void opcionPantallaGeneracionDeNumerosAleatorios()
         {
             HabilitarPantallaGeneracionDeNumerosAleatorios();
         }
@@ -52,6 +53,27 @@ namespace TrabajosPracticosSIM
         public void HabilitarPantallaGeneracionDeNumerosAleatorios()
         {
             CreateView(new Frm_PantallaGeneracionDeNumerosAleatorios());
+        }
+
+        //Viene de Pantalla GenDeNumerosAleat.
+        public void opcionGeneracionDeNumerosAleatorios(Frm_PantallaGeneracionDeNumerosAleatorios frm_PantallaGeneracionDeNumerosAleatorios)
+        {
+            var mapa = GeneracionDeNumerosAleatorios();
+            frm_PantallaGeneracionDeNumerosAleatorios.LlenarTablaInicial(mapa);
+        }
+
+        public SortedDictionary<int, double> GeneracionDeNumerosAleatorios()
+        {
+            //Prueba Con 5 Valores de llenado de Tabla.
+            SortedDictionary<int, double> numeros = new SortedDictionary<int, double>();
+
+            for (int i = 1; i < 51; i++)
+            {
+                numeros.Add(i, ((double)i/50));
+            }
+            
+
+            return numeros;
         }
 
 
