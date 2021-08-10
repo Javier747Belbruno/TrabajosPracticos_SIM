@@ -12,7 +12,7 @@ namespace TrabajosPracticosSIM
 
         //Instancia Unica - Patron Singleton
         private ControladorTP1 mInstance;
-        //Lista de Vistas
+        //Lista de Vistas / Pantallas
         private List<Form> Views = new List<Form>();
 
 
@@ -26,7 +26,7 @@ namespace TrabajosPracticosSIM
         public ControladorTP1 Instance { get { return mInstance; } }
         public void Start()
         {
-            HabilitarPantallaPrincipal();
+            IniciarFuncionalidad();
             Application.Run(this);
         }
 

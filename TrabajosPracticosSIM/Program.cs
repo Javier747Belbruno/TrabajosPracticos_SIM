@@ -9,11 +9,12 @@ namespace TrabajosPracticosSIM
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Punto de entrada para la aplicacion.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            //Creamos controlador de TP1
             var c = new ControladorTP1();
             c.Start();
         }
