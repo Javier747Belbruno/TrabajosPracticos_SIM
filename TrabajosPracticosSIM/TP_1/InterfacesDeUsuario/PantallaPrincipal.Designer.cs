@@ -30,7 +30,6 @@ namespace TrabajosPracticosSIM
         private void InitializeComponent()
         {
             this.btn_generar = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_universidad = new System.Windows.Forms.Label();
             this.lbl_facultad = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,11 +41,13 @@ namespace TrabajosPracticosSIM
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btn_pruebaDeFrec = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_generar
             // 
+            this.btn_generar.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_generar.Location = new System.Drawing.Point(55, 673);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(341, 141);
@@ -54,16 +55,6 @@ namespace TrabajosPracticosSIM
             this.btn_generar.Text = "Generar serie de 50000 números aleatorios";
             this.btn_generar.UseVisualStyleBackColor = true;
             this.btn_generar.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::TrabajosPracticosSIM.Properties.Resources.SH9q_yOc_400x400;
-            this.pictureBox1.Location = new System.Drawing.Point(446, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(156, 139);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
             // 
             // lbl_universidad
             // 
@@ -170,12 +161,24 @@ namespace TrabajosPracticosSIM
             // 
             // btn_pruebaDeFrec
             // 
+            this.btn_pruebaDeFrec.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_pruebaDeFrec.Location = new System.Drawing.Point(558, 673);
             this.btn_pruebaDeFrec.Name = "btn_pruebaDeFrec";
             this.btn_pruebaDeFrec.Size = new System.Drawing.Size(353, 141);
             this.btn_pruebaDeFrec.TabIndex = 16;
             this.btn_pruebaDeFrec.Text = "Prueba de frecuencia (Test de Chi Cuadrado)";
             this.btn_pruebaDeFrec.UseVisualStyleBackColor = true;
+            this.btn_pruebaDeFrec.Click += new System.EventHandler(this.btn_pruebaDeFrec_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::TrabajosPracticosSIM.Properties.Resources.SH9q_yOc_400x400;
+            this.pictureBox1.Location = new System.Drawing.Point(446, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(156, 139);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
             // Frm_PantallaPrincipal
             // 
