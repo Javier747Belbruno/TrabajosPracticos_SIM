@@ -49,16 +49,25 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         private void btn_Generar_Click(object sender, EventArgs e)
         {
             LimpiarTabla();
-            //Chequear que todo se encuentre bien.
-            int a = (tb_a.Text.Length != 0 ? Convert.ToInt32(tb_a.Text) : 0); 
-            int c = (tb_c.Text.Length != 0 ? Convert.ToInt32(tb_c.Text) :  0);
-            int semilla = (tb_semilla.Text.Length != 0 ? Convert.ToInt32(tb_semilla.Text) : 0);
-            int m = (tb_m.Text.Length != 0 ? Convert.ToInt32(tb_m.Text) : 1);
-            //Habilitamos Panel.
-            habitarPanelTabla();
 
-            //Mandar Datos al Gestor.
-            ControladorTP1.GetInstance().opcionGeneracionDeNumerosAleatorios(this,a,c,semilla,m);
+            try
+            {
+                //Chequear que todo se encuentre bien.
+                int a = Convert.ToInt32(tb_a.Text);
+                int c = Convert.ToInt32(tb_c.Text);
+                int semilla = Convert.ToInt32(tb_semilla.Text);
+                int m = Convert.ToInt32(tb_m.Text);
+                //Habilitamos Panel.
+                habitarPanelTabla();
+
+                //Mandar Datos al Gestor.
+                ControladorTP1.GetInstance().opcionGeneracionDeNumerosAleatorios(this, a, c, semilla, m);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+ 
         }
 
         public void LlenarTablaInicial(SortedDictionary<int, double> mapa)
@@ -190,14 +199,21 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         {
             //Hacer validaciones de RANGO
             //Hacer que lo que entre sea solo tipo Numerico.
-            if(tb_desde.Text.Length != 0 && tb_hasta.Text.Length != 0){ 
+            try
+            {
                 var desde = Convert.ToInt32(tb_desde.Text);
                 var hasta = Convert.ToInt32(tb_hasta.Text);
-                foreach (KeyValuePair<int, double> kvp in mapa){
+                foreach (KeyValuePair<int, double> kvp in mapa)
+                {
                     if (kvp.Key >= desde && kvp.Key <= hasta)
                         dgv_numeros.Rows.Add(kvp.Key, kvp.Value);
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btn_cerrar_ventana_Click(object sender, EventArgs e)

@@ -49,9 +49,9 @@ namespace TrabajosPracticosSIM
             // 
             this.btn_generar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_generar.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_generar.Location = new System.Drawing.Point(55, 673);
+            this.btn_generar.Location = new System.Drawing.Point(67, 597);
             this.btn_generar.Name = "btn_generar";
-            this.btn_generar.Size = new System.Drawing.Size(341, 141);
+            this.btn_generar.Size = new System.Drawing.Size(341, 106);
             this.btn_generar.TabIndex = 0;
             this.btn_generar.Text = "Generar serie de 50000 números aleatorios";
             this.btn_generar.UseVisualStyleBackColor = true;
@@ -61,7 +61,7 @@ namespace TrabajosPracticosSIM
             // 
             this.lbl_universidad.AutoSize = true;
             this.lbl_universidad.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_universidad.Location = new System.Drawing.Point(406, 179);
+            this.lbl_universidad.Location = new System.Drawing.Point(411, 177);
             this.lbl_universidad.Name = "lbl_universidad";
             this.lbl_universidad.Size = new System.Drawing.Size(264, 23);
             this.lbl_universidad.TabIndex = 6;
@@ -71,7 +71,7 @@ namespace TrabajosPracticosSIM
             // 
             this.lbl_facultad.AutoSize = true;
             this.lbl_facultad.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_facultad.Location = new System.Drawing.Point(429, 214);
+            this.lbl_facultad.Location = new System.Drawing.Point(434, 214);
             this.lbl_facultad.Name = "lbl_facultad";
             this.lbl_facultad.Size = new System.Drawing.Size(213, 23);
             this.lbl_facultad.TabIndex = 7;
@@ -81,7 +81,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(442, 253);
+            this.label1.Location = new System.Drawing.Point(447, 246);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(180, 23);
             this.label1.TabIndex = 8;
@@ -92,7 +92,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(298, 317);
+            this.label2.Location = new System.Drawing.Point(309, 304);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(471, 23);
             this.label2.TabIndex = 9;
@@ -102,7 +102,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(65, 375);
+            this.label3.Location = new System.Drawing.Point(76, 369);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 18);
             this.label3.TabIndex = 10;
@@ -113,7 +113,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(245, 407);
+            this.label4.Location = new System.Drawing.Point(256, 405);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(231, 18);
             this.label4.TabIndex = 11;
@@ -124,7 +124,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(245, 509);
+            this.label5.Location = new System.Drawing.Point(257, 504);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(217, 18);
             this.label5.TabIndex = 12;
@@ -134,7 +134,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(245, 440);
+            this.label6.Location = new System.Drawing.Point(256, 436);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(197, 18);
             this.label6.TabIndex = 13;
@@ -144,7 +144,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(245, 474);
+            this.label7.Location = new System.Drawing.Point(256, 469);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(152, 18);
             this.label7.TabIndex = 14;
@@ -154,7 +154,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(245, 545);
+            this.label8.Location = new System.Drawing.Point(256, 539);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(218, 18);
             this.label8.TabIndex = 15;
@@ -164,30 +164,30 @@ namespace TrabajosPracticosSIM
             // 
             this.btn_pruebaDeFrec.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_pruebaDeFrec.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_pruebaDeFrec.Location = new System.Drawing.Point(558, 673);
+            this.btn_pruebaDeFrec.Location = new System.Drawing.Point(570, 597);
             this.btn_pruebaDeFrec.Name = "btn_pruebaDeFrec";
-            this.btn_pruebaDeFrec.Size = new System.Drawing.Size(353, 141);
+            this.btn_pruebaDeFrec.Size = new System.Drawing.Size(353, 106);
             this.btn_pruebaDeFrec.TabIndex = 16;
-            this.btn_pruebaDeFrec.Text = "Prueba de frecuencia (Test de Chi Cuadrado)";
+            this.btn_pruebaDeFrec.Text = "Prueba de Frecuencia";
             this.btn_pruebaDeFrec.UseVisualStyleBackColor = true;
             this.btn_pruebaDeFrec.Click += new System.EventHandler(this.btn_pruebaDeFrec_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::TrabajosPracticosSIM.Properties.Resources.SH9q_yOc_400x400;
-            this.pictureBox1.Location = new System.Drawing.Point(446, 32);
+            this.pictureBox1.Location = new System.Drawing.Point(451, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(156, 139);
+            this.pictureBox1.Size = new System.Drawing.Size(156, 156);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
             // Frm_PantallaPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1026, 868);
+            this.ClientSize = new System.Drawing.Size(1026, 734);
             this.Controls.Add(this.btn_pruebaDeFrec);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -201,7 +201,9 @@ namespace TrabajosPracticosSIM
             this.Controls.Add(this.lbl_universidad);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btn_generar);
+            this.Font = new System.Drawing.Font("Calibri", 9F);
             this.Name = "Frm_PantallaPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pantalla Principal";
             this.Load += new System.EventHandler(this.Frm_PantallaPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
