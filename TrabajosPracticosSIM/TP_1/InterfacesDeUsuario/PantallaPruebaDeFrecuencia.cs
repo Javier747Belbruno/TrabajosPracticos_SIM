@@ -65,17 +65,27 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         }
         private void btn_Gen_Leng_Click(object sender, EventArgs e)
         {
-            CambiarColorBtnSeleccionado(btn_met_mixto, Color.LightGray);
-            CambiarColorBtnSeleccionado(sender, Color.LightBlue);
-            //Tomar valores Parametros cantidades
-            TomarParametrosIngresados();
+            try
+            {
+                CambiarColorBtnSeleccionado(btn_met_mixto, Color.LightGray);
+                CambiarColorBtnSeleccionado(sender, Color.LightBlue);
+                //Tomar valores Parametros cantidades
+                cantNros = Convert.ToInt32(tb_cantNros.Text);
+                cantIntervs = Convert.ToInt32(tb_cantInterv.Text);
 
-            VisibilidadPanelParametrosMixto(false);
-            VisibilidadPanelGrafico(true);
 
-            //Mandar Datos al Gestor.
-            ControladorTP1.GetInstance().opcionNumerosAleatoriosLenguaje(this, cantNros, cantIntervs);
+                VisibilidadPanelParametrosMixto(false);
+                VisibilidadPanelGrafico(true);
+
+                //Mandar Datos al Gestor.
+                ControladorTP1.GetInstance().opcionNumerosAleatoriosLenguaje(this, cantNros, cantIntervs);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Mensaje Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+
         private void CambiarColorBtnSeleccionado(object sender,Color color)
         {
             ((Button)sender).BackColor = color;
@@ -92,22 +102,35 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         //Boton de Confirmacion> Mixto.
         private void btn_genMixto_Click(object sender, EventArgs e)
         {
+            try
+            {
+
+
             VisibilidadPanelGrafico(true);
+
             TomarParametrosIngresados();
+
             //Mandar Datos al Gestor.
             ControladorTP1.GetInstance().opcionNumerosAleatoriosMixtos(this, cantNros, cantIntervs
-                                            , a,c,semilla,m);
+                                        , a,c,semilla,m);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Mensaje Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         public void TomarParametrosIngresados()
         {
             //Tomar valores Parametros cantidades
+
             cantNros = Convert.ToInt32(tb_cantNros.Text);
             cantIntervs = Convert.ToInt32(tb_cantInterv.Text);
-            a = ( tb_a.Text.Length!=0 ? Convert.ToInt32(tb_a.Text) : 0  );
-            c = (tb_c.Text.Length != 0 ? Convert.ToInt32(tb_c.Text) : 0);
-            semilla = (tb_semilla.Text.Length != 0 ? Convert.ToInt32(tb_semilla.Text) : 0); 
-            m = (tb_m.Text.Length != 0 ? Convert.ToInt32(tb_m.Text) : 0); 
+            a = Convert.ToInt32(tb_a.Text);
+            c = Convert.ToInt32(tb_c.Text);
+            semilla = Convert.ToInt32(tb_semilla.Text);
+            m = Convert.ToInt32(tb_m.Text);
+
         }
 
 
@@ -125,8 +148,11 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         private void btn_exportar_Click(object sender, EventArgs e)
         {
-            
-            DataTable dt = new DataTable();
+
+            //TRY - CATCHA.
+            try
+            {
+                DataTable dt = new DataTable();
             dt.Columns.Add("Int_Inf");
             dt.Columns.Add("Int_Sup");
             dt.Columns.Add("Media_Int");
@@ -174,7 +200,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
                 IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
                 sb.AppendLine(string.Join(",", fields));
             }
-
+            
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "csv files (*.csv)|*.csv";
             DialogResult result = dialog.ShowDialog();
@@ -185,8 +211,17 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             {
                 selectedPath = dialog.FileName;
             }
-            //METER TRY-CATCHA.
+     
             File.WriteAllText(selectedPath, sb.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error: "+ ex.Message, "Error Archivo",MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+
 
         }
 
