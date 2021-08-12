@@ -52,9 +52,18 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
             try
             {
+                //Chequear si utiliza o no la constante c
+                int c;
+                if (tb_c.Enabled)
+                {
+                    c = Convert.ToInt32(tb_c.Text);
+                }
+                else
+                {
+                    c = 0;
+                }
                 //Chequear que todo se encuentre bien.
                 int a = Convert.ToInt32(tb_a.Text);
-                int c = Convert.ToInt32(tb_c.Text);
                 int semilla = Convert.ToInt32(tb_semilla.Text);
                 int m = Convert.ToInt32(tb_m.Text);
                 //Habilitamos Panel.

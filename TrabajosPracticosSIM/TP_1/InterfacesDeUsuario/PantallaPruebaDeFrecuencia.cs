@@ -213,6 +213,8 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             }
      
             File.WriteAllText(selectedPath, sb.ToString());
+            
+            MessageBox.Show("El archivo se exportó con éxito", "Exportar archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
