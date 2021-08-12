@@ -146,9 +146,9 @@ namespace TrabajosPracticosSIM
             this.label7.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(256, 469);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(152, 18);
+            this.label7.Size = new System.Drawing.Size(157, 18);
             this.label7.TabIndex = 14;
-            this.label7.Text = "LLLLL - Oberti, Francisco";
+            this.label7.Text = "71915 - Oberti, Francisco";
             // 
             // label8
             // 
