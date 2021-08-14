@@ -148,8 +148,6 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         private void btn_exportar_Click(object sender, EventArgs e)
         {
-
-            //TRY - CATCHA.
             try
             {
                 DataTable dt = new DataTable();
@@ -218,9 +216,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show("Error: "+ ex.Message, "Error Archivo",MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+            MessageBox.Show("Error: "+ ex.Message, "Error Archivo",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
