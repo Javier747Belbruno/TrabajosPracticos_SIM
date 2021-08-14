@@ -72,7 +72,7 @@ namespace TrabajosPracticosSIM.TP_1.Entidades
 
                 foreach (KeyValuePair<int, double> kvp in lista)
                 {
-                    if (kvp.Value >= subinterv_limite_inf && kvp.Value <= subinterv_limite_sup)
+                    if (kvp.Value >= subinterv_limite_inf && kvp.Value < subinterv_limite_sup)
                         fo++;
                 }
                 
