@@ -36,7 +36,6 @@ namespace TrabajosPracticosSIM
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -120,16 +119,6 @@ namespace TrabajosPracticosSIM
             this.label4.Text = "70869 - Valle Ybañez, Matías Agustín ";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(257, 504);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(217, 18);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "43129 - Gimenez, Guillermo Ángel";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -154,7 +143,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(256, 539);
+            this.label8.Location = new System.Drawing.Point(256, 501);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(218, 18);
             this.label8.TabIndex = 15;
@@ -192,7 +181,6 @@ namespace TrabajosPracticosSIM
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -222,7 +210,6 @@ namespace TrabajosPracticosSIM
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
