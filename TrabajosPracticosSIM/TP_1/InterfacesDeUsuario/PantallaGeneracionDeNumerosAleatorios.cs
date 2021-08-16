@@ -155,6 +155,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
                 if (kvp.Key > ultimaPosicion && kvp.Key <= (ultimaPosicion + 20))
                     dgv_numeros.Rows.Add(kvp.Key, kvp.Value);
             }
+            ScrollDown();
 
         }
 
@@ -183,6 +184,13 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
                 if (kvp.Key > ultimaPosicion && kvp.Key <= (ultimaPosicion + 1))
                     dgv_numeros.Rows.Add(kvp.Key, kvp.Value);
             }
+            ScrollDown();
+        }
+
+        private void ScrollDown()
+        {
+            dgv_numeros.FirstDisplayedScrollingRowIndex = dgv_numeros.RowCount - 1;
+
         }
 
         private void btn_listar_todo_Click(object sender, EventArgs e)
