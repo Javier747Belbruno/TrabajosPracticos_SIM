@@ -156,6 +156,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
                     dgv_numeros.Rows.Add(kvp.Key, kvp.Value);
             }
             scrollDownDataGridView(20);
+
         }
 
         // Si 0 = Congr. Mixto , Si 1 = Congr. Mult.
@@ -189,7 +190,9 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         private void scrollDownDataGridView(int i)
         {
             dgv_numeros.FirstDisplayedScrollingRowIndex = dgv_numeros.FirstDisplayedScrollingRowIndex + i;
+
         }
+
 
         private void btn_listar_todo_Click(object sender, EventArgs e)
         {
