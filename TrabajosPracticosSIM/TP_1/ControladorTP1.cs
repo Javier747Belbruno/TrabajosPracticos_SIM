@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_1.Entidades;
 using TrabajosPracticosSIM.TP_1.InterfacesDeUsuario;
+using MathNet.Numerics.Distributions;
 
 namespace TrabajosPracticosSIM
 {
@@ -91,30 +92,59 @@ namespace TrabajosPracticosSIM
                         , SortedDictionary<int, double> lista,int cantNros,int cantIntervs)
         {
             EstructuraFrecuencias estruc = new EstructuraFrecuencias(lista: lista, cant_Nros: cantNros, cant_intervalos: cantIntervs);
-            estruc.construirEstructura();
-            var EstructuraFrecEsperada = estruc.getIntervalosEsperados();
-            var EstructuraFrecObservada = estruc.getIntervalosObservados();
+            
+            //Construyo Estructura.
+            estruc.construirEstructuraFrecuencias();
+            //Calculo chi cuadrado
+            estruc.CalcularChiCuadrado();
+            // Obtener los intervalos.
+            var Intervalos = estruc.getIntervalos();
+
+            double chi_cuadrado_calculado = estruc.getChi_cuadrado();
+            
+            double significancia_alfa = 0.05;
+
+            //Obtener Chi por tabla
+            double chi_tabulado = getChiTabulado(chi_cuadrado_calculado, cantIntervs, significancia_alfa);
+            //Get Resultado de hipotesis
+            String mensaje = getRespuestaFinal(chi_cuadrado_calculado, chi_tabulado);
 
             //Crear arrays para meter los datos.
-            ArrayList mediaInterFE = new ArrayList();
             ArrayList mediaInterFO = new ArrayList();
             ArrayList FE = new ArrayList();
             ArrayList FO = new ArrayList();
 
-
-            foreach (KeyValuePair<double, Subintervalo> kvp in EstructuraFrecEsperada)
-            {
-                mediaInterFE.Add(kvp.Key);
-                FE.Add(kvp.Value.getFrecuencia());
-            }
-            foreach (KeyValuePair<double, Subintervalo> kvp in EstructuraFrecObservada)
+            foreach (KeyValuePair<double, Subintervalo> kvp in Intervalos)
             {
                 mediaInterFO.Add(kvp.Key);
-                FO.Add(kvp.Value.getFrecuencia());
+                FO.Add(kvp.Value.getFrecuenciaObservada());
+                FE.Add(kvp.Value.getFrecuenciaEsperada());
             }
 
 
-            frm.GenerarGrafico(mediaInterFE, FE, mediaInterFO, FO, EstructuraFrecObservada, lista);
+            frm.GenerarGraficosYTabla(FE, mediaInterFO, FO, Intervalos, lista,chi_cuadrado_calculado
+                                    ,chi_tabulado,mensaje,significancia_alfa, cantIntervs);
+        }
+
+        private string getRespuestaFinal(double chi_cuadrado_calculado, double chi_tabulado)
+        {
+            if(chi_cuadrado_calculado <= chi_tabulado)
+            {
+                return "Dado que el chi calculado es menor o igual al chi por tabla no se puede rechazar la hipótesis"
+                    + "de que la muestra proviene de una distribución uniforme de probabilidad";
+            }
+            
+        return "Dado que el chi calculado es mayor al chi por tabla se puede rechazar la hipótesis"
+            + "de que la muestra proviene de una distribución uniforme de probabilidad";
+   
+        }
+
+        //Obtener Chi por tabla
+        public double getChiTabulado(double chi_cuadrado_calculado, int cantIntervs, double significancia_alfa)
+        {
+            ChiSquared ch = new ChiSquared(cantIntervs - 1);
+            double chiTabulado = ch.InverseCumulativeDistribution(1 - significancia_alfa);
+            return chiTabulado;
         }
 
         public void opcionPantallaPruebaDeFrecuencia()
