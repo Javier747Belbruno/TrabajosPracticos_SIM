@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_1.Entidades;
 using TrabajosPracticosSIM.TP_1.InterfacesDeUsuario;
 using MathNet.Numerics.Distributions;
+using TrabajosPracticosSIM.TP_1;
 
 namespace TrabajosPracticosSIM
 {
@@ -113,12 +114,12 @@ namespace TrabajosPracticosSIM
             ArrayList mediaInterFO = new ArrayList();
             ArrayList FE = new ArrayList();
             ArrayList FO = new ArrayList();
-
+            
             foreach (KeyValuePair<double, Subintervalo> kvp in Intervalos)
             {
-                mediaInterFO.Add(kvp.Key);
-                FO.Add(kvp.Value.getFrecuenciaObservada());
-                FE.Add(kvp.Value.getFrecuenciaEsperada());
+                mediaInterFO.Add(Utiles.Redondear4Decimales(kvp.Key));
+                FO.Add(Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaObservada()));
+                FE.Add(Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaEsperada()));
             }
 
 
@@ -130,12 +131,12 @@ namespace TrabajosPracticosSIM
         {
             if(chi_cuadrado_calculado <= chi_tabulado)
             {
-                return "Dado que el chi calculado es menor o igual al chi por tabla no se puede rechazar la hipótesis"
-                    + "de que la muestra proviene de una distribución uniforme de probabilidad";
+                return "Dado que el chi calculado es menor o igual al chi por tabla NO se puede rechazar la hipótesis"
+                    + " de que la muestra proviene de una distribución uniforme de probabilidad";
             }
             
         return "Dado que el chi calculado es mayor al chi por tabla se puede rechazar la hipótesis"
-            + "de que la muestra proviene de una distribución uniforme de probabilidad";
+            + " de que la muestra proviene de una distribución uniforme de probabilidad";
    
         }
 

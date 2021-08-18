@@ -35,7 +35,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             VisibilidadPanelParametrosMixto(false);
             VisibilidadPanelGrafico(false);
             chart1.Titles.Add("Histograma de Frecuencias");
-            chart1.ChartAreas[0].AxisX.Title = "Media Intervalos";
+            chart1.ChartAreas[0].AxisX.Title = "Intervalos";
             chart1.ChartAreas[0].AxisY.Title = "Frecuencia";
             chart1.Series[0].LegendText = "FO";
             chart1.Series[1].LegendText = "FE";
@@ -149,9 +149,10 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.estructuraFrecObservada = Intervalos;
             this.lista = lista;
 
+            chart1.ChartAreas[0].AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.FixedCount;
             chart1.Series[0].Points.DataBindXY(mediaInterFO,FO);
             chart1.Series[1].Points.DataBindXY(mediaInterFO,FE);
-            //chart1.ChartAreas[0].AxisX.Interval = 0.06;
+            
             chart1.ChartAreas[0].AxisX.Maximum = 1;
             chart1.ChartAreas[0].AxisX.Minimum = 0;
 
@@ -159,7 +160,8 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             foreach (KeyValuePair<double, Subintervalo> kvp in Intervalos)
             {
                 dgv_frecuencias.Rows.Add(kvp.Value.getLimite_inferior().ToString("0.0000"), kvp.Value.getLimite_superior().ToString("0.0000"),
-                                        kvp.Value.getFrecuenciaEsperada(), kvp.Value.getFrecuenciaObservada(),
+                                        Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaEsperada())
+                                        , Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaObservada()),
                                         kvp.Value.getIntervalo_chi_cuadrado().ToString("0.0000"));
             }
             tb_resultado_final.Text = mensaje;
