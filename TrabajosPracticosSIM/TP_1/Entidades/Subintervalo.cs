@@ -10,14 +10,14 @@ namespace TrabajosPracticosSIM.TP_1.Entidades
     {
         private double limite_inferior;
         private double limite_superior;
-        private double frecuencia;
-        private double media_intervalo;
+        private double frecuencia_observada;
+        private double frecuencia_esperada;
+        private double intervalo_chi_cuadrado;
 
         public Subintervalo(double limite_inferior,double limite_superior)
         {
             this.limite_inferior = limite_inferior;
             this.limite_superior = limite_superior;
-            this.media_intervalo = Utiles.Redondear4Decimales((limite_superior + limite_inferior) / 2);
         }
         public void setLimite_inferior(double limite_inferior)
         {
@@ -35,21 +35,29 @@ namespace TrabajosPracticosSIM.TP_1.Entidades
         {
             this.limite_superior = limite_superior;
         }
-        public double getFrecuencia()
+        public double getFrecuenciaObservada()
         {
-            return frecuencia;
+            return frecuencia_observada;
         }
-        public void setFrecuencia(double frecuencia)
+        public void setFrecuenciaEsperada(double frecuencia_esperada)
         {
-            this.frecuencia = frecuencia;
+            this.frecuencia_esperada = frecuencia_esperada;
         }
-        public double getMedia_intervalo()
+        public double getFrecuenciaEsperada()
         {
-            return media_intervalo;
+            return frecuencia_esperada;
         }
-        public void setMedia_intervalo(double media_intervalo)
+        public void setFrecuenciaObservada(double frecuencia_observada)
         {
-            this.media_intervalo = media_intervalo;
+            this.frecuencia_observada = frecuencia_observada;
+        }
+        public void setIntervalo_chi_cuadrado(double intervalo_chi_cuadrado)
+        {
+            this.intervalo_chi_cuadrado = intervalo_chi_cuadrado;
+        }
+        public double getIntervalo_chi_cuadrado()
+        {
+            return intervalo_chi_cuadrado;
         }
     }
 }

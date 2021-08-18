@@ -39,6 +39,12 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             chart1.ChartAreas[0].AxisY.Title = "Frecuencia";
             chart1.Series[0].LegendText = "FO";
             chart1.Series[1].LegendText = "FE";
+
+            tb_gdl.Enabled = false;
+            tb_resultado_final.Enabled = false;
+            tb_significancia_alfa.Enabled = false;
+            tb_xo_cuadrado.Enabled = false;
+            tb_valor_tabulado.Enabled = false;
         }
 
         private void VisibilidadPanelParametrosMixto(bool valor)
@@ -134,16 +140,47 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         }
 
 
-        public void GenerarGrafico(ArrayList mediaInterFE, ArrayList FE
+        public void GenerarGraficosYTabla( ArrayList FE
                         ,ArrayList mediaInterFO , ArrayList FO, 
-                         SortedDictionary<double, Subintervalo> estructuraFrecObservada,
-                         SortedDictionary<int, double>  lista)
+                         SortedDictionary<double, Subintervalo> Intervalos,
+                         SortedDictionary<int, double>  lista, double chi_cuadrado_calculado,
+                         double chi_tabulado, string mensaje, double significancia_alfa, int cantIntervs)
         {
-            this.estructuraFrecObservada = estructuraFrecObservada;
+            this.estructuraFrecObservada = Intervalos;
             this.lista = lista;
 
             chart1.Series[0].Points.DataBindXY(mediaInterFO,FO);
-            chart1.Series[1].Points.DataBindXY(mediaInterFE,FE);
+            chart1.Series[1].Points.DataBindXY(mediaInterFO,FE);
+            //chart1.ChartAreas[0].AxisX.Interval = 0.06;
+            chart1.ChartAreas[0].AxisX.Maximum = 1;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+
+            limpiarDatos();
+            foreach (KeyValuePair<double, Subintervalo> kvp in Intervalos)
+            {
+                dgv_frecuencias.Rows.Add(kvp.Value.getLimite_inferior().ToString("0.0000"), kvp.Value.getLimite_superior().ToString("0.0000"),
+                                        kvp.Value.getFrecuenciaEsperada(), kvp.Value.getFrecuenciaObservada(),
+                                        kvp.Value.getIntervalo_chi_cuadrado().ToString("0.0000"));
+            }
+            tb_resultado_final.Text = mensaje;
+            tb_significancia_alfa.Text = significancia_alfa.ToString();
+            tb_valor_tabulado.Text = chi_tabulado.ToString("0.00");
+            tb_xo_cuadrado.Text = chi_cuadrado_calculado.ToString("0.00");
+            tb_gdl.Text = (cantIntervs - 1).ToString();
+
+
+
+
+        }
+
+        private void limpiarDatos()
+        {
+            dgv_frecuencias.Rows.Clear();
+            tb_resultado_final.Clear();
+            tb_significancia_alfa.Clear();
+            tb_valor_tabulado.Clear();
+            tb_xo_cuadrado.Clear();
+            tb_gdl.Clear();
         }
 
         private void btn_exportar_Click(object sender, EventArgs e)
@@ -161,8 +198,8 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
                 DataRow nueva = dt.NewRow();
                 nueva["Int_Inf"] = kvp.Value.getLimite_inferior();
                 nueva["Int_Sup"] = kvp.Value.getLimite_superior();
-                nueva["Media_Int"] = kvp.Value.getMedia_intervalo();
-                nueva["Frec_Obs"] = kvp.Value.getFrecuencia();
+                ///nueva["Media_Int"] = kvp.Value.getMedia_intervalo();
+                //nueva["Frec_Obs"] = kvp.Value.getFrecuencia();
                 dt.Rows.Add(nueva);
             }
 
@@ -258,6 +295,9 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
 
         }
 
+        private void label14_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
