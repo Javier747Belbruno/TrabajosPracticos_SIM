@@ -52,8 +52,8 @@ namespace TrabajosPracticosSIM.TP_1.Entidades
             //Saco el paso
             double paso = lista.Values.Max() / (double)cant_intervalos;
             //Defino los limites del primer intervalo.
-            double subinterv_limite_inf = 0;
-            double subinterv_limite_sup = paso;
+            double subinterv_limite_inf = lista.Values.Min();
+            double subinterv_limite_sup = paso + subinterv_limite_inf; 
             //Frecuencia esperada por cada intervalo.
             double fe = (double)cant_numeros / cant_intervalos;
             double fo = 0;
