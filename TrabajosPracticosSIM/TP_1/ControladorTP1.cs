@@ -59,13 +59,13 @@ namespace TrabajosPracticosSIM
         public void opcionGeneracionDeNumerosAleatorios(Frm_PantallaGeneracionDeNumerosAleatorios frm, 
                                 int a, int c, int semilla, int m)
         {
-            if(frm.getMetodo() == 0)
+            if(frm.getMetodo() == 0) //
             {
                 GeneradorCongruenteMixto genCMixto = new GeneradorCongruenteMixto(x:semilla,a:a,c:c,m:m);
                 var lista = genCMixto.getLista();
                 frm.LlenarTablaInicial(lista);
             }
-            if(frm.getMetodo() == 1)
+            if(frm.getMetodo() == 1) //
             {
                 GeneradorCongruenteMultiplicativo genCMult = new GeneradorCongruenteMultiplicativo(x: semilla, a: a, m: m);
                 var lista = genCMult.getLista();
@@ -88,7 +88,7 @@ namespace TrabajosPracticosSIM
             EstructuraFrecuencias(frm, lista, cantNros, cantIntervs);
 
         }
-
+        //generacion de intervalos
         public void EstructuraFrecuencias(Frm_PantallaPruebaDeFrecuencia frm
                         , SortedDictionary<int, double> lista,int cantNros,int cantIntervs)
         {
@@ -106,7 +106,7 @@ namespace TrabajosPracticosSIM
             double significancia_alfa = 0.05;
 
             //Obtener Chi por tabla
-            double chi_tabulado = getChiTabulado(chi_cuadrado_calculado, cantIntervs, significancia_alfa);
+            double chi_tabulado = getChiTabulado( cantIntervs, significancia_alfa);
             //Get Resultado de hipotesis
             String mensaje = getRespuestaFinal(chi_cuadrado_calculado, chi_tabulado);
 
@@ -141,7 +141,7 @@ namespace TrabajosPracticosSIM
         }
 
         //Obtener Chi por tabla
-        public double getChiTabulado(double chi_cuadrado_calculado, int cantIntervs, double significancia_alfa)
+        public double getChiTabulado( int cantIntervs, double significancia_alfa)
         {
             ChiSquared ch = new ChiSquared(cantIntervs - 1);
             double chiTabulado = ch.InverseCumulativeDistribution(1 - significancia_alfa);
