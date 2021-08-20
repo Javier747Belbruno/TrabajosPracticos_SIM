@@ -117,7 +117,7 @@ namespace TrabajosPracticosSIM
             
             foreach (KeyValuePair<double, Subintervalo> kvp in Intervalos)
             {
-                mediaInterFO.Add(Utiles.Redondear4Decimales(kvp.Key));
+                mediaInterFO.Add(Utiles.RedondearDecimales(kvp.Key,3));
                 FO.Add(Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaObservada()));
                 FE.Add(Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaEsperada()));
             }
