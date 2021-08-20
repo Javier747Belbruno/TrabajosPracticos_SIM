@@ -18,5 +18,10 @@ namespace TrabajosPracticosSIM.TP_1
             double valorRedondeado = Math.Round(valor, 4, MidpointRounding.AwayFromZero);
             return valorRedondeado;
         }
+        public static double RedondearDecimales(double valor,int cantidadDecimales)
+        {
+            double valorRedondeado = Math.Round(valor, cantidadDecimales, MidpointRounding.AwayFromZero);
+            return valorRedondeado;
+        }
     }
 }

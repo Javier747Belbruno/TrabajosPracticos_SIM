@@ -35,10 +35,10 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             VisibilidadPanelParametrosMixto(false);
             VisibilidadPanelGrafico(false);
             chart1.Titles.Add("Histograma de Frecuencias");
-            chart1.ChartAreas[0].AxisX.Title = "Intervalos";
+            chart1.ChartAreas[0].AxisX.Title = "Marcas de Clase";
             chart1.ChartAreas[0].AxisY.Title = "Frecuencia";
-            chart1.Series[0].LegendText = "FO";
-            chart1.Series[1].LegendText = "FE";
+            chart1.Series[0].LegendText = "FE";
+            chart1.Series[1].LegendText = "FO";
 
             tb_gdl.Enabled = false;
             tb_resultado_final.Enabled = false;
@@ -140,21 +140,31 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         }
 
 
-        public void GenerarGraficosYTabla( ArrayList FE
-                        ,ArrayList mediaInterFO , ArrayList FO, 
+        public void GenerarGraficosYTabla(ArrayList FE
+                        , ArrayList mediaInterFO, ArrayList FO,
                          SortedDictionary<double, Subintervalo> Intervalos,
-                         SortedDictionary<int, double>  lista, double chi_cuadrado_calculado,
+                         SortedDictionary<int, double> lista, double chi_cuadrado_calculado,
                          double chi_tabulado, string mensaje, double significancia_alfa, int cantIntervs)
         {
             this.estructuraFrecObservada = Intervalos;
             this.lista = lista;
 
-            chart1.ChartAreas[0].AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.FixedCount;
-            chart1.Series[0].Points.DataBindXY(mediaInterFO,FO);
-            chart1.Series[1].Points.DataBindXY(mediaInterFO,FE);
-            
-            chart1.ChartAreas[0].AxisX.Maximum = 1;
-            chart1.ChartAreas[0].AxisX.Minimum = 0;
+
+            var ca = chart1.ChartAreas.FirstOrDefault();
+            ca.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+            //Parte del intervalo.
+            //Si es un numero mayor a 15 intervalos, que el grafico automatice que mostrar.
+            //Si no que lo parta en los intervalos que le corresponden
+            ca.AxisX.IsStartedFromZero = true;
+            ca.AxisX.LabelAutoFitStyle = System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.LabelsAngleStep30;
+            //Si es impar que lo haga par.
+            double escala_intervalo = mediaInterFO.Count;
+            chart1.ChartAreas.FirstOrDefault().AxisX.Interval 
+                    = (mediaInterFO.Count <= 15 ? Utiles.RedondearDecimales((1/ (double)escala_intervalo),2) : 0);
+
+            chart1.Series[0].Points.DataBindXY(mediaInterFO, FE);
+            chart1.Series[1].Points.DataBindXY(mediaInterFO, FO);
+
 
             limpiarDatos();
             foreach (KeyValuePair<double, Subintervalo> kvp in Intervalos)
