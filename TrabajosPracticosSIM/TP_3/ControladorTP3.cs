@@ -131,11 +131,15 @@ namespace TrabajosPracticosSIM.TP_3
         {
             //Obtener randoms Lenguaje
             GeneradorLenguaje genLenguage = new GeneradorLenguaje(cantidad);
+            int milisegundo = 20;
+            System.Threading.Thread.Sleep(milisegundo);
+            GeneradorLenguaje genLenguage2 = new GeneradorLenguaje(cantidad);
             SortedDictionary<int, double> listaRandoms = genLenguage.getLista();
+            SortedDictionary<int, double> listaRandoms2 = genLenguage2.getLista();
 
             //Generar las var aleatorias Normal
             GeneradorAleatoriasNormal genAN = new GeneradorAleatoriasNormal(normal, ds);
-            listaVariablesAleatorias = genAN.getListaVariablesAleatorias(listaRandoms);
+            listaVariablesAleatorias = genAN.getListaVariablesAleatorias(listaRandoms, listaRandoms2);
 
             //Pasar a la Pantalla para que muestre
             form.MostrarLista(listaVariablesAleatorias);
