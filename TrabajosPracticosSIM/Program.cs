@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using TrabajosPracticosSIM.TP_3;
 
 namespace TrabajosPracticosSIM
 {
-    
     static class Program
     {
         
@@ -16,8 +12,8 @@ namespace TrabajosPracticosSIM
         [STAThread]
         static void Main()
         {
-            //Inicio Controlador TP 1
-            ControladorTP1.GetInstance().Start();
+            //Inicio Controlador TP (Elegir)
+            ControladorTP3.GetInstance().Start();
         }
     }
 }
