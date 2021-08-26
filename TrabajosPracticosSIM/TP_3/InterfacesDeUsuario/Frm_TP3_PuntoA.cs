@@ -164,7 +164,15 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
             foreach (KeyValuePair<int, Random_VarAleatoria> kvp in listaVariablesAleatorias)
             {
-                dgv_distribucion.Rows.Add(kvp.Key, kvp.Value.getRandom(), kvp.Value.getVarAleatoria());
+                if (kvp.Value.getTieneRandom2())
+                {
+
+                    dgv_distribucion.Rows.Add(kvp.Key, kvp.Value.getRandom().ToString() + " , " + kvp.Value.getRandom2().ToString(), kvp.Value.getVarAleatoria());
+                }
+                else
+                {
+                    dgv_distribucion.Rows.Add(kvp.Key, kvp.Value.getRandom(), kvp.Value.getVarAleatoria());
+                }
             }
         }
     }

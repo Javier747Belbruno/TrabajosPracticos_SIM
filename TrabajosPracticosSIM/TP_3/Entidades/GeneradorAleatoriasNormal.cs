@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrabajosPracticosSIM.TP_1;
 
 namespace TrabajosPracticosSIM.TP_3.Entidades
 {
@@ -19,17 +20,20 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
             this.ds = ds;
         }
 
-        public SortedDictionary<int, Random_VarAleatoria> getListaVariablesAleatorias(SortedDictionary<int, double> listaRandoms)
+        public SortedDictionary<int, Random_VarAleatoria> getListaVariablesAleatorias(SortedDictionary<int, double> listaRandoms, SortedDictionary<int, double> listaRandoms2)
         {
-            foreach (KeyValuePair<int, double> kvp in listaRandoms)
+            for (int i = 0; i < listaRandoms.Count; i++)
             {
                 Random_VarAleatoria rVA = new Random_VarAleatoria();
-                rVA.setRandom(kvp.Value);
+                rVA.setRandom(listaRandoms.ElementAt(i).Value);
+                rVA.setRandom2(listaRandoms2.ElementAt(i).Value);
 
-                double varAleatoriaUniforme = media + kvp.Value * (media - media);
-                rVA.setVarAleatoria(varAleatoriaUniforme);
+                double z = Math.Sqrt(-2 * Math.Log(1 - rVA.getRandom())) * Math.Cos(2 * Math.PI * rVA.getRandom2());
+                double varAleatoriaUniforme = media + (z * ds);
+                rVA.setVarAleatoria(Utiles.Redondear4Decimales(varAleatoriaUniforme));
 
-                VariablesAleatoriasNormalLista.Add(kvp.Key, rVA);
+                rVA.setTieneRandom2(true);
+                VariablesAleatoriasNormalLista.Add(i+1, rVA);
             }
             return VariablesAleatoriasNormalLista;
         }

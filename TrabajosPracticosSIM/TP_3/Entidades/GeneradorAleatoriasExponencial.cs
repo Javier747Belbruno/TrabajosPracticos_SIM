@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrabajosPracticosSIM.TP_1;
 
 namespace TrabajosPracticosSIM.TP_3.Entidades
 {
@@ -25,7 +26,7 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
                 rVA.setRandom(kvp.Value);
 
                 double varAleatoriaUniforme = (Math.Log(1 - kvp.Value)) / -lambda;
-                rVA.setVarAleatoria(varAleatoriaUniforme);
+                rVA.setVarAleatoria(Utiles.Redondear4Decimales(varAleatoriaUniforme));
 
                 VariablesAleatoriasLista.Add(kvp.Key, rVA);
             }
