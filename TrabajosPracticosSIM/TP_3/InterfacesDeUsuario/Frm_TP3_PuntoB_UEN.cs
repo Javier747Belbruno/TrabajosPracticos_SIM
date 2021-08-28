@@ -50,7 +50,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
         private void VisibilidadPanelParametrosMixto(bool valor)
         {
-            pnl_Cong_mixto.Visible = valor;
+            //pnl_Cong_mixto.Visible = valor;
         }
         private void VisibilidadPanelGrafico(bool valor)
         {
@@ -61,23 +61,15 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         {
             this.Close();
         }
-        private void limpiarPantalla()
-        {
-            btn_Gen_Leng.BackColor = Color.LightGray;
-            btn_genMixto.BackColor = Color.LightGray;
-            //habitarC();
-            tb_semilla.Clear();
-            tb_a.Clear();
-            tb_c.Clear();
-        }
+       
         private void btn_Gen_Leng_Click(object sender, EventArgs e)
         {
             try
             {
-                CambiarColorBtnSeleccionado(btn_met_mixto, Color.LightGray);
+               // CambiarColorBtnSeleccionado(btn_met_mixto, Color.LightGray);
                 CambiarColorBtnSeleccionado(sender, Color.LightBlue);
                 //Tomar valores Parametros cantidades
-                cantNros = Convert.ToInt32(tb_cantNros.Text);
+                //cantNros = Convert.ToInt32(tb_cantNros.Text);
                 cantIntervs = Convert.ToInt32(tb_cantInterv.Text);
 
 
@@ -101,7 +93,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
         private void btn_met_mixto_Click(object sender, EventArgs e)
         {
-            CambiarColorBtnSeleccionado(btn_Gen_Leng, Color.LightGray);
+            //CambiarColorBtnSeleccionado(btn_Gen_Leng, Color.LightGray);
             CambiarColorBtnSeleccionado(sender, Color.LightBlue);
             VisibilidadPanelParametrosMixto(true);
      
@@ -130,12 +122,9 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         {
             //Tomar valores Parametros cantidades
 
-            cantNros = Convert.ToInt32(tb_cantNros.Text);
+           
             cantIntervs = Convert.ToInt32(tb_cantInterv.Text);
-            a = Convert.ToInt32(tb_a.Text);
-            c = Convert.ToInt32(tb_c.Text);
-            semilla = Convert.ToInt32(tb_semilla.Text);
-            m = Convert.ToInt32(tb_m.Text);
+
 
         }
 
@@ -272,44 +261,17 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+
+        private void Btn_Prueba_De_Frecuencia_Click(object sender, EventArgs e)
         {
+            try
+            {
 
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error Archivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
