@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 {
-    public partial class Frm_TP3_PuntoB : Form
+    public partial class Frm_TP3_PuntoB_Poisson : Form
     {
-        public Frm_TP3_PuntoB()
+        public Frm_TP3_PuntoB_Poisson()
         {
             InitializeComponent();
         }

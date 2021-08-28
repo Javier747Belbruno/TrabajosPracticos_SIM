@@ -108,11 +108,17 @@
     <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoA.Designer.cs">
       <DependentUpon>Frm_TP3_PuntoA.cs</DependentUpon>
     </Compile>
-    <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB.cs">
+    <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_Poisson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB.Designer.cs">
-      <DependentUpon>Frm_TP3_PuntoB.cs</DependentUpon>
+    <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_Poisson.Designer.cs">
+      <DependentUpon>Frm_TP3_PuntoB_Poisson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_UEN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_UEN.Designer.cs">
+      <DependentUpon>Frm_TP3_PuntoB_UEN.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.resx">
       <DependentUpon>PantallaGeneracionDeNumerosAleatorios.cs</DependentUpon>
@@ -139,8 +145,11 @@
     <EmbeddedResource Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoA.resx">
       <DependentUpon>Frm_TP3_PuntoA.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB.resx">
-      <DependentUpon>Frm_TP3_PuntoB.cs</DependentUpon>
+    <EmbeddedResource Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_Poisson.resx">
+      <DependentUpon>Frm_TP3_PuntoB_Poisson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_UEN.resx">
+      <DependentUpon>Frm_TP3_PuntoB_UEN.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

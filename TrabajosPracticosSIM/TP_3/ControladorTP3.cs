@@ -85,7 +85,7 @@ namespace TrabajosPracticosSIM.TP_3
         //Crear Pantalla Punto B
         public void OpcionPantallaPuntoB()
         {
-            CreateView(new Frm_TP3_PuntoB());
+            CreateView(new Frm_TP3_PuntoB_Poisson());
         }
 
         public void OpcionGenerarUniforme(int cantidad, double a, double b, Frm_TP3_PuntoA form)
