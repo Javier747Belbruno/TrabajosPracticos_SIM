@@ -43,7 +43,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
             tb_gdl.Enabled = false;
             tb_resultado_final.Enabled = false;
-            tb_significancia_alfa.Enabled = false;
+            tb_significancia_alfa.Enabled = true;
             tb_xo_cuadrado.Enabled = false;
             tb_valor_tabulado.Enabled = false;
         }
@@ -266,12 +266,21 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         {
             try
             {
+                int cant_intervalos = Convert.ToInt32(tb_cantInterv.Text);
+                int significancia_alfa = Convert.ToInt32(tb_significancia_alfa.Text);
+
+                ControladorTP3.GetInstance().Prueba_de_Frecuencias(cant_intervalos,significancia_alfa);
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "Error Archivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Frm_TP3_PuntoB_UEN_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
