@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,16 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
 {
     public class EstructuraFrecuencias_General //Uniforme, Normal, Exponencial y Oberti gato mira lo que hice hoy* 
     {
+        private string distrSeleccionada;
         private SortedDictionary<int, Random_VarAleatoria> lista;
         private int cant_intervalos;
         private int cant_numeros;
         private SortedDictionary<double, Subintervalo> intervalos = new SortedDictionary<double, Subintervalo>();
         private double chi_cuadrado;
 
-        public EstructuraFrecuencias_General(SortedDictionary<int, Random_VarAleatoria> lista, int cant_Nros, int cant_intervalos)
+        public EstructuraFrecuencias_General(string distrSeleccionada,SortedDictionary<int, Random_VarAleatoria> lista, int cant_Nros, int cant_intervalos)
         {
+            this.distrSeleccionada = distrSeleccionada;
             this.lista = lista;
             this.cant_numeros = cant_Nros;
             this.cant_intervalos = cant_intervalos;
@@ -47,18 +50,51 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
             return cant_intervalos;
         }
 
+        private double getFrecuenciaEsperada(double limite_inf, double limite_sup)
+        {
+            switch (distrSeleccionada)
+            {
+                case "Uniforme":
+                    return cant_numeros / (double)cant_intervalos;
+                case "Exponencial":
+                    double lambda = ControladorTP3.GetInstance().getLambda();
+                    double prob_en_intervaloExp = Exponential.CDF(lambda, limite_sup) - Exponential.CDF(lambda, limite_inf);
+                    return prob_en_intervaloExp * cant_numeros; 
+                case "Poisson":
+                    return getFEPoisson(limite_inf,limite_sup);
+                case "Normal":
+                    double media = ControladorTP3.GetInstance().getMedia();
+                    double ds = ControladorTP3.GetInstance().getDS();
+                    double prob_en_intervalo = Normal.CDF(media,ds, limite_sup) - Normal.CDF(media, ds, limite_inf);
+                    return prob_en_intervalo * cant_numeros;
+                default:
+                    break;
+            }
+            return 0.0;
+        }
 
-
+        private double getFEPoisson(double limite_inf, double limite_sup)
+        {
+            ArrayList prob = ControladorTP3.GetInstance().getFuncDeDistribPoisson(); 
+            ArrayList probAcum = ControladorTP3.GetInstance().getFuncDeDistribPoissonAcum();
+            double FEPoissonintervalo = 0.0;
+            for (int i = 0; i < probAcum.Count; i++)
+            {
+                if (i >= limite_inf && i < limite_sup)
+                    FEPoissonintervalo = FEPoissonintervalo + ((double)prob[i] * cant_numeros);
+            }
+            return FEPoissonintervalo;
+        }
 
         public void construirEstructuraFrecuencias()
         {
             //Saco el paso
-            double paso = (((double)lista.Values.Max().getVarAleatoria())- ((double)lista.Values.Min().getVarAleatoria())) / (double)cant_intervalos;
+            double paso = (lista.Values.Max().getVarAleatoria()- lista.Values.Min().getVarAleatoria()) / (double)cant_intervalos;
             //Defino los limites del primer intervalo.
             double subinterv_limite_inf = lista.Values.Min().getVarAleatoria();
             double subinterv_limite_sup = paso + subinterv_limite_inf;
-            //Frecuencia esperada por cada intervalo.
-            double fe = (double)cant_numeros / cant_intervalos;
+            //Inicializo frecuencia.
+            double fe = 0;
             double fo = 0;
             //Recorrer por cada intervalo todos los valores para ver si caen dentro de cada uno.
             for (int i = 0; i < cant_intervalos; i++)
@@ -71,9 +107,10 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
                 //Recorro la lista de numeros randoms
                 foreach (KeyValuePair<int, Random_VarAleatoria> kvp in lista)
                 {
-                    /*if (kvp.Value >= subinterv_limite_inf && kvp.Value < subinterv_limite_sup)
-                        fo++;*/
+                    if (kvp.Value.getVarAleatoria() >= subinterv_limite_inf && kvp.Value.getVarAleatoria() < subinterv_limite_sup)
+                        fo++;
                 }
+                fe = getFrecuenciaEsperada(subinterv_limite_inf, subinterv_limite_sup);
                 //Seteo los valores
                 sub.setFrecuenciaEsperada(fe);
                 sub.setFrecuenciaObservada(fo);

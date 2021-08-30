@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using TrabajosPracticosSIM.TP_1;
 using TrabajosPracticosSIM.TP_1.Entidades;
 using TrabajosPracticosSIM.TP_3.Entidades;
 using TrabajosPracticosSIM.TP_3.InterfacesDeUsuario;
@@ -18,8 +20,22 @@ namespace TrabajosPracticosSIM.TP_3
         SortedDictionary<int, Random_VarAleatoria> listaVariablesAleatorias 
                 = new SortedDictionary<int, Random_VarAleatoria>();
 
-        //
+        //Para solo Poisson
+        private ArrayList funcDeDistrib = new ArrayList();
+        private ArrayList probAcumuladas = new ArrayList();
 
+        //Para mostrar en pantalla PuntoB
+        private string distrSeleccionada;
+        private string parametros;
+        private string cantidad_var_aleatorias;
+
+        private double a;
+        private double b;
+        private double lambda;
+        private double media;
+        private double ds;
+
+        
         //Constructor Privado.
         private ControladorTP3()
         {
@@ -86,14 +102,51 @@ namespace TrabajosPracticosSIM.TP_3
         //Crear Pantalla Punto B
         public void OpcionPantallaPuntoB()
         {
-            CreateView(new Frm_TP3_PuntoB_UEN());
+            Frm_TP3_PuntoB pantalla = new Frm_TP3_PuntoB();
+            CreateView(pantalla);
+            pantalla.setLabels(distrSeleccionada,parametros,cantidad_var_aleatorias);
+            pantalla.MostrarLista(listaVariablesAleatorias);
         }
 
         //Prueba de Frecuenta.
-        public void Prueba_de_Frecuencias(int cant_intervalos, int significancia_alfa)
+        public void BtnPrueba_de_Frecuencias(int cant_intervalos, Frm_TP3_PuntoB form)
         {
-            EstructuraFrecuencias_General EFG = new EstructuraFrecuencias_General(listaVariablesAleatorias,listaVariablesAleatorias.Count,cant_intervalos);
+            EstructuraFrecuencias_General EFG = new EstructuraFrecuencias_General(distrSeleccionada,listaVariablesAleatorias
+                                                                            ,listaVariablesAleatorias.Count,cant_intervalos);
             EFG.construirEstructuraFrecuencias();
+            //Calculo chi cuadrado
+            //estruc.CalcularChiCuadrado();
+            // Obtener los intervalos.
+            var Intervalos = EFG.getIntervalos();
+
+            /*double chi_cuadrado_calculado = estruc.getChi_cuadrado();
+
+            double significancia_alfa = 0.05;
+
+            //Obtener Chi por tabla
+            double chi_tabulado = getChiTabulado(cantIntervs, significancia_alfa);
+            //Get Resultado de hipotesis
+            String mensaje = getRespuestaFinal(chi_cuadrado_calculado, chi_tabulado);*/
+
+            //Crear arrays para meter los datos.
+            ArrayList mediaInterFO = new ArrayList();
+            ArrayList FE = new ArrayList();
+            ArrayList FO = new ArrayList();
+
+            foreach (KeyValuePair<double, Subintervalo> kvp in Intervalos)
+            {
+                mediaInterFO.Add(Utiles.RedondearDecimales(kvp.Key, 3));
+                FO.Add(Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaObservada()));
+                FE.Add(Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaEsperada()));
+            }
+
+            double chi_cuadrado_calculado = 0.0;
+            double chi_tabulado = 0.0;
+            string mensaje = "";
+            double significancia_alfa = 0.0;
+            int cantIntervs = 0; 
+            form.GenerarGraficosYTabla(FE, mediaInterFO, FO, Intervalos, listaVariablesAleatorias, chi_cuadrado_calculado
+                                    , chi_tabulado, mensaje, significancia_alfa, cantIntervs);
 
         }
 
@@ -101,6 +154,14 @@ namespace TrabajosPracticosSIM.TP_3
 
         public void OpcionGenerarUniforme(int cantidad, double a, double b, Frm_TP3_PuntoA form)
         {
+
+            //Lleno info que se va a usar en pantalla B
+            this.a = a;
+            this.b = b;
+            distrSeleccionada = "Uniforme";
+            parametros = "a = " + a + ", b = " + b;
+            cantidad_var_aleatorias = cantidad.ToString();
+
             //Obtener randoms Lenguaje
             GeneradorLenguaje genLenguage = new GeneradorLenguaje(cantidad);
             SortedDictionary<int, double> listaRandoms = genLenguage.getLista();
@@ -114,6 +175,13 @@ namespace TrabajosPracticosSIM.TP_3
         }
         public void OpcionGenerarExponencial(int cantidad, double lambda, Frm_TP3_PuntoA form)
         {
+
+            //Lleno info que se va a usar en pantalla B
+            this.lambda = lambda;
+            distrSeleccionada = "Exponencial";
+            parametros = "λ = " + lambda;
+            cantidad_var_aleatorias = cantidad.ToString();
+
             //Obtener randoms Lenguaje
             GeneradorLenguaje genLenguage = new GeneradorLenguaje(cantidad);
             SortedDictionary<int, double> listaRandoms = genLenguage.getLista();
@@ -127,6 +195,12 @@ namespace TrabajosPracticosSIM.TP_3
         }
         public void OpcionGenerarPoisson(int cantidad, double lambda, Frm_TP3_PuntoA form)
         {
+            //Lleno info que se va a usar en pantalla B
+            this.lambda = lambda;
+            distrSeleccionada = "Poisson";
+            parametros = "λ = " + lambda;
+            cantidad_var_aleatorias = cantidad.ToString();
+
             //Obtener randoms Lenguaje
             GeneradorLenguaje genLenguage = new GeneradorLenguaje(cantidad);
             SortedDictionary<int, double> listaRandoms = genLenguage.getLista();
@@ -135,11 +209,22 @@ namespace TrabajosPracticosSIM.TP_3
             GeneradorAleatoriasPoisson genAP = new GeneradorAleatoriasPoisson(lambda);
             listaVariablesAleatorias = genAP.getListaVariablesAleatorias(listaRandoms);
 
+            //Traer Arraylist Probabilidades Acumuladas.
+            funcDeDistrib = genAP.getFuncionDeProbabilidad();
+            probAcumuladas = genAP.getProbabilidadesAcumladas();
+
             //Pasar a la Pantalla para que muestre
             form.MostrarLista(listaVariablesAleatorias);
         }
-        public void OpcionGenerarNormal(int cantidad, double normal, double ds, Frm_TP3_PuntoA form)
+        public void OpcionGenerarNormal(int cantidad, double media, double ds, Frm_TP3_PuntoA form)
         {
+            //Lleno info que se va a usar en pantalla B
+            this.media = media;
+            this.ds = ds;
+            distrSeleccionada = "Normal";
+            parametros = "µ = " + media + ", σ = " + ds;
+            cantidad_var_aleatorias = cantidad.ToString();
+
             //Obtener randoms Lenguaje
             GeneradorLenguaje genLenguage = new GeneradorLenguaje(cantidad);
             int milisegundo = 20;
@@ -149,11 +234,52 @@ namespace TrabajosPracticosSIM.TP_3
             SortedDictionary<int, double> listaRandoms2 = genLenguage2.getLista();
 
             //Generar las var aleatorias Normal
-            GeneradorAleatoriasNormal genAN = new GeneradorAleatoriasNormal(normal, ds);
+            GeneradorAleatoriasNormal genAN = new GeneradorAleatoriasNormal(media, ds);
             listaVariablesAleatorias = genAN.getListaVariablesAleatorias(listaRandoms, listaRandoms2);
 
             //Pasar a la Pantalla para que muestre
             form.MostrarLista(listaVariablesAleatorias);
         }
+
+        public void Btn_Probabilidades_Poisson()
+        {
+            Frm_TP3_PuntoB_ProbPoisson pantalla = new Frm_TP3_PuntoB_ProbPoisson();
+            CreateView(pantalla);
+            pantalla.LlenarTabla(funcDeDistrib, probAcumuladas);
+        }
+        public string getDistrSeleccionada()
+        {
+            return distrSeleccionada;
+        }
+
+        public double getA()
+        {
+            return a;
+        }
+        public double getB()
+        {
+            return b;
+        }
+        public double getLambda()
+        {
+            return lambda;
+        }
+        public double getMedia()
+        {
+            return media;
+        }
+        public double getDS()
+        {
+            return ds;
+        }
+        public ArrayList getFuncDeDistribPoisson()
+        {
+            return funcDeDistrib;
+        }
+        public ArrayList getFuncDeDistribPoissonAcum()
+        {
+            return probAcumuladas;
+        }
+
     }
 }

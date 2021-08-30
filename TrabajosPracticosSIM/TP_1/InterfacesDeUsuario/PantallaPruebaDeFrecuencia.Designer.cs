@@ -492,6 +492,7 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
             this.Name = "Frm_PantallaPruebaDeFrecuencia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PantallaPruebaDeFrecuencia";
+            this.Load += new System.EventHandler(this.Frm_PantallaPruebaDeFrecuencia_Load);
             this.pnl_Cong_mixto.ResumeLayout(false);
             this.pnl_Cong_mixto.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

@@ -15,15 +15,27 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
 
         private double lambda;
 
+        private ArrayList probabilidadesAcumuladas = new ArrayList();
+        private ArrayList funcionDeProbabilidad = new ArrayList();
+
         public GeneradorAleatoriasPoisson(double lambda)
         {
             this.lambda = lambda;
         }
 
+        public ArrayList getProbabilidadesAcumladas()
+        {
+            return probabilidadesAcumuladas;
+        }
+
+        public ArrayList getFuncionDeProbabilidad()
+        {
+            return funcionDeProbabilidad;
+        }
+
         public SortedDictionary<int, Random_VarAleatoria> getListaVariablesAleatorias(SortedDictionary<int, double> listaRandoms)
         {
             //Con la formula hacer un array de probabilidades acumuladas.
-            ArrayList probabilidadesAcumuladas = new ArrayList();
             int i = 0;
             do
             {
@@ -32,10 +44,13 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
                 //Guardo La primera.
                 if(probabilidadesAcumuladas.Count == 0)
                 {
+                    funcionDeProbabilidad.Add(fdeDistribProb);
                     probabilidadesAcumuladas.Add(fdeDistribProb);
+                    
                 }
                 else 
                 {
+                    funcionDeProbabilidad.Add(fdeDistribProb);
                     double acumulada = Utiles.RedondearDecimales(fdeDistribProb + (double)probabilidadesAcumuladas[i - 1],4);
                     probabilidadesAcumuladas.Add(acumulada);
                 }

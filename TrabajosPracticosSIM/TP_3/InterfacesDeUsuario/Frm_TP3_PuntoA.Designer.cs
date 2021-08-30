@@ -79,7 +79,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(520, 14);
+            this.label1.Size = new System.Drawing.Size(572, 18);
             this.label1.TabIndex = 3;
             this.label1.Text = "Seleccione una de las siguientes distribuciones para generar valores de variables" +
     " aleatorias ";
@@ -153,7 +153,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             // 
             this.tb_cantidad.Location = new System.Drawing.Point(459, 79);
             this.tb_cantidad.Name = "tb_cantidad";
-            this.tb_cantidad.Size = new System.Drawing.Size(152, 22);
+            this.tb_cantidad.Size = new System.Drawing.Size(152, 26);
             this.tb_cantidad.TabIndex = 13;
             // 
             // label8
@@ -161,7 +161,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(330, 82);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(110, 14);
+            this.label8.Size = new System.Drawing.Size(123, 18);
             this.label8.TabIndex = 12;
             this.label8.Text = "Cantidad a generar";
             // 
@@ -181,7 +181,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(21, 11);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(155, 14);
+            this.label7.Size = new System.Drawing.Size(173, 18);
             this.label7.TabIndex = 10;
             this.label7.Text = "Ingrese el/los parámetro/s";
             // 
@@ -189,43 +189,43 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             // 
             this.tb_desviacion_estandar.Location = new System.Drawing.Point(794, 35);
             this.tb_desviacion_estandar.Name = "tb_desviacion_estandar";
-            this.tb_desviacion_estandar.Size = new System.Drawing.Size(100, 22);
+            this.tb_desviacion_estandar.Size = new System.Drawing.Size(100, 26);
             this.tb_desviacion_estandar.TabIndex = 9;
             // 
             // tb_media
             // 
             this.tb_media.Location = new System.Drawing.Point(617, 35);
             this.tb_media.Name = "tb_media";
-            this.tb_media.Size = new System.Drawing.Size(100, 22);
+            this.tb_media.Size = new System.Drawing.Size(100, 26);
             this.tb_media.TabIndex = 8;
             // 
             // tb_lambda
             // 
             this.tb_lambda.Location = new System.Drawing.Point(435, 35);
             this.tb_lambda.Name = "tb_lambda";
-            this.tb_lambda.Size = new System.Drawing.Size(100, 22);
+            this.tb_lambda.Size = new System.Drawing.Size(100, 26);
             this.tb_lambda.TabIndex = 7;
             // 
             // tb_b
             // 
             this.tb_b.Location = new System.Drawing.Point(253, 35);
             this.tb_b.Name = "tb_b";
-            this.tb_b.Size = new System.Drawing.Size(100, 22);
+            this.tb_b.Size = new System.Drawing.Size(100, 26);
             this.tb_b.TabIndex = 6;
             // 
             // tb_a
             // 
             this.tb_a.Location = new System.Drawing.Point(80, 38);
             this.tb_a.Name = "tb_a";
-            this.tb_a.Size = new System.Drawing.Size(100, 22);
+            this.tb_a.Size = new System.Drawing.Size(100, 26);
             this.tb_a.TabIndex = 5;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(753, 38);
+            this.label6.Location = new System.Drawing.Point(763, 38);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 14);
+            this.label6.Size = new System.Drawing.Size(16, 18);
             this.label6.TabIndex = 4;
             this.label6.Text = "σ";
             // 
@@ -234,7 +234,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(595, 38);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(14, 14);
+            this.label5.Size = new System.Drawing.Size(16, 18);
             this.label5.TabIndex = 3;
             this.label5.Text = "µ";
             // 
@@ -243,7 +243,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(414, 43);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(13, 14);
+            this.label4.Size = new System.Drawing.Size(15, 18);
             this.label4.TabIndex = 2;
             this.label4.Text = "λ";
             // 
@@ -252,7 +252,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(222, 38);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(14, 14);
+            this.label3.Size = new System.Drawing.Size(16, 18);
             this.label3.TabIndex = 1;
             this.label3.Text = "b";
             // 
@@ -261,7 +261,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(58, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 14);
+            this.label2.Size = new System.Drawing.Size(15, 18);
             this.label2.TabIndex = 0;
             this.label2.Text = "a";
             // 
@@ -323,7 +323,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             // 
             // Frm_TP3_PuntoA
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1135, 679);
             this.Controls.Add(this.pnl_tabla);
@@ -333,6 +333,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.Name = "Frm_TP3_PuntoA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Punto A";
+            this.Load += new System.EventHandler(this.Frm_TP3_PuntoA_Load);
             this.pnl_seleccion_distribucion.ResumeLayout(false);
             this.pnl_seleccion_distribucion.PerformLayout();
             this.pnl_parametros.ResumeLayout(false);

@@ -311,5 +311,10 @@ namespace TrabajosPracticosSIM.TP_1.InterfacesDeUsuario
         {
 
         }
+
+        private void Frm_PantallaPruebaDeFrecuencia_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

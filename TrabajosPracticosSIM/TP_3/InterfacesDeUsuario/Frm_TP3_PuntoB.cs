@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_1;
 using TrabajosPracticosSIM.TP_1.Entidades;
+using TrabajosPracticosSIM.TP_3.Entidades;
 
 namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 {
-    public partial class Frm_TP3_PuntoB_UEN : Form
+    public partial class Frm_TP3_PuntoB : Form
     {
         private int cantNros;
         private int cantIntervs;
@@ -23,9 +24,9 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         private int semilla;
         private int m;
         private SortedDictionary<double, Subintervalo> estructuraFrecObservada;
-        private SortedDictionary<int, double> lista;
+        private SortedDictionary<int, Random_VarAleatoria> lista;
 
-        public Frm_TP3_PuntoB_UEN()
+        public Frm_TP3_PuntoB()
         {
             InitializeComponent();
             Iniciar();
@@ -33,24 +34,19 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
         private void Iniciar()
         {
-            VisibilidadPanelParametrosMixto(false);
+            VisibilidadPanelChiCuadrado(false);
             VisibilidadPanelGrafico(false);
             chart1.Titles.Add("Histograma de Frecuencias");
             chart1.ChartAreas[0].AxisX.Title = "Marcas de Clase";
             chart1.ChartAreas[0].AxisY.Title = "Frecuencia";
             chart1.Series[0].LegendText = "FE";
             chart1.Series[1].LegendText = "FO";
-
-            tb_gdl.Enabled = false;
-            tb_resultado_final.Enabled = false;
-            tb_significancia_alfa.Enabled = true;
-            tb_xo_cuadrado.Enabled = false;
-            tb_valor_tabulado.Enabled = false;
+            Btn_Probabilidades.Visible = false;
         }
 
-        private void VisibilidadPanelParametrosMixto(bool valor)
+        private void VisibilidadPanelChiCuadrado(bool valor)
         {
-            //pnl_Cong_mixto.Visible = valor;
+            pnl_x2.Visible = valor;
         }
         private void VisibilidadPanelGrafico(bool valor)
         {
@@ -73,7 +69,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
                 cantIntervs = Convert.ToInt32(tb_cantInterv.Text);
 
 
-                VisibilidadPanelParametrosMixto(false);
+                VisibilidadPanelChiCuadrado(false);
                 VisibilidadPanelGrafico(true);
 
                 //Mandar Datos al Gestor.
@@ -95,7 +91,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         {
             //CambiarColorBtnSeleccionado(btn_Gen_Leng, Color.LightGray);
             CambiarColorBtnSeleccionado(sender, Color.LightBlue);
-            VisibilidadPanelParametrosMixto(true);
+            VisibilidadPanelChiCuadrado(true);
      
         }
         //Boton de Confirmacion> Mixto.
@@ -128,11 +124,37 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
         }
 
+        //Llenar labels Distr Seleccionada y Parametros
+        public void setLabels(String distrSeleccionada,String parametros, String cantVarAleatorias)
+        {
+            lbl_distr_seleccionada.Text = distrSeleccionada;
+            lbl_parametros.Text = parametros;
+            lbl_cant_var_aleatorias.Text = cantVarAleatorias;
+            Btn_Probabilidades.Visible = (distrSeleccionada == "Poisson" ? true : false);
+        }
+
+        public void MostrarLista(SortedDictionary<int, Random_VarAleatoria> listaVariablesAleatorias)
+        {
+            dgv_distribucion.Rows.Clear();
+
+            foreach (KeyValuePair<int, Random_VarAleatoria> kvp in listaVariablesAleatorias)
+            {
+                if (kvp.Value.getTieneRandom2())
+                {
+                    dgv_distribucion.Rows.Add(kvp.Key, kvp.Value.getRandom().ToString() + " , " + kvp.Value.getRandom2().ToString(), kvp.Value.getVarAleatoria());
+                }
+                else
+                {
+                    dgv_distribucion.Rows.Add(kvp.Key, kvp.Value.getRandom(), kvp.Value.getVarAleatoria());
+                }
+            }
+        }
+
 
         public void GenerarGraficosYTabla(ArrayList FE
                         , ArrayList mediaInterFO, ArrayList FO,
                          SortedDictionary<double, Subintervalo> Intervalos,
-                         SortedDictionary<int, double> lista, double chi_cuadrado_calculado,
+                         SortedDictionary<int, Random_VarAleatoria> lista, double chi_cuadrado_calculado,
                          double chi_tabulado, string mensaje, double significancia_alfa, int cantIntervs)
         {
             this.estructuraFrecObservada = Intervalos;
@@ -163,11 +185,11 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
                                         , Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaObservada()),
                                         kvp.Value.getIntervalo_chi_cuadrado().ToString("0.0000"));
             }
-            tb_resultado_final.Text = mensaje;
+            /*tb_resultado_final.Text = mensaje;
             tb_significancia_alfa.Text = significancia_alfa.ToString();
             tb_valor_tabulado.Text = chi_tabulado.ToString("0.00");
             tb_xo_cuadrado.Text = chi_cuadrado_calculado.ToString("0.00");
-            tb_gdl.Text = (cantIntervs - 1).ToString();
+            tb_gdl.Text = (cantIntervs - 1).ToString();*/
 
 
 
@@ -177,88 +199,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         private void limpiarDatos()
         {
             dgv_frecuencias.Rows.Clear();
-            tb_resultado_final.Clear();
             tb_significancia_alfa.Clear();
-            tb_valor_tabulado.Clear();
-            tb_xo_cuadrado.Clear();
-            tb_gdl.Clear();
-        }
-
-        private void btn_exportar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-            dt.Columns.Add("Int_Inf");
-            dt.Columns.Add("Int_Sup");
-            dt.Columns.Add("Media_Int");
-            dt.Columns.Add("Frec_Obs");
-
-            foreach (KeyValuePair<double, Subintervalo> kvp in estructuraFrecObservada)
-            {
-                DataRow nueva = dt.NewRow();
-                nueva["Int_Inf"] = kvp.Value.getLimite_inferior();
-                nueva["Int_Sup"] = kvp.Value.getLimite_superior();
-                ///nueva["Media_Int"] = kvp.Value.getMedia_intervalo();
-                //nueva["Frec_Obs"] = kvp.Value.getFrecuencia();
-                dt.Rows.Add(nueva);
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                DataRow nueva = dt.NewRow();
-                nueva["Int_Inf"] = "";
-                nueva["Int_Sup"] = "";
-                dt.Rows.Add(nueva);
-            }
-            DataRow nueva1 = dt.NewRow();
-            nueva1["Int_Inf"] = "Posicion";
-            nueva1["Int_Sup"] = "NroRandom";
-            dt.Rows.Add(nueva1);
-
-            foreach (KeyValuePair<int, double> kvp in lista)
-            {
-                DataRow nueva = dt.NewRow();
-                nueva["Int_Inf"] = kvp.Key;
-                nueva["Int_Sup"] = kvp.Value;
-                dt.Rows.Add(nueva);
-            }
-
-
-            StringBuilder sb = new StringBuilder();
-
-            IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().
-                                              Select(column => column.ColumnName);
-            sb.AppendLine(string.Join(",", columnNames));
-
-            foreach (DataRow row in dt.Rows)
-            {
-                IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
-                sb.AppendLine(string.Join(",", fields));
-            }
-            
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "csv files (*.csv)|*.csv";
-            DialogResult result = dialog.ShowDialog();
-
-
-            string selectedPath = "";
-            if (result == DialogResult.OK)
-            {
-                selectedPath = dialog.FileName;
-            }
-     
-            File.WriteAllText(selectedPath, sb.ToString());
-            
-            MessageBox.Show("El archivo se exportó con éxito", "Exportar archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-            MessageBox.Show("Error: "+ ex.Message, "Error Archivo",MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-
         }
 
 
@@ -267,14 +208,13 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             try
             {
                 int cant_intervalos = Convert.ToInt32(tb_cantInterv.Text);
-                int significancia_alfa = Convert.ToInt32(tb_significancia_alfa.Text);
-
-                ControladorTP3.GetInstance().Prueba_de_Frecuencias(cant_intervalos,significancia_alfa);
-
+                ControladorTP3.GetInstance().BtnPrueba_de_Frecuencias(cant_intervalos,this);
+                pnl_Grafico.Visible = true;
+                pnl_x2.Visible = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error Archivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -282,5 +222,11 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         {
 
         }
+
+        private void Btn_Probabilidades_Click(object sender, EventArgs e)
+        {
+            ControladorTP3.GetInstance().Btn_Probabilidades_Poisson();
+        }
+
     }
 }
