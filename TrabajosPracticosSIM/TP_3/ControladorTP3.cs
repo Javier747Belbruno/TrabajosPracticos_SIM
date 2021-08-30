@@ -94,7 +94,7 @@ namespace TrabajosPracticosSIM.TP_3
         {
             EstructuraFrecuencias_General EFG = new EstructuraFrecuencias_General(listaVariablesAleatorias,listaVariablesAleatorias.Count,cant_intervalos);
             EFG.construirEstructuraFrecuencias();
-
+            
         }
 
         
