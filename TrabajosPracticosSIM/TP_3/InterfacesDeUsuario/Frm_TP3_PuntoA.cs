@@ -125,7 +125,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             try
             {
                 int cantidad = Convert.ToInt32(tb_cantidad.Text);
-            
+
                 switch (distribucionSeleccionada)
                 {
                     case "Uniforme":
@@ -177,6 +177,11 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         }
 
         private void dgv_distribucion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Frm_TP3_PuntoA_Load(object sender, EventArgs e)
         {
 
         }

@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_1;
 using TrabajosPracticosSIM.TP_1.Entidades;
+using TrabajosPracticosSIM.TP_3.Entidades;
 
 namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 {
-    public partial class Frm_TP3_PuntoB_UEN : Form
+    public partial class Frm_TP3_PuntoB : Form
     {
         private int cantNros;
         private int cantIntervs;
@@ -23,9 +24,9 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         private int semilla;
         private int m;
         private SortedDictionary<double, Subintervalo> estructuraFrecObservada;
-        private SortedDictionary<int, double> lista;
+        private SortedDictionary<int, Random_VarAleatoria> lista;
 
-        public Frm_TP3_PuntoB_UEN()
+        public Frm_TP3_PuntoB()
         {
             InitializeComponent();
             Iniciar();
@@ -33,19 +34,19 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
         private void Iniciar()
         {
-            VisibilidadPanelParametrosMixto(false);
+            VisibilidadPanelChiCuadrado(false);
             VisibilidadPanelGrafico(false);
             chart1.Titles.Add("Histograma de Frecuencias");
             chart1.ChartAreas[0].AxisX.Title = "Marcas de Clase";
             chart1.ChartAreas[0].AxisY.Title = "Frecuencia";
             chart1.Series[0].LegendText = "FE";
             chart1.Series[1].LegendText = "FO";
-
+            Btn_Probabilidades.Visible = false;
         }
 
-        private void VisibilidadPanelParametrosMixto(bool valor)
+        private void VisibilidadPanelChiCuadrado(bool valor)
         {
-            //pnl_Cong_mixto.Visible = valor;
+            pnl_x2.Visible = valor;
         }
         private void VisibilidadPanelGrafico(bool valor)
         {
@@ -68,7 +69,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
                 cantIntervs = Convert.ToInt32(tb_cantInterv.Text);
 
 
-                VisibilidadPanelParametrosMixto(false);
+                VisibilidadPanelChiCuadrado(false);
                 VisibilidadPanelGrafico(true);
 
                 //Mandar Datos al Gestor.
@@ -90,7 +91,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         {
             //CambiarColorBtnSeleccionado(btn_Gen_Leng, Color.LightGray);
             CambiarColorBtnSeleccionado(sender, Color.LightBlue);
-            VisibilidadPanelParametrosMixto(true);
+            VisibilidadPanelChiCuadrado(true);
      
         }
         //Boton de Confirmacion> Mixto.
@@ -123,11 +124,37 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 
         }
 
+        //Llenar labels Distr Seleccionada y Parametros
+        public void setLabels(String distrSeleccionada,String parametros, String cantVarAleatorias)
+        {
+            lbl_distr_seleccionada.Text = distrSeleccionada;
+            lbl_parametros.Text = parametros;
+            lbl_cant_var_aleatorias.Text = cantVarAleatorias;
+            Btn_Probabilidades.Visible = (distrSeleccionada == "Poisson" ? true : false);
+        }
+
+        public void MostrarLista(SortedDictionary<int, Random_VarAleatoria> listaVariablesAleatorias)
+        {
+            dgv_distribucion.Rows.Clear();
+
+            foreach (KeyValuePair<int, Random_VarAleatoria> kvp in listaVariablesAleatorias)
+            {
+                if (kvp.Value.getTieneRandom2())
+                {
+                    dgv_distribucion.Rows.Add(kvp.Key, kvp.Value.getRandom().ToString() + " , " + kvp.Value.getRandom2().ToString(), kvp.Value.getVarAleatoria());
+                }
+                else
+                {
+                    dgv_distribucion.Rows.Add(kvp.Key, kvp.Value.getRandom(), kvp.Value.getVarAleatoria());
+                }
+            }
+        }
+
 
         public void GenerarGraficosYTabla(ArrayList FE
                         , ArrayList mediaInterFO, ArrayList FO,
                          SortedDictionary<double, Subintervalo> Intervalos,
-                         SortedDictionary<int, double> lista, double chi_cuadrado_calculado,
+                         SortedDictionary<int, Random_VarAleatoria> lista, double chi_cuadrado_calculado,
                          double chi_tabulado, string mensaje, double significancia_alfa, int cantIntervs)
         {
             this.estructuraFrecObservada = Intervalos;
@@ -181,14 +208,13 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             try
             {
                 int cant_intervalos = Convert.ToInt32(tb_cantInterv.Text);
-                int significancia_alfa = Convert.ToInt32(tb_significancia_alfa.Text);
-
-                ControladorTP3.GetInstance().Prueba_de_Frecuencias(cant_intervalos,significancia_alfa);
-
+                ControladorTP3.GetInstance().BtnPrueba_de_Frecuencias(cant_intervalos,this);
+                pnl_Grafico.Visible = true;
+                pnl_x2.Visible = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error Archivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -196,5 +222,11 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         {
 
         }
+
+        private void Btn_Probabilidades_Click(object sender, EventArgs e)
+        {
+            ControladorTP3.GetInstance().Btn_Probabilidades_Poisson();
+        }
+
     }
 }
