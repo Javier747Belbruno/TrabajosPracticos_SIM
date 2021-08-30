@@ -19,10 +19,6 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
     {
         private int cantNros;
         private int cantIntervs;
-        private int a;
-        private int c;
-        private int semilla;
-        private int m;
         private SortedDictionary<double, Subintervalo> estructuraFrecObservada;
         private SortedDictionary<int, Random_VarAleatoria> lista;
 
@@ -161,7 +157,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.lista = lista;
 
 
-            var ca = chart1.ChartAreas.FirstOrDefault();
+            /*var ca = chart1.ChartAreas.FirstOrDefault();
             ca.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
             //Parte del intervalo.
             //Si es un numero mayor a 15 intervalos, que el grafico automatice que mostrar.
@@ -172,7 +168,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             double escala_intervalo = mediaInterFO.Count;
             chart1.ChartAreas.FirstOrDefault().AxisX.Interval 
                     = (mediaInterFO.Count <= 15 ? Utiles.RedondearDecimales((1/ (double)escala_intervalo),2) : 0);
-
+            */
             chart1.Series[0].Points.DataBindXY(mediaInterFO, FE);
             chart1.Series[1].Points.DataBindXY(mediaInterFO, FO);
 
@@ -228,5 +224,17 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             ControladorTP3.GetInstance().Btn_Probabilidades_Poisson();
         }
 
+        private void Btn_Chi_Cuadrado_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double significancia_alfa = Convert.ToDouble(tb_significancia_alfa.Text);
+                ControladorTP3.GetInstance().Btn_Chi_Cuadrado(significancia_alfa, this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

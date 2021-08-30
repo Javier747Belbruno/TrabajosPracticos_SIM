@@ -19,6 +19,9 @@ namespace TrabajosPracticosSIM.TP_3
         //Aca se guarda las varAleatorias
         SortedDictionary<int, Random_VarAleatoria> listaVariablesAleatorias 
                 = new SortedDictionary<int, Random_VarAleatoria>();
+        
+        private int cant_intervalos;
+        EstructuraFrecuencias_General EFG;
 
         //Para solo Poisson
         private ArrayList funcDeDistrib = new ArrayList();
@@ -111,22 +114,14 @@ namespace TrabajosPracticosSIM.TP_3
         //Prueba de Frecuenta.
         public void BtnPrueba_de_Frecuencias(int cant_intervalos, Frm_TP3_PuntoB form)
         {
-            EstructuraFrecuencias_General EFG = new EstructuraFrecuencias_General(distrSeleccionada,listaVariablesAleatorias
+            this.cant_intervalos = cant_intervalos;
+            EFG = new EstructuraFrecuencias_General(distrSeleccionada,listaVariablesAleatorias
                                                                             ,listaVariablesAleatorias.Count,cant_intervalos);
             EFG.construirEstructuraFrecuencias();
             //Calculo chi cuadrado
-            //estruc.CalcularChiCuadrado();
+            EFG.CalcularChiCuadrado();
             // Obtener los intervalos.
             var Intervalos = EFG.getIntervalos();
-
-            /*double chi_cuadrado_calculado = estruc.getChi_cuadrado();
-
-            double significancia_alfa = 0.05;
-
-            //Obtener Chi por tabla
-            double chi_tabulado = getChiTabulado(cantIntervs, significancia_alfa);
-            //Get Resultado de hipotesis
-            String mensaje = getRespuestaFinal(chi_cuadrado_calculado, chi_tabulado);*/
 
             //Crear arrays para meter los datos.
             ArrayList mediaInterFO = new ArrayList();
@@ -239,6 +234,21 @@ namespace TrabajosPracticosSIM.TP_3
 
             //Pasar a la Pantalla para que muestre
             form.MostrarLista(listaVariablesAleatorias);
+        }
+
+        public void Btn_Chi_Cuadrado(double significancia_alfa, Frm_TP3_PuntoB frm_TP3_PuntoB)
+        {
+            Frm_TP3_PuntoB_ChiCuadrado pantalla = new Frm_TP3_PuntoB_ChiCuadrado();
+            CreateView(pantalla);
+
+            double chi_calculado = EFG.getChi_cuadrado();
+
+
+            PruebaDeChi x2 = new PruebaDeChi(distrSeleccionada, chi_calculado, significancia_alfa, cant_intervalos);
+            x2.calcularPrueba();
+
+            pantalla.LlenarTextBoxes(chi_calculado, x2.getChi_tabulado(), x2.getGDL(),
+                                        significancia_alfa, x2.getMensaje());
         }
 
         public void Btn_Probabilidades_Poisson()

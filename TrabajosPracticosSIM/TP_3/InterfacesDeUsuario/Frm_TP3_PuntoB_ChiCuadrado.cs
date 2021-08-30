@@ -35,5 +35,16 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             tb_xo_cuadrado.Clear();
             tb_gdl.Clear();
         }
+
+        public void LlenarTextBoxes(double chi_calculado, double chi_tabulado, 
+                                               int gdl, double significancia_alfa, string mensaje)
+        {
+            limpiarDatos();
+            tb_gdl.Text = gdl.ToString();
+            tb_resultado_final.Text = mensaje;
+            tb_significancia_alfa.Text = significancia_alfa.ToString();
+            tb_xo_cuadrado.Text = chi_calculado.ToString();
+            tb_valor_tabulado.Text = chi_tabulado.ToString();
+        }
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="TP_3\Entidades\GeneradorAleatoriasNormal.cs" />
     <Compile Include="TP_3\Entidades\GeneradorAleatoriasPoisson.cs" />
     <Compile Include="TP_3\Entidades\GeneradorAleatoriasUniforme.cs" />
+    <Compile Include="TP_3\Entidades\PruebaDeChi.cs" />
     <Compile Include="TP_3\Entidades\Random_VarAleatoria.cs" />
     <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_Principal.cs">
       <SubType>Form</SubType>
