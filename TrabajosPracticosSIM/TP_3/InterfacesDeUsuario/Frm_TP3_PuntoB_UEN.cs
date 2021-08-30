@@ -41,11 +41,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             chart1.Series[0].LegendText = "FE";
             chart1.Series[1].LegendText = "FO";
 
-            tb_gdl.Enabled = false;
-            tb_resultado_final.Enabled = false;
-            tb_significancia_alfa.Enabled = false;
-            tb_xo_cuadrado.Enabled = false;
-            tb_valor_tabulado.Enabled = false;
+
         }
 
         private void VisibilidadPanelParametrosMixto(bool valor)
@@ -163,11 +159,11 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
                                         , Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaObservada()),
                                         kvp.Value.getIntervalo_chi_cuadrado().ToString("0.0000"));
             }
-            tb_resultado_final.Text = mensaje;
+            /*tb_resultado_final.Text = mensaje;
             tb_significancia_alfa.Text = significancia_alfa.ToString();
             tb_valor_tabulado.Text = chi_tabulado.ToString("0.00");
             tb_xo_cuadrado.Text = chi_cuadrado_calculado.ToString("0.00");
-            tb_gdl.Text = (cantIntervs - 1).ToString();
+            tb_gdl.Text = (cantIntervs - 1).ToString();*/
 
 
 
@@ -177,88 +173,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         private void limpiarDatos()
         {
             dgv_frecuencias.Rows.Clear();
-            tb_resultado_final.Clear();
             tb_significancia_alfa.Clear();
-            tb_valor_tabulado.Clear();
-            tb_xo_cuadrado.Clear();
-            tb_gdl.Clear();
-        }
-
-        private void btn_exportar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-            dt.Columns.Add("Int_Inf");
-            dt.Columns.Add("Int_Sup");
-            dt.Columns.Add("Media_Int");
-            dt.Columns.Add("Frec_Obs");
-
-            foreach (KeyValuePair<double, Subintervalo> kvp in estructuraFrecObservada)
-            {
-                DataRow nueva = dt.NewRow();
-                nueva["Int_Inf"] = kvp.Value.getLimite_inferior();
-                nueva["Int_Sup"] = kvp.Value.getLimite_superior();
-                ///nueva["Media_Int"] = kvp.Value.getMedia_intervalo();
-                //nueva["Frec_Obs"] = kvp.Value.getFrecuencia();
-                dt.Rows.Add(nueva);
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                DataRow nueva = dt.NewRow();
-                nueva["Int_Inf"] = "";
-                nueva["Int_Sup"] = "";
-                dt.Rows.Add(nueva);
-            }
-            DataRow nueva1 = dt.NewRow();
-            nueva1["Int_Inf"] = "Posicion";
-            nueva1["Int_Sup"] = "NroRandom";
-            dt.Rows.Add(nueva1);
-
-            foreach (KeyValuePair<int, double> kvp in lista)
-            {
-                DataRow nueva = dt.NewRow();
-                nueva["Int_Inf"] = kvp.Key;
-                nueva["Int_Sup"] = kvp.Value;
-                dt.Rows.Add(nueva);
-            }
-
-
-            StringBuilder sb = new StringBuilder();
-
-            IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().
-                                              Select(column => column.ColumnName);
-            sb.AppendLine(string.Join(",", columnNames));
-
-            foreach (DataRow row in dt.Rows)
-            {
-                IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
-                sb.AppendLine(string.Join(",", fields));
-            }
-            
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "csv files (*.csv)|*.csv";
-            DialogResult result = dialog.ShowDialog();
-
-
-            string selectedPath = "";
-            if (result == DialogResult.OK)
-            {
-                selectedPath = dialog.FileName;
-            }
-     
-            File.WriteAllText(selectedPath, sb.ToString());
-            
-            MessageBox.Show("El archivo se exportó con éxito", "Exportar archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-            MessageBox.Show("Error: "+ ex.Message, "Error Archivo",MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-
         }
 
 

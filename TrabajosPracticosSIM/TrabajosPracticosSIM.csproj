@@ -108,6 +108,12 @@
     <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoA.Designer.cs">
       <DependentUpon>Frm_TP3_PuntoA.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_ChiCuadrado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_ChiCuadrado.Designer.cs">
+      <DependentUpon>Frm_TP3_PuntoB_ChiCuadrado.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_Poisson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoA.resx">
       <DependentUpon>Frm_TP3_PuntoA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_ChiCuadrado.resx">
+      <DependentUpon>Frm_TP3_PuntoB_ChiCuadrado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_Poisson.resx">
       <DependentUpon>Frm_TP3_PuntoB_Poisson.cs</DependentUpon>
