@@ -55,7 +55,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.lbl_distr_seleccionada = new System.Windows.Forms.Label();
             this.lbl_cant_var_aleatorias = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Btn_Chi_Cuadrado = new System.Windows.Forms.Button();
             this.pnl_x2 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Btn_Probabilidades = new System.Windows.Forms.Button();
@@ -276,20 +276,21 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label5.TabIndex = 30;
             this.label5.Text = "Cant. de var. Aleat.";
             // 
-            // button1
+            // Btn_Chi_Cuadrado
             // 
-            this.button1.Location = new System.Drawing.Point(98, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(194, 54);
-            this.button1.TabIndex = 32;
-            this.button1.Text = "Prueba de X^2";
-            this.button1.UseVisualStyleBackColor = true;
+            this.Btn_Chi_Cuadrado.Location = new System.Drawing.Point(98, 66);
+            this.Btn_Chi_Cuadrado.Name = "Btn_Chi_Cuadrado";
+            this.Btn_Chi_Cuadrado.Size = new System.Drawing.Size(194, 54);
+            this.Btn_Chi_Cuadrado.TabIndex = 32;
+            this.Btn_Chi_Cuadrado.Text = "Prueba de X^2";
+            this.Btn_Chi_Cuadrado.UseVisualStyleBackColor = true;
+            this.Btn_Chi_Cuadrado.Click += new System.EventHandler(this.Btn_Chi_Cuadrado_Click);
             // 
             // pnl_x2
             // 
             this.pnl_x2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_x2.Controls.Add(this.tb_significancia_alfa);
-            this.pnl_x2.Controls.Add(this.button1);
+            this.pnl_x2.Controls.Add(this.Btn_Chi_Cuadrado);
             this.pnl_x2.Controls.Add(this.label17);
             this.pnl_x2.Location = new System.Drawing.Point(9, 534);
             this.pnl_x2.Name = "pnl_x2";
@@ -409,7 +410,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         private System.Windows.Forms.Label lbl_distr_seleccionada;
         private System.Windows.Forms.Label lbl_cant_var_aleatorias;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Btn_Chi_Cuadrado;
         private System.Windows.Forms.Panel pnl_x2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgv_distribucion;

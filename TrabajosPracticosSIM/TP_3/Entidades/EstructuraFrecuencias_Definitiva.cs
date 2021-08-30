@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics.Distributions;
+using TrabajosPracticosSIM.TP_1;
 using TrabajosPracticosSIM.TP_1.Entidades;
 
 namespace TrabajosPracticosSIM.TP_3.Entidades
@@ -81,7 +82,7 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
             for (int i = 0; i < probAcum.Count; i++)
             {
                 if (i >= limite_inf && i < limite_sup)
-                    FEPoissonintervalo = FEPoissonintervalo + ((double)prob[i] * cant_numeros);
+                    FEPoissonintervalo = FEPoissonintervalo + (Utiles.RedondearDecimales((double)prob[i] * cant_numeros,0));
             }
             return FEPoissonintervalo;
         }
@@ -99,6 +100,10 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
             //Recorrer por cada intervalo todos los valores para ver si caen dentro de cada uno.
             for (int i = 0; i < cant_intervalos; i++)
             {
+                if(i== cant_intervalos - 1)
+                {
+                    subinterv_limite_sup = subinterv_limite_sup + 0.0001;
+                }
                 //Creo objeto subintervalo.
                 Subintervalo sub = new Subintervalo(subinterv_limite_inf, subinterv_limite_sup);
 
