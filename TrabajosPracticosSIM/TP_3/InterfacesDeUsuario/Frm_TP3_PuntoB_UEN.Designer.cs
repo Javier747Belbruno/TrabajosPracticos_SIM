@@ -49,11 +49,11 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.tb_significancia_alfa = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.Btn_Prueba_De_Frecuencia = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_var_aleatorias = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.pnl_Grafico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_frecuencias)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_var_aleatorias)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Cerrar
@@ -71,7 +71,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             // 
             this.tb_cantInterv.Location = new System.Drawing.Point(221, 77);
             this.tb_cantInterv.Name = "tb_cantInterv";
-            this.tb_cantInterv.Size = new System.Drawing.Size(146, 26);
+            this.tb_cantInterv.Size = new System.Drawing.Size(146, 22);
             this.tb_cantInterv.TabIndex = 4;
             // 
             // label2
@@ -80,7 +80,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label2.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(39, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 21);
+            this.label2.Size = new System.Drawing.Size(114, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Cant. de Intervalos";
             // 
@@ -124,6 +124,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.pnl_Grafico.Size = new System.Drawing.Size(980, 638);
             this.pnl_Grafico.TabIndex = 13;
             // 
+
             // dgv_frecuencias
             // 
             this.dgv_frecuencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -179,7 +180,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             // 
             this.tb_significancia_alfa.Location = new System.Drawing.Point(808, 403);
             this.tb_significancia_alfa.Name = "tb_significancia_alfa";
-            this.tb_significancia_alfa.Size = new System.Drawing.Size(146, 26);
+            this.tb_significancia_alfa.Size = new System.Drawing.Size(146, 22);
             this.tb_significancia_alfa.TabIndex = 22;
             // 
             // label17
@@ -188,7 +189,9 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.label17.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(804, 362);
             this.label17.Name = "label17";
+
             this.label17.Size = new System.Drawing.Size(126, 21);
+
             this.label17.TabIndex = 20;
             this.label17.Text = "Significancia Alfa";
             // 
@@ -202,23 +205,23 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.Btn_Prueba_De_Frecuencia.UseVisualStyleBackColor = true;
             this.Btn_Prueba_De_Frecuencia.Click += new System.EventHandler(this.Btn_Prueba_De_Frecuencia_Click);
             // 
-            // dataGridView1
+            // dgv_var_aleatorias
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(29, 337);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(338, 320);
-            this.dataGridView1.TabIndex = 24;
+            this.dgv_var_aleatorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_var_aleatorias.Location = new System.Drawing.Point(29, 337);
+            this.dgv_var_aleatorias.Name = "dgv_var_aleatorias";
+            this.dgv_var_aleatorias.RowHeadersWidth = 51;
+            this.dgv_var_aleatorias.RowTemplate.Height = 24;
+            this.dgv_var_aleatorias.Size = new System.Drawing.Size(338, 320);
+            this.dgv_var_aleatorias.TabIndex = 24;
             // 
             // Frm_TP3_PuntoB_UEN
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1402, 761);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv_var_aleatorias);
             this.Controls.Add(this.Btn_Prueba_De_Frecuencia);
             this.Controls.Add(this.pnl_Grafico);
             this.Controls.Add(this.tb_cantInterv);
@@ -228,11 +231,12 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.Name = "Frm_TP3_PuntoB_UEN";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PantallaPruebaDeFrecuencia";
+            this.Load += new System.EventHandler(this.Frm_TP3_PuntoB_UEN_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.pnl_Grafico.ResumeLayout(false);
             this.pnl_Grafico.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_frecuencias)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_var_aleatorias)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,6 +258,6 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         private System.Windows.Forms.DataGridViewTextBoxColumn FO;
         private System.Windows.Forms.DataGridViewTextBoxColumn FEFO2FE;
         private System.Windows.Forms.Button Btn_Prueba_De_Frecuencia;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_var_aleatorias;
     }
 }

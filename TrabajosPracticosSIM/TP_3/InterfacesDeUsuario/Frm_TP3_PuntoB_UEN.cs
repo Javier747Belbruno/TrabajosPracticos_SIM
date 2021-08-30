@@ -41,7 +41,6 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             chart1.Series[0].LegendText = "FE";
             chart1.Series[1].LegendText = "FO";
 
-
         }
 
         private void VisibilidadPanelParametrosMixto(bool valor)
@@ -181,12 +180,21 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
         {
             try
             {
+                int cant_intervalos = Convert.ToInt32(tb_cantInterv.Text);
+                int significancia_alfa = Convert.ToInt32(tb_significancia_alfa.Text);
+
+                ControladorTP3.GetInstance().Prueba_de_Frecuencias(cant_intervalos,significancia_alfa);
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "Error Archivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Frm_TP3_PuntoB_UEN_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

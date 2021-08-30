@@ -175,5 +175,10 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
                 }
             }
         }
+
+        private void dgv_distribucion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

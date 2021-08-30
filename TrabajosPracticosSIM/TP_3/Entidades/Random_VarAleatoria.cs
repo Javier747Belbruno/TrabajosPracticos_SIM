@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace TrabajosPracticosSIM.TP_3.Entidades
 {
-    public class Random_VarAleatoria
+    public class Random_VarAleatoria : IComparable
     {
         private double random;
         private double random2;
         private double varAleatoria;
         private Boolean tieneRandom2 = false;
+
 
         public void setRandom(double random)
         {
@@ -47,6 +48,17 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
         public Boolean getTieneRandom2()
         {
             return tieneRandom2;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            Random_VarAleatoria parametroRandom = obj as Random_VarAleatoria;
+            if (parametroRandom != null)
+                return this.varAleatoria.CompareTo(parametroRandom.varAleatoria);
+            else
+                throw new ArgumentException("La varAleatoria rompio todo");
         }
     }
 }

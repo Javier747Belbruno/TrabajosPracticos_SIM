@@ -18,6 +18,7 @@ namespace TrabajosPracticosSIM.TP_3
         SortedDictionary<int, Random_VarAleatoria> listaVariablesAleatorias 
                 = new SortedDictionary<int, Random_VarAleatoria>();
 
+        //
 
         //Constructor Privado.
         private ControladorTP3()
@@ -85,8 +86,18 @@ namespace TrabajosPracticosSIM.TP_3
         //Crear Pantalla Punto B
         public void OpcionPantallaPuntoB()
         {
-            CreateView(new Frm_TP3_PuntoB_Poisson());
+            CreateView(new Frm_TP3_PuntoB_UEN());
         }
+
+        //Prueba de Frecuenta.
+        public void Prueba_de_Frecuencias(int cant_intervalos, int significancia_alfa)
+        {
+            EstructuraFrecuencias_General EFG = new EstructuraFrecuencias_General(listaVariablesAleatorias,listaVariablesAleatorias.Count,cant_intervalos);
+            EFG.construirEstructuraFrecuencias();
+            
+        }
+
+        
 
         public void OpcionGenerarUniforme(int cantidad, double a, double b, Frm_TP3_PuntoA form)
         {

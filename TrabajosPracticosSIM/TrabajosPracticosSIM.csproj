@@ -91,6 +91,7 @@
       <DependentUpon>PantallaPruebaDeFrecuencia.cs</DependentUpon>
     </Compile>
     <Compile Include="TP_3\ControladorTP3.cs" />
+    <Compile Include="TP_3\Entidades\EstructuraFrecuencias_Definitiva.cs" />
     <Compile Include="TP_3\Entidades\GeneradorAleatoriasExponencial.cs" />
     <Compile Include="TP_3\Entidades\GeneradorAleatoriasNormal.cs" />
     <Compile Include="TP_3\Entidades\GeneradorAleatoriasPoisson.cs" />
