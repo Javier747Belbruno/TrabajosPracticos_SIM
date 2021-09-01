@@ -34,6 +34,7 @@ namespace TrabajosPracticosSIM.TP_3.Entidades
             {
                 this.chi_cuadrado += kvp.Value.getIntervalo_chi_cuadrado();
             }
+            this.chi_cuadrado = Utiles.RedondearDecimales(this.chi_cuadrado, 4);
         }
 
         public SortedDictionary<double, Subintervalo> getIntervalos()

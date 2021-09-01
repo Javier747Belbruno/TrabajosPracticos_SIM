@@ -80,6 +80,29 @@ namespace TrabajosPracticosSIM.TP_3
                 frm.Show();
             }
         }
+        public void ReplaceView(Form frm)
+        {
+            bool EstaCreada = false;
+            foreach (var v in Views)
+            {
+                if (frm.GetType() == v.GetType())
+                {
+                    v.Close();
+                    v.FormClosed += FormClosed;
+                    Views.Add(frm);
+                    frm.FormClosed += FormClosed;
+                    frm.Show();
+                    EstaCreada = true;
+                    break;
+                }
+            }
+            if (!EstaCreada)
+            {
+                Views.Add(frm);
+                frm.FormClosed += FormClosed;
+                frm.Show();
+            }
+        }
 
         //Evento Cerrar un Form
         private void FormClosed(object sender, FormClosedEventArgs e)
@@ -130,7 +153,7 @@ namespace TrabajosPracticosSIM.TP_3
 
             foreach (KeyValuePair<double, Subintervalo> kvp in Intervalos)
             {
-                mediaInterFO.Add(Utiles.RedondearDecimales(kvp.Key, 3));
+                mediaInterFO.Add(Utiles.RedondearDecimales(kvp.Key, 2));
                 FO.Add(Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaObservada()));
                 FE.Add(Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaEsperada()));
             }
@@ -254,7 +277,7 @@ namespace TrabajosPracticosSIM.TP_3
         public void Btn_Probabilidades_Poisson()
         {
             Frm_TP3_PuntoB_ProbPoisson pantalla = new Frm_TP3_PuntoB_ProbPoisson();
-            CreateView(pantalla);
+            ReplaceView(pantalla);
             pantalla.LlenarTabla(funcDeDistrib, probAcumuladas);
         }
         public string getDistrSeleccionada()
