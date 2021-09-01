@@ -12,6 +12,9 @@ using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_1;
 using TrabajosPracticosSIM.TP_1.Entidades;
 using TrabajosPracticosSIM.TP_3.Entidades;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using TrabajosPracticosSIM.Utilities;
 
 namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 {
@@ -157,20 +160,32 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
             this.lista = lista;
 
 
-            /*var ca = chart1.ChartAreas.FirstOrDefault();
-            ca.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
-            //Parte del intervalo.
-            //Si es un numero mayor a 15 intervalos, que el grafico automatice que mostrar.
-            //Si no que lo parta en los intervalos que le corresponden
-            ca.AxisX.IsStartedFromZero = true;
-            ca.AxisX.LabelAutoFitStyle = System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.LabelsAngleStep30;
-            //Si es impar que lo haga par.
-            double escala_intervalo = mediaInterFO.Count;
-            chart1.ChartAreas.FirstOrDefault().AxisX.Interval 
-                    = (mediaInterFO.Count <= 15 ? Utiles.RedondearDecimales((1/ (double)escala_intervalo),2) : 0);
-            */
+
+            var CA = chart1.ChartAreas.FirstOrDefault();
+            
+
+
+            CA.AxisX.MajorTickMark.Enabled = false;
+            CA.AxisY.MajorTickMark.Enabled = false;
+            CA.AxisX.MinorTickMark.Enabled = false;
+            CA.AxisY.MinorTickMark.Enabled = false;
+
+            CA.AxisX.CustomLabels.Clear();
+            CA.AxisX.IsLabelAutoFit = false;
+
+            if (mediaInterFO.Count < 50)
+            {
+                foreach (double MarcadeClase in mediaInterFO)
+                {
+                    var label = new CustomLabel(MarcadeClase - 100, MarcadeClase + 100, MarcadeClase.ToString(), 0, LabelMarkStyle.LineSideMark);
+                    CA.AxisX.CustomLabels.Add(label);
+                }
+            }
+          
+
             chart1.Series[0].Points.DataBindXY(mediaInterFO, FE);
             chart1.Series[1].Points.DataBindXY(mediaInterFO, FO);
+
 
 
             limpiarDatos();
@@ -181,13 +196,6 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
                                         , Utiles.Redondear4Decimales(kvp.Value.getFrecuenciaObservada()),
                                         kvp.Value.getIntervalo_chi_cuadrado().ToString("0.0000"));
             }
-            /*tb_resultado_final.Text = mensaje;
-            tb_significancia_alfa.Text = significancia_alfa.ToString();
-            tb_valor_tabulado.Text = chi_tabulado.ToString("0.00");
-            tb_xo_cuadrado.Text = chi_cuadrado_calculado.ToString("0.00");
-            tb_gdl.Text = (cantIntervs - 1).ToString();*/
-
-
 
 
         }
