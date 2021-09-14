@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_1;
 using TrabajosPracticosSIM.TP_1.Entidades;
 using TrabajosPracticosSIM.TP_3.Entidades;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.DataVisualization.Charting.Utilities;
-using TrabajosPracticosSIM.Utilities;
 
 namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 {
