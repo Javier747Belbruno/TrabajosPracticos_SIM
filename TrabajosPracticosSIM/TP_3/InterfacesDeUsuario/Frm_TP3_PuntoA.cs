@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_3.Entidades;
 
@@ -135,10 +130,18 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
                         break;
                     case "Exponencial":
                         double lambda = Convert.ToDouble(tb_lambda.Text);
+                        if (lambda <= 0)
+                        {
+                            throw(new Exception("Lambda ingresado no válido"));   
+                        }
                         ControladorTP3.GetInstance().OpcionGenerarExponencial(cantidad, lambda, this);
                         break;
                     case "Poisson":
                         double lambdaPoisson = Convert.ToDouble(tb_lambda.Text);
+                        if (lambdaPoisson <= 0)
+                        {
+                            throw (new Exception("Lambda ingresado no válido"));
+                        }
                         ControladorTP3.GetInstance().OpcionGenerarPoisson(cantidad, lambdaPoisson, this);
                         break;
                     case "Normal":

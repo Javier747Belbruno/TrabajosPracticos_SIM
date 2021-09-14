@@ -128,7 +128,6 @@
     <Compile Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_ProbPoisson.Designer.cs">
       <DependentUpon>Frm_TP3_PuntoB_ProbPoisson.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\HistogramChartHelper.cs" />
     <EmbeddedResource Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.resx">
       <DependentUpon>PantallaGeneracionDeNumerosAleatorios.cs</DependentUpon>
     </EmbeddedResource>

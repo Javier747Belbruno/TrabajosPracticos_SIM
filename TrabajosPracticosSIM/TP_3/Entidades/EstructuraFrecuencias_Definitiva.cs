@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MathNet.Numerics.Distributions;
 using TrabajosPracticosSIM.TP_1;
 using TrabajosPracticosSIM.TP_1.Entidades;
