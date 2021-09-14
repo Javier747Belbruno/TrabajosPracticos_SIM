@@ -80,3 +80,6 @@ Ejemplo: El objeto que llama, pide la instancia de controladorTP3 y a esa instan
 #### Responsabilidades:
 
 >  Realizar el trabajo que le fue delegado.
+
+## Diagrama de Clases de TP3
+![](https://javier747belbruno.github.io/car-control-simulation/assets/DiagramaDeClases.png)
