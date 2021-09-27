@@ -81,6 +81,7 @@ namespace TrabajosPracticosSIM.TP_4
 
         public void OpcionIniciarSimulacion()
         {
+            Grafo g = new Grafo();
     
             //The Mighty FOR
             for (int i = 0; i < 2; i++)
@@ -92,6 +93,11 @@ namespace TrabajosPracticosSIM.TP_4
                 r3 = r.NextDouble();
                 r4 = r.NextDouble();
                 r5 = r.NextDouble();
+
+                Queue<double> q = new Queue<double>();
+                q.Enqueue(r1);
+                double var = g.actividad1.Distr.DevolverUnaVariableAleatoria(q);
+
                 var lala = "";
             }
         }

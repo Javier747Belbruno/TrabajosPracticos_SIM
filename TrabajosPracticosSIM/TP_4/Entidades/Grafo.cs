@@ -10,17 +10,17 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
     public class Grafo
     {
         //Nodos
-        public Nodo nodo1 { get; set; }
-        public Nodo nodo2 { get; set; }
-        public Nodo nodo3 { get; set; }
-        public Nodo nodo4 { get; set; }
-    
+        public Nodo nodo1 { get; set; } = new Nodo();
+        public Nodo nodo2 { get; set; } = new Nodo();
+        public Nodo nodo3 { get; set; } = new Nodo();
+        public Nodo nodo4 { get; set; } = new Nodo();
+
         //Actividades
-        public Actividad actividad1 { get; set; }
-        public Actividad actividad2 { get; set; }
-        public Actividad actividad3 { get; set; }
-        public Actividad actividad4 { get; set; }
-        public Actividad actividad5 { get; set; }
+        public Actividad actividad1 { get; set; } = new Actividad();
+        public Actividad actividad2 { get; set; } = new Actividad();
+        public Actividad actividad3 { get; set; } = new Actividad();
+        public Actividad actividad4 { get; set; } = new Actividad();
+        public Actividad actividad5 { get; set; } = new Actividad();
 
         public Grafo()
         {
