@@ -8,7 +8,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
 {
     public class Nodo
     {
-        public int Id { get; set; }
+        public int Id { get; set; } = 0;
 
         public bool EsInicial { get; set; } = false;
 

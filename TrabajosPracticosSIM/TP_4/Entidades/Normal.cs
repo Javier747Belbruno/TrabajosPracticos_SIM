@@ -31,6 +31,8 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             varAleat = Utiles.RedondearDecimales(varAleat, 4);
             return varAleat;
         }
+
+
     }
 }
 

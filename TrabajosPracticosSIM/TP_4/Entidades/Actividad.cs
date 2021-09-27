@@ -15,5 +15,6 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         public int Id { get; set; }
         public IDistribucion Distr { get; set; }
 
+
     }
 }
