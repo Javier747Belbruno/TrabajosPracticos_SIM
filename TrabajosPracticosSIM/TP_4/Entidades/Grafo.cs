@@ -35,6 +35,8 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             IniciarActividad5();
             CargarActividadesPredecesoras();
             CargarActividadesSucesoras();
+            CargarNodosPredecesores();
+            CargarNodosSucesores();
         }
         private void IniciarNodo1()
         {
@@ -65,6 +67,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             nodo4.Predecesores.Add(actividad5);
             nodo4.Predecesores.Add(actividad3);
         }
+        
         private void CargarActividadesSucesoras()
         {
             nodo1.Sucesores.Add(actividad1);
@@ -74,6 +77,22 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             nodo2.Sucesores.Add(actividad4);
 
             nodo3.Sucesores.Add(actividad5);
+        }
+        private void CargarNodosPredecesores()
+        {
+            actividad1.Predecesor = nodo1;
+            actividad2.Predecesor = nodo1;
+            actividad3.Predecesor = nodo1;
+            actividad4.Predecesor = nodo2;
+            actividad5.Predecesor = nodo3;
+        }
+        private void CargarNodosSucesores()
+        {
+            actividad1.Sucesor = nodo2;
+            actividad2.Sucesor = nodo3;
+            actividad3.Sucesor = nodo4;
+            actividad4.Sucesor = nodo3;
+            actividad5.Sucesor = nodo4;
         }
 
         private void IniciarActividad1()

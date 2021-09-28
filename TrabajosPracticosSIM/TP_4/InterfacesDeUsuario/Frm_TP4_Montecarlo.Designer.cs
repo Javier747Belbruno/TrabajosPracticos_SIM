@@ -32,7 +32,9 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.btn_simular = new System.Windows.Forms.Button();
             this.btn_config = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.btn_config)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_simular
@@ -69,11 +71,22 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.label1.TabIndex = 2;
             this.label1.Text = "Configurar Actividades";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(271, 221);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(1195, 150);
+            this.dataGridView1.TabIndex = 3;
+            // 
             // Frm_TP4_Montecarlo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 585);
+            this.ClientSize = new System.Drawing.Size(1402, 591);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_config);
             this.Controls.Add(this.btn_simular);
@@ -81,6 +94,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.Name = "Frm_TP4_Montecarlo";
             this.Text = "Frm_TP4_Montecarlo";
             ((System.ComponentModel.ISupportInitialize)(this.btn_config)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,5 +105,6 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         private System.Windows.Forms.Button btn_simular;
         private System.Windows.Forms.PictureBox btn_config;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

@@ -17,5 +17,22 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         public List<Actividad> Predecesores { get; set; } = new List<Actividad>();
 
         public List<Actividad> Sucesores { get; set; } = new List<Actividad>();
+
+        public double TiempoFinalizacion { get; set; } = 0;
+
+        public double CalcularTiempoFinalizacion()
+        {
+            TiempoFinalizacion = 0;
+            foreach (Actividad a in Predecesores)
+            {
+                if(a.Tiempo + a.Predecesor.TiempoFinalizacion > TiempoFinalizacion)
+                {
+                    TiempoFinalizacion = a.Tiempo + a.Predecesor.TiempoFinalizacion;
+                }
+                
+            }
+            return TiempoFinalizacion;
+        }
+
     }
 }
