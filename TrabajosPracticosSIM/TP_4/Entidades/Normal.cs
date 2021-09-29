@@ -20,7 +20,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
 
         public string DevolverParams()
         {
-            return Media + ", " + DS;
+            return "µ: " + Media + ",σ: " + DS;
         }
         public double DevolverUnaVariableAleatoria(Queue<double> random)
         {

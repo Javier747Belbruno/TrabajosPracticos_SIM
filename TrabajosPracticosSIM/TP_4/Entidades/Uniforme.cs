@@ -19,7 +19,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         }
         public string DevolverParams()
         {
-            return A + ", " + B;
+            return "a: "+ A + ",b: " + B;
         }
         /// <summary>
         /// Sacar el primer random de la lista

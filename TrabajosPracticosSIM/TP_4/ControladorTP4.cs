@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_1;
 using TrabajosPracticosSIM.TP_4.Entidades;
+using TrabajosPracticosSIM.TP_4.InterfacesDeUsuario;
 
 namespace TrabajosPracticosSIM.TP_4
 {
@@ -13,7 +14,8 @@ namespace TrabajosPracticosSIM.TP_4
         private static readonly ControladorTP4 _instance = new ControladorTP4();
         public Random r = new Random();
         private Grafo grafo = new Grafo();
-        DataTable dt = new DataTable();
+        DataTable dtActividadesPantalla = new DataTable();
+        DataTable dtGeneral = new DataTable();
 
         //Lista de Vistas / Pantallas que controla el ControladorTP4
         private List<Form> Views = new List<Form>();
@@ -24,6 +26,7 @@ namespace TrabajosPracticosSIM.TP_4
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
         }
+
         // Devolver instancia estática única.
         public static ControladorTP4 GetInstance() { return _instance; }
 
@@ -36,6 +39,7 @@ namespace TrabajosPracticosSIM.TP_4
         public void IniciarFuncionalidad()
         {
             HabilitarPantallaPrincipal();
+            InicializarColumnasTablas();
         }
 
         public void HabilitarPantallaPrincipal()
@@ -81,30 +85,18 @@ namespace TrabajosPracticosSIM.TP_4
         {
             CreateView(new Frm_TP4_Montecarlo());
         }
-
-        public void OpcionIniciarSimulacion(Frm_TP4_Montecarlo form)
+        public void OpcionPantallaConfiguracion()
         {
-            dt.Columns.Add("i");
-            dt.Columns.Add("r1");
-            dt.Columns.Add("r2");
-            dt.Columns.Add("r3");
-            dt.Columns.Add("r4");
-            dt.Columns.Add("r5");
-            dt.Columns.Add("t1");
-            dt.Columns.Add("t2");
-            dt.Columns.Add("t3");
-            dt.Columns.Add("t4");
-            dt.Columns.Add("t5");
-            dt.Columns.Add("n1");
-            dt.Columns.Add("n2");
-            dt.Columns.Add("n3");
-            dt.Columns.Add("n4");
-            dt.Columns.Add("tiempoEnsamble");
-            dt.Columns.Add("promedioTiempoEnsamble");
-            dt.Columns.Add("tiempoMin");
-            dt.Columns.Add("tiempoMax");
-            dt.Columns.Add("contadorMenorIgual45");
-            dt.Columns.Add("probMenorIgual45");
+            CreateView(new Frm_TP4_Configuracion());
+        }
+        /// <summary>
+        /// Metodo que ejecuta la Simulación
+        /// </summary>
+        /// <param name="form">Por Parametro se pasa pantalla que lo llamó</param>
+        public void OpcionIniciarSimulacion(Frm_TP4_Montecarlo form, int cant_sim, int desde, int hasta)
+        {
+            //Dejar Lista Tablas de Datos
+            LimpiarTableDatas();
 
             //Condiciones Iniciales
             double r1, r2, r3, r4, r5;
@@ -116,7 +108,7 @@ namespace TrabajosPracticosSIM.TP_4
             double probMenorIgual45 = 0;
             
             //Empieza la simulacion
-            for (int i = 1; i <= 1000000; i++)
+            for (int i = 1; i <= cant_sim; i++)
             {
                 
                 //Randoms
@@ -149,7 +141,7 @@ namespace TrabajosPracticosSIM.TP_4
                 tiempoEnsamble = n4;
 
                 //Calcular Promedio
-                promedioTiempoEnsamble = (promedioTiempoEnsamble * (i - 1) + tiempoEnsamble) / i;
+                promedioTiempoEnsamble = Utiles.RedondearDecimales((promedioTiempoEnsamble * (i - 1) + tiempoEnsamble) / i, 4);
 
                 //Tiempo Minimo
                 if(tiempoEnsamble< tiempoMin)
@@ -166,12 +158,12 @@ namespace TrabajosPracticosSIM.TP_4
                 {
                     contadorMenorIgual45++;
                 }
-                probMenorIgual45 = contadorMenorIgual45 / (double)i;
+                probMenorIgual45 = Utiles.RedondearDecimales(contadorMenorIgual45 / (double)i, 4);
 
                 //Recordar solo las que pide
-                if(i >= 1 && i <= 20 || i%1000 == 0)
+                if((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) )
                 {
-                   dt.Rows.Add(i,r1, r2, r3, r4, r5, t1, t2, t3, t4, t5, n1, n2, n3, n4,
+                    dtGeneral.Rows.Add(i,r1, r2, r3, r4, r5, t1, t2, t3, t4, t5, n1, n2, n3, n4,
                                tiempoEnsamble, promedioTiempoEnsamble,
                 tiempoMin, tiempoMax, contadorMenorIgual45, probMenorIgual45);
                 }
@@ -179,10 +171,53 @@ namespace TrabajosPracticosSIM.TP_4
                 
 
             }
-            form.LlenarGridView(dt);
+            form.LlenarGridView(dtGeneral);
         }
 
+        private void InicializarColumnasTablas()
+        {
+            dtActividadesPantalla.Columns.Add("ID");
+            dtActividadesPantalla.Columns.Add("DISTR");
+            dtActividadesPantalla.Columns.Add("PARAMS");
 
 
+            dtGeneral.Columns.Add("i");
+            dtGeneral.Columns.Add("r1");
+            dtGeneral.Columns.Add("r2");
+            dtGeneral.Columns.Add("r3");
+            dtGeneral.Columns.Add("r4");
+            dtGeneral.Columns.Add("r5");
+            dtGeneral.Columns.Add("t1");
+            dtGeneral.Columns.Add("t2");
+            dtGeneral.Columns.Add("t3");
+            dtGeneral.Columns.Add("t4");
+            dtGeneral.Columns.Add("t5");
+            dtGeneral.Columns.Add("n1");
+            dtGeneral.Columns.Add("n2");
+            dtGeneral.Columns.Add("n3");
+            dtGeneral.Columns.Add("n4");
+            dtGeneral.Columns.Add("tiempoEnsamble");
+            dtGeneral.Columns.Add("promedioTiempoEnsamble");
+            dtGeneral.Columns.Add("tiempoMin");
+            dtGeneral.Columns.Add("tiempoMax");
+            dtGeneral.Columns.Add("contadorMenorIgual45");
+            dtGeneral.Columns.Add("probMenorIgual45");
+        }
+        private void LimpiarTableDatas()
+        {
+            dtGeneral.Clear();
+        }
+        public void OpcionCargarPanelActividades(Frm_TP4_Montecarlo form)
+        {
+            dtActividadesPantalla.Clear();
+            dtActividadesPantalla.Rows.Add(grafo.actividad1.Id, grafo.actividad1.Distr.GetType().Name, grafo.actividad1.Distr.DevolverParams());
+            dtActividadesPantalla.Rows.Add(grafo.actividad2.Id, grafo.actividad2.Distr.GetType().Name, grafo.actividad2.Distr.DevolverParams());
+            dtActividadesPantalla.Rows.Add(grafo.actividad3.Id, grafo.actividad3.Distr.GetType().Name, grafo.actividad3.Distr.DevolverParams());
+            dtActividadesPantalla.Rows.Add(grafo.actividad4.Id, grafo.actividad4.Distr.GetType().Name, grafo.actividad4.Distr.DevolverParams());
+            dtActividadesPantalla.Rows.Add(grafo.actividad5.Id, grafo.actividad5.Distr.GetType().Name, grafo.actividad5.Distr.DevolverParams());
+
+            form.LlenarGridViewActividades(dtActividadesPantalla);
+        }
     }
+
 }

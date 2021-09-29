@@ -18,7 +18,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
 
         public string DevolverParams()
         {
-            return Media.ToString();
+            return "media: "+Media.ToString();
         }
         public double DevolverUnaVariableAleatoria(Queue<double> random)
         {

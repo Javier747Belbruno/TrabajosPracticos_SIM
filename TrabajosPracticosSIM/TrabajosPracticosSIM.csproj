@@ -137,6 +137,12 @@
     <Compile Include="TP_4\Entidades\Fila.cs" />
     <Compile Include="TP_4\Entidades\Grafo.cs" />
     <Compile Include="TP_4\Entidades\Nodo.cs" />
+    <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_Configuracion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_Configuracion.Designer.cs">
+      <DependentUpon>Frm_TP4_Configuracion.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_Montecarlo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_3\InterfacesDeUsuario\Frm_TP3_PuntoB_ProbPoisson.resx">
       <DependentUpon>Frm_TP3_PuntoB_ProbPoisson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_Configuracion.resx">
+      <DependentUpon>Frm_TP4_Configuracion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_Montecarlo.resx">
       <DependentUpon>Frm_TP4_Montecarlo.cs</DependentUpon>
