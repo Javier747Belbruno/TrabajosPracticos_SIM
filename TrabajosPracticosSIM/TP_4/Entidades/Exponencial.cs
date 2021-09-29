@@ -26,5 +26,16 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             varAleat = Utiles.RedondearDecimales(varAleat, 4);
             return varAleat;
         }
+
+        public double DevolverParam1()
+        {
+            return Media;
+        }
+
+        public double DevolverParam2()
+        {
+            //Lamdba
+            return 1 / Media;
+        }
     }
 }

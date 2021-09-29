@@ -32,7 +32,15 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             return varAleat;
         }
 
+        public double DevolverParam1()
+        {
+            return Media;
+        }
 
+        public double DevolverParam2()
+        {
+            return DS;
+        }
     }
 }
 
