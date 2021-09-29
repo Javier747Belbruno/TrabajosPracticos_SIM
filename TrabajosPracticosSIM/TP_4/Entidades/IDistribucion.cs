@@ -15,5 +15,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         /// <returns> Variable Aleatoria</returns>
         double DevolverUnaVariableAleatoria(Queue<double> random);
         string DevolverParams();
+        double DevolverParam1();
+        double DevolverParam2();
     }
 }

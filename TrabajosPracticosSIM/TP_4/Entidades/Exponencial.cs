@@ -18,13 +18,24 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
 
         public string DevolverParams()
         {
-            return Media.ToString();
+            return "media: "+Media.ToString();
         }
         public double DevolverUnaVariableAleatoria(Queue<double> random)
         {
             double varAleat = -Media * Math.Log(1 - random.Dequeue());
             varAleat = Utiles.RedondearDecimales(varAleat, 4);
             return varAleat;
+        }
+
+        public double DevolverParam1()
+        {
+            return Media;
+        }
+
+        public double DevolverParam2()
+        {
+            //Lamdba
+            return 1 / Media;
         }
     }
 }

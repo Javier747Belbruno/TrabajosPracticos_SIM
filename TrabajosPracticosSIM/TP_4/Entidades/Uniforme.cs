@@ -19,7 +19,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         }
         public string DevolverParams()
         {
-            return A + ", " + B;
+            return "a: "+ A + ",b: " + B;
         }
         /// <summary>
         /// Sacar el primer random de la lista
@@ -32,5 +32,16 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             varAleat = Utiles.RedondearDecimales(varAleat, 4);
             return varAleat;
         }
+
+        public double DevolverParam1()
+        {
+            return A;
+        }
+
+        public double DevolverParam2()
+        {
+            return B;
+        }
+
     }
 }
