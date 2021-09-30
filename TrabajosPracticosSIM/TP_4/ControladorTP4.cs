@@ -122,19 +122,16 @@ namespace TrabajosPracticosSIM.TP_4
             for (int i = 1; i <= cant_sim; i++)
             {
 
-
-
-                //Randoms NO LOS DEBERIA REDONDEAR. SOLO REDONDEAR PARA MOSTRAR
-                r1 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r2 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r3 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r4 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r5 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r6 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r7 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r8 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r9 = Utiles.RedondearDecimales(r.NextDouble(), 2);
-                r10 = Utiles.RedondearDecimales(r.NextDouble(), 2);
+                r1 = r.NextDouble();
+                r2 = r.NextDouble();
+                r3 = r.NextDouble();
+                r4 = r.NextDouble();
+                r5 = r.NextDouble();
+                r6 = r.NextDouble();
+                r7 = r.NextDouble();
+                r8 = r.NextDouble();
+                r9 = r.NextDouble();
+                r10 = r.NextDouble();
 
                 //Tiempos de Actividades
                 Queue<double> q = new Queue<double>();
@@ -196,9 +193,13 @@ namespace TrabajosPracticosSIM.TP_4
                 //Recordar solo las que pide
                 if((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) )
                 {
-                    dtGeneral.Rows.Add(i,r1, r2, r3, r4, r5, t1, t2, t3, t4, t5, n1, n2, n3, n4,
-                               tiempoEnsamble, promedioTiempoEnsamble,
-                tiempoMin, tiempoMax, contadorMenorIgual45, probMenorIgual45);
+                    dtGeneral.Rows.Add(i,r1.ToString("0.00"), r2.ToString("0.00"), 
+                                r3.ToString("0.00"), r4.ToString("0.00"), 
+                                r5.ToString("0.00"), 
+                                t1, t2, t3, t4, t5, n1, n2, n3, n4,
+                                tiempoEnsamble, promedioTiempoEnsamble,
+                                tiempoMin, tiempoMax, contadorMenorIgual45, 
+                                probMenorIgual45);
                 }
             }
             form.LlenarGridView(dtGeneral);
