@@ -22,7 +22,10 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
 
         public double CalcularTiempo(Queue<double> random)
         {
-            Tiempo =  Distr.DevolverUnaVariableAleatoria(random);
+            double t = Distr.DevolverUnaVariableAleatoria(random);
+            if(t < 0)
+                t = 0;
+            Tiempo =  t;
             return Tiempo;
         }
 
