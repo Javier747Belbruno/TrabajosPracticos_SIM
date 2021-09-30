@@ -103,6 +103,26 @@ namespace TrabajosPracticosSIM.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Image_Enunciado {
+            get {
+                object obj = ResourceManager.GetObject("Image_Enunciado", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Image_Enunciado_2 {
+            get {
+                object obj = ResourceManager.GetObject("Image_Enunciado_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SH9q_yOc_400x400 {
             get {
                 object obj = ResourceManager.GetObject("SH9q-yOc_400x400", resourceCulture);

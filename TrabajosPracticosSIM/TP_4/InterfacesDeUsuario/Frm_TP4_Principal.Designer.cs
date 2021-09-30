@@ -40,16 +40,18 @@ namespace TrabajosPracticosSIM
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_Enunciado = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_iniciar
             // 
+            this.Btn_iniciar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Btn_iniciar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_iniciar.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_iniciar.Location = new System.Drawing.Point(396, 585);
+            this.Btn_iniciar.Location = new System.Drawing.Point(629, 552);
             this.Btn_iniciar.Name = "Btn_iniciar";
-            this.Btn_iniciar.Size = new System.Drawing.Size(341, 106);
+            this.Btn_iniciar.Size = new System.Drawing.Size(260, 133);
             this.Btn_iniciar.TabIndex = 0;
             this.Btn_iniciar.Text = "Iniciar";
             this.Btn_iniciar.UseVisualStyleBackColor = true;
@@ -94,13 +96,12 @@ namespace TrabajosPracticosSIM
             this.label2.Size = new System.Drawing.Size(375, 23);
             this.label2.TabIndex = 9;
             this.label2.Text = "Trabajo Práctico Nro 4: Simulación Montecarlo";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(76, 369);
+            this.label3.Location = new System.Drawing.Point(76, 355);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 18);
             this.label3.TabIndex = 10;
@@ -110,7 +111,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(256, 405);
+            this.label4.Location = new System.Drawing.Point(256, 391);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(231, 18);
             this.label4.TabIndex = 11;
@@ -120,7 +121,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(256, 436);
+            this.label6.Location = new System.Drawing.Point(256, 422);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(197, 18);
             this.label6.TabIndex = 13;
@@ -130,7 +131,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(256, 469);
+            this.label7.Location = new System.Drawing.Point(256, 455);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(157, 18);
             this.label7.TabIndex = 14;
@@ -140,7 +141,7 @@ namespace TrabajosPracticosSIM
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(256, 499);
+            this.label8.Location = new System.Drawing.Point(256, 485);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(218, 18);
             this.label8.TabIndex = 15;
@@ -156,12 +157,25 @@ namespace TrabajosPracticosSIM
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
+            // btn_Enunciado
+            // 
+            this.btn_Enunciado.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Enunciado.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Enunciado.Location = new System.Drawing.Point(149, 552);
+            this.btn_Enunciado.Name = "btn_Enunciado";
+            this.btn_Enunciado.Size = new System.Drawing.Size(264, 133);
+            this.btn_Enunciado.TabIndex = 16;
+            this.btn_Enunciado.Text = "Ver enunciado";
+            this.btn_Enunciado.UseVisualStyleBackColor = true;
+            this.btn_Enunciado.Click += new System.EventHandler(this.btn_Enunciado_Click);
+            // 
             // Frm_TP4_Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1026, 734);
+            this.Controls.Add(this.btn_Enunciado);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -196,6 +210,7 @@ namespace TrabajosPracticosSIM
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btn_Enunciado;
     }
 }
 

@@ -143,6 +143,12 @@
     <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_Configuracion.Designer.cs">
       <DependentUpon>Frm_TP4_Configuracion.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_Enunciado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_Enunciado.Designer.cs">
+      <DependentUpon>Frm_TP4_Enunciado.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_Montecarlo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_Configuracion.resx">
       <DependentUpon>Frm_TP4_Configuracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_Enunciado.resx">
+      <DependentUpon>Frm_TP4_Enunciado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_Montecarlo.resx">
       <DependentUpon>Frm_TP4_Montecarlo.cs</DependentUpon>
@@ -243,7 +252,9 @@
       <Version>4.15.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Image_Enunciado.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ConfigImage.png" />
   </ItemGroup>
@@ -252,6 +263,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ConfigImage2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image_Enunciado_2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

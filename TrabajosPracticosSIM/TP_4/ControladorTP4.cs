@@ -18,6 +18,8 @@ namespace TrabajosPracticosSIM.TP_4
         DataTable dtActividadesPantalla = new DataTable();
         DataTable dtGeneral = new DataTable();
 
+
+
         //Lista de Vistas / Pantallas que controla el ControladorTP4
         private List<Form> Views = new List<Form>();
 
@@ -85,6 +87,14 @@ namespace TrabajosPracticosSIM.TP_4
         public void OpcionPantallaMontecarlo()
         {
             CreateView(new Frm_TP4_Montecarlo());
+        }
+
+        /// <summary>
+        /// /Crea Pantalla Enunciado
+        /// </summary>
+        public void OpcionPantallaEnunciado()
+        {
+            CreateView(new Frm_TP4_Enunciado());
         }
         public void OpcionPantallaConfiguracion()
         {

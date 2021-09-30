@@ -17,9 +17,9 @@ namespace TrabajosPracticosSIM
             ControladorTP4.GetInstance().OpcionPantallaMontecarlo();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void btn_Enunciado_Click(object sender, EventArgs e)
         {
-
+            ControladorTP4.GetInstance().OpcionPantallaEnunciado();
         }
     }
 }
