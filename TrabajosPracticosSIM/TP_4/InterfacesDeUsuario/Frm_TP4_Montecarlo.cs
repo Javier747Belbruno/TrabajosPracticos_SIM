@@ -20,7 +20,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         }
         private void CargarTextBoxes()
         {
-            tb_cant_sim.Text = "14";
+            tb_cant_sim.Text = "20";
             tb_desde.Text = "";
             tb_hasta.Text = "";
         }
@@ -66,13 +66,14 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
 
         }
 
-        public void LlenarGridView(DataTable dt)
+        public void LlenarPantallaMontecarlo(DataTable dt, double promEnsamble)
         {
             BindingSource SBind = new BindingSource();
             SBind.DataSource = dt;
             dgvSimulacion.Columns.Clear();
             dgvSimulacion.DataSource = SBind;
 
+            tb_prom_ensamble.Text = promEnsamble.ToString("0.00");
         }
 
         private void btn_config_Click(object sender, EventArgs e)
@@ -93,6 +94,11 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
 
             dgvActividades.AllowUserToAddRows = false;
 
+        }
+
+        private void btn_Grafico_Click(object sender, EventArgs e)
+        {
+            ControladorTP4.GetInstance().OpcionPantallaPuntoD();
         }
     }
 }

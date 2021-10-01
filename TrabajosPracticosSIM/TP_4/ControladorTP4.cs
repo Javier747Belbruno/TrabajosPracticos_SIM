@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -15,8 +16,14 @@ namespace TrabajosPracticosSIM.TP_4
         private static readonly ControladorTP4 _instance = new ControladorTP4();
         public Random r = new Random();
         private Grafo grafo = new Grafo();
+
+
+
         DataTable dtActividadesPantalla = new DataTable();
         DataTable dtGeneral = new DataTable();
+
+        ArrayList EjeXGrafico = new ArrayList();
+        ArrayList EjeYGrafico = new ArrayList();
 
 
 
@@ -100,6 +107,12 @@ namespace TrabajosPracticosSIM.TP_4
         {
             CreateView(new Frm_TP4_Configuracion());
         }
+        public void OpcionPantallaPuntoD()
+        {
+            CreateView(new Frm_TP4_PuntoD());
+        }
+
+
         /// <summary>
         /// Metodo que ejecuta la Simulación
         /// </summary>
@@ -109,10 +122,14 @@ namespace TrabajosPracticosSIM.TP_4
             //Dejar Lista Tablas de Datos
             LimpiarTableDatas();
 
-            //Condiciones Iniciales
-            double r1, r2, r3, r4, r5, r6, r7, r8, r9, r10;
-            double t1, t2, t3, t4, t5;
-            double n1, n2, n3, n4;
+            Queue<double> q = new Queue<double>();
+            //Definiciones
+            double r1 = 0, r2 = 0, r3 = 0, r4 = 0, r5 = 0;
+            double r6 = 0, r7 = 0, r8 = 0, r9 = 0, r10 = 0;
+            double t1 = 0, t2 = 0, t3 = 0, t4 = 0, t5 = 0;
+            double n1 = 0, n2 = 0, n3 = 0, n4 = 0;
+            double c1 = 0, c2 = 0, c3 = 0;
+            string caminoCritico = "";
             double tiempoEnsamble = 0,promedioTiempoEnsamble = 0;
             double tiempoMin = 9999, tiempoMax = 0;
             int contadorMenorIgual45 = 0;
@@ -122,43 +139,50 @@ namespace TrabajosPracticosSIM.TP_4
             for (int i = 1; i <= cant_sim; i++)
             {
 
-                r1 = r.NextDouble();
-                r2 = r.NextDouble();
-                r3 = r.NextDouble();
-                r4 = r.NextDouble();
-                r5 = r.NextDouble();
-                r6 = r.NextDouble();
-                r7 = r.NextDouble();
-                r8 = r.NextDouble();
-                r9 = r.NextDouble();
-                r10 = r.NextDouble();
-
                 //Tiempos de Actividades
-                Queue<double> q = new Queue<double>();
+                r1 = r.NextDouble();
                 q.Enqueue(r1);
                 if (grafo.actividad1.Distr.GetType().Name == "Normal")
+                {
+                    r6 = r.NextDouble();
                     q.Enqueue(r6);
+                }
                 t1 = grafo.actividad1.CalcularTiempo(q);
 
-
+                r2 = r.NextDouble();
                 q.Enqueue(r2);
                 if (grafo.actividad2.Distr.GetType().Name == "Normal")
+                {
+                    r7 = r.NextDouble();
                     q.Enqueue(r7);
+                }
                 t2 = grafo.actividad2.CalcularTiempo(q);
-                
+
+                r3 = r.NextDouble();
                 q.Enqueue(r3);
                 if (grafo.actividad3.Distr.GetType().Name == "Normal")
+                {
+                    r8 = r.NextDouble();
                     q.Enqueue(r8);
+                }
                 t3 = grafo.actividad3.CalcularTiempo(q);
 
+                r4 = r.NextDouble();
                 q.Enqueue(r4);
                 if (grafo.actividad4.Distr.GetType().Name == "Normal")
+                {
+                    r9 = r.NextDouble();
                     q.Enqueue(r9);
+                }
                 t4 = grafo.actividad4.CalcularTiempo(q);
 
+                r5 = r.NextDouble();
                 q.Enqueue(r5);
                 if (grafo.actividad5.Distr.GetType().Name == "Normal")
+                {
+                    r10 = r.NextDouble();
                     q.Enqueue(r10);
+                }
                 t5 = grafo.actividad5.CalcularTiempo(q);
 
                 //Calcular Tiempos en Nodos
@@ -166,6 +190,13 @@ namespace TrabajosPracticosSIM.TP_4
                 n2 = grafo.nodo2.CalcularTiempoFinalizacion();
                 n3 = grafo.nodo3.CalcularTiempoFinalizacion();
                 n4 = grafo.nodo4.CalcularTiempoFinalizacion();
+
+                //Calcular Caminos
+                c1 = t1 + t4 + t5;
+                c2 = t2 + t5;
+                c3 = t3;
+
+                caminoCritico = CalcularCaminoCritico(c1,c2,c3);
 
                 //Tiempo Ensamble
                 tiempoEnsamble = n4;
@@ -191,18 +222,40 @@ namespace TrabajosPracticosSIM.TP_4
                 probMenorIgual45 = Utiles.RedondearDecimales(contadorMenorIgual45 / (double)i, 2);
 
                 //Recordar solo las que pide
-                if((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) )
+                if((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
                 {
-                    dtGeneral.Rows.Add(i,r1.ToString("0.00"), r2.ToString("0.00"), 
-                                r3.ToString("0.00"), r4.ToString("0.00"), 
-                                r5.ToString("0.00"), 
+                    dtGeneral.Rows.Add(i,
+                                (r6 <= 0 ? r1.ToString("0.00") :  r1.ToString("0.00") + " - " + r6.ToString("0.00")),
+                                (r7 <= 0 ? r2.ToString("0.00") : r2.ToString("0.00") + " - " + r7.ToString("0.00")),
+                                (r8 <= 0 ? r3.ToString("0.00") : r3.ToString("0.00") + " - " + r8.ToString("0.00")),
+                                (r9 <= 0 ? r4.ToString("0.00") : r4.ToString("0.00") + " - " + r9.ToString("0.00")),
+                                (r10 <= 0 ? r5.ToString("0.00") : r5.ToString("0.00") + " - " + r10.ToString("0.00")),
                                 t1, t2, t3, t4, t5, n1, n2, n3, n4,
+                                c1,c2,c3,caminoCritico,
                                 tiempoEnsamble, promedioTiempoEnsamble,
                                 tiempoMin, tiempoMax, contadorMenorIgual45, 
                                 probMenorIgual45);
+
+                    EjeXGrafico.Add(i);
+                    EjeYGrafico.Add(promedioTiempoEnsamble);
                 }
             }
-            form.LlenarGridView(dtGeneral);
+            form.LlenarPantallaMontecarlo(dtGeneral, promedioTiempoEnsamble);
+        }
+
+
+
+        private string CalcularCaminoCritico(double c1, double c2, double c3)
+        {
+            if (c1 > c2 && c1 > c3)
+                return "C1";
+            else
+            {
+                if (c2 > c3)
+                    return "C2";
+                else
+                    return "C3";
+            }
         }
 
         private void InicializarColumnasTablas()
@@ -227,6 +280,10 @@ namespace TrabajosPracticosSIM.TP_4
             dtGeneral.Columns.Add("n2");
             dtGeneral.Columns.Add("n3");
             dtGeneral.Columns.Add("n4");
+            dtGeneral.Columns.Add("c1");
+            dtGeneral.Columns.Add("c2");
+            dtGeneral.Columns.Add("c3");
+            dtGeneral.Columns.Add("camCrit");
             dtGeneral.Columns.Add("tiempoEnsamble");
             dtGeneral.Columns.Add("promedioTiempoEnsamble");
             dtGeneral.Columns.Add("tiempoMin");
@@ -238,7 +295,7 @@ namespace TrabajosPracticosSIM.TP_4
         public void ActualizarActividades(DataTable dtActividadesActualizadas)
         {
 
-            //Agarrar la tabla y actualizar el grafo.....
+            //Manejar la tabla por parametro y actualizar el grafo.
             foreach (DataRow dr in dtActividadesActualizadas.Rows)
             {
                 
@@ -313,6 +370,8 @@ namespace TrabajosPracticosSIM.TP_4
         private void LimpiarTableDatas()
         {
             dtGeneral.Clear();
+            EjeXGrafico.Clear();
+            EjeYGrafico.Clear();
         }
         public void OpcionCargarPanelActividades(Frm_TP4_Montecarlo form)
         {
@@ -350,6 +409,12 @@ namespace TrabajosPracticosSIM.TP_4
             dtActividades.Rows.Add(grafo.actividad5.Id, grafo.actividad5.Distr.GetType().Name, grafo.actividad5.Distr.DevolverParam1(), grafo.actividad5.Distr.DevolverParam2());
 
             form.LlenarCamposActividades(distribuciones,dtActividades);
+        }
+
+
+        public void OpcionPedirDatosGrafico(Frm_TP4_PuntoD form)
+        {
+            form.LlenarGrafico(EjeXGrafico,EjeYGrafico);
         }
     }
 
