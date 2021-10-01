@@ -66,7 +66,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
 
         }
 
-        public void LlenarPantallaMontecarlo(DataTable dt, double promEnsamble)
+        public void LlenarPantallaMontecarlo(DataTable dt, double promEnsamble, double tiempoMin, double tiempoMax, double probMenorIgual45)
         {
             BindingSource SBind = new BindingSource();
             SBind.DataSource = dt;
@@ -74,6 +74,10 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             dgvSimulacion.DataSource = SBind;
 
             tb_prom_ensamble.Text = promEnsamble.ToString("0.00");
+            tb_Maximo.Text = tiempoMax.ToString("0.00");
+            tb_Minimo.Text = tiempoMin.ToString("0.00");
+            tb_Probabilidad45.Text = probMenorIgual45.ToString("0.00");
+
         }
 
         private void btn_config_Click(object sender, EventArgs e)
@@ -99,6 +103,31 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         private void btn_Grafico_Click(object sender, EventArgs e)
         {
             ControladorTP4.GetInstance().OpcionPantallaPuntoD();
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_Minimo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_Probabilidad_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

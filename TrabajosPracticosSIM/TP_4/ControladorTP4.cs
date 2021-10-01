@@ -240,7 +240,7 @@ namespace TrabajosPracticosSIM.TP_4
                     EjeYGrafico.Add(promedioTiempoEnsamble);
                 }
             }
-            form.LlenarPantallaMontecarlo(dtGeneral, promedioTiempoEnsamble);
+            form.LlenarPantallaMontecarlo(dtGeneral, promedioTiempoEnsamble, tiempoMin, tiempoMax, probMenorIgual45);
         }
 
 
@@ -411,6 +411,7 @@ namespace TrabajosPracticosSIM.TP_4
             form.LlenarCamposActividades(distribuciones,dtActividades);
         }
 
+        
 
         public void OpcionPedirDatosGrafico(Frm_TP4_PuntoD form)
         {
