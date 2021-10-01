@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace TrabajosPracticosSIM.TP_4
 
         DataTable dtActividadesPantalla = new DataTable();
         DataTable dtGeneral = new DataTable();
+
+        ArrayList EjeXGrafico = new ArrayList();
+        ArrayList EjeYGrafico = new ArrayList();
 
 
 
@@ -218,7 +222,7 @@ namespace TrabajosPracticosSIM.TP_4
                 probMenorIgual45 = Utiles.RedondearDecimales(contadorMenorIgual45 / (double)i, 2);
 
                 //Recordar solo las que pide
-                if((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) )
+                if((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
                 {
                     dtGeneral.Rows.Add(i,
                                 (r6 <= 0 ? r1.ToString("0.00") :  r1.ToString("0.00") + " - " + r6.ToString("0.00")),
@@ -231,9 +235,12 @@ namespace TrabajosPracticosSIM.TP_4
                                 tiempoEnsamble, promedioTiempoEnsamble,
                                 tiempoMin, tiempoMax, contadorMenorIgual45, 
                                 probMenorIgual45);
+
+                    EjeXGrafico.Add(i);
+                    EjeYGrafico.Add(promedioTiempoEnsamble);
                 }
             }
-            form.LlenarGridView(dtGeneral);
+            form.LlenarPantallaMontecarlo(dtGeneral, promedioTiempoEnsamble);
         }
 
 
@@ -363,6 +370,8 @@ namespace TrabajosPracticosSIM.TP_4
         private void LimpiarTableDatas()
         {
             dtGeneral.Clear();
+            EjeXGrafico.Clear();
+            EjeYGrafico.Clear();
         }
         public void OpcionCargarPanelActividades(Frm_TP4_Montecarlo form)
         {
@@ -405,7 +414,7 @@ namespace TrabajosPracticosSIM.TP_4
 
         public void OpcionPedirDatosGrafico(Frm_TP4_PuntoD form)
         {
-            throw new NotImplementedException();
+            form.LlenarGrafico(EjeXGrafico,EjeYGrafico);
         }
     }
 
