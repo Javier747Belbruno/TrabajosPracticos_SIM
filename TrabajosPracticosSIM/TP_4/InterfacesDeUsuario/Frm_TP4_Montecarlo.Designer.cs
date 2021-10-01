@@ -36,6 +36,8 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.label2 = new System.Windows.Forms.Label();
             this.pnl_Config = new System.Windows.Forms.Panel();
             this.pnl_Actividades = new System.Windows.Forms.Panel();
+            this.dgvActividades = new System.Windows.Forms.DataGridView();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tb_hasta = new System.Windows.Forms.TextBox();
             this.tb_desde = new System.Windows.Forms.TextBox();
@@ -45,14 +47,17 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dgvActividades = new System.Windows.Forms.DataGridView();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tb_prom_ensamble = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btn_Grafico = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.btn_config)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).BeginInit();
             this.pnl_Config.SuspendLayout();
             this.pnl_Actividades.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_simular
@@ -128,6 +133,25 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.pnl_Actividades.Name = "pnl_Actividades";
             this.pnl_Actividades.Size = new System.Drawing.Size(257, 203);
             this.pnl_Actividades.TabIndex = 6;
+            // 
+            // dgvActividades
+            // 
+            this.dgvActividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvActividades.Location = new System.Drawing.Point(3, 35);
+            this.dgvActividades.Name = "dgvActividades";
+            this.dgvActividades.RowHeadersWidth = 51;
+            this.dgvActividades.RowTemplate.Height = 24;
+            this.dgvActividades.Size = new System.Drawing.Size(249, 159);
+            this.dgvActividades.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 4);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(79, 18);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Actividades";
             // 
             // panel1
             // 
@@ -214,30 +238,60 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.label3.TabIndex = 8;
             this.label3.Text = "Ingrese los Parámetros de la Simulación";
             // 
-            // label8
+            // label9
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 4);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 18);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Actividades";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(331, 545);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(132, 18);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Promedio Ensamble";
             // 
-            // dgvActividades
+            // tb_prom_ensamble
             // 
-            this.dgvActividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvActividades.Location = new System.Drawing.Point(3, 35);
-            this.dgvActividades.Name = "dgvActividades";
-            this.dgvActividades.RowHeadersWidth = 51;
-            this.dgvActividades.RowTemplate.Height = 24;
-            this.dgvActividades.Size = new System.Drawing.Size(249, 159);
-            this.dgvActividades.TabIndex = 1;
+            this.tb_prom_ensamble.Location = new System.Drawing.Point(324, 566);
+            this.tb_prom_ensamble.Name = "tb_prom_ensamble";
+            this.tb_prom_ensamble.Size = new System.Drawing.Size(145, 26);
+            this.tb_prom_ensamble.TabIndex = 9;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(331, 631);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(138, 18);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Evolución del tiempo";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(337, 649);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(132, 18);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "Promedio Ensamble";
+            // 
+            // btn_Grafico
+            // 
+            this.btn_Grafico.Location = new System.Drawing.Point(334, 670);
+            this.btn_Grafico.Name = "btn_Grafico";
+            this.btn_Grafico.Size = new System.Drawing.Size(135, 43);
+            this.btn_Grafico.TabIndex = 12;
+            this.btn_Grafico.Text = "Graficar";
+            this.btn_Grafico.UseVisualStyleBackColor = true;
+            this.btn_Grafico.Click += new System.EventHandler(this.btn_Grafico_Click);
             // 
             // Frm_TP4_Montecarlo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1289, 673);
+            this.ClientSize = new System.Drawing.Size(1405, 735);
+            this.Controls.Add(this.btn_Grafico);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.tb_prom_ensamble);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnl_Actividades);
             this.Controls.Add(this.pnl_Config);
@@ -252,10 +306,11 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.pnl_Config.PerformLayout();
             this.pnl_Actividades.ResumeLayout(false);
             this.pnl_Actividades.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -279,5 +334,10 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dgvActividades;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tb_prom_ensamble;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btn_Grafico;
     }
 }

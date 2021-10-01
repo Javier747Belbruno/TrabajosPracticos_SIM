@@ -94,5 +94,10 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             dgvActividades.AllowUserToAddRows = false;
 
         }
+
+        private void btn_Grafico_Click(object sender, EventArgs e)
+        {
+            ControladorTP4.GetInstance().OpcionPantallaPuntoD();
+        }
     }
 }
