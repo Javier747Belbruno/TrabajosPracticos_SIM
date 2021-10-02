@@ -31,8 +31,8 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         }
         private void btn_simular_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 int cant_sim = Convert.ToInt32(tb_cant_sim.Text);
                 if(cant_sim <= 0)
                 {
@@ -57,16 +57,16 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
                     throw (new Exception("El parametro hasta no puede superar la cant de sim"));
                 }
                 ControladorTP4.GetInstance().OpcionIniciarSimulacion(this,cant_sim,desde,hasta);
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
-                MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                //MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
 
         }
 
-        public void LlenarPantallaMontecarlo(DataTable dt, double promEnsamble, double tiempoMin, double tiempoMax, double probMenorIgual45)
+        public void LlenarPantallaMontecarlo(DataTable dt, double promEnsamble, double tiempoMin, double tiempoMax, double probMenorIgual45, double fecha90A)
         {
             BindingSource SBind = new BindingSource();
             SBind.DataSource = dt;
@@ -77,6 +77,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             tb_Maximo.Text = tiempoMax.ToString("0.00");
             tb_Minimo.Text = tiempoMin.ToString("0.00");
             tb_Probabilidad45.Text = probMenorIgual45.ToString("0.00");
+            tb_Fecha90A.Text = fecha90A.ToString("0.00");
 
         }
 
