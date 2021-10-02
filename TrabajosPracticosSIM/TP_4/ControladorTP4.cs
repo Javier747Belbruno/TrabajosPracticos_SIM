@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathNet.Numerics.Distributions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -25,7 +26,8 @@ namespace TrabajosPracticosSIM.TP_4
         ArrayList EjeXGrafico = new ArrayList();
         ArrayList EjeYGrafico = new ArrayList();
 
-
+        ArrayList punto8A = new ArrayList();
+        ArrayList punto8B = new ArrayList();
 
         //Lista de Vistas / Pantallas que controla el ControladorTP4
         private List<Form> Views = new List<Form>();
@@ -50,6 +52,7 @@ namespace TrabajosPracticosSIM.TP_4
         {
             HabilitarPantallaPrincipal();
             InicializarColumnasTablas();
+            SetearPunto8();
         }
 
         public void HabilitarPantallaPrincipal()
@@ -123,6 +126,7 @@ namespace TrabajosPracticosSIM.TP_4
             LimpiarTableDatas();
 
             Queue<double> q = new Queue<double>();
+
             //Definiciones
             double r1 = 0, r2 = 0, r3 = 0, r4 = 0, r5 = 0;
             double r6 = 0, r7 = 0, r8 = 0, r9 = 0, r10 = 0;
@@ -134,7 +138,8 @@ namespace TrabajosPracticosSIM.TP_4
             double tiempoMin = 9999, tiempoMax = 0;
             int contadorMenorIgual45 = 0;
             double probMenorIgual45 = 0;
-            
+            double varianza = 0, desviacion = 0, fecha90A = 0;
+
             //Empieza la simulacion
             for (int i = 1; i <= cant_sim; i++)
             {
@@ -202,7 +207,7 @@ namespace TrabajosPracticosSIM.TP_4
                 tiempoEnsamble = n4;
 
                 //Calcular Promedio
-                promedioTiempoEnsamble = Utiles.RedondearDecimales((promedioTiempoEnsamble * (i - 1) + tiempoEnsamble) / i, 2);
+                promedioTiempoEnsamble = ((promedioTiempoEnsamble * (i - 1)) + tiempoEnsamble) / i;
 
                 //Tiempo Minimo
                 if(tiempoEnsamble< tiempoMin)
@@ -219,10 +224,24 @@ namespace TrabajosPracticosSIM.TP_4
                 {
                     contadorMenorIgual45++;
                 }
-                probMenorIgual45 = Utiles.RedondearDecimales(contadorMenorIgual45 / (double)i, 2);
+                probMenorIgual45 = contadorMenorIgual45 / (double)i;
+
+                //Punto G o 7
+                if (i > 1)
+                    varianza = ( (i-2)* varianza + (i/(i-1))* Math.Pow(promedioTiempoEnsamble - tiempoEnsamble,2) )/(i-1);
+
+                desviacion = Math.Sqrt(varianza);
+                if (i > 2)
+                    fecha90A = StudentT.InvCDF(promedioTiempoEnsamble, desviacion, i-1, 0.9);
+
+                //Punto H o 8
+                var a = punto8A[2];
+                var b = punto8B[0];
+                punto8B[0] = 1;
+
 
                 //Recordar solo las que pide
-                if((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
+                if ((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
                 {
                     dtGeneral.Rows.Add(i,
                                 (r6 <= 0 ? r1.ToString("0.00") :  r1.ToString("0.00") + " - " + r6.ToString("0.00")),
@@ -231,16 +250,26 @@ namespace TrabajosPracticosSIM.TP_4
                                 (r9 <= 0 ? r4.ToString("0.00") : r4.ToString("0.00") + " - " + r9.ToString("0.00")),
                                 (r10 <= 0 ? r5.ToString("0.00") : r5.ToString("0.00") + " - " + r10.ToString("0.00")),
                                 t1, t2, t3, t4, t5, n1, n2, n3, n4,
-                                c1,c2,c3,caminoCritico,
-                                tiempoEnsamble, promedioTiempoEnsamble,
-                                tiempoMin, tiempoMax, contadorMenorIgual45, 
-                                probMenorIgual45);
+                                c1.ToString("0.00"),
+                                c2.ToString("0.00"),
+                                c3.ToString("0.00"),
+                                caminoCritico,
+                                tiempoEnsamble.ToString("0.00"),
+                                promedioTiempoEnsamble.ToString("0.00"),
+                                tiempoMin.ToString("0.00"),
+                                tiempoMax.ToString("0.00"), 
+                                probMenorIgual45.ToString("0.00"),
+                                varianza.ToString("0.00"),
+                                desviacion.ToString("0.00"),
+                                fecha90A.ToString("0.00"));
 
                     EjeXGrafico.Add(i);
                     EjeYGrafico.Add(promedioTiempoEnsamble);
                 }
             }
-            form.LlenarPantallaMontecarlo(dtGeneral, promedioTiempoEnsamble, tiempoMin, tiempoMax, probMenorIgual45);
+            
+            form.LlenarPantallaMontecarlo(dtGeneral, promedioTiempoEnsamble, tiempoMin
+                                , tiempoMax, probMenorIgual45, fecha90A);
         }
 
 
@@ -257,7 +286,18 @@ namespace TrabajosPracticosSIM.TP_4
                     return "C3";
             }
         }
+        private void SetearPunto8()
+        {
+            double c = 0;
+            punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c);
+            punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c);
+            punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c);
+            punto8A.Add(c); punto8A.Add(c);
 
+            punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c);
+            punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c);
+            punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c);
+        }
         private void InicializarColumnasTablas()
         {
             dtActividadesPantalla.Columns.Add("ID");
@@ -288,8 +328,11 @@ namespace TrabajosPracticosSIM.TP_4
             dtGeneral.Columns.Add("promedioTiempoEnsamble");
             dtGeneral.Columns.Add("tiempoMin");
             dtGeneral.Columns.Add("tiempoMax");
-            dtGeneral.Columns.Add("contadorMenorIgual45");
             dtGeneral.Columns.Add("probMenorIgual45");
+            dtGeneral.Columns.Add("varianza");
+            dtGeneral.Columns.Add("desviacion");
+            dtGeneral.Columns.Add("fecha90A");
+
         }
 
         public void ActualizarActividades(DataTable dtActividadesActualizadas)
@@ -357,7 +400,7 @@ namespace TrabajosPracticosSIM.TP_4
                 case "Normal":
                     double param1N = Convert.ToDouble(pparam1);
                     double param2N = Convert.ToDouble(pparam2);
-                    Normal n = new Normal(param1N, param2N);
+                    Entidades.Normal n = new Entidades.Normal(param1N, param2N);
                     return n;
                 default:
                     break;
@@ -372,6 +415,9 @@ namespace TrabajosPracticosSIM.TP_4
             dtGeneral.Clear();
             EjeXGrafico.Clear();
             EjeYGrafico.Clear();
+            punto8A.Clear();
+            punto8B.Clear();
+            SetearPunto8();
         }
         public void OpcionCargarPanelActividades(Frm_TP4_Montecarlo form)
         {

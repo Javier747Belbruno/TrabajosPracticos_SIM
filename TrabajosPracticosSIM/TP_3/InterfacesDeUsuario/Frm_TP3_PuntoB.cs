@@ -13,7 +13,7 @@ namespace TrabajosPracticosSIM.TP_3.InterfacesDeUsuario
 {
     public partial class Frm_TP3_PuntoB : Form
     {
-        private int cantNros;
+
         private int cantIntervs;
         private SortedDictionary<double, Subintervalo> estructuraFrecObservada;
         private SortedDictionary<int, Random_VarAleatoria> lista;
