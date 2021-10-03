@@ -432,7 +432,7 @@ namespace TrabajosPracticosSIM.TP_4
             dtActividadesPantalla.Columns.Add("PARAMS");
 
 
-            dtGeneral.Columns.Add("i");
+            dtGeneral.Columns.Add("Iteración");
             dtGeneral.Columns.Add("r1");
             dtGeneral.Columns.Add("r2");
             dtGeneral.Columns.Add("r3");
@@ -451,21 +451,21 @@ namespace TrabajosPracticosSIM.TP_4
             dtGeneral.Columns.Add("c2");
             dtGeneral.Columns.Add("c3");
             dtGeneral.Columns.Add("camCrit");
-            dtGeneral.Columns.Add("tiempoEnsamble");
-            dtGeneral.Columns.Add("promedioTiempoEnsamble");
+            dtGeneral.Columns.Add("T.Ensamble");
+            dtGeneral.Columns.Add("Prom_T.Ensamble");
             dtGeneral.Columns.Add("tiempoMin");
             dtGeneral.Columns.Add("tiempoMax");
-            dtGeneral.Columns.Add("probMenorIgual45");
+            dtGeneral.Columns.Add("Prob<=45");
             dtGeneral.Columns.Add("varianza");
             dtGeneral.Columns.Add("desviacion");
-            dtGeneral.Columns.Add("fecha90A");
+            dtGeneral.Columns.Add("fecha<=90_A");
 
-            dtPunto8.Columns.Add("i");
-            dtPunto8.Columns.Add("tiempoEnsamble");
+            dtPunto8.Columns.Add("Iteración");
+            dtPunto8.Columns.Add("T.Ensamble");
             dtPunto8.Columns.Add("Tabla_17_límites");
             dtPunto8.Columns.Add("Tabla_15_Porcentajes");
 
-            dtPunto9.Columns.Add("i");
+            dtPunto9.Columns.Add("Iteración");
             dtPunto9.Columns.Add("t1");
             dtPunto9.Columns.Add("t2");
             dtPunto9.Columns.Add("t3");
@@ -477,9 +477,8 @@ namespace TrabajosPracticosSIM.TP_4
             dtPunto9.Columns.Add("tiempo+tardio_a3");
             dtPunto9.Columns.Add("tiempo+tardio_a4");
             dtPunto9.Columns.Add("tiempo+tardio_a5");
-            //1,c2,c3,caminoCritico,a1Punto10, a2Punto10, a3Punto10
-                                              //  , a4Punto10, a5Punto10
-            dtPunto10.Columns.Add("i");
+
+            dtPunto10.Columns.Add("Sim i");
             dtPunto10.Columns.Add("c1");
             dtPunto10.Columns.Add("c2");
             dtPunto10.Columns.Add("c3");
