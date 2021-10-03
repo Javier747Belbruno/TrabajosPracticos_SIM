@@ -31,8 +31,8 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         }
         private void btn_simular_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 int cant_sim = Convert.ToInt32(tb_cant_sim.Text);
                 if(cant_sim <= 0)
                 {
@@ -57,16 +57,16 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
                     throw (new Exception("El parametro hasta no puede superar la cant de sim"));
                 }
                 ControladorTP4.GetInstance().OpcionIniciarSimulacion(this,cant_sim,desde,hasta);
-            //}
-            //catch (Exception ex)
-            //{
+            }
+            catch (Exception ex)
+            {
 
-                //MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
+                MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
 
-        public void LlenarPantallaMontecarlo(DataTable dt, double promEnsamble, double tiempoMin, double tiempoMax, double probMenorIgual45, double fecha90A)
+        public void LlenarPantallaMontecarlo(DataTable dt, double promEnsamble, double tiempoMin, double tiempoMax, double probMenorIgual45, double fecha90A, double fecha90B, double prob90B)
         {
             BindingSource SBind = new BindingSource();
             SBind.DataSource = dt;
@@ -78,6 +78,8 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             tb_Minimo.Text = tiempoMin.ToString("0.00");
             tb_Probabilidad45.Text = probMenorIgual45.ToString("0.00");
             tb_Fecha90A.Text = fecha90A.ToString("0.00");
+            tb_Fecha90B.Text = fecha90B.ToString("0.00");
+            tb_prob90B.Text = prob90B.ToString("0.00");
 
         }
 
@@ -106,29 +108,20 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             ControladorTP4.GetInstance().OpcionPantallaPuntoD();
         }
 
-        private void label12_Click(object sender, EventArgs e)
-        {
 
+        private void btn_fechaB_tablas_Click(object sender, EventArgs e)
+        {
+            ControladorTP4.GetInstance().OpcionPantallaPuntoGHI("btn_fechaB_tablas");
         }
 
-        private void tb_Minimo_TextChanged(object sender, EventArgs e)
+        private void btn_tiempos_tardios_Click(object sender, EventArgs e)
         {
-
+            ControladorTP4.GetInstance().OpcionPantallaPuntoGHI("btn_tiempos_tardios");
         }
 
-        private void label14_Click(object sender, EventArgs e)
+        private void btn_tareas_criticas_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tb_Probabilidad_TextChanged(object sender, EventArgs e)
-        {
-
+            ControladorTP4.GetInstance().OpcionPantallaPuntoGHI("btn_tareas_criticas");
         }
     }
 }

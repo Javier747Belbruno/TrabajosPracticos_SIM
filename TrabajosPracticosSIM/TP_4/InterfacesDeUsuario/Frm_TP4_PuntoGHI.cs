@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace TrabajosPracticosSIM.TP_4.InterfacesDeUsuario
+{
+    public partial class Frm_TP4_PuntoGHI : Form
+    {
+        public Frm_TP4_PuntoGHI(DataTable dt)
+        {
+            InitializeComponent();
+            LlenarDataGridView(dt);
+        }
+
+        private void LlenarDataGridView(DataTable dt)
+        {
+            BindingSource SBind = new BindingSource();
+            SBind.DataSource = dt;
+            dgv_tabla.Columns.Clear();
+            dgv_tabla.DataSource = SBind;
+
+
+            dgv_tabla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgv_tabla.AllowUserToAddRows = false;
+
+        }
+    }
+}
