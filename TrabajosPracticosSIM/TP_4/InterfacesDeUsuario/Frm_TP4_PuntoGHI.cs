@@ -25,9 +25,31 @@ namespace TrabajosPracticosSIM.TP_4.InterfacesDeUsuario
             dgv_tabla.Columns.Clear();
             dgv_tabla.DataSource = SBind;
 
+            dgv_tabla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            if (dt.Columns.Count == 4)
+            {
+                dgv_tabla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            }
 
-            dgv_tabla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            
             dgv_tabla.AllowUserToAddRows = false;
+
+            for (int i = 0; i < dgv_tabla.ColumnCount; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    dgv_tabla.Columns[i].DefaultCellStyle.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    dgv_tabla.Columns[i].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+                }
+            }
+            dgv_tabla.EnableHeadersVisualStyles = false;
+        }
+
+        private void dgv_tabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

@@ -73,6 +73,18 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             dgvSimulacion.Columns.Clear();
             dgvSimulacion.DataSource = SBind;
 
+            dgvSimulacion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+
+            for (int i = 0; i < dgvSimulacion.ColumnCount; i++)
+            {
+                if (i >= 1 && i <= 5 || i >= 11 && i <= 14 || i >= 11 && i <= 14 || i == 18 || i == 20 || i == 23)
+                    dgvSimulacion.Columns[i].DefaultCellStyle.BackColor = Color.LightGray;
+                else
+                    dgvSimulacion.Columns[i].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+            }
+            dgvSimulacion.EnableHeadersVisualStyles = false;
+            dgvSimulacion.AllowUserToAddRows = false;
+
             tb_prom_ensamble.Text = promEnsamble.ToString("0.00");
             tb_Maximo.Text = tiempoMax.ToString("0.00");
             tb_Minimo.Text = tiempoMin.ToString("0.00");
