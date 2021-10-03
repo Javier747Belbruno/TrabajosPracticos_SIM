@@ -167,6 +167,12 @@
     <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_PuntoD.Designer.cs">
       <DependentUpon>Frm_TP4_PuntoD.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_PuntoGHI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_PuntoGHI.Designer.cs">
+      <DependentUpon>Frm_TP4_PuntoGHI.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.resx">
       <DependentUpon>PantallaGeneracionDeNumerosAleatorios.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_PuntoD.resx">
       <DependentUpon>Frm_TP4_PuntoD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_PuntoGHI.resx">
+      <DependentUpon>Frm_TP4_PuntoGHI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

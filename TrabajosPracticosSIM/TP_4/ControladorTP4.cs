@@ -22,6 +22,9 @@ namespace TrabajosPracticosSIM.TP_4
 
         DataTable dtActividadesPantalla = new DataTable();
         DataTable dtGeneral = new DataTable();
+        DataTable dtPunto8 = new DataTable();
+        DataTable dtPunto9 = new DataTable();
+        DataTable dtPunto10 = new DataTable();
 
         ArrayList EjeXGrafico = new ArrayList();
         ArrayList EjeYGrafico = new ArrayList();
@@ -114,6 +117,15 @@ namespace TrabajosPracticosSIM.TP_4
         {
             CreateView(new Frm_TP4_PuntoD());
         }
+        public void OpcionPantallaPuntoGHI(string nameButton)
+        {
+            if(nameButton == "btn_fechaB_tablas")
+                CreateView(new Frm_TP4_PuntoGHI(dtPunto8));
+            if(nameButton == "btn_tiempos_tardios")
+                CreateView(new Frm_TP4_PuntoGHI(dtPunto9));
+            if(nameButton == "btn_tareas_criticas")
+                CreateView(new Frm_TP4_PuntoGHI(dtPunto10));
+        }
 
 
         /// <summary>
@@ -138,7 +150,12 @@ namespace TrabajosPracticosSIM.TP_4
             double tiempoMin = 9999, tiempoMax = 0;
             int contadorMenorIgual45 = 0;
             double probMenorIgual45 = 0;
-            double varianza = 0, desviacion = 0, fecha90A = 0;
+            double varianza = 0, desviacion = 0;
+            double fecha90A = 0;
+            double fecha90B = 0, prob90B = 0;
+            int indice90B = 0;
+            double a1Punto9 = 0, a2Punto9 = 0, a3Punto9 = 0, a4Punto9 = 0, a5Punto9 = 0;
+            double a1Punto10 = 0, a2Punto10 = 0, a3Punto10 = 0, a4Punto10 = 0, a5Punto10 = 0;
 
             //Empieza la simulacion
             for (int i = 1; i <= cant_sim; i++)
@@ -234,15 +251,110 @@ namespace TrabajosPracticosSIM.TP_4
                 if (i > 2)
                     fecha90A = StudentT.InvCDF(promedioTiempoEnsamble, desviacion, i-1, 0.9);
 
-                //Punto H o 8
-                var a = punto8A[2];
-                var b = punto8B[0];
-                punto8B[0] = 1;
+                ///Punto H o 8
+                //Llenar Tabla 1.
+                if (i <= 15)
+                {
+                    for (int j = 16; j > 0; j--)
+                    {
+                        if (tiempoEnsamble < Convert.ToDouble(punto8A[j]))
+                            if (tiempoEnsamble > Convert.ToDouble(punto8A[j-1]))
+                                punto8A[j] = tiempoEnsamble;
+                            else
+                                punto8A[j] = punto8A[j-1];
+                    }
+
+                }
+
+                //Llenar Tabla 2
+                if(i >= 15)
+                {
+                    for (int k = 0; k < 15; k++)
+                    {
+                        if (i == 15)
+                            punto8B[k] = 1 / ((double)i);
+                        else
+                        {
+                            if (tiempoEnsamble <= Convert.ToDouble(punto8A[k+1]) && tiempoEnsamble >= Convert.ToDouble(punto8A[k]))
+                                punto8B[k] = ((Convert.ToDouble(punto8B[k]) * (i - 1)) + 1) / (double)i;
+                            else
+                                punto8B[k] = ((Convert.ToDouble(punto8B[k]) * (i - 1)) + 0) / (double)i;
+                        }
+                    } 
+                }
+                //Determinar Fecha90B
+                if(i == cant_sim)
+                {
+                    double menorDiferenciaA90=9999;
+                    double acumPorcentajes=0;
+                    for (int g = 0; g < punto8B.Count; g++)
+                    {
+                        acumPorcentajes += (double)punto8B[g];
+                        //Guardar Menor Diff
+                        if (Math.Pow(0.9 - acumPorcentajes, 2) < menorDiferenciaA90)
+                        {
+                            menorDiferenciaA90 = Math.Pow(0.9 - acumPorcentajes, 2);
+                            indice90B = g;
+                            prob90B = acumPorcentajes;
+                        }
+                    }
+                    fecha90B = (double)punto8A[indice90B+1];
+                }
+
+                //Punto 9
+                a5Punto9 = Utiles.RedondearDecimales(tiempoEnsamble - t5,2);
+                a4Punto9 = Utiles.RedondearDecimales(tiempoEnsamble - t5 - t4, 2);
+                a3Punto9 = Utiles.RedondearDecimales(tiempoEnsamble - t3, 2);
+                a2Punto9 = Utiles.RedondearDecimales(tiempoEnsamble - t5 - t2, 2);
+                a1Punto9 = Utiles.RedondearDecimales(tiempoEnsamble - t5 - t4 - t1, 2);
+
+
+                //Punto 10
+                if(caminoCritico == "C1")
+                {
+                    a1Punto10 = ((a1Punto10 * (i - 1)) + 1) / (double)i;
+                    a4Punto10 = ((a4Punto10 * (i - 1)) + 1) / (double)i;
+                    a5Punto10 = ((a5Punto10 * (i - 1)) + 1) / (double)i;
+                    a2Punto10 = ((a2Punto10 * (i - 1)) + 0) / (double)i;
+                    a3Punto10 = ((a3Punto10 * (i - 1)) + 0) / (double)i;
+                }
+                else { 
+                    if (caminoCritico == "C2")
+                    {
+                        a1Punto10 = ((a1Punto10 * (i - 1)) + 0) / (double)i;
+                        a4Punto10 = ((a4Punto10 * (i - 1)) + 0) / (double)i;
+                        a5Punto10 = ((a5Punto10 * (i - 1)) + 1) / (double)i;
+                        a2Punto10 = ((a2Punto10 * (i - 1)) + 1) / (double)i;
+                        a3Punto10 = ((a3Punto10 * (i - 1)) + 0) / (double)i;
+                    }
+                    else
+                    {
+                        a1Punto10 = ((a1Punto10 * (i - 1)) + 0) / (double)i;
+                        a4Punto10 = ((a4Punto10 * (i - 1)) + 0) / (double)i;
+                        a5Punto10 = ((a5Punto10 * (i - 1)) + 0) / (double)i;
+                        a2Punto10 = ((a2Punto10 * (i - 1)) + 0) / (double)i;
+                        a3Punto10 = ((a3Punto10 * (i - 1)) + 1) / (double)i;
+                    }
+                }
 
 
                 //Recordar solo las que pide
-                if ((i >= 1 && i <= 20) || i%1000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
+                if ((i >= 1 && i <= 20) || i%10000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
                 {
+                    string table1 = "";
+                    string table2 = "";
+                    for (int m = 0; m < 17; m++)
+                    {
+                        if (Convert.ToDouble(punto8A[m]) == 9999)
+                            table1 += Convert.ToDouble(punto8A[m]) + "  | ";
+                        else
+                            table1 += Convert.ToDouble(punto8A[m]).ToString("0.00") + " | ";
+                    }
+                    for (int n = 0; n < 15; n++)
+                    {
+                        table2 += Convert.ToDouble(punto8B[n]).ToString("0.00") + " | ";
+                    }
+
                     dtGeneral.Rows.Add(i,
                                 (r6 <= 0 ? r1.ToString("0.00") :  r1.ToString("0.00") + " - " + r6.ToString("0.00")),
                                 (r7 <= 0 ? r2.ToString("0.00") : r2.ToString("0.00") + " - " + r7.ToString("0.00")),
@@ -263,13 +375,25 @@ namespace TrabajosPracticosSIM.TP_4
                                 desviacion.ToString("0.00"),
                                 fecha90A.ToString("0.00"));
 
+                    dtPunto8.Rows.Add(i, tiempoEnsamble.ToString("0.00"), table1, table2);
+
+                    dtPunto9.Rows.Add(i, t1, t2, t3, t4, t5, tiempoEnsamble.ToString("0.00")
+                                            , a1Punto9, a2Punto9, a3Punto9, a4Punto9, a5Punto9);
+
+                    dtPunto10.Rows.Add(i,c1,c2,c3,caminoCritico,
+                                                (a1Punto10*100).ToString("0.00") + " %", 
+                                                (a2Punto10 * 100).ToString("0.00") + " %", 
+                                                (a3Punto10 * 100).ToString("0.00") + " %",
+                                                (a4Punto10 * 100).ToString("0.00") + " %",
+                                                (a5Punto10 * 100).ToString("0.00") + " %");
+
                     EjeXGrafico.Add(i);
-                    EjeYGrafico.Add(promedioTiempoEnsamble);
+                    EjeYGrafico.Add(Utiles.RedondearDecimales(promedioTiempoEnsamble,2));
                 }
             }
             
             form.LlenarPantallaMontecarlo(dtGeneral, promedioTiempoEnsamble, tiempoMin
-                                , tiempoMax, probMenorIgual45, fecha90A);
+                                , tiempoMax, probMenorIgual45, fecha90A, fecha90B, prob90B);
         }
 
 
@@ -289,11 +413,14 @@ namespace TrabajosPracticosSIM.TP_4
         private void SetearPunto8()
         {
             double c = 0;
-            punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c);
-            punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c);
-            punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c); punto8A.Add(c);
-            punto8A.Add(c); punto8A.Add(c);
+            double n = 9999;
+            //Tabla 1
+            punto8A.Add(c); punto8A.Add(n); punto8A.Add(n); punto8A.Add(n); punto8A.Add(n);
+            punto8A.Add(n); punto8A.Add(n); punto8A.Add(n); punto8A.Add(n); punto8A.Add(n);
+            punto8A.Add(n); punto8A.Add(n); punto8A.Add(n); punto8A.Add(n); punto8A.Add(n);
+            punto8A.Add(n); punto8A.Add(n);
 
+            //Tabla 2
             punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c);
             punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c);
             punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c); punto8B.Add(c);
@@ -333,6 +460,35 @@ namespace TrabajosPracticosSIM.TP_4
             dtGeneral.Columns.Add("desviacion");
             dtGeneral.Columns.Add("fecha90A");
 
+            dtPunto8.Columns.Add("i");
+            dtPunto8.Columns.Add("tiempoEnsamble");
+            dtPunto8.Columns.Add("Tabla_17_límites");
+            dtPunto8.Columns.Add("Tabla_15_Porcentajes");
+
+            dtPunto9.Columns.Add("i");
+            dtPunto9.Columns.Add("t1");
+            dtPunto9.Columns.Add("t2");
+            dtPunto9.Columns.Add("t3");
+            dtPunto9.Columns.Add("t4");
+            dtPunto9.Columns.Add("t5");
+            dtPunto9.Columns.Add("tiempoEnsamble");
+            dtPunto9.Columns.Add("tiempo+tardio_a1");
+            dtPunto9.Columns.Add("tiempo+tardio_a2");
+            dtPunto9.Columns.Add("tiempo+tardio_a3");
+            dtPunto9.Columns.Add("tiempo+tardio_a4");
+            dtPunto9.Columns.Add("tiempo+tardio_a5");
+            //1,c2,c3,caminoCritico,a1Punto10, a2Punto10, a3Punto10
+                                              //  , a4Punto10, a5Punto10
+            dtPunto10.Columns.Add("i");
+            dtPunto10.Columns.Add("c1");
+            dtPunto10.Columns.Add("c2");
+            dtPunto10.Columns.Add("c3");
+            dtPunto10.Columns.Add("cCritico");
+            dtPunto10.Columns.Add("Prob_Activ1");
+            dtPunto10.Columns.Add("Prob_Activ2");
+            dtPunto10.Columns.Add("Prob_Activ3");
+            dtPunto10.Columns.Add("Prob_Activ4");
+            dtPunto10.Columns.Add("Prob_Activ5");
         }
 
         public void ActualizarActividades(DataTable dtActividadesActualizadas)
@@ -418,6 +574,9 @@ namespace TrabajosPracticosSIM.TP_4
             punto8A.Clear();
             punto8B.Clear();
             SetearPunto8();
+            dtPunto8.Clear();
+            dtPunto9.Clear();
+            dtPunto10.Clear();
         }
         public void OpcionCargarPanelActividades(Frm_TP4_Montecarlo form)
         {
