@@ -1,5 +1,6 @@
 ﻿using System;
 using TrabajosPracticosSIM.TP_4;
+using TrabajosPracticosSIM.TP_5;
 
 namespace TrabajosPracticosSIM
 {
@@ -13,7 +14,7 @@ namespace TrabajosPracticosSIM
         static void Main()
         {
             //Inicio Controlador TP(Elegir)
-            ControladorTP4.GetInstance().Start();
+            ControladorTP5.GetInstance().Start();
         }
     }
 }
