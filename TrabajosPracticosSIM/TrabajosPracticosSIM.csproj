@@ -173,6 +173,25 @@
     <Compile Include="TP_4\InterfacesDeUsuario\Frm_TP4_PuntoGHI.Designer.cs">
       <DependentUpon>Frm_TP4_PuntoGHI.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_5\ControladorTP5.cs" />
+    <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Enunciado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Enunciado.Designer.cs">
+      <DependentUpon>Frm_TP5_Enunciado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_PantallaSimulacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_PantallaSimulacion.Designer.cs">
+      <DependentUpon>Frm_TP5_PantallaSimulacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Principal.Designer.cs">
+      <DependentUpon>Frm_TP5_Principal.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.resx">
       <DependentUpon>PantallaGeneracionDeNumerosAleatorios.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,6 +243,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_PuntoGHI.resx">
       <DependentUpon>Frm_TP4_PuntoGHI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_5\InterfacesDeUsuario\Frm_TP5_Enunciado.resx">
+      <DependentUpon>Frm_TP5_Enunciado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_5\InterfacesDeUsuario\Frm_TP5_PantallaSimulacion.resx">
+      <DependentUpon>Frm_TP5_PantallaSimulacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_5\InterfacesDeUsuario\Frm_TP5_Principal.resx">
+      <DependentUpon>Frm_TP5_Principal.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -284,6 +312,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Image_Enunciado_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TP_5\Entidades\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
