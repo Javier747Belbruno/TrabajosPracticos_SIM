@@ -8,7 +8,12 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
 {
     public class ColaSimple : ICola
     {
+
         public int Cantidad { get; set; } = 0;
+        public int Cantidad_Anterior { get; set; } = 0;
+        public string EventoEncolador { get; set; }
+
+        public string EventoDecolador { get; set; }
 
         public int P4_Cantidad_Maxima { get; set; } = 0;
 
@@ -26,9 +31,15 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             P6_Promedio_Pedidos_en_Cola = 0;
         }
 
-        public void CalcularCola()
+        public void CalcularCola(string evento,bool estado_ocupado)
         {
-            throw new NotImplementedException();
+            Cantidad_Anterior = Cantidad;
+            if(evento == EventoEncolador)
+                if (estado_ocupado)
+                    Cantidad++;
+            if (evento == EventoDecolador)
+                if (Cantidad > 0)
+                    Cantidad--;
         }
     }
 }

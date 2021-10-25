@@ -181,6 +181,7 @@
     <Compile Include="TP_5\Entidades\IServidor.cs" />
     <Compile Include="TP_5\Entidades\Llegadas.cs" />
     <Compile Include="TP_5\Entidades\Modelo.cs" />
+    <Compile Include="TP_5\Entidades\ServidorConCD.cs" />
     <Compile Include="TP_5\Entidades\ServidorConCS.cs" />
     <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Enunciado.cs">
       <SubType>Form</SubType>

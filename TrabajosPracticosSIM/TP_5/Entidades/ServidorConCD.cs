@@ -7,26 +7,20 @@ using TrabajosPracticosSIM.TP_4.Entidades;
 
 namespace TrabajosPracticosSIM.TP_5.Entidades
 {
-    /// <summary>
-    /// Servidor Con Cola Simple
-    /// </summary>
-    public class ServidorConCS : IServidor
+    public class ServidorConCD : IServidor
     {
         Random r = new Random();
-        public ColaSimple Cola { get; set; } = new ColaSimple();
+        public ColaDoble Cola { get; set; } = new ColaDoble();
         public bool Ocupado { get; set; } = false;
         public bool Ocupado_Anterior { get; set; } = false;
         public int? Nro_Pedido { get; set; } = null;
-        public int? Nro_Pedido_Anterior { get; set; } = null; 
+        public int? Nro_Pedido_Anterior { get; set; } = null;
         public IDistribucion Distr { get; set; }
         public Queue<double> Random { get; set; } = null;
         public double? Tiempo { get; set; } = null;
         public double? TiempoProx { get; set; } = null;
         public double P8_Tiempo_Ocupado_Acumulado { get; set; } = 0;
         public double P8_Porcentaje_Tiempo_Ocupado { get; set; } = 0;
-
-        
-
 
         public void ResetearServidor()
         {
@@ -43,9 +37,63 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             Cola.CalcularCola(evento, Ocupado);
         }
 
+        public void CalcularEstado(string evento)
+        {
+            Ocupado_Anterior = Ocupado;
+            if (evento == Cola.Cola2.EventoEncolador)
+            {
+                if (Cola.Cola1.Cantidad_Anterior > 0 && !Ocupado)
+                {
+                    Ocupado = true;
+                }
+            }
+            if (evento == Cola.Cola1.EventoEncolador)
+            {
+                if (Cola.Cola2.Cantidad_Anterior > 0 && !Ocupado)
+                {
+                    Ocupado = true;
+                }
+            }
+            if (evento == Cola.Cola1.EventoDecolador)
+            {
+                if(Cola.Cola1.Cantidad_Anterior>0 && Cola.Cola2.Cantidad_Anterior > 0)
+                {
+                    Ocupado = true;
+                }
+                else
+                {
+                    Ocupado = false;
+                }
+            }
+        }
+
+        public void CalcularNroPedidoEnAtencion(string evento, int? nro_pedido)
+        {
+            Nro_Pedido_Anterior = Nro_Pedido;
+            if (!Ocupado)
+            {
+                Nro_Pedido = null;
+            }
+            else
+            {
+                if((!Ocupado_Anterior && evento == Cola.Cola2.EventoEncolador)
+                    || (!Ocupado_Anterior && evento == Cola.Cola1.EventoEncolador))
+                {
+                    Nro_Pedido = nro_pedido;
+                }
+                else
+                {
+                    if(Ocupado && evento == Cola.Cola1.EventoDecolador)
+                    {
+                        Nro_Pedido++;
+                    }
+                }
+            }
+        }
+
         public void CalcularRandom()
         {
- 
+
             Queue<double> q = new Queue<double>();
             if (Nro_Pedido.HasValue && Nro_Pedido != Nro_Pedido_Anterior)
             {
@@ -61,7 +109,7 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             else
                 Random = null;
         }
-    
+
 
         public void CalcularTiempo()
         {
@@ -77,32 +125,10 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
                 TiempoProx = Tiempo + reloj;
             else
                 if (!Ocupado)
-                    TiempoProx = null;
+                TiempoProx = null;
         }
 
-        public void CalcularEstado(string evento)
-        {
-            Ocupado_Anterior = Ocupado;
-            if (evento == Cola.EventoEncolador && !Ocupado )
-                Ocupado = true;
-            if (evento == Cola.EventoDecolador && Cola.Cantidad_Anterior == 0)
-                Ocupado = false;
-        }
 
-        public void CalcularNroPedidoEnAtencion(string evento,int? nro_pedido)
-        {
-            Nro_Pedido_Anterior = Nro_Pedido;
-            if (!Ocupado)
-                Nro_Pedido = null;
-            else
-            {
-                if (!Ocupado_Anterior && evento == Cola.EventoEncolador)
-                    Nro_Pedido = nro_pedido;
-                else{
-                    if (evento == Cola.EventoDecolador && Cola.Cantidad_Anterior > 0)
-                        Nro_Pedido++;
-                }
-            }
-        }
+
     }
 }
