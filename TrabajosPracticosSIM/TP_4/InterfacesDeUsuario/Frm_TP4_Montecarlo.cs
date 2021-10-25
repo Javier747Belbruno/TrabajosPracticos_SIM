@@ -135,5 +135,25 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         {
             ControladorTP4.GetInstance().OpcionPantallaPuntoGHI("btn_tareas_criticas");
         }
+
+        private void pnl_Actividades_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnl_Config_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dgvSimulacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

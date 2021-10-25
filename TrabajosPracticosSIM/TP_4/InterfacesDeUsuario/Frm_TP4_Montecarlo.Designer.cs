@@ -110,6 +110,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.dgvSimulacion.RowTemplate.Height = 24;
             this.dgvSimulacion.Size = new System.Drawing.Size(1101, 463);
             this.dgvSimulacion.TabIndex = 3;
+            this.dgvSimulacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSimulacion_CellContentClick);
             // 
             // label2
             // 
@@ -131,6 +132,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.pnl_Config.Name = "pnl_Config";
             this.pnl_Config.Size = new System.Drawing.Size(257, 119);
             this.pnl_Config.TabIndex = 5;
+            this.pnl_Config.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_Config_Paint);
             // 
             // btn_config
             // 
@@ -155,6 +157,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.pnl_Actividades.Name = "pnl_Actividades";
             this.pnl_Actividades.Size = new System.Drawing.Size(257, 203);
             this.pnl_Actividades.TabIndex = 6;
+            this.pnl_Actividades.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_Actividades_Paint);
             // 
             // dgvActividades
             // 
@@ -191,6 +194,7 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(257, 204);
             this.panel1.TabIndex = 7;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // tb_hasta
             // 
