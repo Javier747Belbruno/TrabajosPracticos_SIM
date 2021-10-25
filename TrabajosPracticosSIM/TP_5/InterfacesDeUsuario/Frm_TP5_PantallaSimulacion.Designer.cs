@@ -43,16 +43,16 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
             this.label8 = new System.Windows.Forms.Label();
             this.pnl_Config = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_config = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvSimulacion = new System.Windows.Forms.DataGridView();
             this.btn_simular = new System.Windows.Forms.Button();
-            this.btn_config = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.pnl_Actividades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).BeginInit();
             this.pnl_Config.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_config)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -196,6 +196,19 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
             this.label2.TabIndex = 4;
             this.label2.Text = "Actividades";
             // 
+            // btn_config
+            // 
+            this.btn_config.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btn_config.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btn_config.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_config.Image = global::TrabajosPracticosSIM.Properties.Resources.ConfigImage2;
+            this.btn_config.Location = new System.Drawing.Point(132, 19);
+            this.btn_config.Name = "btn_config";
+            this.btn_config.Size = new System.Drawing.Size(89, 85);
+            this.btn_config.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btn_config.TabIndex = 1;
+            this.btn_config.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -229,24 +242,11 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
             this.btn_simular.UseVisualStyleBackColor = true;
             this.btn_simular.Click += new System.EventHandler(this.btn_simular_Click);
             // 
-            // btn_config
-            // 
-            this.btn_config.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btn_config.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.btn_config.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_config.Image = global::TrabajosPracticosSIM.Properties.Resources.ConfigImage2;
-            this.btn_config.Location = new System.Drawing.Point(132, 19);
-            this.btn_config.Name = "btn_config";
-            this.btn_config.Size = new System.Drawing.Size(89, 85);
-            this.btn_config.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btn_config.TabIndex = 1;
-            this.btn_config.TabStop = false;
-            // 
             // Frm_TP5_PantallaSimulacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1410, 867);
+            this.ClientSize = new System.Drawing.Size(1393, 787);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnl_Actividades);
             this.Controls.Add(this.pnl_Config);
@@ -262,8 +262,8 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
             ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).EndInit();
             this.pnl_Config.ResumeLayout(false);
             this.pnl_Config.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_config)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).EndInit();
             this.ResumeLayout(false);
 
         }

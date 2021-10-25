@@ -9,6 +9,6 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
     public interface ICola
     {
         void ResetearCola();
-        void CalcularCola();
+        void CalcularCola(string evento,bool estado_servidor);
     }
 }

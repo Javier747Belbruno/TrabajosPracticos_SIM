@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_5.Entidades;
@@ -12,13 +13,14 @@ namespace TrabajosPracticosSIM.TP_5
     {
         //Instancia Unica - Patron Singleton
         private static readonly ControladorTP5 _instance = new ControladorTP5();
-
-
         //Lista de Vistas / Pantallas que controla el ControladorTP5
         private List<Form> Views = new List<Form>();
 
-        //INICIALIZAR MODELO
+
+        //MODELO
         Modelo modelo = new Modelo();
+        //TABLA GENERAL
+        DataTable dtGeneral = new DataTable();
 
         //Constructor Privado.
         private ControladorTP5()
@@ -39,6 +41,7 @@ namespace TrabajosPracticosSIM.TP_5
         public void IniciarFuncionalidad()
         {
             HabilitarPantallaPrincipal();
+            InicializarColumnasTablas();
         }
 
         public void HabilitarPantallaPrincipal()
@@ -63,10 +66,10 @@ namespace TrabajosPracticosSIM.TP_5
             }
         }
 
-        public void OpcionIniciarSimulacion(Frm_TP5_PantallaSimulacion frm_TP5_PantallaSimulacion, int cant_sim, int desde, int hasta)
+        public void OpcionIniciarSimulacion(Frm_TP5_PantallaSimulacion form, int cant_sim, int desde, int hasta)
         {
             //Dejar Lista Tablas de Datos
-            //LimpiarTableDatas();
+            LimpiarTableDatas();
 
             //
             #region CREACION E INICIALIZACION DE VARIABLES
@@ -278,88 +281,202 @@ namespace TrabajosPracticosSIM.TP_5
             for (int i = 1; i <= cant_sim; i++)
             {
                 //Primera vuelta
-                if(i==1)
+                if (i == 1)
                 {
-                    modelo.llegadas.CalcularProxNroPedido(nro_pedido);
-                    modelo.llegadas.CalcularRandom(evento);
-                    modelo.llegadas.CalcularTiempo();
-                    modelo.llegadas.CalcularProxTiempo(reloj);
+                    modelo.Llegadas.CalcularProxNroPedido(nro_pedido);
+                    modelo.Llegadas.CalcularRandom(evento);
+                    modelo.Llegadas.CalcularTiempo();
+                    modelo.Llegadas.CalcularProxTiempo(reloj);
+                    q_tiempos_llegada_pedido.Enqueue((double)modelo.Llegadas.Tiempo_Prox);
 
-                    q_tiempos_llegada_pedido.Enqueue((double)modelo.llegadas.Tiempo_Prox);
+                    dtGeneral.Rows.Add(reloj, evento, nro_pedido,
+                                modelo.Llegadas.Prox_Nro_Pedido, modelo.Llegadas.Tiempo, modelo.Llegadas.Prox_Nro_Pedido,
+                                modelo.S1.Cola.Cantidad, (modelo.S1.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S1.Nro_Pedido, modelo.S1.Tiempo, modelo.S1.TiempoProx,
+                                modelo.S2.Cola.Cantidad, (modelo.S2.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S2.Nro_Pedido, modelo.S2.Tiempo, modelo.S2.TiempoProx,
+                                modelo.S3.Cola.Cantidad, (modelo.S3.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S3.Nro_Pedido, modelo.S3.Tiempo, modelo.S3.TiempoProx,
+                                modelo.S4.Cola.Cantidad, (modelo.S4.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S4.Nro_Pedido, modelo.S4.Tiempo, modelo.S4.TiempoProx,
+                                modelo.S5.Cola.Cola1.Cantidad, modelo.S5.Cola.Cola2.Cantidad, (modelo.S5.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S5.Nro_Pedido, modelo.S5.Tiempo, modelo.S5.TiempoProx,
+                                modelo.C6.Cola1.Cantidad, modelo.C6.Cola2.Cantidad);
                     //Continuar con la segunda vuelta
                     continue;
                 }
 
-                reloj = ProxTiempoMinimo(modelo.llegadas.Tiempo_Prox, s1_prox_t_atencion, s2_prox_t_atencion, s3_prox_t_atencion, s4_prox_t_atencion, s5_prox_t_atencion);
+                reloj = ProxTiempoMinimo();
 
                 evento = DeterminarEvento(reloj);
 
                 nro_pedido = DeterminarNumeroPedido(evento);
 
 
-                modelo.llegadas.CalcularProxNroPedido(nro_pedido);
-                modelo.llegadas.CalcularRandom(evento);
-                modelo.llegadas.CalcularTiempo();
-                modelo.llegadas.CalcularProxTiempo(reloj);
+                modelo.Llegadas.CalcularProxNroPedido(nro_pedido);
+                modelo.Llegadas.CalcularRandom(evento);
+                modelo.Llegadas.CalcularTiempo();
+                modelo.Llegadas.CalcularProxTiempo(reloj);
+
+                foreach (IServidor s in modelo.ListaServidores)
+                {
+                    s.CalcularCola(evento);
+                    s.CalcularEstado(evento);
+                    s.CalcularNroPedidoEnAtencion(evento, nro_pedido);
+                    s.CalcularRandom();
+                    s.CalcularTiempo();
+                    s.CalcularTiempoProx(reloj);
+                }
+
+                modelo.C6.EncastreFinal(evento);
+
+                //Recordar solo las que pide
+                if ((i >= 1 && i <= 20) || i % 10000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
+                {
 
 
+                    dtGeneral.Rows.Add(reloj, evento, nro_pedido,
+                                modelo.Llegadas.Prox_Nro_Pedido, modelo.Llegadas.Tiempo, modelo.Llegadas.Prox_Nro_Pedido,
+                                modelo.S1.Cola.Cantidad,(modelo.S1.Ocupado ? "Ocupado" : "Libre"), 
+                                modelo.S1.Nro_Pedido,modelo.S1.Tiempo,modelo.S1.TiempoProx,
+                                modelo.S2.Cola.Cantidad, (modelo.S2.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S2.Nro_Pedido, modelo.S2.Tiempo, modelo.S2.TiempoProx,
+                                modelo.S3.Cola.Cantidad, (modelo.S3.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S3.Nro_Pedido, modelo.S3.Tiempo, modelo.S3.TiempoProx,
+                                modelo.S4.Cola.Cantidad, (modelo.S4.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S4.Nro_Pedido, modelo.S4.Tiempo, modelo.S4.TiempoProx,
+                                modelo.S5.Cola.Cola1.Cantidad, modelo.S5.Cola.Cola2.Cantidad, (modelo.S5.Ocupado ? "Ocupado" : "Libre"),
+                                modelo.S5.Nro_Pedido, modelo.S5.Tiempo, modelo.S5.TiempoProx,
+                                modelo.C6.Cola1.Cantidad, modelo.C6.Cola2.Cantidad) ;
+
+                    
+                }
             }
             #endregion
+            form.LlenarPantallaSimulacion(dtGeneral);
         }
 
-        private int? DeterminarNumeroPedido(string evento)
+            private int? DeterminarNumeroPedido(string evento)
         {
             switch (evento)
             {
                 case Evento.Llegada_Pedido:
-                    return modelo.llegadas.Prox_Nro_Pedido;
+                    return modelo.Llegadas.Prox_Nro_Pedido;
+                case Evento.Fin_Actividad_1:
+                    return modelo.S1.Nro_Pedido;
+                case Evento.Fin_Actividad_2:
+                    return modelo.S2.Nro_Pedido;
+                case Evento.Fin_Actividad_3:
+                    return modelo.S3.Nro_Pedido;
+                case Evento.Fin_Actividad_4:
+                    return modelo.S4.Nro_Pedido;
+                case Evento.Fin_Actividad_5:
+                    return modelo.S5.Nro_Pedido;
+                default:
+                    return 0;
             }
-            return 1;
         }
 
         private string DeterminarEvento(double reloj)
         {
-            switch (reloj)
-            {
-                case double v when v == modelo.llegadas.Tiempo_Prox:
-                    return Evento.Llegada_Pedido;
-            }
-            return Evento.Fin_Actividad_1;
+            if(reloj == modelo.Llegadas.Tiempo_Prox)
+                return Evento.Llegada_Pedido;
+            if (reloj == modelo.S1.TiempoProx)
+                return Evento.Fin_Actividad_1;
+            if (reloj == modelo.S2.TiempoProx)
+                return Evento.Fin_Actividad_2;
+            if (reloj == modelo.S3.TiempoProx)
+                return Evento.Fin_Actividad_3;
+            if (reloj == modelo.S4.TiempoProx)
+                return Evento.Fin_Actividad_4;
+            if (reloj == modelo.S5.TiempoProx)
+                return Evento.Fin_Actividad_5;
+            return "x";
         }
 
-        private double ProxTiempoMinimo(double? t_prox_llegada, double? s1_prox_t_atencion, double? s2_prox_t_atencion, double? s3_prox_t_atencion, double? s4_prox_t_atencion, double? s5_prox_t_atencion)
+        private double ProxTiempoMinimo()
         {
             List<double> proximos_tiempos = new List<double>();
-           
-            if (t_prox_llegada.HasValue)
+            double? t1 = modelo.Llegadas.Tiempo_Prox;
+            double? t2 = modelo.S1.TiempoProx;
+            double? t3 = modelo.S2.TiempoProx;
+            double? t4 = modelo.S3.TiempoProx;
+            double? t5 = modelo.S4.TiempoProx;
+            double? t6 = modelo.S5.TiempoProx;
+
+            if (t1.HasValue)
             {
-                proximos_tiempos.Add((double)t_prox_llegada);
+                proximos_tiempos.Add((double)t1);
             }
-            if (s1_prox_t_atencion.HasValue) {
-                proximos_tiempos.Add((double)s1_prox_t_atencion);
-            }
-            if (s2_prox_t_atencion.HasValue)
+            if (t2.HasValue)
             {
-                proximos_tiempos.Add((double)s2_prox_t_atencion);
+                proximos_tiempos.Add((double)t2);
             }
-            if (s3_prox_t_atencion.HasValue)
+            if (t3.HasValue)
             {
-                proximos_tiempos.Add((double)s3_prox_t_atencion);
+                proximos_tiempos.Add((double)t3);
             }
-            if (s4_prox_t_atencion.HasValue)
+            if (t4.HasValue)
             {
-                proximos_tiempos.Add((double)s4_prox_t_atencion);
+                proximos_tiempos.Add((double)t4);
             }
-            if (s5_prox_t_atencion.HasValue)
+            if (t5.HasValue)
             {
-                proximos_tiempos.Add((double)s5_prox_t_atencion);
+                proximos_tiempos.Add((double)t5);
+            }
+            if (t6.HasValue)
+            {
+                proximos_tiempos.Add((double)t6);
             }
             proximos_tiempos.Sort();
 
             return proximos_tiempos.First();
         }
 
-        //Evento Cerrar un Form
+
+        private void InicializarColumnasTablas()
+        {
+            dtGeneral.Columns.Add("reloj");
+            dtGeneral.Columns.Add("evento");
+            dtGeneral.Columns.Add("nro_pedido");
+            dtGeneral.Columns.Add("Prox_Pedido");
+            dtGeneral.Columns.Add("Tiempo_lleg");
+            dtGeneral.Columns.Add("Tiempo_Prox_lleg");
+            dtGeneral.Columns.Add("Cola 1");
+            dtGeneral.Columns.Add("Estado Servidor 1");
+            dtGeneral.Columns.Add("Nro Pedido en At 1");
+            dtGeneral.Columns.Add("Tiempo A1");
+            dtGeneral.Columns.Add("Prox Tiempo A1");
+            dtGeneral.Columns.Add("Cola 2");
+            dtGeneral.Columns.Add("Estado Servidor 2");
+            dtGeneral.Columns.Add("Nro Pedido en At 2");
+            dtGeneral.Columns.Add("Tiempo A2");
+            dtGeneral.Columns.Add("Prox Tiempo A2");
+            dtGeneral.Columns.Add("Cola 3");
+            dtGeneral.Columns.Add("Estado Servidor 3");
+            dtGeneral.Columns.Add("Nro Pedido en At 3");
+            dtGeneral.Columns.Add("Tiempo A3");
+            dtGeneral.Columns.Add("Prox Tiempo A3");
+            dtGeneral.Columns.Add("Cola 4");
+            dtGeneral.Columns.Add("Estado Servidor 4");
+            dtGeneral.Columns.Add("Nro Pedido en At 4");
+            dtGeneral.Columns.Add("Tiempo A4");
+            dtGeneral.Columns.Add("Prox Tiempo A4");
+            dtGeneral.Columns.Add("Cola 5a (A4)");
+            dtGeneral.Columns.Add("Cola 5b (A2)");
+            dtGeneral.Columns.Add("Estado Servidor 5");
+            dtGeneral.Columns.Add("Nro Pedido en At 5");
+            dtGeneral.Columns.Add("Tiempo A5");
+            dtGeneral.Columns.Add("Prox Tiempo A5");
+            dtGeneral.Columns.Add("Cola 6a (A5)");
+            dtGeneral.Columns.Add("Cola 6b (A3)");
+        }
+        private void LimpiarTableDatas()
+        {
+            dtGeneral.Clear();
+        }
+
+        ///Evento Cerrar un Form
         private void FormClosed(object sender, FormClosedEventArgs e)
         {
             //Remover Pantalla de la lista de Pantallas.
