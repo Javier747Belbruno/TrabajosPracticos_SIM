@@ -22,6 +22,16 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
         public double P8_Tiempo_Ocupado_Acumulado { get; set; } = 0;
         public double P8_Porcentaje_Tiempo_Ocupado { get; set; } = 0;
 
+        public double P9_Tiempo_Bloqueado_Acumulado { get; set; } = 0;
+
+        public double P9_Proporcion_Bloqueado_Ocupado { get; set; } = 0;
+
+        //Parte 2
+        double p9_tiempo_en_cola_acum_a5 = 0;
+        double p9_tiempo_en_cola_acum_a3 = 0;
+        double p9_proporcion_a5 = 0;
+        double p9_proporcion_a3 = 0;
+
         public void ResetearServidor()
         {
             Cola.ResetearCola();
@@ -93,7 +103,6 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
 
         public void CalcularRandom()
         {
-
             Queue<double> q = new Queue<double>();
             if (Nro_Pedido.HasValue && Nro_Pedido != Nro_Pedido_Anterior)
             {
@@ -128,7 +137,28 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
                 TiempoProx = null;
         }
 
+        public void CalcularPorcentajeOcupacionServidor(double reloj, double reloj_anterior)
+        {
+            if (Ocupado_Anterior)
+            {
+                P8_Tiempo_Ocupado_Acumulado = reloj - reloj_anterior + P8_Tiempo_Ocupado_Acumulado;
+            }
 
+            P8_Porcentaje_Tiempo_Ocupado = (P8_Tiempo_Ocupado_Acumulado / reloj) * 100;
+        }
+
+        public void CalcularProporcionBloqueadoOcupado(double reloj, double reloj_anterior)
+        {
+            if(!Ocupado_Anterior && (Cola.Cola1.Cantidad_Anterior > 0 || Cola.Cola2.Cantidad_Anterior > 0))
+            {
+                P9_Tiempo_Bloqueado_Acumulado = reloj - reloj_anterior + P9_Tiempo_Bloqueado_Acumulado;
+            }
+
+            if(P8_Tiempo_Ocupado_Acumulado != 0)
+            {
+                P9_Proporcion_Bloqueado_Ocupado = (P9_Tiempo_Bloqueado_Acumulado / P8_Tiempo_Ocupado_Acumulado)*100;
+            }
+        }
 
     }
 }

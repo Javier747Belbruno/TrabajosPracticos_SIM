@@ -15,5 +15,6 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
         void CalcularRandom();
         void CalcularTiempo();
         void CalcularTiempoProx(double reloj);
+        void CalcularPorcentajeOcupacionServidor(double reloj, double reloj_anterior);
     }
 }

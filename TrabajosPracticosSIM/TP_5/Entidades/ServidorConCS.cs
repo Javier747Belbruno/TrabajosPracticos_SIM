@@ -104,5 +104,15 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
                 }
             }
         }
+
+        public void CalcularPorcentajeOcupacionServidor(double reloj, double reloj_anterior)
+        {
+            if (Ocupado_Anterior)
+            {
+                P8_Tiempo_Ocupado_Acumulado = reloj - reloj_anterior + P8_Tiempo_Ocupado_Acumulado;
+            }
+
+            P8_Porcentaje_Tiempo_Ocupado = (P8_Tiempo_Ocupado_Acumulado / reloj) * 100;
+        }
     }
 }

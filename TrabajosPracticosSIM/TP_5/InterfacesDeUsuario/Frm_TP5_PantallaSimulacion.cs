@@ -15,10 +15,24 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
         public Frm_TP5_PantallaSimulacion()
         {
             InitializeComponent();
+            CargarTextBoxes();
+            CargarPanelActividades();
+        }
+        private void CargarTextBoxes()
+        {
+            tb_cant_sim.Text = "50";
+            tb_desde.Text = "0";
+            tb_hasta.Text = "50";
+        }
+
+        private void CargarPanelActividades()
+        {
+            //ControladorTP4.GetInstance().OpcionCargarPanelActividades(this);
         }
 
         private void btn_simular_Click(object sender, EventArgs e)
         {
+            int param_punto_11 = 3;
             //try
             //{
                 int cant_sim = Convert.ToInt32(tb_cant_sim.Text);
@@ -44,7 +58,7 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
                 {
                     throw (new Exception("El parametro hasta no puede superar la cant de sim"));
                 }
-                ControladorTP5.GetInstance().OpcionIniciarSimulacion(this, cant_sim, desde, hasta);
+                ControladorTP5.GetInstance().OpcionIniciarSimulacion(this, cant_sim, desde, hasta, param_punto_11);
             //}
             //catch (Exception ex)
             //{
