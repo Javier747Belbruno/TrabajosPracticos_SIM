@@ -26,12 +26,6 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
 
         public double P9_Proporcion_Bloqueado_Ocupado { get; set; } = 0;
 
-        //Parte 2
-        double p9_tiempo_en_cola_acum_a5 = 0;
-        double p9_tiempo_en_cola_acum_a3 = 0;
-        double p9_proporcion_a5 = 0;
-        double p9_proporcion_a3 = 0;
-
         public void ResetearServidor()
         {
             Cola.ResetearCola();

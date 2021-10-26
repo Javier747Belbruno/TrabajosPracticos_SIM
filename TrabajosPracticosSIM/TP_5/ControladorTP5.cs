@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using TrabajosPracticosSIM.TP_4.Entidades;
 using TrabajosPracticosSIM.TP_5.Entidades;
 using TrabajosPracticosSIM.TP_5.InterfacesDeUsuario;
 
@@ -16,17 +17,61 @@ namespace TrabajosPracticosSIM.TP_5
         //Lista de Vistas / Pantallas que controla el ControladorTP5
         private List<Form> Views = new List<Form>();
 
+        public void OpcionCargarActividadesConfiguracion(Frm_TP5_Configuracion form)
+        {
+            List<string> distribuciones = new List<string>();
+            var type = typeof(IDistribucion);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p) && p.IsClass);
+
+            foreach (var item in types)
+            {
+                distribuciones.Add(item.Name);
+            }
+
+            DataTable dtActividades = new DataTable();
+            dtActividades.Columns.Add("SERV");
+            dtActividades.Columns.Add("DISTR");
+            dtActividades.Columns.Add("PARAM1");
+            dtActividades.Columns.Add("PARAM2");
+
+            dtActividades.Rows.Add("Lleg", modelo.Llegadas.Distr.GetType().Name, modelo.Llegadas.Distr.DevolverParam1(), modelo.Llegadas.Distr.DevolverParam2());
+            var i = 1;
+            foreach (IServidor s in modelo.ListaServidores)
+            {
+                dtActividades.Rows.Add("S" + i, s.Distr.GetType().Name, s.Distr.DevolverParam1(), s.Distr.DevolverParam2()); i++;
+            }
+
+            form.LlenarCamposActividades(distribuciones, dtActividades);
+        }
+
 
         //MODELO
         Modelo modelo = new Modelo();
         //TABLA GENERAL
         DataTable dtGeneral = new DataTable();
+        //TABLA ACTIVIDADES
+        DataTable dtActividadesPantalla = new DataTable();
 
         //Constructor Privado.
         private ControladorTP5()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+        }
+
+        public void OpcionCargarPanelActividades(Frm_TP5_PantallaSimulacion form)
+        {
+            dtActividadesPantalla.Clear();
+
+            dtActividadesPantalla.Rows.Add("Lleg", modelo.Llegadas.Distr.GetType().Name, modelo.Llegadas.Distr.DevolverParams());
+            var i = 1;
+            foreach (IServidor s in modelo.ListaServidores)
+            {
+                dtActividadesPantalla.Rows.Add("S"+i, s.Distr.GetType().Name, s.Distr.DevolverParams()); i++;
+            }
+            form.LlenarGridViewActividades(dtActividadesPantalla);
         }
 
         // Devolver instancia estática única.
@@ -68,10 +113,11 @@ namespace TrabajosPracticosSIM.TP_5
 
         public void OpcionIniciarSimulacion(Frm_TP5_PantallaSimulacion form, int cant_sim, int desde, int hasta, int param_punto_11)
         {
-            //Dejar Lista Tablas de Datos
+            #region LIMPIEZA
             LimpiarTableDatas();
             LimpiarModelo();
-            //
+            #endregion
+
             #region CREACION E INICIALIZACION DE VARIABLES
             #region Definiciones
 
@@ -80,8 +126,6 @@ namespace TrabajosPracticosSIM.TP_5
             string evento = Evento.Inicio;
             int? nro_pedido = null;
             #endregion
-
-            
             #region Estadisticas
 
             int pedidos_realizados = 0;
@@ -155,6 +199,7 @@ namespace TrabajosPracticosSIM.TP_5
             #endregion
 
             #endregion
+
             #region SIMULACION
             for (int i = 1; i <= cant_sim; i++)
             {
@@ -268,13 +313,6 @@ namespace TrabajosPracticosSIM.TP_5
                 p11_probabilidad = CalcularProbMayorIgualParametro(p10_nro_hora, p10_nro_hora_anterior, p11_contador_mayor_igual, p11_probabilidad);
 
                 //Punto 13
-                /* string p13_camino_critico = "-";
-                double p13_a1 = 0;
-                double p13_a2 = 0;
-                double p13_a3 = 0;
-                double p13_a4 = 0;
-                double p13_a5 = 0;*/
-
                 p13_camino_critico = DeterminarCaminoCritico(pedidos_realizados, pedidos_realizados_anterior, tiempo_ensamble, camino1, camino3, e_t_a2, e_t_a4);
                 p13_a1 = CalcularProporcionCaminoCritico(p13_camino_critico,"C1", pedidos_realizados, p13_a1);
                 p13_a2 = CalcularProporcionCaminoCritico(p13_camino_critico, "C2", pedidos_realizados, p13_a2);
@@ -293,7 +331,90 @@ namespace TrabajosPracticosSIM.TP_5
                 }
             }
             #endregion
+
             form.LlenarPantallaSimulacion(dtGeneral);
+        }
+
+        public void ActualizarActividades(DataTable dtActividadesActualizadas)
+        {
+            //Manejar la tabla por parametro y actualizar el grafo.
+            foreach (DataRow dr in dtActividadesActualizadas.Rows)
+            {
+                if (dr[0].ToString() == "0")
+                {
+                    modelo.Llegadas.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "1")
+                {
+                    modelo.S1.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "2")
+                {
+                    modelo.S2.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "3")
+                {
+                    modelo.S3.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "4")
+                {
+                    modelo.S4.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "5")
+                {
+                    modelo.S5.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+            }
+
+
+            foreach (var v in Views)
+            {
+                if (v.GetType().Name == "Frm_TP5_PantallaSimulacion")
+                {
+                    var vista = (Frm_TP5_PantallaSimulacion)v;
+                    OpcionCargarPanelActividades(vista);
+                }
+            }
+        }
+        private IDistribucion getDistribucion(string dist, string pparam1, string pparam2)
+        {
+            switch (dist)
+            {
+                case "Uniforme":
+                    double param1U = Convert.ToDouble(pparam1);
+                    double param2U = Convert.ToDouble(pparam2);
+                    Uniforme u = new Uniforme(param1U, param2U);
+                    return u;
+                case "Exponencial":
+                    double param1E = Convert.ToDouble(pparam1);
+                    Exponencial e = new Exponencial(param1E);
+                    return e;
+                case "Normal":
+                    double param1N = Convert.ToDouble(pparam1);
+                    double param2N = Convert.ToDouble(pparam2);
+                    Normal n = new Normal(param1N, param2N);
+                    return n;
+                default:
+                    break;
+            }
+            return null;
+        }
+
+        public void OpcionPantallaConfiguracion()
+        {
+            CreateView(new Frm_TP5_Configuracion());
         }
 
         private double CalcularProporcionCaminoCriticoA5(string p13_camino_critico, string caminoPredeterminado1, string caminoPredeterminado2, int pedidos_realizados, double p13_a5)
@@ -801,6 +922,10 @@ namespace TrabajosPracticosSIM.TP_5
 
         private void InicializarColumnasTablas()
         {
+            dtActividadesPantalla.Columns.Add("SERV");
+            dtActividadesPantalla.Columns.Add("DISTR");
+            dtActividadesPantalla.Columns.Add("PARAMS");
+
             dtGeneral.Columns.Add("i");
             dtGeneral.Columns.Add("Reloj");
             dtGeneral.Columns.Add("Evento");
