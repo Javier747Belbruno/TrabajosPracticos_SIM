@@ -21,8 +21,8 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
         private void CargarTextBoxes()
         {
             tb_cant_sim.Text = "50";
-            tb_desde.Text = "0";
-            tb_hasta.Text = "50";
+            tb_desde.Text = "";
+            tb_hasta.Text = "";
         }
 
         private void CargarPanelActividades()

@@ -106,7 +106,7 @@ namespace TrabajosPracticosSIM.TP_5
             //Caminos
             double? camino1 = null;
             double? camino2 = null;
-
+            double? camino3 = null;
 
             #endregion
             #region Punto 2
@@ -168,9 +168,10 @@ namespace TrabajosPracticosSIM.TP_5
                     q_tiempos_llegada_pedido.Enqueue((double)modelo.Llegadas.Tiempo_Prox);
                     //Grabar Fila
                     AgregarFila(i, reloj, evento, nro_pedido, pedidos_realizados, nro_pedido_listo, e_t_llegada_pedido, e_t_a1, e_t_a2,
-                                e_t_a3, e_t_a4, e_t_a5, camino1, camino2, tiempo_ensamble, prom_tiempo_ensamble, p3_pedidos_solicitados,
+                                e_t_a3, e_t_a4, e_t_a5, camino1, camino2, camino3, tiempo_ensamble, prom_tiempo_ensamble, p3_pedidos_solicitados,
                                 p3_proporcion_PR_PS, p7_pedidos_en_sist, p7_prom_pedidos_en_sist, p10_reloj, p10_nro_hora, p10_contador,
-                                p10_prom_ensambles, p11_contador_mayor_igual, p11_probabilidad);
+                                p10_prom_ensambles, p11_contador_mayor_igual, p11_probabilidad, p13_camino_critico,
+                                p13_a1, p13_a2, p13_a3, p13_a4, p13_a5);
                     //Continuar con la segunda vuelta
                     continue;
                 }
@@ -213,8 +214,9 @@ namespace TrabajosPracticosSIM.TP_5
                 e_t_a5 = CalcularTiemposAct5(q_tiempos_act5, pedidos_realizados_anterior, pedidos_realizados);
 
                 camino1 = CalcularCamino1(e_t_llegada_pedido, e_t_a5, pedidos_realizados_anterior, pedidos_realizados);
-                camino2 = CalcularCamino2(e_t_llegada_pedido, e_t_a3, pedidos_realizados_anterior, pedidos_realizados);
-                tiempo_ensamble = CalcularTiempoNetoEnsamble(camino1, camino2, pedidos_realizados_anterior, pedidos_realizados);
+                camino2 = camino1; 
+                camino3 = CalcularCamino3(e_t_llegada_pedido, e_t_a3, pedidos_realizados_anterior, pedidos_realizados);
+                tiempo_ensamble = CalcularTiempoNetoEnsamble(camino1, camino3, pedidos_realizados_anterior, pedidos_realizados);
 
                 //Punto 2
                 prom_tiempo_ensamble = CalcularPromTiempoEnsamble(prom_tiempo_ensamble, tiempo_ensamble, pedidos_realizados);
@@ -264,50 +266,129 @@ namespace TrabajosPracticosSIM.TP_5
                 //Punto 11
                 p11_contador_mayor_igual = CalcularContadorMayorIgualParametro(p10_nro_hora, p10_nro_hora_anterior, p10_contador_anterior,param_punto_11);
                 p11_probabilidad = CalcularProbMayorIgualParametro(p10_nro_hora, p10_nro_hora_anterior, p11_contador_mayor_igual, p11_probabilidad);
-                
+
+                //Punto 13
+                /* string p13_camino_critico = "-";
+                double p13_a1 = 0;
+                double p13_a2 = 0;
+                double p13_a3 = 0;
+                double p13_a4 = 0;
+                double p13_a5 = 0;*/
+
+                p13_camino_critico = DeterminarCaminoCritico(pedidos_realizados, pedidos_realizados_anterior, tiempo_ensamble, camino1, camino3, e_t_a2, e_t_a4);
+                p13_a1 = CalcularProporcionCaminoCritico(p13_camino_critico,"C1", pedidos_realizados, p13_a1);
+                p13_a2 = CalcularProporcionCaminoCritico(p13_camino_critico, "C2", pedidos_realizados, p13_a2);
+                p13_a3 = CalcularProporcionCaminoCritico(p13_camino_critico, "C3", pedidos_realizados, p13_a3);
+                p13_a4 = CalcularProporcionCaminoCritico(p13_camino_critico, "C1", pedidos_realizados, p13_a4);
+                p13_a5 = CalcularProporcionCaminoCriticoA5(p13_camino_critico, "C1", "C2", pedidos_realizados, p13_a5);
+
                 //Recordar solo las que pide
-                if ((i >= 1 && i <= 20) || i % 10000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
+                if ((i >= 1 && i <= 50) || i % 10000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
                 {
                     AgregarFila(i, reloj, evento, nro_pedido, pedidos_realizados, nro_pedido_listo,e_t_llegada_pedido, e_t_a1, e_t_a2, 
-                                e_t_a3, e_t_a4, e_t_a5,camino1, camino2, tiempo_ensamble, prom_tiempo_ensamble,p3_pedidos_solicitados, 
+                                e_t_a3, e_t_a4, e_t_a5,camino1, camino2, camino3, tiempo_ensamble, prom_tiempo_ensamble,p3_pedidos_solicitados, 
                                 p3_proporcion_PR_PS, p7_pedidos_en_sist, p7_prom_pedidos_en_sist, p10_reloj,p10_nro_hora,p10_contador,
-                                p10_prom_ensambles,p11_contador_mayor_igual, p11_probabilidad);
-
-                    
-                    
+                                p10_prom_ensambles,p11_contador_mayor_igual, p11_probabilidad, p13_camino_critico, 
+                                p13_a1, p13_a2, p13_a3, p13_a4, p13_a5);
                 }
             }
             #endregion
             form.LlenarPantallaSimulacion(dtGeneral);
         }
 
+        private double CalcularProporcionCaminoCriticoA5(string p13_camino_critico, string caminoPredeterminado1, string caminoPredeterminado2, int pedidos_realizados, double p13_a5)
+        {
+            if (p13_camino_critico != "-")
+            {
+                if (p13_camino_critico == caminoPredeterminado1 || p13_camino_critico == caminoPredeterminado2)
+                {
+                    return ((pedidos_realizados - 1) * p13_a5 + 1) / (double)pedidos_realizados;
+                }
+                else
+                {
+                    return ((pedidos_realizados - 1) * p13_a5 + 0) / (double)pedidos_realizados;
+                }
+            }
+            else
+            {
+                return p13_a5;
+            }
+        }
+
+        private double CalcularProporcionCaminoCritico(string p13_camino_critico, string caminoPredeterminado, int pedidos_realizados, double p13_a1)
+        {
+            if (p13_camino_critico != "-")
+            {
+                if(p13_camino_critico == caminoPredeterminado)
+                {
+                    return ((pedidos_realizados - 1) * p13_a1 + 1) / (double)pedidos_realizados;
+                }
+                else
+                {
+                    return ((pedidos_realizados - 1) * p13_a1 + 0) / (double)pedidos_realizados;
+                }
+            }
+            else
+            {
+                return p13_a1;
+            }
+        }
+
         private void AgregarFila(int i, double reloj, string evento, int? nro_pedido, int pedidos_realizados, int? nro_pedido_listo, 
                                  double? e_t_llegada_pedido, double? e_t_a1, double? e_t_a2, double? e_t_a3, double? e_t_a4, double? e_t_a5, 
-                                 double? camino1, double? camino2, double? tiempo_ensamble, double prom_tiempo_ensamble, 
+                                 double? camino1, double? camino2, double? camino3, double? tiempo_ensamble, double prom_tiempo_ensamble, 
                                  int p3_pedidos_solicitados, double p3_proporcion_PR_PS, int p7_pedidos_en_sist, double p7_prom_pedidos_en_sist, 
                                  double p10_reloj, int p10_nro_hora,
-                                 int p10_contador, double p10_prom_ensambles, int? p11_contador_mayor_igual, double p11_probabilidad)
+                                 int p10_contador, double p10_prom_ensambles, int? p11_contador_mayor_igual, double p11_probabilidad, 
+                                 string p13_camino_critico, double p13_a1, double p13_a2, double p13_a3, double p13_a4, double p13_a5)
         {
-            string llegadasTiempo = "";
-            if (modelo.Llegadas.Tiempo.HasValue)
-                llegadasTiempo = modelo.Llegadas.Tiempo.Value.ToString("0.00");
+            
+            string llegadasTiempo = Stringficar(modelo.Llegadas.Tiempo);
+            string llegadasProxTiempo = Stringficar(modelo.Llegadas.Tiempo_Prox);
+
+            string S1Tiempo = Stringficar(modelo.S1.Tiempo);
+            string S2Tiempo = Stringficar(modelo.S2.Tiempo);
+            string S3Tiempo = Stringficar(modelo.S3.Tiempo);
+            string S4Tiempo = Stringficar(modelo.S4.Tiempo);
+            string S5Tiempo = Stringficar(modelo.S5.Tiempo);
+
+
+            string S1ProxTiempo = Stringficar(modelo.S1.TiempoProx);
+            string S2ProxTiempo = Stringficar(modelo.S2.TiempoProx);
+            string S3ProxTiempo = Stringficar(modelo.S3.TiempoProx);
+            string S4ProxTiempo = Stringficar(modelo.S4.TiempoProx);
+            string S5ProxTiempo = Stringficar(modelo.S5.TiempoProx);
+
+            string e_s_llegada = Stringficar(e_t_llegada_pedido);
+            string e_s_a1 = Stringficar(e_t_a1);
+            string e_s_a2 = Stringficar(e_t_a2);
+            string e_s_a3 = Stringficar(e_t_a3);
+            string e_s_a4 = Stringficar(e_t_a4);
+            string e_s_a5 = Stringficar(e_t_a5);
+
+            string s_camino_1 = Stringficar(camino1);
+            string s_camino_2 = Stringficar(camino2);
+            string s_camino_3 = Stringficar(camino3);
+
+            string s_tiempo_ensamble = Stringficar(tiempo_ensamble);
 
             dtGeneral.Rows.Add(i, reloj.ToString("0.00"), evento, nro_pedido,
-                                modelo.Llegadas.Prox_Nro_Pedido, llegadasTiempo, modelo.Llegadas.Tiempo_Prox,
+                                modelo.Llegadas.Prox_Nro_Pedido, llegadasTiempo, llegadasProxTiempo,
                                 modelo.S1.Cola.Cantidad, (modelo.S1.Ocupado ? "Ocupado" : "Libre"),
-                                modelo.S1.Nro_Pedido, modelo.S1.Tiempo, modelo.S1.TiempoProx,
+                                modelo.S1.Nro_Pedido, S1Tiempo, S1ProxTiempo,
                                 modelo.S2.Cola.Cantidad, (modelo.S2.Ocupado ? "Ocupado" : "Libre"),
-                                modelo.S2.Nro_Pedido, modelo.S2.Tiempo, modelo.S2.TiempoProx,
+                                modelo.S2.Nro_Pedido, S2Tiempo, S2ProxTiempo,
                                 modelo.S3.Cola.Cantidad, (modelo.S3.Ocupado ? "Ocupado" : "Libre"),
-                                modelo.S3.Nro_Pedido, modelo.S3.Tiempo, modelo.S3.TiempoProx,
+                                modelo.S3.Nro_Pedido, S3Tiempo, S3ProxTiempo,
                                 modelo.S4.Cola.Cantidad, (modelo.S4.Ocupado ? "Ocupado" : "Libre"),
-                                modelo.S4.Nro_Pedido, modelo.S4.Tiempo, modelo.S4.TiempoProx,
+                                modelo.S4.Nro_Pedido, S4Tiempo, S4ProxTiempo,
                                 modelo.S5.Cola.Cola1.Cantidad, modelo.S5.Cola.Cola2.Cantidad, (modelo.S5.Ocupado ? "Ocupado" : "Libre"),
-                                modelo.S5.Nro_Pedido, modelo.S5.Tiempo, modelo.S5.TiempoProx,
+                                modelo.S5.Nro_Pedido, S5Tiempo, S5ProxTiempo,
                                 modelo.C6.Cola1.Cantidad, modelo.C6.Cola2.Cantidad,
                                 pedidos_realizados, nro_pedido_listo,
-                                e_t_llegada_pedido, e_t_a1, e_t_a2, e_t_a3, e_t_a4, e_t_a5,
-                                camino1, camino2, tiempo_ensamble, prom_tiempo_ensamble.ToString("0.00"),
+                                e_s_llegada, e_s_a1, e_s_a2, e_s_a3, e_s_a4, e_s_a5,
+                                s_camino_1, s_camino_2, s_camino_3, s_tiempo_ensamble, 
+                                prom_tiempo_ensamble.ToString("0.00"),
                                 p3_pedidos_solicitados, p3_proporcion_PR_PS.ToString("0.00"),
                                 modelo.S1.Cola.P4_Cantidad_Maxima, modelo.S2.Cola.P4_Cantidad_Maxima,
                                 modelo.S3.Cola.P4_Cantidad_Maxima, modelo.S4.Cola.P4_Cantidad_Maxima,
@@ -329,14 +410,41 @@ namespace TrabajosPracticosSIM.TP_5
                                 modelo.S5.P8_Tiempo_Ocupado_Acumulado.ToString("0.00"), modelo.S5.P8_Porcentaje_Tiempo_Ocupado.ToString("0.00"),
                                 modelo.S5.P9_Tiempo_Bloqueado_Acumulado.ToString("0.00"), modelo.S5.P9_Proporcion_Bloqueado_Ocupado.ToString("0.00"),
                                 modelo.C6.P9_Proporcion_Espera_Cola_1.ToString("0.00"), modelo.C6.P9_Proporcion_Espera_Cola_2.ToString("0.00"),
-                                p10_reloj.ToString("0.00"),
-               
-                                p10_nro_hora,
-                     
-                                p10_contador,
-                                p10_prom_ensambles.ToString("0.00"),
-                                p11_contador_mayor_igual,
-                                p11_probabilidad.ToString("0.00"));
+                                p10_reloj.ToString("0.00"),p10_nro_hora,p10_contador,p10_prom_ensambles.ToString("0.00"),
+                                p11_contador_mayor_igual,p11_probabilidad.ToString("0.00"),p13_camino_critico,
+                                (p13_a1*100).ToString("0.00"), (p13_a2 * 100).ToString("0.00"), (p13_a3 * 100).ToString("0.00"),
+                                (p13_a4 * 100).ToString("0.00"), (p13_a5 * 100).ToString("0.00"));
+        }
+
+        private string Stringficar(double? nroconmuchosdecimales)
+        {
+            if (nroconmuchosdecimales.HasValue)
+                return nroconmuchosdecimales.Value.ToString("0.00");
+            return "";
+        }
+
+        private string DeterminarCaminoCritico(int pedidos_realizados, int pedidos_realizados_anterior, double? tiempo_ensamble, double? camino1, double? camino3, double? e_t_a2, double? e_t_a4)
+        {
+            if (pedidos_realizados != pedidos_realizados_anterior)
+            {
+                if(tiempo_ensamble == camino3)
+                {
+                    return "C3";
+                }
+                if(tiempo_ensamble == camino1)
+                {
+                    if(e_t_a2 > e_t_a4)
+                    {
+                        return "C2";
+                    }
+                    else
+                    {
+                        return "C1";
+                    }
+                }
+            }
+            return "-";
+
         }
 
         private double CalcularProbMayorIgualParametro(int p10_nro_hora, int p10_nro_hora_anterior, int? p11_contador_mayor_igual, double p11_probabilidad)
@@ -411,15 +519,15 @@ namespace TrabajosPracticosSIM.TP_5
                 return prom_tiempo_ensamble;
         }
 
-        private double? CalcularTiempoNetoEnsamble(double? camino1, double? camino2, int pedidos_realizados_anterior, int pedidos_realizados)
+        private double? CalcularTiempoNetoEnsamble(double? camino1, double? camino3, int pedidos_realizados_anterior, int pedidos_realizados)
         {
             if (pedidos_realizados != pedidos_realizados_anterior)
             {
-                if(camino1 >= camino2)
+                if(camino1 >= camino3)
                 {
                     return camino1;
                 }
-                return camino2;
+                return camino3;
             }
             else
             {
@@ -427,7 +535,7 @@ namespace TrabajosPracticosSIM.TP_5
             }
         }
 
-        private double? CalcularCamino2(double? e_t_llegada_pedido, double? e_t_a3, int pedidos_realizados_anterior, int pedidos_realizados)
+        private double? CalcularCamino3(double? e_t_llegada_pedido, double? e_t_a3, int pedidos_realizados_anterior, int pedidos_realizados)
         {
             if (pedidos_realizados != pedidos_realizados_anterior)
             {
@@ -738,6 +846,7 @@ namespace TrabajosPracticosSIM.TP_5
             dtGeneral.Columns.Add("A5");
             dtGeneral.Columns.Add("Camino 1");
             dtGeneral.Columns.Add("Camino 2");
+            dtGeneral.Columns.Add("Camino 3");
             dtGeneral.Columns.Add("Tiempo Ensamble/C MAX");
             dtGeneral.Columns.Add("Prom Tiempo Ensamble");
             dtGeneral.Columns.Add("Pedidos Solicitados");
@@ -788,7 +897,12 @@ namespace TrabajosPracticosSIM.TP_5
             dtGeneral.Columns.Add("prom_ensambles");
             dtGeneral.Columns.Add("p11_contador_mayor_igual");
             dtGeneral.Columns.Add("p11_probabilidad");
-
+            dtGeneral.Columns.Add("camino_critico");
+            dtGeneral.Columns.Add("p13_A1");
+            dtGeneral.Columns.Add("p13_A2");
+            dtGeneral.Columns.Add("p13_A3");
+            dtGeneral.Columns.Add("p13_A4");
+            dtGeneral.Columns.Add("p13_A5");
         }
         private void LimpiarTableDatas()
         {
