@@ -41,5 +41,26 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
                 if (Cantidad > 0)
                     Cantidad--;
         }
+
+        public void CalcularMaxCantEnCola()
+        {
+            if(Cantidad > P4_Cantidad_Maxima)
+                P4_Cantidad_Maxima = Cantidad;
+        }
+
+        public void CalcularTiempoAcumuladoEnCola(double reloj_anterior, double reloj)
+        {
+            P5_Tiempo_Acumulado = Cantidad * (reloj - reloj_anterior) + P5_Tiempo_Acumulado;
+        }
+        public void CalcularTiempoPromedioEnCola(double reloj_anterior,double reloj, int p3_pedidos_solicitados)
+        {
+            CalcularTiempoAcumuladoEnCola(reloj_anterior, reloj);
+            P5_Tiempo_Promedio = P5_Tiempo_Acumulado / (double)p3_pedidos_solicitados;
+        }
+
+        public void CalcularCantPromedioEnCola(double reloj)
+        {
+            P6_Promedio_Pedidos_en_Cola = P5_Tiempo_Acumulado / reloj;
+        }
     }
 }

@@ -18,36 +18,37 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
 
         public double P6_Promedio_Pedidos_en_Cola { get; set; } = 0;
 
-
+        public double P9_Proporcion_Espera_Cola_1 { get; set; } = 0;
+        public double P9_Proporcion_Espera_Cola_2 { get; set; } = 0;
 
         public void CalcularCola(string evento, bool estado_servidor)
         {
             Cola1.Cantidad_Anterior = Cola1.Cantidad;
             if (evento == Cola1.EventoEncolador)
             {
-                if(Cola2.Cantidad >0 && !estado_servidor)
+                if (Cola2.Cantidad > 0 && !estado_servidor)
                 {
-                    
+
                 }
                 else
                 {
                     Cola1.Cantidad++;
                 }
             }
-            if(evento == Cola2.EventoEncolador)
+            if (evento == Cola2.EventoEncolador)
             {
-                if(Cola2.Cantidad == 0 && 
+                if (Cola2.Cantidad == 0 &&
                     Cola1.Cantidad > 0 &&
                      !estado_servidor)
                 {
                     Cola1.Cantidad--;
                 }
             }
-            if(evento == Cola1.EventoDecolador)
+            if (evento == Cola1.EventoDecolador)
             {
                 if (Cola1.Cantidad == 0 || (Cola1.Cantidad > 0 && Cola2.Cantidad == 0))
                 {
-                    
+
                 }
                 else
                 {
@@ -60,7 +61,7 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             {
                 if (Cola1.Cantidad_Anterior > 0 && !estado_servidor)
                 {
-                    
+
                 }
                 else
                 {
@@ -130,6 +131,45 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
                 {
                     Cola2.Cantidad--;
                 }
+            }
+        }
+
+        public void CalcularMaxCantEnCola()
+        {
+            if ((Cola1.Cantidad + Cola2.Cantidad) > P4_Cantidad_Maxima)
+                P4_Cantidad_Maxima = (Cola1.Cantidad + Cola2.Cantidad);
+        }
+
+        public void CalcularTiempoAcumuladoEnCola(double reloj_anterior, double reloj)
+        {
+            P5_Tiempo_Acumulado = (Cola1.Cantidad + Cola2.Cantidad) * (reloj - reloj_anterior) + P5_Tiempo_Acumulado;
+            //Calculo los tiempos de las colas separadas (Para punto 9)
+            Cola1.CalcularTiempoAcumuladoEnCola(reloj_anterior, reloj);
+            Cola2.CalcularTiempoAcumuladoEnCola(reloj_anterior, reloj);
+        }
+
+        public void CalcularTiempoPromedioEnCola(double reloj_anterior, double reloj, int p3_pedidos_solicitados)
+        {
+            CalcularTiempoAcumuladoEnCola(reloj_anterior,reloj);
+            P5_Tiempo_Promedio = P5_Tiempo_Acumulado / (double)p3_pedidos_solicitados;
+        }
+
+        public void CalcularCantPromedioEnCola(double reloj)
+        {
+            P6_Promedio_Pedidos_en_Cola = P5_Tiempo_Acumulado / reloj;
+        }
+
+        public void CalcularProporcionesDeEspera()
+        {
+            if(P5_Tiempo_Acumulado != 0)
+            {
+                P9_Proporcion_Espera_Cola_1 = (Cola1.P5_Tiempo_Acumulado / P5_Tiempo_Acumulado)*100;
+                P9_Proporcion_Espera_Cola_2 = (Cola2.P5_Tiempo_Acumulado / P5_Tiempo_Acumulado)*100;
+            }
+            else
+            {
+                P9_Proporcion_Espera_Cola_1 = 0;
+                P9_Proporcion_Espera_Cola_2 = 0;
             }
         }
     }

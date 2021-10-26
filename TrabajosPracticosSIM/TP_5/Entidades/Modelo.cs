@@ -21,6 +21,7 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
 
         public List<IServidor> ListaServidores { get; set; } = new List<IServidor>();
 
+        public List<ICola> ListaColas { get; set; } = new List<ICola>();
         public Modelo()
         {
             IniciarLlegadas();
@@ -30,15 +31,25 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             IniciarServidor4();
             IniciarServidor5();
             IniciarCola6();
-            IniciarLista();
+            IniciarListaServidores();
+            IniciarListaColas();
         }
-        private void IniciarLista()
+        private void IniciarListaServidores()
         {
             ListaServidores.Add(S1);
             ListaServidores.Add(S2);
             ListaServidores.Add(S3);
             ListaServidores.Add(S4);
             ListaServidores.Add(S5);
+        }
+        private void IniciarListaColas()
+        {
+            ListaColas.Add(S1.Cola);
+            ListaColas.Add(S2.Cola);
+            ListaColas.Add(S3.Cola);
+            ListaColas.Add(S4.Cola);
+            ListaColas.Add(S5.Cola);
+            ListaColas.Add(C6);
         }
         private void IniciarLlegadas()
         {
