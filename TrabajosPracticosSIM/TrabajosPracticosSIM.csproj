@@ -183,6 +183,12 @@
     <Compile Include="TP_5\Entidades\Modelo.cs" />
     <Compile Include="TP_5\Entidades\ServidorConCD.cs" />
     <Compile Include="TP_5\Entidades\ServidorConCS.cs" />
+    <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Configuracion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Configuracion.Designer.cs">
+      <DependentUpon>Frm_TP5_Configuracion.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Enunciado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_4\InterfacesDeUsuario\Frm_TP4_PuntoGHI.resx">
       <DependentUpon>Frm_TP4_PuntoGHI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_5\InterfacesDeUsuario\Frm_TP5_Configuracion.resx">
+      <DependentUpon>Frm_TP5_Configuracion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_5\InterfacesDeUsuario\Frm_TP5_Enunciado.resx">
       <DependentUpon>Frm_TP5_Enunciado.cs</DependentUpon>
