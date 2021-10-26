@@ -70,7 +70,7 @@ namespace TrabajosPracticosSIM.TP_5
         {
             //Dejar Lista Tablas de Datos
             LimpiarTableDatas();
-
+            LimpiarModelo();
             //
             #region CREACION E INICIALIZACION DE VARIABLES
             #region Definiciones
@@ -80,72 +80,11 @@ namespace TrabajosPracticosSIM.TP_5
             int? nro_pedido = null;
             #endregion
 
-            #region SupuestamenteInnecesarios
-            // Pedidos
-            double prox_pedido = 1;
-            double? rnd_pedido = 0;
-            double? t_llegada = 0;
-            double t_prox_llegada = 0;
-
-            // Cola 1
-            int cola_1 = 0;
-
-            //MAQUINA ACTIVIDAD 1 (SERVIDOR 1)
-            string s1_estado = "Libre";
-            int? s1_nro_pedido_en_at = null;
-            double? s1_rnd = null;
-            double? s1_t_atencion = null;
-            double? s1_prox_t_atencion = null;
-
-            //Cola 2
-            int cola_2 = 0;
-
-            //MAQUINA ACTIVIDAD 2 (SERVIDOR 2)
-            string s2_estado = "Libre";
-            int? s2_nro_pedido_en_at = null;
-            double? s2_rnd = null;
-            double? s2_t_atencion = null;
-            double? s2_prox_t_atencion = null;
-
-            //Cola 3
-            int cola_3 = 0;
-
-            //MAQUINA ACTIVIDAD 3 (SERVIDOR 3)
-            string s3_estado = "Libre";
-            int? s3_nro_pedido_en_at = null;
-            double? s3_rnd = null;
-            double? s3_t_atencion = null;
-            double? s3_prox_t_atencion = null;
-
-            //Cola 4
-            int cola_4 = 0;
-
-            //MAQUINA ACTIVIDAD 4 (SERVIDOR 4)
-            string s4_estado = "Libre";
-            int? s4_nro_pedido_en_at = null;
-            double? s4_rnd = null;
-            double? s4_t_atencion = null;
-            double? s4_prox_t_atencion = null;
-
-            //Colas 5
-            int cola_5a = 0; //(A4)
-            int cola_5b = 0; //(A2)
-
-            //MAQUINA ACTIVIDAD 5 (SERVIDOR 5)
-            string s5_estado = "Libre";
-            int? s5_nro_pedido_en_at = null;
-            double? s5_rnd = null;
-            double? s5_t_atencion = null;
-            double? s5_prox_t_atencion = null;
-
-            //Colas 6 - Encastre final
-            int cola_6a = 0; //(A5)
-            int cola_6b = 0; //(A3)
-
-            #endregion
+            
             #region Estadisticas
 
             int pedidos_realizados = 0;
+            int pedidos_realizados_anterior = 0;
             int? nro_pedido_listo = null;
             double? tiempo_ensamble = null;
             //q de queue
@@ -164,9 +103,9 @@ namespace TrabajosPracticosSIM.TP_5
             double? e_t_a5 = null;
 
             //Caminos
-            double? c1 = null;
-            double? c2 = null;
-            double? c3 = null;
+            double? camino1 = null;
+            double? camino2 = null;
+            double? camino3 = null;
 
             double? camino_critico = null; //a.k.a tiempo de ensamble neto
 
@@ -288,9 +227,13 @@ namespace TrabajosPracticosSIM.TP_5
                     modelo.Llegadas.CalcularTiempo();
                     modelo.Llegadas.CalcularProxTiempo(reloj);
                     q_tiempos_llegada_pedido.Enqueue((double)modelo.Llegadas.Tiempo_Prox);
+                    //Grabar Fila
+                    string llegadasTiempo = "";
+                    if (modelo.Llegadas.Tiempo.HasValue)
+                        llegadasTiempo = modelo.Llegadas.Tiempo.Value.ToString("0.00");
 
-                    dtGeneral.Rows.Add(reloj, evento, nro_pedido,
-                                modelo.Llegadas.Prox_Nro_Pedido, modelo.Llegadas.Tiempo, modelo.Llegadas.Prox_Nro_Pedido,
+                    dtGeneral.Rows.Add(i,reloj.ToString("0.00"), evento, nro_pedido,
+                                modelo.Llegadas.Prox_Nro_Pedido, llegadasTiempo, modelo.Llegadas.Tiempo_Prox,
                                 modelo.S1.Cola.Cantidad, (modelo.S1.Ocupado ? "Ocupado" : "Libre"),
                                 modelo.S1.Nro_Pedido, modelo.S1.Tiempo, modelo.S1.TiempoProx,
                                 modelo.S2.Cola.Cantidad, (modelo.S2.Ocupado ? "Ocupado" : "Libre"),
@@ -301,7 +244,8 @@ namespace TrabajosPracticosSIM.TP_5
                                 modelo.S4.Nro_Pedido, modelo.S4.Tiempo, modelo.S4.TiempoProx,
                                 modelo.S5.Cola.Cola1.Cantidad, modelo.S5.Cola.Cola2.Cantidad, (modelo.S5.Ocupado ? "Ocupado" : "Libre"),
                                 modelo.S5.Nro_Pedido, modelo.S5.Tiempo, modelo.S5.TiempoProx,
-                                modelo.C6.Cola1.Cantidad, modelo.C6.Cola2.Cantidad);
+                                modelo.C6.Cola1.Cantidad, modelo.C6.Cola2.Cantidad,
+                                pedidos_realizados);
                     //Continuar con la segunda vuelta
                     continue;
                 }
@@ -329,14 +273,33 @@ namespace TrabajosPracticosSIM.TP_5
                 }
 
                 modelo.C6.EncastreFinal(evento);
+                
+                pedidos_realizados_anterior = pedidos_realizados;
+                pedidos_realizados = CalcularAcumuladorEnsamblesRealizados(evento, pedidos_realizados);
+
+                nro_pedido_listo = DeterminarNroPedidoRealizados(pedidos_realizados, pedidos_realizados_anterior, nro_pedido);
+
+
+                e_t_llegada_pedido = CalcularTiemposLlegadaCliente(q_tiempos_llegada_pedido, pedidos_realizados_anterior,pedidos_realizados); 
+                e_t_a1 = CalcularTiemposAct1(q_tiempos_act1, pedidos_realizados_anterior, pedidos_realizados); 
+                e_t_a2 = CalcularTiemposAct2(q_tiempos_act2, pedidos_realizados_anterior, pedidos_realizados);
+                e_t_a3 = CalcularTiemposAct3(q_tiempos_act3, pedidos_realizados_anterior, pedidos_realizados);
+                e_t_a4 = CalcularTiemposAct4(q_tiempos_act4, pedidos_realizados_anterior, pedidos_realizados);
+                e_t_a5 = CalcularTiemposAct5(q_tiempos_act5, pedidos_realizados_anterior, pedidos_realizados);
+
+                camino1 = CalcularCamino1(e_t_llegada_pedido, e_t_a1, e_t_a2, e_t_a4, e_t_a5, pedidos_realizados_anterior, pedidos_realizados); 
+                
+
 
                 //Recordar solo las que pide
                 if ((i >= 1 && i <= 20) || i % 10000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
                 {
+                    string llegadasTiempo = "";
+                    if (modelo.Llegadas.Tiempo.HasValue)
+                        llegadasTiempo = modelo.Llegadas.Tiempo.Value.ToString("0.00");
 
-
-                    dtGeneral.Rows.Add(reloj, evento, nro_pedido,
-                                modelo.Llegadas.Prox_Nro_Pedido, modelo.Llegadas.Tiempo, modelo.Llegadas.Prox_Nro_Pedido,
+                    dtGeneral.Rows.Add(i,reloj.ToString("0.00"), evento, nro_pedido,
+                                modelo.Llegadas.Prox_Nro_Pedido, llegadasTiempo, modelo.Llegadas.Tiempo_Prox,
                                 modelo.S1.Cola.Cantidad,(modelo.S1.Ocupado ? "Ocupado" : "Libre"), 
                                 modelo.S1.Nro_Pedido,modelo.S1.Tiempo,modelo.S1.TiempoProx,
                                 modelo.S2.Cola.Cantidad, (modelo.S2.Ocupado ? "Ocupado" : "Libre"),
@@ -347,7 +310,10 @@ namespace TrabajosPracticosSIM.TP_5
                                 modelo.S4.Nro_Pedido, modelo.S4.Tiempo, modelo.S4.TiempoProx,
                                 modelo.S5.Cola.Cola1.Cantidad, modelo.S5.Cola.Cola2.Cantidad, (modelo.S5.Ocupado ? "Ocupado" : "Libre"),
                                 modelo.S5.Nro_Pedido, modelo.S5.Tiempo, modelo.S5.TiempoProx,
-                                modelo.C6.Cola1.Cantidad, modelo.C6.Cola2.Cantidad) ;
+                                modelo.C6.Cola1.Cantidad, modelo.C6.Cola2.Cantidad,
+                                pedidos_realizados, nro_pedido_listo , 
+                                e_t_llegada_pedido,  e_t_a1, e_t_a2, e_t_a3, e_t_a4, e_t_a5,
+                                camino1, camino2, camino3, camino_critico) ;
 
                     
                 }
@@ -356,7 +322,210 @@ namespace TrabajosPracticosSIM.TP_5
             form.LlenarPantallaSimulacion(dtGeneral);
         }
 
-            private int? DeterminarNumeroPedido(string evento)
+        private double? CalcularCamino1(double? e_t_llegada_pedido, double? e_t_a1, double? e_t_a4, double? e_t_a5, double? e_t_a2, int pedidos_realizados_anterior, int pedidos_realizados)
+        {
+            double? maximoA2oA4;
+            if (e_t_a2.HasValue)
+            {
+                if (e_t_a4.HasValue)
+                {
+                    if(e_t_a2> e_t_a4) { 
+                        maximoA2oA4 = e_t_a2;
+                    }
+                    else
+                    {
+                        maximoA2oA4 = e_t_a4;
+                    }
+                }
+                else
+                {
+                    maximoA2oA4 = e_t_a2;
+                }
+            }
+            else
+            {
+                if (e_t_a4.HasValue)
+                {
+                    maximoA2oA4 = e_t_a4;
+                }
+                else
+                {
+                    maximoA2oA4 = null;
+                }
+            }
+            if (pedidos_realizados != pedidos_realizados_anterior)
+            {
+                return (e_t_a5 - maximoA2oA4.Value + e_t_a4 - e_t_llegada_pedido);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private void LimpiarModelo()
+        {
+            modelo.C6.ResetearCola();
+            modelo.S5.ResetearServidor();
+            modelo.S4.ResetearServidor();
+            modelo.S3.ResetearServidor();
+            modelo.S2.ResetearServidor();
+            modelo.S1.ResetearServidor();
+        }
+
+        private double? CalcularTiemposAct5(Queue<double> q_tiempos_act5, int pedidos_realizados_anterior, int pedidos_realizados)
+        {
+            if (pedidos_realizados != pedidos_realizados_anterior)
+            {
+                if (modelo.S5.Tiempo.HasValue)
+                {
+                    q_tiempos_act5.Enqueue(modelo.S5.TiempoProx.Value);
+                }
+                return q_tiempos_act5.Dequeue();
+            }
+            else
+            {
+                if (modelo.S5.Tiempo.HasValue)
+                {
+                    q_tiempos_act5.Enqueue(modelo.S5.TiempoProx.Value);
+                }
+                if (q_tiempos_act5.Count == 0)
+                {
+                    return null;
+                }
+                return q_tiempos_act5.Peek();
+            }
+        }
+
+        private double? CalcularTiemposAct4(Queue<double> q_tiempos_act4, int pedidos_realizados_anterior, int pedidos_realizados)
+        {
+            if (pedidos_realizados != pedidos_realizados_anterior)
+            {
+                return q_tiempos_act4.Dequeue();
+            }
+            else
+            {
+                if (modelo.S4.Tiempo.HasValue)
+                {
+                    q_tiempos_act4.Enqueue(modelo.S4.TiempoProx.Value);
+                }
+                if (q_tiempos_act4.Count == 0)
+                {
+                    return null;
+                }
+                return q_tiempos_act4.Peek();
+            }
+        }
+
+        private double? CalcularTiemposAct3(Queue<double> q_tiempos_act3, int pedidos_realizados_anterior, int pedidos_realizados)
+        {
+            if (pedidos_realizados != pedidos_realizados_anterior)
+            {
+                if (modelo.S3.Tiempo.HasValue)
+                {
+                    q_tiempos_act3.Enqueue(modelo.S3.TiempoProx.Value);
+                }
+                return q_tiempos_act3.Dequeue();
+            }
+            else
+            {
+                if (modelo.S3.Tiempo.HasValue)
+                {
+                    q_tiempos_act3.Enqueue(modelo.S3.TiempoProx.Value);
+                }
+                if (q_tiempos_act3.Count == 0)
+                {
+                    return null;
+                }
+                return q_tiempos_act3.Peek();
+            }
+        }
+
+        private double? CalcularTiemposAct2(Queue<double> q_tiempos_act2, int pedidos_realizados_anterior, int pedidos_realizados)
+        {
+            if (pedidos_realizados != pedidos_realizados_anterior)
+            {
+                return q_tiempos_act2.Dequeue();
+            }
+            else
+            {
+                if (modelo.S2.Tiempo.HasValue)
+                {
+                    q_tiempos_act2.Enqueue(modelo.S2.TiempoProx.Value);
+                }
+                if (q_tiempos_act2.Count == 0)
+                {
+                    return null;
+                }
+                return q_tiempos_act2.Peek();
+            }
+        }
+
+        private double? CalcularTiemposAct1(Queue<double> q_tiempos_act1, int pedidos_realizados_anterior, int pedidos_realizados)
+        {
+
+            if (pedidos_realizados != pedidos_realizados_anterior)
+            {
+                return q_tiempos_act1.Dequeue();
+            }
+            else
+            {
+                if (modelo.S1.Tiempo.HasValue)
+                {
+                    q_tiempos_act1.Enqueue(modelo.S1.TiempoProx.Value);
+                }
+                if (q_tiempos_act1.Count == 0)
+                {
+                    return null;
+                }
+                return q_tiempos_act1.Peek();
+            }
+
+        }
+
+        private double? CalcularTiemposLlegadaCliente(Queue<double> q_tiempos_llegada_pedido, int pedidos_realizados_anterior, int pedidos_realizados)
+        {
+
+            if (pedidos_realizados != pedidos_realizados_anterior)
+            {
+                return q_tiempos_llegada_pedido.Dequeue();
+            }
+            else
+            {
+                if (modelo.Llegadas.Tiempo.HasValue)
+                {
+                    q_tiempos_llegada_pedido.Enqueue(modelo.Llegadas.Tiempo_Prox.Value);
+                }
+                if (q_tiempos_llegada_pedido.Count == 0)
+                {
+                    return null;
+                }
+                return q_tiempos_llegada_pedido.Peek();
+            }
+
+        }
+
+        private int? DeterminarNroPedidoRealizados(int pedidos_realizados, int pedidos_realizados_anterior, int? nro_pedido)
+        {
+            if (pedidos_realizados != pedidos_realizados_anterior)
+                return nro_pedido;
+            return null;
+        }
+
+        private int CalcularAcumuladorEnsamblesRealizados(string evento, int pedidos_realizados)
+        {
+            if(evento == Evento.Fin_Actividad_5 && modelo.C6.Cola2.Cantidad_Anterior > 0)
+            {
+                pedidos_realizados++;
+            }
+            if (evento == Evento.Fin_Actividad_3 && modelo.C6.Cola1.Cantidad_Anterior > 0)
+            {
+                pedidos_realizados++;
+            }
+            return pedidos_realizados;
+        }
+
+        private int? DeterminarNumeroPedido(string evento)
         {
             switch (evento)
             {
@@ -436,6 +605,7 @@ namespace TrabajosPracticosSIM.TP_5
 
         private void InicializarColumnasTablas()
         {
+            dtGeneral.Columns.Add("i");
             dtGeneral.Columns.Add("reloj");
             dtGeneral.Columns.Add("evento");
             dtGeneral.Columns.Add("nro_pedido");
@@ -470,6 +640,18 @@ namespace TrabajosPracticosSIM.TP_5
             dtGeneral.Columns.Add("Prox Tiempo A5");
             dtGeneral.Columns.Add("Cola 6a (A5)");
             dtGeneral.Columns.Add("Cola 6b (A3)");
+            dtGeneral.Columns.Add("EnsamblesRealizados");
+            dtGeneral.Columns.Add("NroPedidoListo");
+            dtGeneral.Columns.Add("LlegadaCliente");
+            dtGeneral.Columns.Add("A1");
+            dtGeneral.Columns.Add("A2");
+            dtGeneral.Columns.Add("A3");
+            dtGeneral.Columns.Add("A4");
+            dtGeneral.Columns.Add("A5");
+            dtGeneral.Columns.Add("Camino 1");
+            dtGeneral.Columns.Add("Camino 2");
+            dtGeneral.Columns.Add("Camino 3");
+            dtGeneral.Columns.Add("Tiempo Ensamble/C MAX");
         }
         private void LimpiarTableDatas()
         {

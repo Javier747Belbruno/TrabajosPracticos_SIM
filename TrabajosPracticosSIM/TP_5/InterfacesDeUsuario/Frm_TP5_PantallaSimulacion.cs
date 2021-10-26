@@ -19,8 +19,8 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
 
         private void btn_simular_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 int cant_sim = Convert.ToInt32(tb_cant_sim.Text);
                 if (cant_sim <= 0)
                 {
@@ -45,12 +45,12 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
                     throw (new Exception("El parametro hasta no puede superar la cant de sim"));
                 }
                 ControladorTP5.GetInstance().OpcionIniciarSimulacion(this, cant_sim, desde, hasta);
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
-                MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                //MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
         }
 
         public void LlenarPantallaSimulacion(DataTable dt)
@@ -64,10 +64,13 @@ namespace TrabajosPracticosSIM.TP_5.InterfacesDeUsuario
 
             for (int i = 0; i < dgvSimulacion.ColumnCount; i++)
             {
-                if (i >= 1 && i <= 5 || i >= 11 && i <= 14 || i >= 11 && i <= 14 || i == 18 || i == 20 || i == 23)
-                    dgvSimulacion.Columns[i].DefaultCellStyle.BackColor = Color.LightGray;
+                if (i >= 1 && i <= 3 || i >= 7 && i <= 11 || i >= 17 && i <= 21 || i >= 27 && i <= 31 || i >= 37 && i <= 42)
+                    dgvSimulacion.Columns[i].DefaultCellStyle.BackColor = Color.LightYellow;
                 else
                     dgvSimulacion.Columns[i].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+
+                dgvSimulacion.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             }
             dgvSimulacion.EnableHeadersVisualStyles = false;
             dgvSimulacion.AllowUserToAddRows = false;
