@@ -25,14 +25,18 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             Cola1.Cantidad_Anterior = Cola1.Cantidad;
             if (evento == Cola1.EventoEncolador)
             {
-                if(Cola2.Cantidad_Anterior==0 && !estado_servidor)
+                if(Cola2.Cantidad >0 && !estado_servidor)
+                {
+                    
+                }
+                else
                 {
                     Cola1.Cantidad++;
                 }
             }
             if(evento == Cola2.EventoEncolador)
             {
-                if(Cola2.Cantidad_Anterior == 0 && 
+                if(Cola2.Cantidad == 0 && 
                     Cola1.Cantidad > 0 &&
                      !estado_servidor)
                 {
@@ -41,7 +45,11 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             }
             if(evento == Cola1.EventoDecolador)
             {
-                if (Cola1.Cantidad > 0)
+                if (Cola1.Cantidad == 0 || (Cola1.Cantidad > 0 && Cola2.Cantidad == 0))
+                {
+                    
+                }
+                else
                 {
                     Cola1.Cantidad--;
                 }
@@ -50,7 +58,11 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             Cola2.Cantidad_Anterior = Cola2.Cantidad;
             if (evento == Cola2.EventoEncolador)
             {
-                if (Cola1.Cantidad_Anterior == 0 && !estado_servidor)
+                if (Cola1.Cantidad_Anterior > 0 && !estado_servidor)
+                {
+                    
+                }
+                else
                 {
                     Cola2.Cantidad++;
                 }
@@ -66,7 +78,11 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             }
             if (evento == Cola2.EventoDecolador)
             {
-                if (Cola2.Cantidad > 0)
+                if (Cola2.Cantidad == 0 || (Cola2.Cantidad > 0 && Cola1.Cantidad_Anterior == 0))
+                {
+
+                }
+                else
                 {
                     Cola2.Cantidad--;
                 }
