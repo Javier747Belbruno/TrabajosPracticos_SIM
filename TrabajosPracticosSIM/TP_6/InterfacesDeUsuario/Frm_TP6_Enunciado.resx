@@ -117,32 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ConfigImage2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ConfigImage2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ConfigImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ConfigImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ConfigImage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ConfigImage1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SH9q-yOc_400x400" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SH9q-yOc_400x400.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Diagrama" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Diagrama.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-ms-excel-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-ms-excel-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Image_Enunciado_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Image_Enunciado_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Image_Enunciado" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Image_Enunciado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Diagrama1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Diagrama1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>                                                                                                            Trabajo Práctico 6
+
+Completando los procesos simulados del TP5 se incorpora la siguiente modificación en el proceso de encastre para la finalización del ensamble.
+La realización del encastre comienza cuando llega el segundo de los productos a encastrar (puede provenir de A3 o de A5 y se lo considerará momento cero de la ecuación diferencial) 
+y el tiempo de proceso dependerá de la ecuación diferencial de segundo orden dependiente del tiempo (t) que se describe a continuación:
+
+x" + a. x' + b.x = e^(-c.t)
+
+Valores iniciales:
+a =  Distribución Uniforme [0,5;2] (cada vez que se resuelve tomara un valor diferente con esa distribución) 
+b = 10 ; c = 5 ; h = 0,05 ;  x(0) = 0 ; x'(0) = 0
+
+El encastre se completa cuando se encuentra el segundo valor máximo positivo ocurrido en la variable x.
+Cuando finaliza el encastre finaliza la tarea de ensamble obteniendo el producto final. El encastre se realiza de a uno a la vez por lo que sí hay productos esperando a ser encastrados,
+ se comienza el encastre al haber finalizado el encastre anterior.Todos los valores iniciales deben poder modificarse por pantalla.
+
+Los gráficos pueden ser en el software o con Excel
+
+a) Simular la ecuación diferencial con Euler y con Runge Kutta. Se deberá detectar el momento de tiempo donde se encuentre el 2do pico y el valor de la variable en ese 2do pico.
+
+b) Graficar los valores de x", de x'Dx y de X en función del tiempo
+
+c) Graficar los valores de x", en función de x.
+
+d) Graficar los valores de x'en función de x.
+
+e) Graficar los valores de X", en función de x'.
+
+f) Incorporar la simulación del encastre al proceso de simulación dinámica del TP5 e indicar que modificaciones se produjeron en sus estimadores.</value>
   </data>
 </root>

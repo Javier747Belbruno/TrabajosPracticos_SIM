@@ -207,6 +207,31 @@
     <Compile Include="TP_5\InterfacesDeUsuario\Frm_TP5_Principal.Designer.cs">
       <DependentUpon>Frm_TP5_Principal.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_6\ControladorTP6.cs" />
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Enunciado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Enunciado.Designer.cs">
+      <DependentUpon>Frm_TP6_Enunciado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaPuntoAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaPuntoAE.Designer.cs">
+      <DependentUpon>Frm_TP6_PantallaPuntoAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaPuntoF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaPuntoF.Designer.cs">
+      <DependentUpon>Frm_TP6_PantallaPuntoF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Principal.Designer.cs">
+      <DependentUpon>Frm_TP6_Principal.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="TP_1\InterfacesDeUsuario\PantallaGeneracionDeNumerosAleatorios.resx">
       <DependentUpon>PantallaGeneracionDeNumerosAleatorios.cs</DependentUpon>
     </EmbeddedResource>
@@ -271,6 +296,12 @@
     <EmbeddedResource Include="TP_5\InterfacesDeUsuario\Frm_TP5_Principal.resx">
       <DependentUpon>Frm_TP5_Principal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_Enunciado.resx">
+      <DependentUpon>Frm_TP6_Enunciado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_Principal.resx">
+      <DependentUpon>Frm_TP6_Principal.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -331,7 +362,9 @@
   <ItemGroup>
     <None Include="Resources\Image_Enunciado_2.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Diagrama1.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Diagrama.png" />
   </ItemGroup>
