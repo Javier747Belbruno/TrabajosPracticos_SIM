@@ -15,6 +15,7 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
         public const string Fin_Actividad_3 = "Fin_Actividad_3";
         public const string Fin_Actividad_4 = "Fin_Actividad_4";
         public const string Fin_Actividad_5 = "Fin_Actividad_5";
+        public const string Fin_Actividad_6 = "Fin_Actividad_6";
 
     }
 }

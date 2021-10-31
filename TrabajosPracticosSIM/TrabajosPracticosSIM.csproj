@@ -208,6 +208,15 @@
       <DependentUpon>Frm_TP5_Principal.cs</DependentUpon>
     </Compile>
     <Compile Include="TP_6\ControladorTP6.cs" />
+    <Compile Include="TP_6\Entidades\IModelo.cs" />
+    <Compile Include="TP_6\Entidades\ModeloTP5.cs" />
+    <Compile Include="TP_6\Entidades\ModeloTP6.cs" />
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaSimulacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaSimulacion.Designer.cs">
+      <DependentUpon>Frm_TP6_PantallaSimulacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Enunciado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_5\InterfacesDeUsuario\Frm_TP5_Principal.resx">
       <DependentUpon>Frm_TP5_Principal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaSimulacion.resx">
+      <DependentUpon>Frm_TP6_PantallaSimulacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_Enunciado.resx">
       <DependentUpon>Frm_TP6_Enunciado.cs</DependentUpon>
