@@ -86,5 +86,51 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         {
             return -(a * x2) - (b * x1) + Math.Exp(-c*t);
         }
+
+        public double CalcularTiempo2doPicoMaximo(double a, double b, double c, double h, double x0, double dx0)
+        {
+            //Primera fila
+            double t = 0;
+            double t_Anterior = 0;
+            double x1 = x0;
+            double x1_Anterior = x0;
+            double x2 = dx0;
+            double x3 = DerivadaSegunda(a, b, c, x1, x2, t);
+
+            int contadorPicoMax = 0;
+            double valorPico = 0;
+            double valorPico_Anterior = 0;
+
+
+            while (true)
+            {
+                valorPico_Anterior = valorPico;
+                t_Anterior = t;
+                x1_Anterior = x1;
+
+
+                t = h + t;
+                x1 = x1 + h * x2;
+                x2 = x2 + h * x3;
+                x3 = DerivadaSegunda(a, b, c, x1, x2, t);
+
+                valorPico = Math.Abs(x1) / x2;
+                if (valorPico_Anterior > 0 && valorPico < 0)
+                {
+                    contadorPicoMax++;
+                    if (contadorPicoMax == 2)
+                    {
+                        if (Math.Abs(valorPico_Anterior) > Math.Abs(valorPico))
+                        {
+                            return t_Anterior;
+                        }
+                        else
+                        {
+                            return t;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

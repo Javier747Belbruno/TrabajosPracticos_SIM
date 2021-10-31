@@ -111,9 +111,74 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
 
             return dt;
         }
+
+
+
         private double DerivadaSegunda(double a, double b, double c, double x1, double x2, double t)
         {
             return -(a * x2) - (b * x1) + Math.Exp(-c * t);
+        }
+
+        public double CalcularTiempo2doPicoMaximo(double a, double b, double c, double h, double x0, double dx0)
+        {
+            //Primera fila
+            double t = 0, t_Anterior = 0;
+            double x1 = x0, x1_Anterior = x0;
+            double x2 = dx0;
+            double x3 = DerivadaSegunda(a, b, c, x1, x2, t);
+            double l1 = h * x3;
+            double k1 = h * x2;
+            double l2 = h * DerivadaSegunda(a, b, c, (x1 + 0.5 * k1), (x2 + 0.5 * l1), (t + 0.5 * h));
+            double k2 = h * (x2 + 0.5 * l1);
+            double l3 = h * DerivadaSegunda(a, b, c, (x1 + 0.5 * k2), (x2 + 0.5 * l2), (t + 0.5 * h));
+            double k3 = h * (x2 + 0.5 * l2);
+            double l4 = h * DerivadaSegunda(a, b, c, (x1 + k3), (x2 + l3), (t + h));
+            double k4 = h * (x2 + l3);
+
+
+            int contadorPicoMax = 0;
+            double valorPico = 0;
+            double valorPico_Anterior = 0;
+
+
+            while (true)
+            {
+                valorPico_Anterior = valorPico;
+                t_Anterior = t;
+                x1_Anterior = x1;
+
+
+                t = h + t;
+                x1 = x1 + (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+                x2 = x2 + (l1 + 2 * l2 + 2 * l3 + l4) / 6;
+                x3 = DerivadaSegunda(a, b, c, x1, x2, t);
+                l1 = h * x3;
+                k1 = h * x2;
+                l2 = h * DerivadaSegunda(a, b, c, (x1 + 0.5 * k1), (x2 + 0.5 * l1), (t + 0.5 * h));
+                k2 = h * (x2 + 0.5 * l1);
+                l3 = h * DerivadaSegunda(a, b, c, (x1 + 0.5 * k2), (x2 + 0.5 * l2), (t + 0.5 * h));
+                k3 = h * (x2 + 0.5 * l2);
+                l4 = h * DerivadaSegunda(a, b, c, (x1 + k3), (x2 + l3), (t + h));
+                k4 = h * (x2 + l3);
+
+
+                valorPico = Math.Abs(x1) / x2;
+                if (valorPico_Anterior > 0 && valorPico < 0)
+                {
+                    contadorPicoMax++;
+                    if (contadorPicoMax == 2)
+                    {
+                        if (Math.Abs(valorPico_Anterior) > Math.Abs(valorPico))
+                        {
+                            return t_Anterior;
+                        }
+                        else
+                        {
+                            return t;
+                        }
+                    }
+                }
+            }
         }
     }
 }
