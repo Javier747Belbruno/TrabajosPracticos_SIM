@@ -753,7 +753,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                                 C6.Cola1.Cantidad, C6.Cola2.Cantidad,
                                 pedidos_realizados, nro_pedido_listo,
                                 e_s_llegada, e_s_a1, e_s_a2, e_s_a3, e_s_a4, e_s_a5,
-                                s_camino_1, s_camino_2, s_camino_3, s_tiempo_ensamble,
+                                s_tiempo_ensamble,
                                 prom_tiempo_ensamble.ToString("0.00"),
                                 p3_pedidos_solicitados, p3_proporcion_PR_PS.ToString("0.00"),
                                 S1.Cola.P4_Cantidad_Maxima, S2.Cola.P4_Cantidad_Maxima,
