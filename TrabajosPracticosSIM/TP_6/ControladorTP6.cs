@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajosPracticosSIM.TP_4.Entidades;
 using TrabajosPracticosSIM.TP_6.Entidades;
 using TrabajosPracticosSIM.TP_6.InterfacesDeUsuario;
 
@@ -15,6 +16,8 @@ namespace TrabajosPracticosSIM.TP_6
     {
         //Instancia Unica - Patron Singleton
         private static readonly ControladorTP6 _instance = new ControladorTP6();
+
+
         //Lista de Vistas / Pantallas que controla el ControladorTP5
         private List<Form> Views = new List<Form>();
 
@@ -129,6 +132,10 @@ namespace TrabajosPracticosSIM.TP_6
         public void OpcionGraficoPuntoE()
         {
             CreateView(new Frm_TP6_GraficoTipoT(6));
+        }
+        public void OpcionConfigED()
+        {
+            CreateView(new Frm_TP6_Config_ED());
         }
         public void OpcionPedirDatosGraficoTipoT(Frm_TP6_GraficoTipoT form, int valorgrafico)
         {
@@ -402,6 +409,116 @@ namespace TrabajosPracticosSIM.TP_6
             dtGeneral.Columns.Add("p13_A3");
             dtGeneral.Columns.Add("p13_A4");
             dtGeneral.Columns.Add("p13_A5");
+        }
+
+
+        public void OpcionCargarEDConfiguracion(Frm_TP6_Config_ED form)
+        {
+            List<string> distribuciones = new List<string>();
+            var type = typeof(IDistribucion);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p) && p.IsClass && !(p.Name == "EcDiferencial"));
+
+            foreach (var item in types)
+            {
+                distribuciones.Add(item.Name);
+            }
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("PARAM");
+            dt.Columns.Add("DISTR");
+            dt.Columns.Add("PARAM1");
+            dt.Columns.Add("PARAM2");
+
+            dt.Rows.Add("a", ed.a.GetType().Name, ed.a.DevolverParam1(), ed.a.DevolverParam2());
+            dt.Rows.Add("b", ed.b.GetType().Name, ed.b.DevolverParam1(), ed.b.DevolverParam2());
+            dt.Rows.Add("c", ed.c.GetType().Name, ed.c.DevolverParam1(), ed.c.DevolverParam2());
+            dt.Rows.Add("h", ed.c.GetType().Name, ed.h.DevolverParam1(), ed.h.DevolverParam2());
+            dt.Rows.Add("x0", ed.c.GetType().Name, ed.x0.DevolverParam1(), ed.x0.DevolverParam2());
+            dt.Rows.Add("Dx0", ed.c.GetType().Name, ed.Dx0.DevolverParam1(), ed.Dx0.DevolverParam2());
+
+            form.LlenarCamposActividades(distribuciones, dt);
+        }
+        public void ActualizarED(DataTable dt)
+        {
+            //Manejar la tabla por parametro y actualizar el grafo.
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (dr[0].ToString() == "0")
+                {
+                    ed.a = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "1")
+                {
+                    ed.b = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "2")
+                {
+                    ed.c = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "3")
+                {
+                    ed.h = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "4")
+                {
+                    ed.x0 = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "5")
+                {
+                    ed.Dx0 = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+            }
+
+
+            /*foreach (var v in Views)
+            {
+                if (v.GetType().Name == "Frm_TP6_PantallaSimulacion")
+                {
+                    var vista = (Frm_TP5_PantallaSimulacion)v;
+                    OpcionCargarPanelActividades(vista);
+                }
+            }*/
+        }
+        private IDistribucion getDistribucion(string dist, string pparam1, string pparam2)
+        {
+            switch (dist)
+            {
+                case "Uniforme":
+                    double param1U = Convert.ToDouble(pparam1);
+                    double param2U = Convert.ToDouble(pparam2);
+                    Uniforme u = new Uniforme(param1U, param2U);
+                    return u;
+                case "Exponencial":
+                    double param1E = Convert.ToDouble(pparam1);
+                    Exponencial e = new Exponencial(param1E);
+                    return e;
+                case "Normal":
+                    double param1N = Convert.ToDouble(pparam1);
+                    double param2N = Convert.ToDouble(pparam2);
+                    Normal n = new Normal(param1N, param2N);
+                    return n;
+                case "Constante":
+                    double param1C = Convert.ToDouble(pparam1);
+                    Constante c = new Constante(param1C);
+                    return c;
+                default:
+                    break;
+            }
+            return null;
         }
 
     }

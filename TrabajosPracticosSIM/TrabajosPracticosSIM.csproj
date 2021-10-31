@@ -216,6 +216,12 @@
     <Compile Include="TP_6\Entidades\ModeloTP5.cs" />
     <Compile Include="TP_6\Entidades\ModeloTP6.cs" />
     <Compile Include="TP_6\Entidades\Runge-Kutta.cs" />
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Config_ED.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Config_ED.Designer.cs">
+      <DependentUpon>Frm_TP6_Config_ED.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_GraficoTipoT.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -309,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_5\InterfacesDeUsuario\Frm_TP5_Principal.resx">
       <DependentUpon>Frm_TP5_Principal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_Config_ED.resx">
+      <DependentUpon>Frm_TP6_Config_ED.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_GraficoTipoT.resx">
       <DependentUpon>Frm_TP6_GraficoTipoT.cs</DependentUpon>

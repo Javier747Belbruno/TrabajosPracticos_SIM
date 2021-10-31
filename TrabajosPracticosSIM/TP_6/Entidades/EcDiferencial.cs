@@ -14,9 +14,9 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         public IDistribucion a { get; set; } = new Uniforme(0.5, 2);
         public IDistribucion b { get; set; } = new Constante(10);
         public IDistribucion c { get; set; } = new Constante(5);
-        public double h { get; set; } = 0.05;
-        public double x0 { get; set; } = 0;
-        public double Dx0 { get; set; } = 0;
+        public IDistribucion h { get; set; } = new Constante(0.05);
+        public IDistribucion x0 { get; set; } = new Constante(0);
+        public IDistribucion Dx0 { get; set; } = new Constante(0);
         public DataTable EulerDT { get; set; } = new DataTable();
         public DataTable RKDT { get; set; } = new DataTable();
         public double a_fijo_euler { get; set; } = 1;
@@ -44,11 +44,14 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                 double a_valor = a.DevolverUnaVariableAleatoria(random);
                 double b_valor = b.DevolverUnaVariableAleatoria(random);
                 double c_valor = c.DevolverUnaVariableAleatoria(random);
+                double h_valor = h.DevolverUnaVariableAleatoria(random);
+                double x0_valor = x0.DevolverUnaVariableAleatoria(random);
+                double Dx0_valor = Dx0.DevolverUnaVariableAleatoria(random);
                 if (a_fijo_euler != a_fijo_rk)
                 {
                     a_valor = a_fijo_rk;
                 }
-                EulerDT = metodo.Calcular(a_valor, b_valor, c_valor, h,x0,Dx0);
+                EulerDT = metodo.Calcular(a_valor, b_valor, c_valor, h_valor, x0_valor,Dx0_valor);
                 a_fijo_euler = a_valor;
             }
         }
@@ -65,11 +68,14 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                 double a_valor = a.DevolverUnaVariableAleatoria(random);
                 double b_valor = b.DevolverUnaVariableAleatoria(random);
                 double c_valor = c.DevolverUnaVariableAleatoria(random);
+                double h_valor = h.DevolverUnaVariableAleatoria(random);
+                double x0_valor = x0.DevolverUnaVariableAleatoria(random);
+                double Dx0_valor = Dx0.DevolverUnaVariableAleatoria(random);
                 if (a_fijo_euler != a_fijo_rk)
                 {
                     a_valor = a_fijo_euler;
                 }
-                RKDT = metodo.Calcular(a_valor, b_valor, c_valor, h, x0, Dx0);
+                RKDT = metodo.Calcular(a_valor, b_valor, c_valor, h_valor, x0_valor, Dx0_valor);
                 a_fijo_rk = a_valor;
             }
         }
@@ -86,7 +92,9 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
 
         public int CantidadDeRandoms()
         {
-            int cantidad = a.CantidadDeRandoms() + b.CantidadDeRandoms() + c.CantidadDeRandoms();
+            int cantidad = a.CantidadDeRandoms() + b.CantidadDeRandoms()
+                + c.CantidadDeRandoms() + h.CantidadDeRandoms() + x0.CantidadDeRandoms()
+                 + Dx0.CantidadDeRandoms() ;
             return cantidad;
         }
 

@@ -121,5 +121,10 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         {
             ControladorTP6.GetInstance().OpcionGraficoPuntoE();
         }
+
+        private void btn_config_Click(object sender, EventArgs e)
+        {
+            ControladorTP6.GetInstance().OpcionConfigED();
+        }
     }
 }
