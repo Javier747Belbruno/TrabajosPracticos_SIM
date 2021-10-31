@@ -30,5 +30,10 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         {
             return valor;
         }
+
+        public int CantidadDeRandoms()
+        {
+            return 0;
+        }
     }
 }

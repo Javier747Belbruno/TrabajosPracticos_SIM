@@ -17,5 +17,6 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
         string DevolverParams();
         double DevolverParam1();
         double DevolverParam2();
+        int CantidadDeRandoms();
     }
 }
