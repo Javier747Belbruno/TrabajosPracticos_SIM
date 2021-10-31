@@ -49,6 +49,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.label1 = new System.Windows.Forms.Label();
             this.dgvSimulacion = new System.Windows.Forms.DataGridView();
             this.btn_simular = new System.Windows.Forms.Button();
+            this.cmb_tipo_modelo = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.pnl_Actividades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).BeginInit();
@@ -60,6 +61,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cmb_tipo_modelo);
             this.panel1.Controls.Add(this.tb_param_p11);
             this.panel1.Controls.Add(this.lb_param_p11);
             this.panel1.Controls.Add(this.tb_hasta);
@@ -70,14 +72,14 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(12, 29);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(334, 247);
+            this.panel1.Size = new System.Drawing.Size(334, 264);
             this.panel1.TabIndex = 12;
             // 
             // tb_param_p11
             // 
-            this.tb_param_p11.Location = new System.Drawing.Point(144, 203);
+            this.tb_param_p11.Location = new System.Drawing.Point(146, 228);
             this.tb_param_p11.Name = "tb_param_p11";
             this.tb_param_p11.Size = new System.Drawing.Size(145, 26);
             this.tb_param_p11.TabIndex = 17;
@@ -87,7 +89,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // 
             this.lb_param_p11.AutoSize = true;
             this.lb_param_p11.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_param_p11.Location = new System.Drawing.Point(11, 204);
+            this.lb_param_p11.Location = new System.Drawing.Point(13, 229);
             this.lb_param_p11.Name = "lb_param_p11";
             this.lb_param_p11.Size = new System.Drawing.Size(115, 21);
             this.lb_param_p11.TabIndex = 16;
@@ -95,7 +97,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // 
             // tb_hasta
             // 
-            this.tb_hasta.Location = new System.Drawing.Point(142, 149);
+            this.tb_hasta.Location = new System.Drawing.Point(144, 174);
             this.tb_hasta.Name = "tb_hasta";
             this.tb_hasta.Size = new System.Drawing.Size(145, 26);
             this.tb_hasta.TabIndex = 15;
@@ -103,7 +105,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // 
             // tb_desde
             // 
-            this.tb_desde.Location = new System.Drawing.Point(142, 117);
+            this.tb_desde.Location = new System.Drawing.Point(144, 142);
             this.tb_desde.Name = "tb_desde";
             this.tb_desde.Size = new System.Drawing.Size(145, 26);
             this.tb_desde.TabIndex = 14;
@@ -113,7 +115,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(55, 152);
+            this.label6.Location = new System.Drawing.Point(57, 177);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 21);
             this.label6.TabIndex = 13;
@@ -123,7 +125,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(55, 126);
+            this.label7.Location = new System.Drawing.Point(57, 151);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 21);
             this.label7.TabIndex = 12;
@@ -131,7 +133,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // 
             // tb_cant_sim
             // 
-            this.tb_cant_sim.Location = new System.Drawing.Point(142, 60);
+            this.tb_cant_sim.Location = new System.Drawing.Point(144, 85);
             this.tb_cant_sim.Name = "tb_cant_sim";
             this.tb_cant_sim.Size = new System.Drawing.Size(145, 26);
             this.tb_cant_sim.TabIndex = 11;
@@ -141,7 +143,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 77);
+            this.label5.Location = new System.Drawing.Point(5, 102);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(134, 21);
             this.label5.TabIndex = 10;
@@ -151,7 +153,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 60);
+            this.label4.Location = new System.Drawing.Point(5, 85);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 21);
             this.label4.TabIndex = 9;
@@ -265,6 +267,14 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.btn_simular.UseVisualStyleBackColor = true;
             this.btn_simular.Click += new System.EventHandler(this.btn_simular_Click);
             // 
+            // cmb_tipo_modelo
+            // 
+            this.cmb_tipo_modelo.FormattingEnabled = true;
+            this.cmb_tipo_modelo.Location = new System.Drawing.Point(9, 42);
+            this.cmb_tipo_modelo.Name = "cmb_tipo_modelo";
+            this.cmb_tipo_modelo.Size = new System.Drawing.Size(280, 26);
+            this.cmb_tipo_modelo.TabIndex = 18;
+            // 
             // Frm_TP6_PantallaSimulacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -313,5 +323,6 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         private System.Windows.Forms.Button btn_simular;
         private System.Windows.Forms.TextBox tb_param_p11;
         private System.Windows.Forms.Label lb_param_p11;
+        private System.Windows.Forms.ComboBox cmb_tipo_modelo;
     }
 }

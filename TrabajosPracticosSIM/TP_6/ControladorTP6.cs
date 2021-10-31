@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_4.Entidades;
 using TrabajosPracticosSIM.TP_5.Entidades;
@@ -18,15 +16,12 @@ namespace TrabajosPracticosSIM.TP_6
         //Instancia Unica - Patron Singleton
         private static readonly ControladorTP6 _instance = new ControladorTP6();
 
-     
-    
-
-
         //Lista de Vistas / Pantallas que controla el ControladorTP5
         private List<Form> Views = new List<Form>();
 
+        //Objeto Ecuacion Diferencial
         private EcDiferencial ed = new EcDiferencial();
-
+        //Objeto Modelo
         private IModelo modelo;
 
         //TABLA ACTIVIDADES
@@ -236,20 +231,22 @@ namespace TrabajosPracticosSIM.TP_6
 
 
 
-        public void OpcionIniciarSimulacion(Frm_TP6_PantallaSimulacion form, int cant_sim, int desde, int hasta, int param_punto_11)
+        public void OpcionIniciarSimulacion(Frm_TP6_PantallaSimulacion form, int tipo_modelo, int cant_sim, int desde, int hasta, int param_punto_11)
         {
 
-
-            if(modelo == null)
+            if(tipo_modelo == 0 && modelo == null || tipo_modelo == 0 && modelo is ModeloTP6)
+            {
+                modelo = new ModeloTP5();
+            }
+            if (tipo_modelo == 1 && modelo == null || tipo_modelo == 1 && modelo is ModeloTP5)
             {
                 //Pasarle la ecuacion diferencial al modelo
                 modelo = new ModeloTP6(ed);
-                
             }
-            String tipomodelo = "TP6";
+            
             //TABLA GENERAL
             DataTable dtGeneral = new DataTable();
-            InicializarColumnasTablas(tipomodelo,ref dtGeneral);
+            InicializarColumnasTablas(tipo_modelo, ref dtGeneral);
             modelo.ResetearValores();
 
             #region SIMULACION
@@ -318,7 +315,7 @@ namespace TrabajosPracticosSIM.TP_6
             }
             #endregion
 
-            form.LlenarPantallaSimulacion(dtGeneral);
+            form.LlenarPantallaSimulacion(dtGeneral, tipo_modelo);
         }
 
         public void ActualizarActividades(DataTable dtActividadesActualizadas)
@@ -389,7 +386,7 @@ namespace TrabajosPracticosSIM.TP_6
             form.LlenarGridViewActividades(dtActividadesPantalla);
         }
 
-        private void InicializarColumnasTablas(string modelo,ref DataTable dtGeneral)
+        private void InicializarColumnasTablas(int modelo,ref DataTable dtGeneral)
         {
             if(dtActividadesPantalla.Columns.Count == 0)
             {
@@ -433,7 +430,7 @@ namespace TrabajosPracticosSIM.TP_6
             dtGeneral.Columns.Add("Prox Tiempo A5");
             dtGeneral.Columns.Add("Cola 6a (A5)");
             dtGeneral.Columns.Add("Cola 6b (A3)");
-            if(modelo == "TP6")
+            if(modelo == 1)
             {
                 dtGeneral.Columns.Add("Estado Servidor 6");
                 dtGeneral.Columns.Add("Nro Pedido en At 6");
@@ -448,7 +445,7 @@ namespace TrabajosPracticosSIM.TP_6
             dtGeneral.Columns.Add("A3");
             dtGeneral.Columns.Add("A4");
             dtGeneral.Columns.Add("A5");
-            if (modelo == "TP6")
+            if (modelo == 1)
             {
                 dtGeneral.Columns.Add("A6");
             }
@@ -481,7 +478,7 @@ namespace TrabajosPracticosSIM.TP_6
             dtGeneral.Columns.Add("Porcentaje Ocupado S3");
             dtGeneral.Columns.Add("Porcentaje Ocupado S4");
             dtGeneral.Columns.Add("Porcentaje Ocupado S5");
-            if (modelo == "TP6")
+            if (modelo == 1)
             {
                 dtGeneral.Columns.Add("Porcentaje Ocupado S6");
             }
@@ -573,16 +570,6 @@ namespace TrabajosPracticosSIM.TP_6
                                                                 dr[3].ToString());
                 }
             }
-
-
-            /*foreach (var v in Views)
-            {
-                if (v.GetType().Name == "Frm_TP6_PantallaSimulacion")
-                {
-                    var vista = (Frm_TP5_PantallaSimulacion)v;
-                    OpcionCargarPanelActividades(vista);
-                }
-            }*/
         }
         private IDistribucion getDistribucion(string dist, string pparam1, string pparam2)
         {

@@ -22,10 +22,31 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         public double a_fijo_euler { get; set; } = 1;
         public double a_fijo_rk { get; set; } = 1;
 
-
+        /// <summary>
+        /// Calcular el tiempo del segundo pico maximo con Runge Kutta.
+        /// </summary>
+        /// <param name="random"></param>
+        /// <returns></returns>
         public double DevolverUnaVariableAleatoria(Queue<double> random)
         {
-            return a.DevolverUnaVariableAleatoria(random);
+            double variable_aleatoria = 0;
+            if (metodo is Euler)
+            {
+                metodo = new Runge_Kutta();
+            }
+            if (metodo is Runge_Kutta)
+            {
+                random = GenerarRandoms();
+                double a_valor = a.DevolverUnaVariableAleatoria(random);
+                double b_valor = b.DevolverUnaVariableAleatoria(random);
+                double c_valor = c.DevolverUnaVariableAleatoria(random);
+                double h_valor = h.DevolverUnaVariableAleatoria(random);
+                double x0_valor = x0.DevolverUnaVariableAleatoria(random);
+                double Dx0_valor = Dx0.DevolverUnaVariableAleatoria(random);
+
+                variable_aleatoria = metodo.CalcularTiempo2doPicoMaximo(a_valor, b_valor, c_valor, h_valor, x0_valor, Dx0_valor);
+            }
+            return variable_aleatoria;
         }
         /// <summary>
         /// MMMM
