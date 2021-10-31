@@ -177,7 +177,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         }
         private void IniciarServidor6()
         {
-            S6.Distr = new Exponencial(5);
+            S6.Distr = new EcDiferencial();
             S6.Cola.Cola1.EventoEncolador = Evento.Fin_Actividad_5;
             S6.Cola.Cola1.EventoDecolador = Evento.Fin_Actividad_6;
             S6.Cola.Cola2.EventoEncolador = Evento.Fin_Actividad_3;
@@ -498,11 +498,11 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             camino3 = camino1;
         }
 
-        private double? CalcularCamino1(double? e_t_llegada_pedido, double? e_t_a5, int pedidos_realizados_anterior, int pedidos_realizados)
+        private double? CalcularCamino1(double? e_t_llegada_pedido, double? e_t_a6, int pedidos_realizados_anterior, int pedidos_realizados)
         {
             if (pedidos_realizados != pedidos_realizados_anterior)
             {
-                return (e_t_a5 - e_t_llegada_pedido);
+                return (e_t_a6 - e_t_llegada_pedido);
             }
             else
             {
@@ -658,22 +658,18 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         }
         public void CalcularPunto13()
         {
-            p13_camino_critico = DeterminarCaminoCritico(pedidos_realizados, pedidos_realizados_anterior, tiempo_ensamble, camino1, camino3, e_t_a2, e_t_a4);
+            p13_camino_critico = DeterminarCaminoCritico(pedidos_realizados, pedidos_realizados_anterior, tiempo_ensamble, camino1, e_t_a2, e_t_a4, e_t_a5, e_t_a3);
             p13_a1 = CalcularProporcionCaminoCritico(p13_camino_critico, "C1", pedidos_realizados, p13_a1);
             p13_a2 = CalcularProporcionCaminoCritico(p13_camino_critico, "C2", pedidos_realizados, p13_a2);
             p13_a3 = CalcularProporcionCaminoCritico(p13_camino_critico, "C3", pedidos_realizados, p13_a3);
             p13_a4 = CalcularProporcionCaminoCritico(p13_camino_critico, "C1", pedidos_realizados, p13_a4);
             p13_a5 = CalcularProporcionCaminoCriticoA5(p13_camino_critico, "C1", "C2", pedidos_realizados, p13_a5);
         }
-        private string DeterminarCaminoCritico(int pedidos_realizados, int pedidos_realizados_anterior, double? tiempo_ensamble, double? camino1, double? camino3, double? e_t_a2, double? e_t_a4)
+        private string DeterminarCaminoCritico(int pedidos_realizados, int pedidos_realizados_anterior, double? tiempo_ensamble, double? camino1, double? e_t_a2, double? e_t_a4, double? e_t_a5, double? e_t_a3)
         {
             if (pedidos_realizados != pedidos_realizados_anterior)
             {
-                if (tiempo_ensamble == camino3)
-                {
-                    return "C3";
-                }
-                if (tiempo_ensamble == camino1)
+                if (e_t_a5 > e_t_a3)
                 {
                     if (e_t_a2 > e_t_a4)
                     {
@@ -684,9 +680,12 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                         return "C1";
                     }
                 }
+                else
+                {
+                    return "C3";
+                }
             }
             return "-";
-
         }
         private double CalcularProporcionCaminoCriticoA5(string p13_camino_critico, string caminoPredeterminado1, string caminoPredeterminado2, int pedidos_realizados, double p13_a5)
         {
@@ -773,7 +772,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                                 S6.Nro_Pedido, S6Tiempo, S6ProxTiempo,
                                 pedidos_realizados, nro_pedido_listo,
                                 e_s_llegada, e_s_a1, e_s_a2, e_s_a3, e_s_a4, e_s_a5, e_s_a6,
-                                s_camino_1, s_camino_2, s_camino_3, s_tiempo_ensamble,
+                                s_tiempo_ensamble,
                                 prom_tiempo_ensamble.ToString("0.00"),
                                 p3_pedidos_solicitados, p3_proporcion_PR_PS.ToString("0.00"),
                                 S1.Cola.P4_Cantidad_Maxima, S2.Cola.P4_Cantidad_Maxima,

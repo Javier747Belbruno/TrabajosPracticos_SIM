@@ -227,10 +227,7 @@ namespace TrabajosPracticosSIM.TP_6
             {
                 dtGeneral.Columns.Add("A6");
             }
-            dtGeneral.Columns.Add("Camino 1");
-            dtGeneral.Columns.Add("Camino 2");
-            dtGeneral.Columns.Add("Camino 3");
-            dtGeneral.Columns.Add("Tiempo Ensamble/C MAX");
+            dtGeneral.Columns.Add("Tiempo Ensamble");
             dtGeneral.Columns.Add("Prom Tiempo Ensamble");
             dtGeneral.Columns.Add("Pedidos Solicitados");
             dtGeneral.Columns.Add("Proporcion PR - PS");
