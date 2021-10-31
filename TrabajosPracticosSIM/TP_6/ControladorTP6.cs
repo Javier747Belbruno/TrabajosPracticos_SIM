@@ -17,13 +17,19 @@ namespace TrabajosPracticosSIM.TP_6
         //Lista de Vistas / Pantallas que controla el ControladorTP5
         private List<Form> Views = new List<Form>();
 
-
+        private EcDiferencial ed = new EcDiferencial();
 
         //Constructor Privado.
         private ControladorTP6()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+        }
+
+        public void CalcularEuler(Frm_TP6_PantallaPuntoAE form)
+        {
+            ed.CalcularEuler();
+            //form.LlenarDatosEuler(); 
         }
 
         // Devolver instancia estática única.

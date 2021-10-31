@@ -1,5 +1,4 @@
 ﻿using System;
-using TrabajosPracticosSIM.TP_4;
 using TrabajosPracticosSIM.TP_6;
 
 namespace TrabajosPracticosSIM

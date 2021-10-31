@@ -43,5 +43,9 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             return B;
         }
 
+        public int CantidadDeRandoms()
+        {
+            return 1;
+        }
     }
 }

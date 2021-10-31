@@ -37,5 +37,10 @@ namespace TrabajosPracticosSIM.TP_4.Entidades
             //Lamdba
             return 1 / Media;
         }
+
+        public int CantidadDeRandoms()
+        {
+            return 1;
+        }
     }
 }

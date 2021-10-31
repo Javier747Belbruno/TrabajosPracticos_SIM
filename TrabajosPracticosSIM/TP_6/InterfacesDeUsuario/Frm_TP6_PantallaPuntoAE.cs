@@ -15,6 +15,18 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         public Frm_TP6_PantallaPuntoAE()
         {
             InitializeComponent();
+            IniciarPantalla();
+        }
+        public void IniciarPantalla()
+        {
+            pnl_euler.Visible = false;
+            pnl_rk.Visible = false;
+            pnl_graficos.Visible = false;
+        }
+
+        private void btn_euler_Click(object sender, EventArgs e)
+        {
+            ControladorTP6.GetInstance().CalcularEuler(this);
         }
     }
 }
