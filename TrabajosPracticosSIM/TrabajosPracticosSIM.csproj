@@ -229,12 +229,6 @@
     <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaPuntoAE.Designer.cs">
       <DependentUpon>Frm_TP6_PantallaPuntoAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaPuntoF.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_PantallaPuntoF.Designer.cs">
-      <DependentUpon>Frm_TP6_PantallaPuntoF.cs</DependentUpon>
-    </Compile>
     <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Principal.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -33,8 +33,8 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
 
         private void btn_simular_Click(object sender, EventArgs e)
         {
-            try
-            {
+            /*try
+            {*/
                 int cant_sim = Convert.ToInt32(tb_cant_sim.Text);
                 if (cant_sim <= 0)
                 {
@@ -68,11 +68,11 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
                     throw (new Exception("El parametro punto 11 no puede ser negativo"));
                 }
                 ControladorTP6.GetInstance().OpcionIniciarSimulacion(this, cant_sim, desde, hasta, param_punto_11);
-            }
+            /*}
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            }*/
         }
 
         public void LlenarGridViewActividades(DataTable dtActividadesPantalla)

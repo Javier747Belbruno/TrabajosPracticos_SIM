@@ -208,6 +208,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             double? t4 = S3.TiempoProx;
             double? t5 = S4.TiempoProx;
             double? t6 = S5.TiempoProx;
+            double? t7 = S6.TiempoProx;
 
             if (t1.HasValue)
             {
@@ -232,6 +233,10 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             if (t6.HasValue)
             {
                 proximos_tiempos.Add((double)t6);
+            }
+            if (t7.HasValue)
+            {
+                proximos_tiempos.Add((double)t7);
             }
             proximos_tiempos.Sort();
 
@@ -344,7 +349,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             }
             else
             {
-                if (S5.Tiempo.HasValue)
+                if (S6.Tiempo.HasValue)
                 {
                     q_tiempos_act6.Enqueue(S6.TiempoProx.Value);
                 }
