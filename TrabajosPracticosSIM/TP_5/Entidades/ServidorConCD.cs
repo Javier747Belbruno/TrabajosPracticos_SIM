@@ -30,10 +30,16 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
         {
             Cola.ResetearCola();
             Ocupado = false;
+            Ocupado_Anterior = false;
             Nro_Pedido = null;
+            Nro_Pedido_Anterior = null;
             Random = null;
             Tiempo = null;
             TiempoProx = null;
+            P8_Tiempo_Ocupado_Acumulado = 0;
+            P8_Porcentaje_Tiempo_Ocupado = 0;
+            P9_Tiempo_Bloqueado_Acumulado = 0;
+            P9_Proporcion_Bloqueado_Ocupado = 0;
         }
 
         public void CalcularCola(string evento)

@@ -101,6 +101,10 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                 {
                     break;
                 }
+                if (dt.Rows.Count > 1000)
+                {
+                    throw new Exception("La ecuación diferencial no converge en 0, Cambiar parámetros, Por Favor");
+                }
             }
 
             dt.Rows.Add(t_2do_pico.ToString("0.00"), x1_2do_pico.ToString("0.0000"), a.ToString("0.0000"), "");

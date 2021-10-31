@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajosPracticosSIM.TP_4.Entidades;
+using TrabajosPracticosSIM.TP_5.Entidades;
 using TrabajosPracticosSIM.TP_6.Entidades;
 using TrabajosPracticosSIM.TP_6.InterfacesDeUsuario;
 
@@ -17,11 +18,19 @@ namespace TrabajosPracticosSIM.TP_6
         //Instancia Unica - Patron Singleton
         private static readonly ControladorTP6 _instance = new ControladorTP6();
 
+     
+    
+
 
         //Lista de Vistas / Pantallas que controla el ControladorTP5
         private List<Form> Views = new List<Form>();
 
         private EcDiferencial ed = new EcDiferencial();
+
+        private IModelo modelo;
+
+        //TABLA ACTIVIDADES
+        DataTable dtActividadesPantalla = new DataTable();
 
         //Constructor Privado.
         private ControladorTP6()
@@ -35,8 +44,6 @@ namespace TrabajosPracticosSIM.TP_6
             ed.CalcularEuler();
             form.LlenarDatosEuler(ed.EulerDT); 
         }
-
-
 
         public void CalcularRK(Frm_TP6_PantallaPuntoAE form)
         {
@@ -137,6 +144,10 @@ namespace TrabajosPracticosSIM.TP_6
         {
             CreateView(new Frm_TP6_Config_ED());
         }
+        public void OpcionPantallaConfiguracion()
+        {
+            CreateView(new Frm_TP6_Config_Actividades());
+        }
         public void OpcionPedirDatosGraficoTipoT(Frm_TP6_GraficoTipoT form, int valorgrafico)
         {
             ArrayList EjeXEuler = null;
@@ -222,16 +233,24 @@ namespace TrabajosPracticosSIM.TP_6
             
 
         }
+
+
+
         public void OpcionIniciarSimulacion(Frm_TP6_PantallaSimulacion form, int cant_sim, int desde, int hasta, int param_punto_11)
         {
 
 
-            IModelo modelo;
-            modelo = new ModeloTP6();
+            if(modelo == null)
+            {
+                //Pasarle la ecuacion diferencial al modelo
+                modelo = new ModeloTP6(ed);
+                
+            }
             String tipomodelo = "TP6";
             //TABLA GENERAL
             DataTable dtGeneral = new DataTable();
             InicializarColumnasTablas(tipomodelo,ref dtGeneral);
+            modelo.ResetearValores();
 
             #region SIMULACION
             for (int i = 1; i <= cant_sim; i++)
@@ -302,10 +321,82 @@ namespace TrabajosPracticosSIM.TP_6
             form.LlenarPantallaSimulacion(dtGeneral);
         }
 
+        public void ActualizarActividades(DataTable dtActividadesActualizadas)
+        {
+           //Manejar la tabla por parametro y actualizar el grafo.
+            foreach (DataRow dr in dtActividadesActualizadas.Rows)
+            {
+                if (dr[0].ToString() == "0")
+                {
+                    modelo.Llegadas.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "1")
+                {
+                    modelo.S1.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "2")
+                {
+                    modelo.S2.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "3")
+                {
+                    modelo.S3.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "4")
+                {
+                    modelo.S4.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "5")
+                {
+                    modelo.S5.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
 
+            }
+
+
+            foreach (var v in Views)
+            {
+                if (v.GetType().Name == "Frm_TP6_PantallaSimulacion")
+                {
+                    var vista = (Frm_TP6_PantallaSimulacion)v;
+                    OpcionCargarPanelActividades(vista);
+                }
+            }
+         }
+
+        public void OpcionCargarPanelActividades(Frm_TP6_PantallaSimulacion form)
+        {
+            dtActividadesPantalla.Clear();
+
+            dtActividadesPantalla.Rows.Add("Lleg", modelo.Llegadas.Distr.GetType().Name, modelo.Llegadas.Distr.DevolverParams());
+            var i = 1;
+            foreach (IServidor s in modelo.ListaServidores)
+            {
+                dtActividadesPantalla.Rows.Add("S" + i, s.Distr.GetType().Name, s.Distr.DevolverParams()); i++;
+            }
+            form.LlenarGridViewActividades(dtActividadesPantalla);
+        }
 
         private void InicializarColumnasTablas(string modelo,ref DataTable dtGeneral)
         {
+            if(dtActividadesPantalla.Columns.Count == 0)
+            {
+                dtActividadesPantalla.Columns.Add("SERV");
+                dtActividadesPantalla.Columns.Add("DISTR");
+                dtActividadesPantalla.Columns.Add("PARAMS");
+            }
 
             dtGeneral.Columns.Add("i");
             dtGeneral.Columns.Add("Reloj");
@@ -519,6 +610,35 @@ namespace TrabajosPracticosSIM.TP_6
                     break;
             }
             return null;
+        }
+        public void OpcionCargarActividadesConfiguracion(Frm_TP6_Config_Actividades form)
+        {
+            List<string> distribuciones = new List<string>();
+            var type = typeof(IDistribucion);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p) && p.IsClass);
+
+            foreach (var item in types)
+            {
+                distribuciones.Add(item.Name);
+            }
+
+
+            DataTable dtActividades = new DataTable();
+            dtActividades.Columns.Add("SERV");
+            dtActividades.Columns.Add("DISTR");
+            dtActividades.Columns.Add("PARAM1");
+            dtActividades.Columns.Add("PARAM2");
+
+            dtActividades.Rows.Add("Lleg", modelo.Llegadas.Distr.GetType().Name, modelo.Llegadas.Distr.DevolverParam1(), modelo.Llegadas.Distr.DevolverParam2());
+            var i = 1;
+            foreach (IServidor s in modelo.ListaServidores)
+            {
+                dtActividades.Rows.Add("S" + i, s.Distr.GetType().Name, s.Distr.DevolverParam1(), s.Distr.DevolverParam2()); i++;
+            }
+
+            form.LlenarCamposActividades(distribuciones, dtActividades);
         }
 
     }

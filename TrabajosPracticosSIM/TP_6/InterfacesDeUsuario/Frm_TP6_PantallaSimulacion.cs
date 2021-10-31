@@ -16,7 +16,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         {
             InitializeComponent();
             CargarTextBoxes();
-            CargarPanelActividades();
+            OcultarPanelActividades();
         }
         private void CargarTextBoxes()
         {
@@ -26,16 +26,18 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             tb_param_p11.Text = "3";
         }
 
-        private void CargarPanelActividades()
+        private void OcultarPanelActividades()
         {
-            //ControladorTP5.GetInstance().OpcionCargarPanelActividades(this);
+            pnl_Actividades.Visible = false;
+            pnl_Config.Visible = false;
         }
 
         private void btn_simular_Click(object sender, EventArgs e)
         {
+
             /*try
             {*/
-                int cant_sim = Convert.ToInt32(tb_cant_sim.Text);
+            int cant_sim = Convert.ToInt32(tb_cant_sim.Text);
                 if (cant_sim <= 0)
                 {
                     throw (new Exception("La cantidad de simulaciones debe ser mayor que 0"));
@@ -68,6 +70,10 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
                     throw (new Exception("El parametro punto 11 no puede ser negativo"));
                 }
                 ControladorTP6.GetInstance().OpcionIniciarSimulacion(this, cant_sim, desde, hasta, param_punto_11);
+
+                pnl_Actividades.Visible = true;
+                pnl_Config.Visible = true;
+                ControladorTP6.GetInstance().OpcionCargarPanelActividades(this);
             /*}
             catch (Exception ex)
             {
@@ -117,7 +123,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
 
         private void btn_config_Click(object sender, EventArgs e)
         {
-            //ControladorTP5.GetInstance().OpcionPantallaConfiguracion();
+            ControladorTP6.GetInstance().OpcionPantallaConfiguracion();
         }
     }
 }

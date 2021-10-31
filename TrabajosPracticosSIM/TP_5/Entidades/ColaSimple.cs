@@ -25,6 +25,7 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
         public void ResetearCola()
         {
             Cantidad = 0;
+            Cantidad_Anterior = 0;
             P4_Cantidad_Maxima = 0;
             P5_Tiempo_Acumulado = 0;
             P5_Tiempo_Promedio = 0;

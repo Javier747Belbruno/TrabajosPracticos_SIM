@@ -26,10 +26,16 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
 
         private void btn_euler_Click(object sender, EventArgs e)
         {
-            pnl_euler.Visible = true;
-            pnl_graficos.Visible = true;
-      
-            ControladorTP6.GetInstance().CalcularEuler(this);
+            try
+            {
+                pnl_euler.Visible = true;
+                pnl_graficos.Visible = true;
+                ControladorTP6.GetInstance().CalcularEuler(this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         public void LlenarDatosEuler(DataTable dt)
@@ -86,10 +92,16 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
 
         private void btn_rk_Click(object sender, EventArgs e)
         {
-            pnl_rk.Visible = true;
-            pnl_graficos.Visible = true;
-
-            ControladorTP6.GetInstance().CalcularRK(this);
+            try
+            {
+                pnl_rk.Visible = true;
+                pnl_graficos.Visible = true;
+                ControladorTP6.GetInstance().CalcularRK(this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_punto_b_x_t_Click(object sender, EventArgs e)

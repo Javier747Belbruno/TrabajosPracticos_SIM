@@ -4,11 +4,20 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrabajosPracticosSIM.TP_5.Entidades;
 
 namespace TrabajosPracticosSIM.TP_6.Entidades
 {
     public interface IModelo
     {
+        Llegadas Llegadas { get; }
+        List<IServidor> ListaServidores { get; }
+        ServidorConCS S1 { get; }
+        ServidorConCS S2 { get; }
+        ServidorConCS S3 { get; }
+        ServidorConCS S4 { get; }
+        ServidorConCD S5 { get; }
+
         void CalcularReloj();
 
         void CalcularEvento();
@@ -56,5 +65,6 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         void AgregarFila(int i, ref DataTable dtGeneral);
 
         void GuardarLlegadaPedido();
+        void ResetearValores();
     }
 }

@@ -27,9 +27,13 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         {
             return a.DevolverUnaVariableAleatoria(random);
         }
+        /// <summary>
+        /// MMMM
+        /// </summary>
+        /// <returns></returns>
         public double DevolverParam1()
         {
-            throw new NotImplementedException();
+            return a_fijo_euler;
         }
 
         public void CalcularEuler()
@@ -82,12 +86,13 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
 
         public double DevolverParam2()
         {
-            throw new NotImplementedException();
+            return a_fijo_euler;
         }
 
         public string DevolverParams()
         {
-            throw new NotImplementedException();
+            return a.DevolverParams()+" "+ b.DevolverParams() + " " + c.DevolverParams() 
+                + " " + h.DevolverParams() + " " + x0.DevolverParams() + " " + Dx0.DevolverParams();
         }
 
         public int CantidadDeRandoms()
