@@ -19,6 +19,8 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         public double Dx0 { get; set; } = 0;
         public DataTable EulerDT { get; set; } = new DataTable();
         public DataTable RKDT { get; set; } = new DataTable();
+        public double a_fijo_euler { get; set; } = 1;
+        public double a_fijo_rk { get; set; } = 1;
 
 
         public double DevolverUnaVariableAleatoria(Queue<double> random)
@@ -42,7 +44,33 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                 double a_valor = a.DevolverUnaVariableAleatoria(random);
                 double b_valor = b.DevolverUnaVariableAleatoria(random);
                 double c_valor = c.DevolverUnaVariableAleatoria(random);
+                if (a_fijo_euler != a_fijo_rk)
+                {
+                    a_valor = a_fijo_rk;
+                }
                 EulerDT = metodo.Calcular(a_valor, b_valor, c_valor, h,x0,Dx0);
+                a_fijo_euler = a_valor;
+            }
+        }
+
+        public void CalcularRK()
+        {
+            if (metodo is Euler)
+            {
+                metodo = new Runge_Kutta();
+            }
+            if (metodo is Runge_Kutta)
+            {
+                Queue<double> random = GenerarRandoms();
+                double a_valor = a.DevolverUnaVariableAleatoria(random);
+                double b_valor = b.DevolverUnaVariableAleatoria(random);
+                double c_valor = c.DevolverUnaVariableAleatoria(random);
+                if (a_fijo_euler != a_fijo_rk)
+                {
+                    a_valor = a_fijo_euler;
+                }
+                RKDT = metodo.Calcular(a_valor, b_valor, c_valor, h, x0, Dx0);
+                a_fijo_rk = a_valor;
             }
         }
 

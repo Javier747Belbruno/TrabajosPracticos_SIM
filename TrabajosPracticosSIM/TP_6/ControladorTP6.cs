@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -29,7 +30,15 @@ namespace TrabajosPracticosSIM.TP_6
         public void CalcularEuler(Frm_TP6_PantallaPuntoAE form)
         {
             ed.CalcularEuler();
-            //form.LlenarDatosEuler(); 
+            form.LlenarDatosEuler(ed.EulerDT); 
+        }
+
+
+
+        public void CalcularRK(Frm_TP6_PantallaPuntoAE form)
+        {
+            ed.CalcularRK();
+            form.LlenarDatosRK(ed.RKDT);
         }
 
         // Devolver instancia estática única.
@@ -96,6 +105,115 @@ namespace TrabajosPracticosSIM.TP_6
         public void OpcionPuntoF()
         {
             CreateView(new Frm_TP6_PantallaSimulacion());
+        }
+        public void OpcionGraficoPuntoBXdeT()
+        {
+            CreateView(new Frm_TP6_GraficoTipoT(1));
+        }
+        public void OpcionGraficoPuntoBDXdeT()
+        {
+            CreateView(new Frm_TP6_GraficoTipoT(2));
+        }
+        public void OpcionGraficoPuntoBDDXdeT()
+        {
+            CreateView(new Frm_TP6_GraficoTipoT(3));
+        }
+        public void OpcionGraficoPuntoC()
+        {
+            CreateView(new Frm_TP6_GraficoTipoT(4));
+        }
+        public void OpcionGraficoPuntoD()
+        {
+            CreateView(new Frm_TP6_GraficoTipoT(5));
+        }
+        public void OpcionGraficoPuntoE()
+        {
+            CreateView(new Frm_TP6_GraficoTipoT(6));
+        }
+        public void OpcionPedirDatosGraficoTipoT(Frm_TP6_GraficoTipoT form, int valorgrafico)
+        {
+            ArrayList EjeXEuler = null;
+            ArrayList EjeYEuler = null;
+            ArrayList EjeXRK = null;
+            ArrayList EjeYRK = null;
+            int columnaXEuler = 0;
+            int columnaYEuler = 0;
+            int columnaXRK = 0;
+            int columnaYRK = 0;
+            if (valorgrafico == 1)//x en funcion de t
+            {
+                columnaXEuler = 0;
+                columnaYEuler = 1;
+                columnaXRK = 0;
+                columnaYRK = 1;
+            }
+            if (valorgrafico == 2)//x' en funcion de t
+            {
+                columnaXEuler = 0;
+                columnaYEuler = 2;
+                columnaXRK = 0;
+                columnaYRK = 6;
+            }
+            if (valorgrafico == 3)//x'' en funcion de t
+            {
+                columnaXEuler = 0;
+                columnaYEuler = 3;
+                columnaXRK = 0;
+                columnaYRK = 11;
+            }
+            if (valorgrafico == 4)//x'' en funcion de x
+            {
+                columnaXEuler = 1;
+                columnaYEuler = 3;
+                columnaXRK = 1;
+                columnaYRK = 11;
+            }
+            if (valorgrafico == 5)//x' en funcion de x
+            {
+                columnaXEuler = 1;
+                columnaYEuler = 2;
+                columnaXRK = 1;
+                columnaYRK = 6;
+            }
+            if (valorgrafico == 6)//x'' en funcion de x'
+            {
+                columnaXEuler = 2;
+                columnaYEuler = 3;
+                columnaXRK = 6;
+                columnaYRK = 11;
+            }
+
+            if (ed.EulerDT.Rows.Count > 0)
+            {
+  
+                EjeXEuler = new ArrayList();
+                EjeYEuler = new ArrayList();
+                foreach (DataRow dr in ed.EulerDT.Rows)
+                {
+                    if (dr == ed.EulerDT.Rows[ed.EulerDT.Rows.Count - 1]) {
+                        break;
+                    }
+                    EjeXEuler.Add(Convert.ToDouble(dr[columnaXEuler]));
+                    EjeYEuler.Add(Convert.ToDouble(dr[columnaYEuler]));
+                }
+            }
+            if (ed.RKDT.Rows.Count > 0)
+            {
+                EjeXRK = new ArrayList();
+                EjeYRK = new ArrayList();
+                foreach (DataRow dr in ed.RKDT.Rows)
+                {
+                    if (dr == ed.RKDT.Rows[ed.RKDT.Rows.Count - 1])
+                    {
+                        break;
+                    }
+                    EjeXRK.Add(Convert.ToDouble(dr[columnaXRK]));
+                    EjeYRK.Add(Convert.ToDouble(dr[columnaYRK]));
+                }
+            }
+            form.LlenarGrafico(valorgrafico,EjeXEuler, EjeYEuler, EjeXRK, EjeYRK);
+            
+
         }
         public void OpcionIniciarSimulacion(Frm_TP6_PantallaSimulacion form, int cant_sim, int desde, int hasta, int param_punto_11)
         {
@@ -176,6 +294,9 @@ namespace TrabajosPracticosSIM.TP_6
 
             form.LlenarPantallaSimulacion(dtGeneral);
         }
+
+
+
         private void InicializarColumnasTablas(string modelo,ref DataTable dtGeneral)
         {
 
