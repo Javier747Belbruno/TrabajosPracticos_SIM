@@ -350,6 +350,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.btn_config.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btn_config.TabIndex = 1;
             this.btn_config.TabStop = false;
+            this.btn_config.Click += new System.EventHandler(this.btn_config_Click);
             // 
             // Frm_TP6_PantallaPuntoAE
             // 
