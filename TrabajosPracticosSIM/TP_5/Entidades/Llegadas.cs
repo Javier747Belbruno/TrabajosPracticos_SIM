@@ -59,5 +59,14 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
             if (Tiempo != null)
                 Tiempo_Prox = Tiempo + reloj;
         }
+
+        public void Resetear()
+        {
+            Prox_Nro_Pedido = null;
+            Random = null;
+            Tiempo = null;
+            Tiempo_Prox = null;
+        }
+    
     }
 }

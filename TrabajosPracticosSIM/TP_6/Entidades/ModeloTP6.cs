@@ -109,7 +109,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         #endregion
 
         #endregion
-        public ModeloTP6()
+        public ModeloTP6(EcDiferencial ed)
         {
             IniciarLlegadas();
             IniciarServidor1();
@@ -117,7 +117,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             IniciarServidor3();
             IniciarServidor4();
             IniciarServidor5();
-            IniciarServidor6();
+            IniciarServidor6(ed);
             IniciarListaServidores();
             IniciarListaColas();
         }
@@ -175,9 +175,9 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             S5.Cola.Cola2.EventoEncolador = Evento.Fin_Actividad_2;
             S5.Cola.Cola2.EventoDecolador = Evento.Fin_Actividad_5;
         }
-        private void IniciarServidor6()
+        private void IniciarServidor6(EcDiferencial ed)
         {
-            S6.Distr = new EcDiferencial();
+            S6.Distr = ed;
             S6.Cola.Cola1.EventoEncolador = Evento.Fin_Actividad_5;
             S6.Cola.Cola1.EventoDecolador = Evento.Fin_Actividad_6;
             S6.Cola.Cola2.EventoEncolador = Evento.Fin_Actividad_3;
@@ -809,5 +809,59 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             return "";
         }
 
+        public void ResetearValores()
+        {
+            Llegadas.Resetear();
+            foreach (IServidor s in ListaServidores)
+            {
+                s.ResetearServidor();
+            }
+            reloj = 0;
+            reloj_anterior = 0;
+            evento = Evento.Inicio;
+            nro_pedido = null;
+            pedidos_realizados = 0;
+            pedidos_realizados_anterior = 0;
+            nro_pedido_listo = null;
+            tiempo_ensamble = null;
+            q_tiempos_llegada_pedido = new Queue<double>();
+            q_tiempos_act1 = new Queue<double>();
+            q_tiempos_act2 = new Queue<double>();
+            q_tiempos_act3 = new Queue<double>();
+            q_tiempos_act4 = new Queue<double>();
+            q_tiempos_act5 = new Queue<double>();
+            q_tiempos_act6 = new Queue<double>();
+            e_t_llegada_pedido = null;
+            e_t_a1 = null;
+            e_t_a2 = null;
+            e_t_a3 = null;
+            e_t_a4 = null;
+            e_t_a5 = null;
+            e_t_a6 = null;
+            camino1 = null;
+            camino2 = null;
+            camino3 = null;
+            prom_tiempo_ensamble = 0;
+            p3_pedidos_solicitados = 0;
+            p3_proporcion_PR_PS = 0;
+            p7_pedidos_en_sist = 0;
+            p7_prom_pedidos_en_sist = 0;
+            p10_reloj = 0;
+            p10_reloj_anterior = 0;
+            p10_nro_hora = 0;
+            p10_nro_hora_anterior = 0;
+            p10_contador = 0;
+            p10_contador_anterior = 0;
+            p10_prom_ensambles = 0;
+            p11_contador_mayor_igual = null;
+            p11_probabilidad = 0;
+            p13_camino_critico = "-";
+            p13_a1 = 0;
+            p13_a2 = 0;
+            p13_a3 = 0;
+            p13_a4 = 0;
+            p13_a5 = 0;
+
+        }
     }
 }

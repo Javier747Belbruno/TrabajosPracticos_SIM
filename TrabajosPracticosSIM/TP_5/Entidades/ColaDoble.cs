@@ -95,7 +95,16 @@ namespace TrabajosPracticosSIM.TP_5.Entidades
         {
             Cola1.ResetearCola();
             Cola2.ResetearCola();
-        }
+            P4_Cantidad_Maxima = 0;
+
+            P5_Tiempo_Acumulado = 0;
+            P5_Tiempo_Promedio = 0;
+
+            P6_Promedio_Pedidos_en_Cola  = 0;
+
+            P9_Proporcion_Espera_Cola_1  = 0;
+            P9_Proporcion_Espera_Cola_2 = 0;
+    }
         /// <summary>
         /// Solo para la cola 6
         /// </summary>

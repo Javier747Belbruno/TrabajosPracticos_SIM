@@ -30,6 +30,8 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tb_param_p11 = new System.Windows.Forms.TextBox();
+            this.lb_param_p11 = new System.Windows.Forms.Label();
             this.tb_hasta = new System.Windows.Forms.TextBox();
             this.tb_desde = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,18 +45,16 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.label8 = new System.Windows.Forms.Label();
             this.pnl_Config = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_config = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvSimulacion = new System.Windows.Forms.DataGridView();
             this.btn_simular = new System.Windows.Forms.Button();
-            this.btn_config = new System.Windows.Forms.PictureBox();
-            this.tb_param_p11 = new System.Windows.Forms.TextBox();
-            this.lb_param_p11 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.pnl_Actividades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).BeginInit();
             this.pnl_Config.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_config)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -70,10 +70,28 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(17, 255);
+            this.panel1.Location = new System.Drawing.Point(12, 29);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(334, 247);
             this.panel1.TabIndex = 12;
+            // 
+            // tb_param_p11
+            // 
+            this.tb_param_p11.Location = new System.Drawing.Point(144, 203);
+            this.tb_param_p11.Name = "tb_param_p11";
+            this.tb_param_p11.Size = new System.Drawing.Size(145, 26);
+            this.tb_param_p11.TabIndex = 17;
+            this.tb_param_p11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lb_param_p11
+            // 
+            this.lb_param_p11.AutoSize = true;
+            this.lb_param_p11.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_param_p11.Location = new System.Drawing.Point(11, 204);
+            this.lb_param_p11.Name = "lb_param_p11";
+            this.lb_param_p11.Size = new System.Drawing.Size(115, 21);
+            this.lb_param_p11.TabIndex = 16;
+            this.lb_param_p11.Text = "Parámetro P11";
             // 
             // tb_hasta
             // 
@@ -154,7 +172,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.pnl_Actividades.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_Actividades.Controls.Add(this.dgvActividades);
             this.pnl_Actividades.Controls.Add(this.label8);
-            this.pnl_Actividades.Location = new System.Drawing.Point(17, 29);
+            this.pnl_Actividades.Location = new System.Drawing.Point(12, 404);
             this.pnl_Actividades.Name = "pnl_Actividades";
             this.pnl_Actividades.Size = new System.Drawing.Size(334, 220);
             this.pnl_Actividades.TabIndex = 11;
@@ -185,7 +203,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.pnl_Config.Controls.Add(this.label2);
             this.pnl_Config.Controls.Add(this.btn_config);
             this.pnl_Config.Controls.Add(this.label1);
-            this.pnl_Config.Location = new System.Drawing.Point(17, 630);
+            this.pnl_Config.Location = new System.Drawing.Point(12, 630);
             this.pnl_Config.Name = "pnl_Config";
             this.pnl_Config.Size = new System.Drawing.Size(334, 134);
             this.pnl_Config.TabIndex = 10;
@@ -199,6 +217,20 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.label2.Size = new System.Drawing.Size(109, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "Distribuciones";
+            // 
+            // btn_config
+            // 
+            this.btn_config.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btn_config.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btn_config.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_config.Image = global::TrabajosPracticosSIM.Properties.Resources.ConfigImage2;
+            this.btn_config.Location = new System.Drawing.Point(178, 22);
+            this.btn_config.Name = "btn_config";
+            this.btn_config.Size = new System.Drawing.Size(89, 85);
+            this.btn_config.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btn_config.TabIndex = 1;
+            this.btn_config.TabStop = false;
+            this.btn_config.Click += new System.EventHandler(this.btn_config_Click);
             // 
             // label1
             // 
@@ -225,7 +257,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.btn_simular.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_simular.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_simular.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_simular.Location = new System.Drawing.Point(17, 508);
+            this.btn_simular.Location = new System.Drawing.Point(12, 282);
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(334, 116);
             this.btn_simular.TabIndex = 8;
@@ -233,39 +265,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.btn_simular.UseVisualStyleBackColor = true;
             this.btn_simular.Click += new System.EventHandler(this.btn_simular_Click);
             // 
-            // btn_config
-            // 
-            this.btn_config.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btn_config.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.btn_config.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_config.Image = global::TrabajosPracticosSIM.Properties.Resources.ConfigImage2;
-            this.btn_config.Location = new System.Drawing.Point(178, 22);
-            this.btn_config.Name = "btn_config";
-            this.btn_config.Size = new System.Drawing.Size(89, 85);
-            this.btn_config.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btn_config.TabIndex = 1;
-            this.btn_config.TabStop = false;
-            this.btn_config.Click += new System.EventHandler(this.btn_config_Click);
-            // 
-            // tb_param_p11
-            // 
-            this.tb_param_p11.Location = new System.Drawing.Point(144, 203);
-            this.tb_param_p11.Name = "tb_param_p11";
-            this.tb_param_p11.Size = new System.Drawing.Size(145, 26);
-            this.tb_param_p11.TabIndex = 17;
-            this.tb_param_p11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lb_param_p11
-            // 
-            this.lb_param_p11.AutoSize = true;
-            this.lb_param_p11.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_param_p11.Location = new System.Drawing.Point(11, 204);
-            this.lb_param_p11.Name = "lb_param_p11";
-            this.lb_param_p11.Size = new System.Drawing.Size(115, 21);
-            this.lb_param_p11.TabIndex = 16;
-            this.lb_param_p11.Text = "Parámetro P11";
-            // 
-            // Frm_TP5_PantallaSimulacion
+            // Frm_TP6_PantallaSimulacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -276,7 +276,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.Controls.Add(this.dgvSimulacion);
             this.Controls.Add(this.btn_simular);
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "Frm_TP5_PantallaSimulacion";
+            this.Name = "Frm_TP6_PantallaSimulacion";
             this.Text = "Pantalla Simulacion";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -285,8 +285,8 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).EndInit();
             this.pnl_Config.ResumeLayout(false);
             this.pnl_Config.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_config)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSimulacion)).EndInit();
             this.ResumeLayout(false);
 
         }
