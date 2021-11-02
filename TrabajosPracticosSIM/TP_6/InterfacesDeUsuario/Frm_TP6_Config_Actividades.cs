@@ -54,10 +54,13 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
 
             foreach (Panel p in this.Controls.OfType<Panel>().OrderBy(c => c.Name))
             {
-                foreach (ComboBox cb in p.Controls.OfType<ComboBox>())
+                if(distrsActuales.Count != 0)
                 {
-                    cb.Text = distrsActuales.Dequeue();
-                    ActualizarLabelsTextBoxesParams(cb);
+                    foreach (ComboBox cb in p.Controls.OfType<ComboBox>())
+                    {
+                        cb.Text = distrsActuales.Dequeue();
+                        ActualizarLabelsTextBoxesParams(cb);
+                    }
                 }
             }
 
@@ -67,6 +70,11 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             {
                 foreach (TextBox tb in p.Controls.OfType<TextBox>())
                 {
+                    if(j== dtActividadesPantalla.Rows.Count)
+                    {
+                        panel6.Visible = true;
+                        break;
+                    }
                     if (tb.Name.StartsWith("tb_param1"))
                     {
                         tb.Text = dtActividadesPantalla.Rows[j][2].ToString();
@@ -233,6 +241,11 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
                 MessageBox.Show("Error: " + ex.Message, "Error - Formato de los datos ingresados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             
+        }
+
+        private void btn_config_Click(object sender, EventArgs e)
+        {
+            ControladorTP6.GetInstance().OpcionConfigED();
         }
     }
 }

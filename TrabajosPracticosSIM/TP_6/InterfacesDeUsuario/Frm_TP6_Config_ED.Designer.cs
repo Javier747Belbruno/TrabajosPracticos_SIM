@@ -418,6 +418,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.cb_distr_3.Name = "cb_distr_3";
             this.cb_distr_3.Size = new System.Drawing.Size(188, 29);
             this.cb_distr_3.TabIndex = 2;
+            this.cb_distr_3.DropDownClosed += new System.EventHandler(this.ComboBox_SelectionChanged);
             // 
             // label5
             // 
@@ -493,6 +494,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.cb_distr_5.Name = "cb_distr_5";
             this.cb_distr_5.Size = new System.Drawing.Size(188, 29);
             this.cb_distr_5.TabIndex = 2;
+            this.cb_distr_5.DropDownClosed += new System.EventHandler(this.ComboBox_SelectionChanged);
             // 
             // panel4
             // 
@@ -548,6 +550,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.cb_distr_4.Name = "cb_distr_4";
             this.cb_distr_4.Size = new System.Drawing.Size(188, 29);
             this.cb_distr_4.TabIndex = 2;
+            this.cb_distr_4.DropDownClosed += new System.EventHandler(this.ComboBox_SelectionChanged);
             // 
             // Frm_TP6_Config_ED
             // 

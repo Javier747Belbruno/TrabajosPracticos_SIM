@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,7 +20,14 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
 
         private void PedirDatosGrafico(int valorgrafico)
         {
-            ControladorTP6.GetInstance().OpcionPedirDatosGraficoTipoT(this, valorgrafico);
+            try
+            {
+                ControladorTP6.GetInstance().OpcionPedirDatosGraficoTipoT(this, valorgrafico);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         public void LlenarGrafico(int valorgrafico, ArrayList ejeXEuler, ArrayList ejeYEuler, ArrayList ejeXRK, ArrayList ejeYRK)

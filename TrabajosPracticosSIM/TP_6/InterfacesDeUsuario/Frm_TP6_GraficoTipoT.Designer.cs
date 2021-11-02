@@ -30,6 +30,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
@@ -43,6 +44,8 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F);
             chartArea1.Name = "ChartArea1";
             this.grafico.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.grafico.Legends.Add(legend1);
             this.grafico.Location = new System.Drawing.Point(12, 12);
             this.grafico.Name = "grafico";
             series1.BorderWidth = 2;
