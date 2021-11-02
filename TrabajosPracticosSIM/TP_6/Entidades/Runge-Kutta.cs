@@ -103,7 +103,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                 }
                 if (dt.Rows.Count > 1000)
                 {
-                    throw new Exception("La ecuación diferencial no converge en 0, Cambiar parámetros, Por Favor");
+                    break;
                 }
             }
 

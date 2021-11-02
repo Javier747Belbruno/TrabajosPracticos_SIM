@@ -67,13 +67,13 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                         }
                     }
                 }
-                if(Math.Abs(x1) < 0.01 && Math.Abs(x2) < 0.01 && Math.Abs(x3) < 0.01)
+                if (Math.Abs(x1) < 0.01 && Math.Abs(x2) < 0.01 && Math.Abs(x3) < 0.01)
                 {
                     break;
                 }
-                if(dt.Rows.Count > 1000)
+                if (dt.Rows.Count > 1000)
                 {
-                    throw new Exception("La ecuación diferencial no converge en 0, Cambiar parámetros, Por Favor");
+                    break;
                 }
             } 
 

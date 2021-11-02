@@ -92,6 +92,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.tb_param2_6 = new System.Windows.Forms.TextBox();
             this.tb_param1_6 = new System.Windows.Forms.TextBox();
             this.cb_distr_6 = new System.Windows.Forms.ComboBox();
+            this.btn_config = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -99,6 +100,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.panel5.SuspendLayout();
             this.panel0.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_config)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -650,6 +652,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             // panel6
             // 
             this.panel6.Controls.Add(this.lb_param2_6);
+            this.panel6.Controls.Add(this.btn_config);
             this.panel6.Controls.Add(this.lb_param1_6);
             this.panel6.Controls.Add(this.tb_param2_6);
             this.panel6.Controls.Add(this.tb_param1_6);
@@ -702,6 +705,20 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.cb_distr_6.Size = new System.Drawing.Size(188, 29);
             this.cb_distr_6.TabIndex = 2;
             // 
+            // btn_config
+            // 
+            this.btn_config.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btn_config.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btn_config.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_config.Image = global::TrabajosPracticosSIM.Properties.Resources.ConfigImage2;
+            this.btn_config.Location = new System.Drawing.Point(285, 3);
+            this.btn_config.Name = "btn_config";
+            this.btn_config.Size = new System.Drawing.Size(51, 45);
+            this.btn_config.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btn_config.TabIndex = 1;
+            this.btn_config.TabStop = false;
+            this.btn_config.Click += new System.EventHandler(this.btn_config_Click);
+            // 
             // Frm_TP6_Config_Actividades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -752,6 +769,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.panel0.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_config)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -821,5 +839,6 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         private System.Windows.Forms.TextBox tb_param2_6;
         private System.Windows.Forms.TextBox tb_param1_6;
         private System.Windows.Forms.ComboBox cb_distr_6;
+        private System.Windows.Forms.PictureBox btn_config;
     }
 }

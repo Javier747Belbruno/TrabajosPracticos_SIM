@@ -106,32 +106,74 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
 
         private void btn_punto_b_x_t_Click(object sender, EventArgs e)
         {
-            ControladorTP6.GetInstance().OpcionGraficoPuntoBXdeT();
+            try
+            {
+                ControladorTP6.GetInstance().OpcionGraficoPuntoBXdeT();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_punto_b_dx_t_Click(object sender, EventArgs e)
         {
-            ControladorTP6.GetInstance().OpcionGraficoPuntoBDXdeT();
+            try
+            {
+                ControladorTP6.GetInstance().OpcionGraficoPuntoBDXdeT();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_punto_b_ddx_t_Click(object sender, EventArgs e)
         {
-            ControladorTP6.GetInstance().OpcionGraficoPuntoBDDXdeT();
+            try
+            {
+                ControladorTP6.GetInstance().OpcionGraficoPuntoBDDXdeT();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_punto_c_Click(object sender, EventArgs e)
         {
-            ControladorTP6.GetInstance().OpcionGraficoPuntoC();
+            try
+            {
+                ControladorTP6.GetInstance().OpcionGraficoPuntoC();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_punto_d_Click(object sender, EventArgs e)
         {
-            ControladorTP6.GetInstance().OpcionGraficoPuntoD();
+            try
+            {
+                ControladorTP6.GetInstance().OpcionGraficoPuntoD();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_punto_e_Click(object sender, EventArgs e)
         {
-            ControladorTP6.GetInstance().OpcionGraficoPuntoE();
+            try
+            {
+                ControladorTP6.GetInstance().OpcionGraficoPuntoE();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_config_Click(object sender, EventArgs e)
