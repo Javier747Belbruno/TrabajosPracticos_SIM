@@ -39,9 +39,6 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             while(true)
             {
                 valorPico_Anterior = valorPico;
-                t_Anterior = t;
-                x1_Anterior = x1;
-
 
                 t = h + t;
                 x1 = x1 + h * x2;
@@ -55,16 +52,8 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                     contadorPicoMax++;
                     if(contadorPicoMax == 2)
                     {
-                        if(Math.Abs(valorPico_Anterior) > Math.Abs(valorPico))
-                        {
-                            t_2do_pico = t_Anterior;
-                            x1_2do_pico = x1_Anterior;
-                        }
-                        else
-                        {
-                            t_2do_pico = t;
-                            x1_2do_pico = x1;
-                        }
+                        t_2do_pico = t;
+                        x1_2do_pico = x1;
                     }
                 }
                 if (Math.Abs(x1) < 0.01 && Math.Abs(x2) < 0.01 && Math.Abs(x3) < 0.01)
@@ -75,9 +64,9 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                 {
                     break;
                 }
-            } 
-
-            dt.Rows.Add(t_2do_pico.ToString("0.00"), x1_2do_pico.ToString("0.0000"), a.ToString("0.0000"), "");
+            }
+            dt.Rows.Add(c.ToString("0.00"), h.ToString("0.0000"), x0.ToString("0.00"), dx0.ToString("0.00"));
+            dt.Rows.Add(t_2do_pico.ToString("0.00"), x1_2do_pico.ToString("0.0000"), a.ToString("0.00"), b.ToString("0.00"));
             
             return dt;
         }
@@ -105,9 +94,6 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
             while (true)
             {
                 valorPico_Anterior = valorPico;
-                t_Anterior = t;
-                x1_Anterior = x1;
-
 
                 t = h + t;
                 x1 = x1 + h * x2;
@@ -120,14 +106,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                     contadorPicoMax++;
                     if (contadorPicoMax == 2)
                     {
-                        if (Math.Abs(valorPico_Anterior) > Math.Abs(valorPico))
-                        {
-                            return t_Anterior;
-                        }
-                        else
-                        {
-                            return t;
-                        }
+                        return t;
                     }
                 }
             }

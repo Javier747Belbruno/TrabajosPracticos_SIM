@@ -19,6 +19,8 @@ namespace TrabajosPracticosSIM.TP_6
         //Lista de Vistas / Pantallas que controla el ControladorTP5
         private List<Form> Views = new List<Form>();
 
+
+
         //Objeto Ecuacion Diferencial
         private EcDiferencial ed = new EcDiferencial();
         //Objeto Modelo
@@ -122,6 +124,14 @@ namespace TrabajosPracticosSIM.TP_6
         public void OpcionGraficoPuntoBDDXdeT()
         {
             CreateView(new Frm_TP6_GraficoTipoT(3));
+        }
+        public void OpcionGraficoPuntoBRK()
+        {
+            CreateView(new Frm_TP6_GraficoTipo3Series(1));
+        }
+        public void OpcionGraficoPuntoBEuler()
+        {
+            CreateView(new Frm_TP6_GraficoTipo3Series(2));
         }
         public void OpcionGraficoPuntoC()
         {
@@ -228,7 +238,79 @@ namespace TrabajosPracticosSIM.TP_6
             
 
         }
+        public void OpcionPedirDatosGraficoTipo3Series(Frm_TP6_GraficoTipo3Series form, int valorgrafico)
+        {
+            ArrayList EjeX = null;
+            ArrayList EjeY1 = null;
+            ArrayList EjeY2 = null;
+            ArrayList EjeY3 = null;
+            int columnaX = 0;
+            int columnaY1 = 0;
+            int columnaY2 = 0;
+            int columnaY3 = 0;
+            if (valorgrafico == 1)//RK
+            {
+                columnaX = 0;
+                columnaY1 = 11;
+                columnaY2 = 6;
+                columnaY3 = 1;
+                if (ed.RKDT.Rows.Count > 0)
+                {
+                    EjeX = new ArrayList();
+                    EjeY1 = new ArrayList();
+                    EjeY2 = new ArrayList();
+                    EjeY3 = new ArrayList();
+                    foreach (DataRow dr in ed.RKDT.Rows)
+                    {
+                        if (dr == ed.RKDT.Rows[ed.RKDT.Rows.Count - 1])
+                        {
+                            break;
+                        }
+                        EjeX.Add(Convert.ToDouble(dr[columnaX]));
+                        EjeY1.Add(Convert.ToDouble(dr[columnaY1]));
+                        EjeY2.Add(Convert.ToDouble(dr[columnaY2]));
+                        EjeY3.Add(Convert.ToDouble(dr[columnaY3]));
+                    }
+                    form.LlenarGrafico(valorgrafico, EjeX, EjeY1, EjeY2, EjeY3);
+                }
+                else
+                {
+                    throw new Exception("No hay data de RK para graficar");
+                }
+            }
+            if (valorgrafico == 2)//Euler
+            {
+                columnaX = 0;
+                columnaY1 = 3;
+                columnaY2 = 2;
+                columnaY3 = 1;
+                if (ed.EulerDT.Rows.Count > 0)
+                {
+                    EjeX = new ArrayList();
+                    EjeY1 = new ArrayList();
+                    EjeY2 = new ArrayList();
+                    EjeY3 = new ArrayList();
+                    foreach (DataRow dr in ed.EulerDT.Rows)
+                    {
+                        if (dr == ed.EulerDT.Rows[ed.EulerDT.Rows.Count - 1])
+                        {
+                            break;
+                        }
+                        EjeX.Add(Convert.ToDouble(dr[columnaX]));
+                        EjeY1.Add(Convert.ToDouble(dr[columnaY1]));
+                        EjeY2.Add(Convert.ToDouble(dr[columnaY2]));
+                        EjeY3.Add(Convert.ToDouble(dr[columnaY3]));
+                    }
+                    form.LlenarGrafico(valorgrafico, EjeX, EjeY1, EjeY2, EjeY3);
+                }
+                else
+                {
+                    throw new Exception("No hay data de Euler para graficar");
+                }
+            }
 
+            
+        }
 
 
         public void OpcionIniciarSimulacion(Frm_TP6_PantallaSimulacion form, int tipo_modelo, int cant_sim, int desde, int hasta, int param_punto_11)
