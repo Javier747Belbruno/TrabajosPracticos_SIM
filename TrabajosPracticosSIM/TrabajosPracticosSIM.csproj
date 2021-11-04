@@ -228,6 +228,12 @@
     <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_Config_ED.Designer.cs">
       <DependentUpon>Frm_TP6_Config_ED.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_GraficoTipo3Series.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_GraficoTipo3Series.Designer.cs">
+      <DependentUpon>Frm_TP6_GraficoTipo3Series.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_6\InterfacesDeUsuario\Frm_TP6_GraficoTipoT.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_Config_ED.resx">
       <DependentUpon>Frm_TP6_Config_ED.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_GraficoTipo3Series.resx">
+      <DependentUpon>Frm_TP6_GraficoTipo3Series.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_GraficoTipoT.resx">
       <DependentUpon>Frm_TP6_GraficoTipoT.cs</DependentUpon>

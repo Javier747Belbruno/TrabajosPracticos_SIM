@@ -85,7 +85,7 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                     contadorPicoMax++;
                     if (contadorPicoMax == 2)
                     {
-                        if (Math.Abs(valorPico_Anterior) > Math.Abs(valorPico))
+                        if (x1_Anterior > x1)
                         {
                             t_2do_pico = t_Anterior;
                             x1_2do_pico = x1_Anterior;
@@ -107,7 +107,8 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
                 }
             }
 
-            dt.Rows.Add(t_2do_pico.ToString("0.00"), x1_2do_pico.ToString("0.0000"), a.ToString("0.0000"), "");
+            dt.Rows.Add(t_2do_pico.ToString("0.00"), x1_2do_pico.ToString("0.0000"), a.ToString("0.00")
+                , b.ToString("0.00"), c.ToString("0.00"), h.ToString("0.0000"), x0.ToString("0.00"), dx0.ToString("0.00"));
 
             return dt;
         }

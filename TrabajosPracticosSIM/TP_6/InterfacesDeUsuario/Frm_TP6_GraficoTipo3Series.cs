@@ -8,10 +8,10 @@ using TrabajosPracticosSIM.TP_1;
 
 namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
 {
-    public partial class Frm_TP6_GraficoTipoT : Form
+    public partial class Frm_TP6_GraficoTipo3Series : Form
     {
 
-        public Frm_TP6_GraficoTipoT(int tipo_grafico)
+        public Frm_TP6_GraficoTipo3Series(int tipo_grafico)
         {
             InitializeComponent();
             grafico.MouseWheel += grafico_MouseWheel;
@@ -22,7 +22,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         {
             try
             {
-                ControladorTP6.GetInstance().OpcionPedirDatosGraficoTipoT(this, valorgrafico);
+                ControladorTP6.GetInstance().OpcionPedirDatosGraficoTipo3Series(this, valorgrafico);
             }
             catch (Exception ex)
             {
@@ -30,42 +30,17 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             }
         }
 
-        public void LlenarGrafico(int valorgrafico, ArrayList ejeXEuler, ArrayList ejeYEuler, ArrayList ejeXRK, ArrayList ejeYRK)
+        public void LlenarGrafico(int valorgrafico, ArrayList ejeX, ArrayList ejeY1, ArrayList ejeY2, ArrayList ejeY3)
         {
             switch (valorgrafico)
             {
                 case 1:
-                    grafico.Titles[0].Text = "Punto B - X1 en función de t";
-                    grafico.ChartAreas[0].AxisX.Title = "Tiempo";
-                    grafico.ChartAreas[0].AxisY.Title = "X1";
+                    grafico.Titles[0].Text = "Punto B - X'',X',X en función de t (RK)";
+                    grafico.ChartAreas[0].AxisX.Title = "t";
+                    grafico.ChartAreas[0].AxisY.Title = " X'',X',X";
                     break;
                 case 2:
-                    grafico.Titles[0].Text = "Punto B - X2 en función de t";
-                    grafico.ChartAreas[0].AxisX.Title = "Tiempo";
-                    grafico.ChartAreas[0].AxisY.Title = "X2";
-                    break;
-                case 3:
-                    grafico.Titles[0].Text = "Punto B - X'2 en función de t";
-                    grafico.ChartAreas[0].AxisX.Title = "Tiempo";
-                    grafico.ChartAreas[0].AxisY.Title = "X'2";
-                    break;
-                case 4:
-                    grafico.Titles[0].Text = "Punto C - X'2 en función de X1";
-                    grafico.ChartAreas[0].AxisX.Title = "X1";
-                    grafico.ChartAreas[0].AxisY.Title = "X'2";
-                    break;
-                case 5:
-                    grafico.Titles[0].Text = "Punto D - X2 en función de X1";
-                    grafico.ChartAreas[0].AxisX.Title = "X1";
-                    grafico.ChartAreas[0].AxisY.Title = "X2";
-                    break;
-                case 6:
-                    grafico.Titles[0].Text = "Punto E - X'2 en función de X2";
-                    grafico.ChartAreas[0].AxisX.Title = "X2";
-                    grafico.ChartAreas[0].AxisY.Title = "X'2";
-                    break;
-                case 7:
-                    grafico.Titles[0].Text = "Punto B - X'',X',X en función de t";
+                    grafico.Titles[0].Text = "Punto B - X'',X',X en función de t (Euler)";
                     grafico.ChartAreas[0].AxisX.Title = "t";
                     grafico.ChartAreas[0].AxisY.Title = " X'',X',X";
                     break;
@@ -76,19 +51,24 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             
             grafico.Series[0].Points.Clear();
             grafico.Series[1].Points.Clear();
+            grafico.Series[2].Points.Clear();
             var CA = grafico.ChartAreas.FirstOrDefault();
             CA.AxisX.ScaleView.Zoomable = true;
             CA.AxisY.ScaleView.Zoomable = true;
             CA.AxisX.IsMarginVisible = true;
             
 
-            if(ejeXEuler != null && ejeYEuler != null)
+            if(ejeX != null && ejeY1 != null)
             {
-                grafico.Series[0].Points.DataBindXY(ejeXEuler, ejeYEuler);
+                grafico.Series[0].Points.DataBindXY(ejeX, ejeY1);
             }
-            if (ejeXRK != null && ejeYRK != null)
+            if (ejeX != null && ejeY2 != null)
             {
-                grafico.Series[1].Points.DataBindXY(ejeXRK, ejeYRK);
+                grafico.Series[1].Points.DataBindXY(ejeX, ejeY2);
+            }
+            if (ejeX != null && ejeY3 != null)
+            {
+                grafico.Series[2].Points.DataBindXY(ejeX, ejeY3);
             }
 
 
