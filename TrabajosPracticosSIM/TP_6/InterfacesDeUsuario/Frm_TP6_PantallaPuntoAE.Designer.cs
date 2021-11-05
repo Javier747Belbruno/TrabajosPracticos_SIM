@@ -31,6 +31,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
         {
             this.pnl_Config = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_config = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_punto_b_x_t = new System.Windows.Forms.Button();
             this.btn_punto_c = new System.Windows.Forms.Button();
@@ -40,6 +41,11 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.btn_rk = new System.Windows.Forms.Button();
             this.pnl_botones = new System.Windows.Forms.Panel();
             this.pnl_euler = new System.Windows.Forms.Panel();
+            this.lb_Dx0_e = new System.Windows.Forms.Label();
+            this.lb_x0_e = new System.Windows.Forms.Label();
+            this.lb_h_e = new System.Windows.Forms.Label();
+            this.lb_c_e = new System.Windows.Forms.Label();
+            this.lb_b_e = new System.Windows.Forms.Label();
             this.lb_a_e = new System.Windows.Forms.Label();
             this.tb_2pico_e_x1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -47,36 +53,30 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.label3 = new System.Windows.Forms.Label();
             this.dgvEuler = new System.Windows.Forms.DataGridView();
             this.pnl_rk = new System.Windows.Forms.Panel();
+            this.lb_Dx0_rk = new System.Windows.Forms.Label();
             this.lb_a_rk = new System.Windows.Forms.Label();
+            this.lb_x0_rk = new System.Windows.Forms.Label();
             this.tb_2pico_rk_x1 = new System.Windows.Forms.TextBox();
+            this.lb_h_rk = new System.Windows.Forms.Label();
             this.dgvRK = new System.Windows.Forms.DataGridView();
+            this.lb_c_rk = new System.Windows.Forms.Label();
+            this.lb_b_rk = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tb_2pico_rk_t = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pnl_graficos = new System.Windows.Forms.Panel();
+            this.btn_DDx_Dx_x_f_t_rk = new System.Windows.Forms.Button();
             this.btn_DDx_Dx_x_f_t_e = new System.Windows.Forms.Button();
             this.btn_punto_b_ddx_t = new System.Windows.Forms.Button();
             this.btn_punto_b_dx_t = new System.Windows.Forms.Button();
-            this.btn_config = new System.Windows.Forms.PictureBox();
-            this.btn_DDx_Dx_x_f_t_rk = new System.Windows.Forms.Button();
-            this.lb_b_e = new System.Windows.Forms.Label();
-            this.lb_c_e = new System.Windows.Forms.Label();
-            this.lb_h_e = new System.Windows.Forms.Label();
-            this.lb_Dx0_e = new System.Windows.Forms.Label();
-            this.lb_x0_e = new System.Windows.Forms.Label();
-            this.lb_Dx0_rk = new System.Windows.Forms.Label();
-            this.lb_x0_rk = new System.Windows.Forms.Label();
-            this.lb_h_rk = new System.Windows.Forms.Label();
-            this.lb_c_rk = new System.Windows.Forms.Label();
-            this.lb_b_rk = new System.Windows.Forms.Label();
             this.pnl_Config.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_config)).BeginInit();
             this.pnl_botones.SuspendLayout();
             this.pnl_euler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEuler)).BeginInit();
             this.pnl_rk.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRK)).BeginInit();
             this.pnl_graficos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_config)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_Config
@@ -99,6 +99,20 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.label2.Size = new System.Drawing.Size(91, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "Parámetros";
+            // 
+            // btn_config
+            // 
+            this.btn_config.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btn_config.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btn_config.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_config.Image = global::TrabajosPracticosSIM.Properties.Resources.ConfigImage2;
+            this.btn_config.Location = new System.Drawing.Point(196, 18);
+            this.btn_config.Name = "btn_config";
+            this.btn_config.Size = new System.Drawing.Size(76, 73);
+            this.btn_config.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btn_config.TabIndex = 1;
+            this.btn_config.TabStop = false;
+            this.btn_config.Click += new System.EventHandler(this.btn_config_Click);
             // 
             // label1
             // 
@@ -204,6 +218,51 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.pnl_euler.TabIndex = 19;
             this.pnl_euler.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_euler_Paint);
             // 
+            // lb_Dx0_e
+            // 
+            this.lb_Dx0_e.AutoSize = true;
+            this.lb_Dx0_e.Location = new System.Drawing.Point(345, 35);
+            this.lb_Dx0_e.Name = "lb_Dx0_e";
+            this.lb_Dx0_e.Size = new System.Drawing.Size(38, 18);
+            this.lb_Dx0_e.TabIndex = 12;
+            this.lb_Dx0_e.Text = "Dx0 :";
+            // 
+            // lb_x0_e
+            // 
+            this.lb_x0_e.AutoSize = true;
+            this.lb_x0_e.Location = new System.Drawing.Point(345, 4);
+            this.lb_x0_e.Name = "lb_x0_e";
+            this.lb_x0_e.Size = new System.Drawing.Size(29, 18);
+            this.lb_x0_e.TabIndex = 10;
+            this.lb_x0_e.Text = "x0 :";
+            // 
+            // lb_h_e
+            // 
+            this.lb_h_e.AutoSize = true;
+            this.lb_h_e.Location = new System.Drawing.Point(169, 35);
+            this.lb_h_e.Name = "lb_h_e";
+            this.lb_h_e.Size = new System.Drawing.Size(23, 18);
+            this.lb_h_e.TabIndex = 9;
+            this.lb_h_e.Text = "h :";
+            // 
+            // lb_c_e
+            // 
+            this.lb_c_e.AutoSize = true;
+            this.lb_c_e.Location = new System.Drawing.Point(169, 4);
+            this.lb_c_e.Name = "lb_c_e";
+            this.lb_c_e.Size = new System.Drawing.Size(21, 18);
+            this.lb_c_e.TabIndex = 8;
+            this.lb_c_e.Text = "c :";
+            // 
+            // lb_b_e
+            // 
+            this.lb_b_e.AutoSize = true;
+            this.lb_b_e.Location = new System.Drawing.Point(23, 35);
+            this.lb_b_e.Name = "lb_b_e";
+            this.lb_b_e.Size = new System.Drawing.Size(23, 18);
+            this.lb_b_e.TabIndex = 6;
+            this.lb_b_e.Text = "b :";
+            // 
             // lb_a_e
             // 
             this.lb_a_e.AutoSize = true;
@@ -275,6 +334,15 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.pnl_rk.Size = new System.Drawing.Size(868, 372);
             this.pnl_rk.TabIndex = 20;
             // 
+            // lb_Dx0_rk
+            // 
+            this.lb_Dx0_rk.AutoSize = true;
+            this.lb_Dx0_rk.Location = new System.Drawing.Point(509, 35);
+            this.lb_Dx0_rk.Name = "lb_Dx0_rk";
+            this.lb_Dx0_rk.Size = new System.Drawing.Size(41, 18);
+            this.lb_Dx0_rk.TabIndex = 18;
+            this.lb_Dx0_rk.Text = "Dx0 : ";
+            // 
             // lb_a_rk
             // 
             this.lb_a_rk.AutoSize = true;
@@ -284,6 +352,15 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.lb_a_rk.TabIndex = 6;
             this.lb_a_rk.Text = "a : ";
             // 
+            // lb_x0_rk
+            // 
+            this.lb_x0_rk.AutoSize = true;
+            this.lb_x0_rk.Location = new System.Drawing.Point(509, 4);
+            this.lb_x0_rk.Name = "lb_x0_rk";
+            this.lb_x0_rk.Size = new System.Drawing.Size(32, 18);
+            this.lb_x0_rk.TabIndex = 17;
+            this.lb_x0_rk.Text = "x0 : ";
+            // 
             // tb_2pico_rk_x1
             // 
             this.tb_2pico_rk_x1.Location = new System.Drawing.Point(630, 336);
@@ -291,6 +368,15 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.tb_2pico_rk_x1.Size = new System.Drawing.Size(100, 26);
             this.tb_2pico_rk_x1.TabIndex = 24;
             this.tb_2pico_rk_x1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_h_rk
+            // 
+            this.lb_h_rk.AutoSize = true;
+            this.lb_h_rk.Location = new System.Drawing.Point(333, 35);
+            this.lb_h_rk.Name = "lb_h_rk";
+            this.lb_h_rk.Size = new System.Drawing.Size(26, 18);
+            this.lb_h_rk.TabIndex = 16;
+            this.lb_h_rk.Text = "h : ";
             // 
             // dgvRK
             // 
@@ -301,6 +387,24 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.dgvRK.RowTemplate.Height = 24;
             this.dgvRK.Size = new System.Drawing.Size(842, 265);
             this.dgvRK.TabIndex = 1;
+            // 
+            // lb_c_rk
+            // 
+            this.lb_c_rk.AutoSize = true;
+            this.lb_c_rk.Location = new System.Drawing.Point(333, 4);
+            this.lb_c_rk.Name = "lb_c_rk";
+            this.lb_c_rk.Size = new System.Drawing.Size(24, 18);
+            this.lb_c_rk.TabIndex = 15;
+            this.lb_c_rk.Text = "c : ";
+            // 
+            // lb_b_rk
+            // 
+            this.lb_b_rk.AutoSize = true;
+            this.lb_b_rk.Location = new System.Drawing.Point(187, 35);
+            this.lb_b_rk.Name = "lb_b_rk";
+            this.lb_b_rk.Size = new System.Drawing.Size(23, 18);
+            this.lb_b_rk.TabIndex = 14;
+            this.lb_b_rk.Text = "b :";
             // 
             // label5
             // 
@@ -343,6 +447,17 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.pnl_graficos.Size = new System.Drawing.Size(1367, 168);
             this.pnl_graficos.TabIndex = 0;
             // 
+            // btn_DDx_Dx_x_f_t_rk
+            // 
+            this.btn_DDx_Dx_x_f_t_rk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_DDx_Dx_x_f_t_rk.Location = new System.Drawing.Point(338, 13);
+            this.btn_DDx_Dx_x_f_t_rk.Name = "btn_DDx_Dx_x_f_t_rk";
+            this.btn_DDx_Dx_x_f_t_rk.Size = new System.Drawing.Size(286, 68);
+            this.btn_DDx_Dx_x_f_t_rk.TabIndex = 22;
+            this.btn_DDx_Dx_x_f_t_rk.Text = "Gráfico de x\'\',x\',x en función de t (RK)";
+            this.btn_DDx_Dx_x_f_t_rk.UseVisualStyleBackColor = true;
+            this.btn_DDx_Dx_x_f_t_rk.Click += new System.EventHandler(this.btn_DDx_Dx_x_f_t_rk_Click);
+            // 
             // btn_DDx_Dx_x_f_t_e
             // 
             this.btn_DDx_Dx_x_f_t_e.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -376,121 +491,6 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.btn_punto_b_dx_t.UseVisualStyleBackColor = true;
             this.btn_punto_b_dx_t.Click += new System.EventHandler(this.btn_punto_b_dx_t_Click);
             // 
-            // btn_config
-            // 
-            this.btn_config.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btn_config.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.btn_config.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_config.Image = global::TrabajosPracticosSIM.Properties.Resources.ConfigImage2;
-            this.btn_config.Location = new System.Drawing.Point(196, 18);
-            this.btn_config.Name = "btn_config";
-            this.btn_config.Size = new System.Drawing.Size(76, 73);
-            this.btn_config.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btn_config.TabIndex = 1;
-            this.btn_config.TabStop = false;
-            this.btn_config.Click += new System.EventHandler(this.btn_config_Click);
-            // 
-            // btn_DDx_Dx_x_f_t_rk
-            // 
-            this.btn_DDx_Dx_x_f_t_rk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_DDx_Dx_x_f_t_rk.Location = new System.Drawing.Point(338, 13);
-            this.btn_DDx_Dx_x_f_t_rk.Name = "btn_DDx_Dx_x_f_t_rk";
-            this.btn_DDx_Dx_x_f_t_rk.Size = new System.Drawing.Size(286, 68);
-            this.btn_DDx_Dx_x_f_t_rk.TabIndex = 22;
-            this.btn_DDx_Dx_x_f_t_rk.Text = "Gráfico de x\'\',x\',x en función de t (RK)";
-            this.btn_DDx_Dx_x_f_t_rk.UseVisualStyleBackColor = true;
-            this.btn_DDx_Dx_x_f_t_rk.Click += new System.EventHandler(this.btn_DDx_Dx_x_f_t_rk_Click);
-            // 
-            // lb_b_e
-            // 
-            this.lb_b_e.AutoSize = true;
-            this.lb_b_e.Location = new System.Drawing.Point(23, 35);
-            this.lb_b_e.Name = "lb_b_e";
-            this.lb_b_e.Size = new System.Drawing.Size(23, 18);
-            this.lb_b_e.TabIndex = 6;
-            this.lb_b_e.Text = "b :";
-            // 
-            // lb_c_e
-            // 
-            this.lb_c_e.AutoSize = true;
-            this.lb_c_e.Location = new System.Drawing.Point(169, 4);
-            this.lb_c_e.Name = "lb_c_e";
-            this.lb_c_e.Size = new System.Drawing.Size(21, 18);
-            this.lb_c_e.TabIndex = 8;
-            this.lb_c_e.Text = "c :";
-            // 
-            // lb_h_e
-            // 
-            this.lb_h_e.AutoSize = true;
-            this.lb_h_e.Location = new System.Drawing.Point(169, 35);
-            this.lb_h_e.Name = "lb_h_e";
-            this.lb_h_e.Size = new System.Drawing.Size(23, 18);
-            this.lb_h_e.TabIndex = 9;
-            this.lb_h_e.Text = "h :";
-            // 
-            // lb_Dx0_e
-            // 
-            this.lb_Dx0_e.AutoSize = true;
-            this.lb_Dx0_e.Location = new System.Drawing.Point(345, 35);
-            this.lb_Dx0_e.Name = "lb_Dx0_e";
-            this.lb_Dx0_e.Size = new System.Drawing.Size(38, 18);
-            this.lb_Dx0_e.TabIndex = 12;
-            this.lb_Dx0_e.Text = "Dx0 :";
-            // 
-            // lb_x0_e
-            // 
-            this.lb_x0_e.AutoSize = true;
-            this.lb_x0_e.Location = new System.Drawing.Point(345, 4);
-            this.lb_x0_e.Name = "lb_x0_e";
-            this.lb_x0_e.Size = new System.Drawing.Size(29, 18);
-            this.lb_x0_e.TabIndex = 10;
-            this.lb_x0_e.Text = "x0 :";
-            // 
-            // lb_Dx0_rk
-            // 
-            this.lb_Dx0_rk.AutoSize = true;
-            this.lb_Dx0_rk.Location = new System.Drawing.Point(509, 35);
-            this.lb_Dx0_rk.Name = "lb_Dx0_rk";
-            this.lb_Dx0_rk.Size = new System.Drawing.Size(41, 18);
-            this.lb_Dx0_rk.TabIndex = 18;
-            this.lb_Dx0_rk.Text = "Dx0 : ";
-            // 
-            // lb_x0_rk
-            // 
-            this.lb_x0_rk.AutoSize = true;
-            this.lb_x0_rk.Location = new System.Drawing.Point(509, 4);
-            this.lb_x0_rk.Name = "lb_x0_rk";
-            this.lb_x0_rk.Size = new System.Drawing.Size(32, 18);
-            this.lb_x0_rk.TabIndex = 17;
-            this.lb_x0_rk.Text = "x0 : ";
-            // 
-            // lb_h_rk
-            // 
-            this.lb_h_rk.AutoSize = true;
-            this.lb_h_rk.Location = new System.Drawing.Point(333, 35);
-            this.lb_h_rk.Name = "lb_h_rk";
-            this.lb_h_rk.Size = new System.Drawing.Size(26, 18);
-            this.lb_h_rk.TabIndex = 16;
-            this.lb_h_rk.Text = "h : ";
-            // 
-            // lb_c_rk
-            // 
-            this.lb_c_rk.AutoSize = true;
-            this.lb_c_rk.Location = new System.Drawing.Point(333, 4);
-            this.lb_c_rk.Name = "lb_c_rk";
-            this.lb_c_rk.Size = new System.Drawing.Size(24, 18);
-            this.lb_c_rk.TabIndex = 15;
-            this.lb_c_rk.Text = "c : ";
-            // 
-            // lb_b_rk
-            // 
-            this.lb_b_rk.AutoSize = true;
-            this.lb_b_rk.Location = new System.Drawing.Point(187, 35);
-            this.lb_b_rk.Name = "lb_b_rk";
-            this.lb_b_rk.Size = new System.Drawing.Size(23, 18);
-            this.lb_b_rk.TabIndex = 14;
-            this.lb_b_rk.Text = "b :";
-            // 
             // Frm_TP6_PantallaPuntoAE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -503,9 +503,10 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.Controls.Add(this.pnl_Config);
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Frm_TP6_PantallaPuntoAE";
-            this.Text = "Frm_TP6_PantallaPuntoAE";
+            this.Text = "Pantalla Punto A-E";
             this.pnl_Config.ResumeLayout(false);
             this.pnl_Config.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_config)).EndInit();
             this.pnl_botones.ResumeLayout(false);
             this.pnl_euler.ResumeLayout(false);
             this.pnl_euler.PerformLayout();
@@ -514,7 +515,6 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.pnl_rk.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRK)).EndInit();
             this.pnl_graficos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btn_config)).EndInit();
             this.ResumeLayout(false);
 
         }

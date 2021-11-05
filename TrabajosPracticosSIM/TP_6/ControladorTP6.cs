@@ -115,42 +115,63 @@ namespace TrabajosPracticosSIM.TP_6
         }
         public void OpcionGraficoPuntoBXdeT()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_GraficoTipoT));
             CreateView(new Frm_TP6_GraficoTipoT(1));
         }
         public void OpcionGraficoPuntoBDXdeT()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_GraficoTipoT));
             CreateView(new Frm_TP6_GraficoTipoT(2));
         }
         public void OpcionGraficoPuntoBDDXdeT()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_GraficoTipoT));
             CreateView(new Frm_TP6_GraficoTipoT(3));
         }
         public void OpcionGraficoPuntoBRK()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_GraficoTipo3Series));
             CreateView(new Frm_TP6_GraficoTipo3Series(1));
         }
         public void OpcionGraficoPuntoBEuler()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_GraficoTipo3Series));
             CreateView(new Frm_TP6_GraficoTipo3Series(2));
+        }
+        private void RemoverVistaSiExiste(Type type)
+        {
+            foreach (Form v in Views.ToList())
+            {
+                if (v.GetType() == type)
+                {
+                    Views.Remove(v);
+                    v.Close();
+                }
+            }
         }
         public void OpcionGraficoPuntoC()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_GraficoTipoT));
             CreateView(new Frm_TP6_GraficoTipoT(4));
         }
         public void OpcionGraficoPuntoD()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_GraficoTipoT));
             CreateView(new Frm_TP6_GraficoTipoT(5));
         }
         public void OpcionGraficoPuntoE()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_GraficoTipoT));
             CreateView(new Frm_TP6_GraficoTipoT(6));
         }
         public void OpcionConfigED()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_Config_ED));
             CreateView(new Frm_TP6_Config_ED());
         }
         public void OpcionPantallaConfiguracion()
         {
+            RemoverVistaSiExiste(typeof(Frm_TP6_Config_Actividades));
             CreateView(new Frm_TP6_Config_Actividades());
         }
         public void OpcionPedirDatosGraficoTipoT(Frm_TP6_GraficoTipoT form, int valorgrafico)

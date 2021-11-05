@@ -578,7 +578,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Frm_TP6_Config_ED";
-            this.Text = "Configuración de Actividades";
+            this.Text = "Configuración de los Parámetros de la Ecuación Diferencial";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
