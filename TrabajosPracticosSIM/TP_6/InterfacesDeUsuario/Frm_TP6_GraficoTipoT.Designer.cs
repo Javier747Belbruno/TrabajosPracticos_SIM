@@ -67,7 +67,6 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.grafico.Text = "chart1";
             title1.Font = new System.Drawing.Font("Calibri", 16F);
             title1.Name = "Title1";
-            title1.Text = "Evolución del promedio de Tiempo de Ensamble";
             this.grafico.Titles.Add(title1);
             // 
             // Frm_TP6_GraficoTipoT
@@ -77,7 +76,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.ClientSize = new System.Drawing.Size(1422, 771);
             this.Controls.Add(this.grafico);
             this.Name = "Frm_TP6_GraficoTipoT";
-            this.Text = "Frm_TP4_PuntoD";
+            this.Text = "Gráfico Euler vs RK";
             ((System.ComponentModel.ISupportInitialize)(this.grafico)).EndInit();
             this.ResumeLayout(false);
 

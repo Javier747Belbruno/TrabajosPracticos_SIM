@@ -61,8 +61,10 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             series2.Legend = "Legend1";
             series2.Name = "X\'";
+            series3.BorderWidth = 2;
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.DarkMagenta;
             series3.Legend = "Legend1";
             series3.Name = "X";
             this.grafico.Series.Add(series1);
@@ -82,7 +84,7 @@ namespace TrabajosPracticosSIM.TP_6.InterfacesDeUsuario
             this.ClientSize = new System.Drawing.Size(1422, 771);
             this.Controls.Add(this.grafico);
             this.Name = "Frm_TP6_GraficoTipo3Series";
-            this.Text = "Frm_TP4_PuntoD";
+            this.Text = "Gráfico 3 Series";
             ((System.ComponentModel.ISupportInitialize)(this.grafico)).EndInit();
             this.ResumeLayout(false);
 
