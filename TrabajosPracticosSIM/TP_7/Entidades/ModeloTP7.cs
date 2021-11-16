@@ -37,6 +37,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         public Queue<double> cola_tn { get; set; } = new Queue<double>();
         public double? tiempo_cambio { get; set; } = 0.00;
         public string silo_para_suministro { get; set; } = Estados.S2;
+
+        public List<Silo> ListaSilos { get; set; } = new List<Silo>();
         #endregion
 
         public ModeloTP7()
@@ -51,6 +53,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
             IniciarS2();
             IniciarS3();
             IniciarS4();
+            IniciarListaSilos();
+
         }
         private void IniciarLlegadas()
         {
@@ -73,6 +77,13 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         private void IniciarS4()
         {
             S4.Distr = new Uniforme(5, 6);
+        }
+        private void IniciarListaSilos()
+        {
+            ListaSilos.Add(S1);
+            ListaSilos.Add(S2);
+            ListaSilos.Add(S3);
+            ListaSilos.Add(S4);
         }
 
         public void ResetearValores()
