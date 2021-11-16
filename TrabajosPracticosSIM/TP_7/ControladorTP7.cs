@@ -148,42 +148,8 @@ namespace TrabajosPracticosSIM.TP_7
                 
                 m.CalcularSilos();
 
-                /*modelo.CalcularPedidosRealizados();
-
-                modelo.CalcularNroPedidoRealizado();
-
-                modelo.CalcularTiemposDeCadaPedido();
-
-                modelo.CalcularCaminos();
-
-                modelo.CalcularTiempoEnsamble();
-
-                modelo.CalcularPunto2();//PromedioEnsamble
-
-                modelo.CalcularPunto3();//Proporcion_PR_PS
-
-                modelo.CalcularPunto4();//Calcular Max Cant En cada Cola
-
-                modelo.CalcularPunto5();//Tiempo Promedio En Cola
-
-                modelo.CalcularPunto6();//Cant Promedio En Cola
-
-                modelo.CalcularPunto7(i);//Prom pedidos en sist
-
-                modelo.CalcularPunto8();//Porcentaje Ocupacion Servidor
-
-                modelo.CalcularPunto9();//ProporcionBloqueadoOcupado
-                                        //ProporcionesDeEspera
-
-                modelo.CalcularPunto10();//ContadorEnsamblesPorHora
-                                         //CalcularPromEnsamblesPorHora
-
-                modelo.CalcularPunto11(param_punto_11);//Prob Mayor Igual Parametro
-
-                modelo.CalcularPunto13();//Proporcion Actividades de Caminos Criticos
-                */
                 //Recordar solo las que pide
-                if ((i >= 1 && i <= 50) || i % 10000 == 0 || (i >= desde && i <= hasta) || i == cant_sim)
+                if ((i >= 1 && i <= 500) || (i >= desde && i <= hasta) || i == cant_sim)
                 {
                     m.AgregarFila(i, ref dtGeneral);
                 }
