@@ -21,7 +21,6 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
 
             //Primera fila
             double t = 0;
-            double t_Anterior = 0;
             double x1 = x0;
             double x1_Anterior = x0;
             double x2 = dx0;
@@ -80,7 +79,6 @@ namespace TrabajosPracticosSIM.TP_6.Entidades
         {
             //Primera fila
             double t = 0;
-            double t_Anterior = 0;
             double x1 = x0;
             double x1_Anterior = x0;
             double x2 = dx0;
