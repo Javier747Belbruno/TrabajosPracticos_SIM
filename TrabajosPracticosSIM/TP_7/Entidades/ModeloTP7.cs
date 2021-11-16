@@ -30,8 +30,9 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         #region Secundarias
 
         public string tubo_aspirador { get; set; } = "-";
+        public string tubo_aspirador_anterior { get; set; } = "-";
         public int? nro_primer_camion_en_salir { get; set; } = null;
-        public int? tn_primer_camion_en_salir { get; set; } = null;
+        public double? tn_primer_camion_en_salir { get; set; } = null;
         public Queue<int> cola_camiones { get; set; } = new Queue<int>();
         public Queue<double> cola_tn { get; set; } = new Queue<double>();
         public double? tiempo_cambio { get; set; } = 0.00;
@@ -317,6 +318,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
 
         public void CalcularTuboAspirador()
         {
+            tubo_aspirador_anterior = tubo_aspirador;
             tubo_aspirador = DeterminarTuboAspirador(evento);
         }
 
@@ -355,7 +357,6 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
                             }
                         }
                     }
-
                 case EventosFabrica.Silo_Lleno_S1:
                     return "-";
                 case EventosFabrica.Silo_Lleno_S2:
@@ -377,6 +378,126 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
             }
         }
 
+        public void DeterminarPrimeroColaCamion()
+        {
+            if (cola_camiones.Count > 0)
+            {
+                nro_primer_camion_en_salir = cola_camiones.Peek();
+            }
+            else
+            {
+                nro_primer_camion_en_salir = null;
+            }
+        }
+        public void DeterminarPrimeroColaTn()
+        {
+            if (cola_tn.Count > 0)
+            {
+                tn_primer_camion_en_salir = cola_tn.Peek();
+            }
+            else
+            {
+                tn_primer_camion_en_salir = null;
+            }
+        }
+
+        public void CalcularColaCamion()
+        {
+            if( ( (evento == EventosFabrica.Preparacion_Lista && !(tubo_aspirador==Estados.Espera) ) 
+                || evento == EventosFabrica.Fin_Descarga_S1 || evento == EventosFabrica.Fin_Descarga_S2
+                || evento == EventosFabrica.Fin_Descarga_S3 || evento == EventosFabrica.Fin_Descarga_S4) 
+                && (cola_camiones.Count>0))
+            {
+                cola_camiones.Dequeue();
+            }
+            else
+            {
+                if(evento == EventosFabrica.Silo_Lleno_S1 || evento == EventosFabrica.Silo_Lleno_S2 
+                    || evento == EventosFabrica.Silo_Lleno_S3 || evento == EventosFabrica.Silo_Lleno_S4 
+                    || silo_designado == Estados.Espera)
+                {
+                    cola_camiones.Enqueue((int)nro_camion);
+                }
+            }
+        }
+        public void CalcularColaTn()
+        {
+            if (((evento == EventosFabrica.Preparacion_Lista && !(tubo_aspirador == Estados.Espera))
+                || evento == EventosFabrica.Fin_Descarga_S1 || evento == EventosFabrica.Fin_Descarga_S2
+                || evento == EventosFabrica.Fin_Descarga_S3 || evento == EventosFabrica.Fin_Descarga_S4)
+                && (cola_tn.Count > 0))
+            {
+                cola_tn.Dequeue();
+            }
+            else
+            {
+                if (evento == EventosFabrica.Silo_Lleno_S1 || evento == EventosFabrica.Silo_Lleno_S2
+                    || evento == EventosFabrica.Silo_Lleno_S3 || evento == EventosFabrica.Silo_Lleno_S4
+                    || silo_designado == Estados.Espera)
+                {
+                    cola_tn.Enqueue((double)tn_actuales_camion);
+                }
+            }
+        }
+
+        public void CalcularTiempoCambio()
+        {
+            if (evento == EventosFabrica.Preparacion_Lista)
+            {
+                tiempo_cambio = null;
+            }
+            else
+            {
+                if(tubo_aspirador_anterior != tubo_aspirador)
+                {
+                    tiempo_cambio = Math.Round(reloj + (1 / 6),2);
+                }
+            }
+        }
+
+        public void CalcularSiloParaSuministrar()
+        {
+            if (evento == EventosFabrica.Fin_Suministro_S1 ||
+                evento == EventosFabrica.Fin_Suministro_S2 ||
+                evento == EventosFabrica.Fin_Suministro_S3 ||
+                evento == EventosFabrica.Fin_Suministro_S4)
+            {
+                if(S1.Estado == Estados.Lleno)
+                {
+                    silo_para_suministro = Estados.S1;
+                }
+                else
+                {
+                    if (S2.Estado == Estados.Lleno)
+                    {
+                        silo_para_suministro = Estados.S2;
+                    }
+                    else
+                    {
+                        if (S3.Estado == Estados.Lleno)
+                        {
+                            silo_para_suministro = Estados.S3;
+                        }
+                        else
+                        {
+                            if (S1.Estado == Estados.Lleno)
+                            {
+                                silo_para_suministro = Estados.S4;
+                            }
+                            else
+                            {
+                                silo_para_suministro = "x";//Daria Error;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                silo_para_suministro = "-";
+            }
+        }
+        
         public void AgregarFila(int i, ref DataTable dtGeneral)
         {
             string llegadasTiempo = Stringficar(Llegadas.Tiempo);
