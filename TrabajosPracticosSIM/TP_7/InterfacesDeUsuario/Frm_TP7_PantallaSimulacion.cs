@@ -20,7 +20,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
         }
         private void CargarTextBoxes()
         {
-            tb_cant_sim.Text = "2";
+            tb_cant_sim.Text = "500";
             tb_desde.Text = "";
             tb_hasta.Text = "";
         }
@@ -90,9 +90,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
 
             for (int i = 0; i < dgvSimulacion.ColumnCount; i++)
             {
-                if (i >= 1 && i <= 3 || i >= 7 && i <= 11 || i >= 17 && i <= 21 || i >= 27 && i <= 32 ||  i == 35 || i >= 37 && i <= 42
-                    || i >= 37 && i <= 42 || i == 46 || i >= 48 && i <= 49 || i >= 56 && i <= 67 || i >= 74 && i <= 75 || i >= 86 && i <= 89
-                    || i >= 94 && i <= 95)
+                if (i >= 1 && i <= 5 || i == 10  || i >= 13 && i <= 15  || i >= 27 && i <= 37 || i >= 50 && i <= 60)
                     dgvSimulacion.Columns[i].DefaultCellStyle.BackColor = Color.LightYellow;
                 else
                     dgvSimulacion.Columns[i].HeaderCell.Style.BackColor = Color.LightSkyBlue;
