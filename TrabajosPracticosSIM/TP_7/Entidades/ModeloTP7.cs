@@ -65,7 +65,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         private void IniciarS1()
         {
             S1.Nombre = "S1";
-            S1.Distr = new Uniforme(1, 2);
+            //S1.Distr = new Uniforme(1, 2);
+            S1.Distr = new ED();
             S1.Fin_Descarga_Propio = EventosFabrica.Fin_Descarga_S1;
             S1.Fin_Lleno_Silo_Propio = EventosFabrica.Silo_Lleno_S1;
             S1.Fin_Suministro_Propio = EventosFabrica.Fin_Suministro_S1;
@@ -76,7 +77,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         private void IniciarS2()
         {
             S2.Nombre = "S2";
-            S2.Distr = new Uniforme(1, 2);
+            //S2.Distr = new Uniforme(1, 2);
+            S2.Distr = new ED();
             S2.Estado = Estados.Suministrando;
             S2.Capacidad_actual = 20;
             S2.Fin_Descarga_Propio = EventosFabrica.Fin_Descarga_S2;
@@ -89,7 +91,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         private void IniciarS3()
         {
             S3.Nombre = "S3";
-            S3.Distr = new Uniforme(1, 2);
+            //S3.Distr = new Uniforme(1, 2);
+            S3.Distr = new ED();
             S3.Fin_Descarga_Propio = EventosFabrica.Fin_Descarga_S3;
             S3.Fin_Lleno_Silo_Propio = EventosFabrica.Silo_Lleno_S3;
             S3.Fin_Suministro_Propio = EventosFabrica.Fin_Suministro_S3;
@@ -100,7 +103,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         private void IniciarS4()
         {
             S4.Nombre = "S4";
-            S4.Distr = new Uniforme(1, 2);
+            //S4.Distr = new Uniforme(1, 2);
+            S4.Distr = new ED();
             S4.Fin_Descarga_Propio = EventosFabrica.Fin_Descarga_S4;
             S4.Fin_Lleno_Silo_Propio = EventosFabrica.Silo_Lleno_S4;
             S4.Fin_Suministro_Propio = EventosFabrica.Fin_Suministro_S4;
