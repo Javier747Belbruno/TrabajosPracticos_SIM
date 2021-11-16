@@ -508,7 +508,21 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
                 silo_para_suministro = "-";
             }
         }
-        
+
+        public void CalcularSilos()
+        {
+            foreach (Silo s in ListaSilos)
+            {
+                /*s.CalcularCola(evento);
+                s.CalcularEstado(evento);
+                s.CalcularNroPedidoEnAtencion(evento, nro_pedido);*/
+                s.CalcularRandom();
+                /*s.CalcularTiempo();
+                s.CalcularTiempoProx(reloj);*/
+            }
+
+        }
+
         public void AgregarFila(int i, ref DataTable dtGeneral)
         {
             string llegadasTiempo = Stringficar(Llegadas.Tiempo);

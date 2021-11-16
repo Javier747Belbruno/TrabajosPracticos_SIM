@@ -143,11 +143,11 @@ namespace TrabajosPracticosSIM.TP_7
                 m.CalcularTiempoCambio();
 
                 m.CalcularSiloParaSuministrar();
-                /*
+                
 
-                modelo.CalcularServidoresYColas();
+                m.CalcularSilos();
 
-                modelo.CalcularPedidosRealizados();
+                /*modelo.CalcularPedidosRealizados();
 
                 modelo.CalcularNroPedidoRealizado();
 
