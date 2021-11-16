@@ -35,6 +35,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         public double? tn_primer_camion_en_salir { get; set; } = null;
         public Queue<int> cola_camiones { get; set; } = new Queue<int>();
         public Queue<double> cola_tn { get; set; } = new Queue<double>();
+        public int cantidad_cola { get; set; } = 0;
+        public int cantidad_cola_anterior { get; set; } = 0;
         public double? tiempo_cambio { get; set; } = 0.00;
         public string silo_para_suministro { get; set; } = Estados.S2;
 
@@ -62,21 +64,49 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         }
         private void IniciarS1()
         {
-            S1.Distr = new Uniforme(5, 6);
+            S1.Nombre = "S1";
+            S1.Distr = new Uniforme(1, 2);
+            S1.Fin_Descarga_Propio = EventosFabrica.Fin_Descarga_S1;
+            S1.Fin_Lleno_Silo_Propio = EventosFabrica.Silo_Lleno_S1;
+            S1.Fin_Suministro_Propio = EventosFabrica.Fin_Suministro_S1;
+            S1.Fin_Suministro_Propio_2 = EventosFabrica.Fin_Suministro_S2;
+            S1.Fin_Suministro_Propio_3 = EventosFabrica.Fin_Suministro_S3;
+            S1.Fin_Suministro_Propio_4 = EventosFabrica.Fin_Suministro_S4;
         }
         private void IniciarS2()
         {
-            S2.Distr = new Uniforme(5, 6);
+            S2.Nombre = "S2";
+            S2.Distr = new Uniforme(1, 2);
             S2.Estado = Estados.Suministrando;
             S2.Capacidad_actual = 20;
+            S2.Fin_Descarga_Propio = EventosFabrica.Fin_Descarga_S2;
+            S2.Fin_Lleno_Silo_Propio = EventosFabrica.Silo_Lleno_S2;
+            S2.Fin_Suministro_Propio = EventosFabrica.Fin_Suministro_S2;
+            S2.Fin_Suministro_Propio_2 = EventosFabrica.Fin_Suministro_S1;
+            S2.Fin_Suministro_Propio_3 = EventosFabrica.Fin_Suministro_S3;
+            S2.Fin_Suministro_Propio_4 = EventosFabrica.Fin_Suministro_S4;
         }
         private void IniciarS3()
         {
-            S3.Distr = new Uniforme(5, 6);
+            S3.Nombre = "S3";
+            S3.Distr = new Uniforme(1, 2);
+            S3.Fin_Descarga_Propio = EventosFabrica.Fin_Descarga_S3;
+            S3.Fin_Lleno_Silo_Propio = EventosFabrica.Silo_Lleno_S3;
+            S3.Fin_Suministro_Propio = EventosFabrica.Fin_Suministro_S3;
+            S3.Fin_Suministro_Propio_2 = EventosFabrica.Fin_Suministro_S1;
+            S3.Fin_Suministro_Propio_3 = EventosFabrica.Fin_Suministro_S2;
+            S3.Fin_Suministro_Propio_4 = EventosFabrica.Fin_Suministro_S4;
         }
         private void IniciarS4()
         {
-            S4.Distr = new Uniforme(5, 6);
+            S4.Nombre = "S4";
+            S4.Distr = new Uniforme(1, 2);
+            S4.Fin_Descarga_Propio = EventosFabrica.Fin_Descarga_S4;
+            S4.Fin_Lleno_Silo_Propio = EventosFabrica.Silo_Lleno_S4;
+            S4.Fin_Suministro_Propio = EventosFabrica.Fin_Suministro_S4;
+            S4.Fin_Suministro_Propio_2 = EventosFabrica.Fin_Suministro_S1;
+            S4.Fin_Suministro_Propio_3 = EventosFabrica.Fin_Suministro_S2;
+            S4.Fin_Suministro_Propio_4 = EventosFabrica.Fin_Suministro_S3;
         }
         private void IniciarListaSilos()
         {
@@ -121,7 +151,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         public void CalcularReloj()
         {
             reloj_anterior = reloj;
-            double hora = Math.Truncate(reloj) + 1;
+            double hora = Math.Truncate(reloj+1);
             double prox = ProxTiempoMinimo();
             if (hora < prox)
                 reloj = hora;
@@ -170,7 +200,12 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
 
         public  void CalcularSiloDesignado()
         {
-            if(evento==EventosFabrica.Llegada && (cola_camiones.Count > 0 || tubo_aspirador == "-"))
+            if(evento==EventosFabrica.Llegada && (cola_camiones.Count > 0 || tubo_aspirador == "-"
+                     || (tubo_aspirador == Estados.S1 && S1.Estado == Estados.Ocupado)
+                     || (tubo_aspirador == Estados.S2 && S2.Estado == Estados.Ocupado)
+                     || (tubo_aspirador == Estados.S3 && S3.Estado == Estados.Ocupado)
+                     || (tubo_aspirador == Estados.S4 && S4.Estado == Estados.Ocupado)
+                     ))
             {
                 silo_designado = Estados.Espera;
             }
@@ -245,7 +280,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         }
         private string DeterminarEvento(double reloj)
         {
-            if (reloj == Math.Truncate(reloj) + 1)
+            if (reloj == Math.Truncate(reloj_anterior+1))
                 return EventosFabrica.Hora;
             if (reloj == Llegadas.Tiempo_Prox)
                 return EventosFabrica.Llegada;
@@ -451,6 +486,12 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
             }
         }
 
+        public void CalcularCantidadCola()
+        {
+            cantidad_cola_anterior = cantidad_cola;
+            cantidad_cola = cola_camiones.Count;
+        }
+
         public void CalcularTiempoCambio()
         {
             if (evento == EventosFabrica.Preparacion_Lista)
@@ -513,11 +554,23 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         {
             foreach (Silo s in ListaSilos)
             {
-                /*s.CalcularCola(evento);
-                s.CalcularEstado(evento);
-                s.CalcularNroPedidoEnAtencion(evento, nro_pedido);*/
+                s.CalcularCapacidadActual(reloj,reloj_anterior,evento);
+                s.CalcularEstado(evento,silo_designado,tubo_aspirador,nro_primer_camion_en_salir,
+                                 cantidad_cola_anterior,silo_para_suministro);
+                s.CalcularNroCamion(evento, nro_camion, silo_designado, tubo_aspirador,
+                                     nro_primer_camion_en_salir, cantidad_cola_anterior);
+                s.CalcularCapacidadCamionInicial(evento,silo_designado,tn_actuales_camion,tubo_aspirador
+                                                    ,tn_primer_camion_en_salir,cantidad_cola_anterior);
+                s.CalcularTasaDeDescarga();
+                s.CalcularTiempoFinLlenadoSilo();
+                s.CalcularProxFinLlenadoSilo(reloj,evento);
+                s.CalcularTiempoFinDescarga();
+                s.CalcularProxFinDescarga(reloj);
+                s.CalcularCapacidadCamionFinal();
+                s.CalcularTiempoFinSuministro(reloj);
+                /*s.CalcularNroPedidoEnAtencion(evento, nro_pedido);
                 s.CalcularRandom();
-                /*s.CalcularTiempo();
+                s.CalcularTiempo();
                 s.CalcularTiempoProx(reloj);*/
             }
 
@@ -573,7 +626,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
                                 tubo_aspirador,
                                 nro_primer_camion_en_salir,
                                 tn_primer_camion_en_salir,
-                                cola_camiones.Count,
+                                cantidad_cola,
                                 TiempoCambio,
                                 silo_para_suministro,
                                 S1.Capacidad_actual,

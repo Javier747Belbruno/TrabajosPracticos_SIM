@@ -140,11 +140,12 @@ namespace TrabajosPracticosSIM.TP_7
 
                 m.CalcularColaTn();
 
+                m.CalcularCantidadCola();
+
                 m.CalcularTiempoCambio();
 
                 m.CalcularSiloParaSuministrar();
                 
-
                 m.CalcularSilos();
 
                 /*modelo.CalcularPedidosRealizados();

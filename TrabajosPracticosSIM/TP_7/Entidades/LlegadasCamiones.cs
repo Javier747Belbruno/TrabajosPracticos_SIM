@@ -10,7 +10,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
     public class LlegadasCamiones
     {
         Random r = new Random();
-        public int? Prox_Nro_Camion { get; set; } = null;
+        public int? Prox_Nro_Camion { get; set; } = 1;
         public IDistribucion Distr { get; set; }
         public Queue<double> Random { get; set; } = null;
         public double? Tiempo { get; set; } = null;
@@ -20,13 +20,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
 
         public void CalcularProxNroCamion(int? p_nro_camion)
         {
-            if (p_nro_camion.HasValue)
-            {
-                if (Prox_Nro_Camion == p_nro_camion)
-                    Prox_Nro_Camion++;
-            }
-            else
-                Prox_Nro_Camion = 1;
+            if (Prox_Nro_Camion == p_nro_camion)
+                Prox_Nro_Camion++;
         }
 
         public void CalcularRandom(string evento)
