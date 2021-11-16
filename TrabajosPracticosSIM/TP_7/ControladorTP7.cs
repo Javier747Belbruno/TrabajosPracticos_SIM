@@ -131,6 +131,18 @@ namespace TrabajosPracticosSIM.TP_7
                 m.CalcularLlegada();
 
                 m.CalcularTuboAspirador();
+
+                m.DeterminarPrimeroColaCamion();
+
+                m.DeterminarPrimeroColaTn();
+
+                m.CalcularColaCamion();
+
+                m.CalcularColaTn();
+
+                m.CalcularTiempoCambio();
+
+                m.CalcularSiloParaSuministrar();
                 /*
 
                 modelo.CalcularServidoresYColas();
