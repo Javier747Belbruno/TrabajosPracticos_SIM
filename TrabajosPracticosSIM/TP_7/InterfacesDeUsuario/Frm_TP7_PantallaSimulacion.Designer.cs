@@ -181,9 +181,9 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             this.pnl_Config.Controls.Add(this.label2);
             this.pnl_Config.Controls.Add(this.btn_config);
             this.pnl_Config.Controls.Add(this.label1);
-            this.pnl_Config.Location = new System.Drawing.Point(17, 630);
+            this.pnl_Config.Location = new System.Drawing.Point(17, 623);
             this.pnl_Config.Name = "pnl_Config";
-            this.pnl_Config.Size = new System.Drawing.Size(334, 134);
+            this.pnl_Config.Size = new System.Drawing.Size(334, 141);
             this.pnl_Config.TabIndex = 10;
             // 
             // label2
@@ -237,7 +237,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             this.btn_simular.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_simular.Location = new System.Drawing.Point(17, 459);
             this.btn_simular.Name = "btn_simular";
-            this.btn_simular.Size = new System.Drawing.Size(334, 116);
+            this.btn_simular.Size = new System.Drawing.Size(334, 148);
             this.btn_simular.TabIndex = 8;
             this.btn_simular.Text = "Simular";
             this.btn_simular.UseVisualStyleBackColor = true;

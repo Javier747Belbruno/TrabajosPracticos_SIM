@@ -271,6 +271,12 @@
     <Compile Include="TP_7\Entidades\LlegadasCamiones.cs" />
     <Compile Include="TP_7\Entidades\ModeloTP7.cs" />
     <Compile Include="TP_7\Entidades\Silo.cs" />
+    <Compile Include="TP_7\InterfacesDeUsuario\Frm_TP7_Config_Actividades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_7\InterfacesDeUsuario\Frm_TP7_Config_Actividades.Designer.cs">
+      <DependentUpon>Frm_TP7_Config_Actividades.cs</DependentUpon>
+    </Compile>
     <Compile Include="TP_7\InterfacesDeUsuario\Frm_TP7_PantallaSimulacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -376,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_6\InterfacesDeUsuario\Frm_TP6_Principal.resx">
       <DependentUpon>Frm_TP6_Principal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_7\InterfacesDeUsuario\Frm_TP7_Config_Actividades.resx">
+      <DependentUpon>Frm_TP7_Config_Actividades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_7\InterfacesDeUsuario\Frm_TP7_PantallaSimulacion.resx">
       <DependentUpon>Frm_TP7_PantallaSimulacion.cs</DependentUpon>

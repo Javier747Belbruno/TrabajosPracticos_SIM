@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajosPracticosSIM.TP_4.Entidades;
+using TrabajosPracticosSIM.TP_6.Entidades;
 using TrabajosPracticosSIM.TP_7.Entidades;
 using TrabajosPracticosSIM.TP_7.InterfacesDeUsuario;
 
@@ -25,14 +27,17 @@ namespace TrabajosPracticosSIM.TP_7
         //MODELO
         ModeloTP7 m = new ModeloTP7();
 
+
+
         //TABLA ACTIVIDADES
-        //DataTable dtActividadesPantalla = new DataTable();
+        DataTable dtActividadesPantalla = new DataTable();
 
         //Constructor Privado.
         private ControladorTP7()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            InicializarColumnasTablaActividades();
         }
         // Devolver instancia estática única.
         public static ControladorTP7 GetInstance() { return _instance; }
@@ -159,14 +164,131 @@ namespace TrabajosPracticosSIM.TP_7
             form.LlenarPantallaSimulacion(dtGeneral);
         }
 
-        private void InicializarColumnasTablas(ref DataTable dtGeneral)
+        public void OpcionPantallaConfiguracion()
         {
-            /*if (dtActividadesPantalla.Columns.Count == 0)
+            CreateView(new Frm_TP7_Config_Actividades());
+        }
+        public void OpcionCargarActividadesConfiguracion(Frm_TP7_Config_Actividades form)
+        {
+            List<string> distribuciones = new List<string>();
+            var type = typeof(IDistribucion);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p) && p.IsClass);
+
+            foreach (var item in types)
+            {
+                distribuciones.Add(item.Name);
+            }
+
+
+            DataTable dtActividades = new DataTable();
+            dtActividades.Columns.Add("SERV");
+            dtActividades.Columns.Add("DISTR");
+            dtActividades.Columns.Add("PARAM1");
+            dtActividades.Columns.Add("PARAM2");
+
+            dtActividades.Rows.Add("Lleg", m.Llegadas.Distr.GetType().Name, m.Llegadas.Distr.DevolverParam1(), m.Llegadas.Distr.DevolverParam2());
+            var i = 1;
+            foreach (Silo s in m.ListaSilos)
+            {
+                dtActividades.Rows.Add("S" + i, s.Distr.GetType().Name, s.Distr.DevolverParam1(), s.Distr.DevolverParam2()); i++;
+            }
+
+            form.LlenarCamposActividades(distribuciones, dtActividades);
+        }
+
+        private void InicializarColumnasTablaActividades()
+        {
+            if (dtActividadesPantalla.Columns.Count == 0)
             {
                 dtActividadesPantalla.Columns.Add("SERV");
                 dtActividadesPantalla.Columns.Add("DISTR");
                 dtActividadesPantalla.Columns.Add("PARAMS");
-            }*/
+            }
+
+        }
+
+        public void ActualizarActividades(DataTable dtActividadesActualizadas)
+        {
+            //Manejar la tabla por parametro y actualizar el grafo.
+            foreach (DataRow dr in dtActividadesActualizadas.Rows)
+            {
+                if (dr[0].ToString() == "0")
+                {
+                    m.Llegadas.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "1")
+                {
+                    m.S1.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "2")
+                {
+                    m.S2.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "3")
+                {
+                    m.S3.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+                if (dr[0].ToString() == "4")
+                {
+                    m.S4.Distr = getDistribucion(dr[1].ToString(),
+                                                                dr[2].ToString(),
+                                                                dr[3].ToString());
+                }
+
+            }
+
+
+            foreach (var v in Views)
+            {
+                if (v.GetType().Name == "Frm_TP7_PantallaSimulacion")
+                {
+                    var vista = (Frm_TP7_PantallaSimulacion)v;
+                    OpcionCargarPanelActividades(vista);
+                }
+            }
+        }
+        private IDistribucion getDistribucion(string dist, string pparam1, string pparam2)
+        {
+            switch (dist)
+            {
+                case "Uniforme":
+                    double param1U = Convert.ToDouble(pparam1);
+                    double param2U = Convert.ToDouble(pparam2);
+                    Uniforme u = new Uniforme(param1U, param2U);
+                    return u;
+                case "Exponencial":
+                    double param1E = Convert.ToDouble(pparam1);
+                    Exponencial e = new Exponencial(param1E);
+                    return e;
+                case "Normal":
+                    double param1N = Convert.ToDouble(pparam1);
+                    double param2N = Convert.ToDouble(pparam2);
+                    Normal n = new Normal(param1N, param2N);
+                    return n;
+                case "Constante":
+                    double param1C = Convert.ToDouble(pparam1);
+                    Constante c = new Constante(param1C);
+                    return c;
+                case "ED":
+                    ED ed = new ED();
+                    return ed;
+                default:
+                    break;
+            }
+            return null;
+        }
+        private void InicializarColumnasTablas(ref DataTable dtGeneral)
+        {
 
             dtGeneral.Columns.Add("i");
             dtGeneral.Columns.Add("Reloj");
@@ -233,6 +355,19 @@ namespace TrabajosPracticosSIM.TP_7
             dtGeneral.Columns.Add("S4 Capacidad Camion Final");
             dtGeneral.Columns.Add("S4 Prox Fin Suministro");
 
+        }
+
+        public void OpcionCargarPanelActividades(Frm_TP7_PantallaSimulacion form)
+        {
+            dtActividadesPantalla.Clear();
+
+            dtActividadesPantalla.Rows.Add("Lleg", m.Llegadas.Distr.GetType().Name, m.Llegadas.Distr.DevolverParams());
+            var i = 1;
+            foreach (Silo s in m.ListaSilos)
+            {
+                dtActividadesPantalla.Rows.Add("S" + i, s.Distr.GetType().Name, s.Distr.DevolverParams()); i++;
+            }
+            form.LlenarGridViewActividades(dtActividadesPantalla);
         }
 
     }

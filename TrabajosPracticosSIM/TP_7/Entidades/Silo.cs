@@ -26,7 +26,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         public double? Capacidad_Camion_Inicial { get; set; } = null;
         public double? Tasa_de_Descarga { get; set; } = null;
         public double? Capacidad_Camion_Final { get; set; } = null;
-        public IDistribucion Distr { get; set; }
+        public IDistribucion Distr { get; set; } = new ED();
         public Queue<double> Random { get; set; } = new Queue<double>();
         public double? Tiempo_Fin_Llenado_Silo { get; set; } = null;
         public double? Prox_Fin_Llenado_Silo { get; set; } = null;
@@ -34,9 +34,6 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         public double? Prox_Fin_Descarga { get; set; } = null;
         public double? Prox_Fin_Suministro { get; set; } = null;
 
-        public void CalcularRandom()
-        {
-        }
 
         public void CalcularCapacidadActual(double reloj,double reloj_anterior,string evento)
         {
@@ -147,6 +144,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
             }
 
         }
+
+
 
         public void CalcularNroCamion(string evento, int? nro_camion, string silo_designado, string tubo_aspirador, int? nro_primer_camion_en_salir, int cantidad_cola_anterior)
         {
@@ -339,6 +338,32 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
             {
                 Prox_Fin_Suministro = null;
             }
+        }
+
+        public void Resetear()
+        {
+            Nombre = "-";
+            Fin_Descarga_Propio = "-";
+            Fin_Lleno_Silo_Propio = "-";
+            Fin_Suministro_Propio = "-";
+            Fin_Suministro_Propio_2 = "-";
+            Fin_Suministro_Propio_3 = "-";
+            Fin_Suministro_Propio_4 = "-";
+            Capacidad_actual = 0;
+            Capacidad_actual_anterior = 0;
+            Estado = Estados.Disponible;
+            Estado_Anterior = "-";
+            Nro_Camion = null;
+            Nro_Camion_Anterior = null;
+            Capacidad_Camion_Inicial = null;
+            Tasa_de_Descarga = null;
+            Capacidad_Camion_Final = null;
+            Random = new Queue<double>();
+            Tiempo_Fin_Llenado_Silo = null;
+            Prox_Fin_Llenado_Silo = null;
+            Tiempo_Fin_Descarga = null;
+            Prox_Fin_Descarga = null;
+            Prox_Fin_Suministro = null;
         }
     }
 }
