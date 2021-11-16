@@ -24,7 +24,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         public string evento { get; set; } = EventosFabrica.Inicio;
         public int? nro_camion { get; set; } = null;
         public string silo_designado { get; set; } = "-";
-        public int? tn_actuales_camion { get; set; } = null;
+        public double? tn_actuales_camion { get; set; } = null;
 
         #endregion
         #region Secundarias
@@ -104,6 +104,277 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
             Llegadas.CalcularTiempo();
             Llegadas.CalcularProxTiempo(reloj);
             Llegadas.CalcularCapacidadCamion();
+        }
+
+        public void CalcularReloj()
+        {
+            reloj_anterior = reloj;
+            double hora = Math.Truncate(reloj) + 1;
+            double prox = ProxTiempoMinimo();
+            if (hora < prox)
+                reloj = hora;
+            else
+                reloj = prox; 
+        }
+
+        public void CalcularNroCamion()
+        {
+            nro_camion = DeterminarNumeroCamion(evento);
+        }
+
+        private int? DeterminarNumeroCamion(string evento)
+        {
+            switch (evento)
+            {
+                case EventosFabrica.Llegada:
+                    return Llegadas.Prox_Nro_Camion;
+                case EventosFabrica.Hora:
+                    return null;
+                case EventosFabrica.Preparacion_Lista:
+                    if (nro_primer_camion_en_salir.HasValue)
+                        return nro_primer_camion_en_salir;
+                    else
+                        return null;
+                case EventosFabrica.Fin_Descarga_S1:
+                    return S1.Nro_Camion;
+                case EventosFabrica.Silo_Lleno_S1:
+                    return S1.Nro_Camion;
+                case EventosFabrica.Fin_Descarga_S2:
+                    return S2.Nro_Camion;
+                case EventosFabrica.Silo_Lleno_S2:
+                    return S2.Nro_Camion;
+                case EventosFabrica.Fin_Descarga_S3:
+                    return S3.Nro_Camion;
+                case EventosFabrica.Silo_Lleno_S3:
+                    return S3.Nro_Camion;
+                case EventosFabrica.Fin_Descarga_S4:
+                    return S4.Nro_Camion;
+                case EventosFabrica.Silo_Lleno_S4:
+                    return S4.Nro_Camion;
+                default:
+                    return nro_camion;
+            }
+        }
+
+        public  void CalcularSiloDesignado()
+        {
+            if(evento==EventosFabrica.Llegada && (cola_camiones.Count > 0 || tubo_aspirador == "-"))
+            {
+                silo_designado = Estados.Espera;
+            }
+            else
+            {
+                if(evento == EventosFabrica.Hora || evento == EventosFabrica.Fin_Suministro_S1  
+                    || evento == EventosFabrica.Fin_Suministro_S2 || evento == EventosFabrica.Fin_Suministro_S3 
+                    || evento == EventosFabrica.Fin_Suministro_S4)
+                {
+                    silo_designado = "-";
+                }
+                else
+                {
+                    silo_designado = tubo_aspirador;
+                }
+            }
+        }
+        private double ProxTiempoMinimo()
+        {
+            List<double> proximos_tiempos = new List<double>();
+            double? t1 = Llegadas.Tiempo_Prox;
+            double? t2 = S1.Prox_Fin_Llenado_Silo;
+            double? t3 = S1.Prox_Fin_Descarga;
+            double? t4 = S1.Prox_Fin_Suministro;
+            double? t5 = S2.Prox_Fin_Llenado_Silo;
+            double? t6 = S2.Prox_Fin_Descarga;
+            double? t7 = S2.Prox_Fin_Suministro;
+            double? t8 = S3.Prox_Fin_Llenado_Silo;
+            double? t9 = S3.Prox_Fin_Descarga;
+            double? t10 = S3.Prox_Fin_Suministro;
+            double? t11 = S4.Prox_Fin_Llenado_Silo;
+            double? t12 = S4.Prox_Fin_Descarga;
+            double? t13 = S4.Prox_Fin_Suministro;
+            double? t14 = tiempo_cambio;
+
+            if (t1.HasValue)
+                proximos_tiempos.Add((double)t1);
+            if (t2.HasValue)
+                proximos_tiempos.Add((double)t2);
+            if (t3.HasValue)
+                proximos_tiempos.Add((double)t3);
+            if (t4.HasValue)
+                proximos_tiempos.Add((double)t4);
+            if (t5.HasValue)
+                proximos_tiempos.Add((double)t5);
+            if (t6.HasValue)
+                proximos_tiempos.Add((double)t6);
+            if (t7.HasValue)
+                proximos_tiempos.Add((double)t7);
+            if (t8.HasValue)
+                proximos_tiempos.Add((double)t8);
+            if (t9.HasValue)
+                proximos_tiempos.Add((double)t9);
+            if (t10.HasValue)
+                proximos_tiempos.Add((double)t10);
+            if (t11.HasValue)
+                proximos_tiempos.Add((double)t11);
+            if (t12.HasValue)
+                proximos_tiempos.Add((double)t12);
+            if (t13.HasValue)
+                proximos_tiempos.Add((double)t13);
+            if (t14.HasValue)
+                proximos_tiempos.Add((double)t14);
+            proximos_tiempos.Sort();
+
+            return proximos_tiempos.First();
+        }
+
+        public void CalcularEvento()
+        {
+            evento = DeterminarEvento(reloj);
+        }
+        private string DeterminarEvento(double reloj)
+        {
+            if (reloj == Math.Truncate(reloj) + 1)
+                return EventosFabrica.Hora;
+            if (reloj == Llegadas.Tiempo_Prox)
+                return EventosFabrica.Llegada;
+            if (reloj == S1.Prox_Fin_Llenado_Silo)
+                return EventosFabrica.Silo_Lleno_S1;
+            if (reloj == S1.Prox_Fin_Descarga)
+                return EventosFabrica.Fin_Descarga_S1;
+            if (reloj == S1.Prox_Fin_Suministro)
+                return EventosFabrica.Fin_Suministro_S1;
+            if (reloj == S2.Prox_Fin_Llenado_Silo)
+                return EventosFabrica.Silo_Lleno_S2;
+            if (reloj == S2.Prox_Fin_Descarga)
+                return EventosFabrica.Fin_Descarga_S2;
+            if (reloj == S2.Prox_Fin_Suministro)
+                return EventosFabrica.Fin_Suministro_S2;
+            if (reloj == S3.Prox_Fin_Llenado_Silo)
+                return EventosFabrica.Silo_Lleno_S3;
+            if (reloj == S3.Prox_Fin_Descarga)
+                return EventosFabrica.Fin_Descarga_S3;
+            if (reloj == S3.Prox_Fin_Suministro)
+                return EventosFabrica.Fin_Suministro_S3;
+            if (reloj == S4.Prox_Fin_Llenado_Silo)
+                return EventosFabrica.Silo_Lleno_S4;
+            if (reloj == S4.Prox_Fin_Descarga)
+                return EventosFabrica.Fin_Descarga_S4;
+            if (reloj == S4.Prox_Fin_Suministro)
+                return EventosFabrica.Fin_Suministro_S4;
+            if (reloj == tiempo_cambio)
+                return EventosFabrica.Preparacion_Lista;
+            return "x";
+        }
+
+        public void CalcularTnCamionActual()
+        {
+            tn_actuales_camion = DeterminarTnCamionActual(evento);
+        }
+        public double? DeterminarTnCamionActual(string evento)
+        {
+            switch (evento)
+            {
+                case EventosFabrica.Llegada:
+                    return Llegadas.Capacidad_Camion;
+
+                case EventosFabrica.Preparacion_Lista:
+                    if (nro_camion.HasValue)
+                    {
+                        if (tn_primer_camion_en_salir.HasValue)
+                        {
+                            return tn_primer_camion_en_salir;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                    else
+                    {
+                        return tn_actuales_camion;
+                    };
+
+                case EventosFabrica.Fin_Descarga_S1:
+                    return S1.Capacidad_Camion_Final;
+                case EventosFabrica.Silo_Lleno_S1:
+                    return S1.Capacidad_Camion_Final;
+                case EventosFabrica.Fin_Descarga_S2:
+                    return S2.Capacidad_Camion_Final;
+                case EventosFabrica.Silo_Lleno_S2:
+                    return S2.Capacidad_Camion_Final;
+                case EventosFabrica.Fin_Descarga_S3:
+                    return S3.Capacidad_Camion_Final;
+                case EventosFabrica.Silo_Lleno_S3:
+                    return S3.Capacidad_Camion_Final;
+                case EventosFabrica.Fin_Descarga_S4:
+                    return S4.Capacidad_Camion_Final;
+                case EventosFabrica.Silo_Lleno_S4:
+                    return S4.Capacidad_Camion_Final;
+                default:
+                    return null;
+            }
+        }
+
+        public void CalcularTuboAspirador()
+        {
+            tubo_aspirador = DeterminarTuboAspirador(evento);
+        }
+
+        public string DeterminarTuboAspirador(string evento)
+        {
+            switch (evento)
+            {
+
+                case EventosFabrica.Preparacion_Lista:
+                    if (S1.Estado == Estados.Disponible && S1.Capacidad_actual < 20)
+                    {
+                        return Estados.S1;
+                    }
+                    else
+                    {
+                        if (S2.Estado == Estados.Disponible && S2.Capacidad_actual < 20)
+                        {
+                            return Estados.S2;
+                        }
+                        else
+                        {
+                            if (S3.Estado == Estados.Disponible && S3.Capacidad_actual < 20)
+                            {
+                                return Estados.S3;
+                            }
+                            else
+                            {
+                                if (S4.Estado == Estados.Disponible && S4.Capacidad_actual < 20)
+                                {
+                                    return Estados.S4;
+                                }
+                                else
+                                {
+                                    return Estados.Espera;
+                                }
+                            }
+                        }
+                    }
+
+                case EventosFabrica.Silo_Lleno_S1:
+                    return "-";
+                case EventosFabrica.Silo_Lleno_S2:
+                    return "-";
+                case EventosFabrica.Silo_Lleno_S3:
+                    return "-";
+                case EventosFabrica.Silo_Lleno_S4:
+                    return "-";
+                case EventosFabrica.Fin_Suministro_S1:
+                    return "-";
+                case EventosFabrica.Fin_Suministro_S2:
+                    return "-";
+                case EventosFabrica.Fin_Suministro_S3:
+                    return "-";
+                case EventosFabrica.Fin_Suministro_S4:
+                    return "-";
+                default:
+                    return tubo_aspirador;
+            }
         }
 
         public void AgregarFila(int i, ref DataTable dtGeneral)
@@ -204,6 +475,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
                                 s4Capacidad_Camion_Final,
                                 s4Prox_Fin_Suministro);
         }
+
+
 
         private string Stringficar(double? nroconmuchosdecimales)
         {
