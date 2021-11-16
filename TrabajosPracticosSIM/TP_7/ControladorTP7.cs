@@ -118,13 +118,20 @@ namespace TrabajosPracticosSIM.TP_7
                     continue;
                 }
 
-                /*modelo.CalcularReloj();
+                m.CalcularReloj();
 
-                modelo.CalcularEvento();
+                m.CalcularEvento();
 
-                modelo.CalcularNroPedido();
+                m.CalcularNroCamion();
 
-                modelo.CalcularLlegada();
+                m.CalcularSiloDesignado();
+
+                m.CalcularTnCamionActual();
+
+                m.CalcularLlegada();
+
+                m.CalcularTuboAspirador();
+                /*
 
                 modelo.CalcularServidoresYColas();
 

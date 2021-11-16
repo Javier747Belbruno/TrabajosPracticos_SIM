@@ -18,11 +18,11 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
         public int Capacidad_Camion { get; set; } = 0;
 
 
-        public void CalcularProxNroCamion(int? nro_pedido)
+        public void CalcularProxNroCamion(int? p_nro_camion)
         {
-            if (nro_pedido.HasValue)
+            if (p_nro_camion.HasValue)
             {
-                if (Prox_Nro_Camion == nro_pedido)
+                if (Prox_Nro_Camion == p_nro_camion)
                     Prox_Nro_Camion++;
             }
             else
