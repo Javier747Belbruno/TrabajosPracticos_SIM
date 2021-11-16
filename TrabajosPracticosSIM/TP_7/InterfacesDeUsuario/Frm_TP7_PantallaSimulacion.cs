@@ -27,7 +27,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
 
         private void CargarPanelActividades()
         {
-            //ControladorTP5.GetInstance().OpcionCargarPanelActividades(this);
+            ControladorTP7.GetInstance().OpcionCargarPanelActividades(this);
         }
 
         private void btn_simular_Click(object sender, EventArgs e)
@@ -105,7 +105,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
 
         private void btn_config_Click(object sender, EventArgs e)
         {
-            //ControladorTP5.GetInstance().OpcionPantallaConfiguracion();
+            ControladorTP7.GetInstance().OpcionPantallaConfiguracion();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
     {
         Random r = new Random();
         public int? Prox_Nro_Camion { get; set; } = 1;
-        public IDistribucion Distr { get; set; }
+        public IDistribucion Distr { get; set; } = new Uniforme(5, 9);
         public Queue<double> Random { get; set; } = null;
         public double? Tiempo { get; set; } = null;
         public double? Tiempo_Prox { get; set; } = null;
@@ -73,7 +73,7 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
 
         public void Resetear()
         {
-            Prox_Nro_Camion = null;
+            Prox_Nro_Camion = 1;
             Random = null;
             Tiempo = null;
             Tiempo_Prox = null;
