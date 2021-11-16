@@ -265,6 +265,7 @@
       <DependentUpon>Frm_TP6_Principal.cs</DependentUpon>
     </Compile>
     <Compile Include="TP_7\ControladorTP7.cs" />
+    <Compile Include="TP_7\Entidades\ED.cs" />
     <Compile Include="TP_7\Entidades\Estados.cs" />
     <Compile Include="TP_7\Entidades\EventosFabrica.cs" />
     <Compile Include="TP_7\Entidades\LlegadasCamiones.cs" />
