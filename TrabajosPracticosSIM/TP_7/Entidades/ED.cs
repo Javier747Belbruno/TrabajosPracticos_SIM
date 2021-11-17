@@ -113,8 +113,8 @@ namespace TrabajosPracticosSIM.TP_7.Entidades
 
         public string DevolverParams()
         {
-            return a.DevolverParams() + " " + b.DevolverParams() + " " + c.DevolverParams()
-                + " " + h.DevolverParams() + " " + x0.DevolverParams() + " " + Dx0.DevolverParams();
+            return "A: ( " + a.DevolverParams() + " ),  B: ( " + b.DevolverParams() + " ), C: ( " + c.DevolverParams()
+                + " ), h: ( " + h.DevolverParams() + " ), D(0): ( " + x0.DevolverParams() + " ), D'(0): ( " + Dx0.DevolverParams() + " )";
         }
 
         public int CantidadDeRandoms()

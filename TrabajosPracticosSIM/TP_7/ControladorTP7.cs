@@ -101,7 +101,7 @@ namespace TrabajosPracticosSIM.TP_7
             CreateView(new Frm_TP7_PantallaSimulacion());
         }
 
-        public void OpcionIniciarSimulacion(Frm_TP7_PantallaSimulacion form, int cant_sim, int desde, int hasta)
+        public void OpcionIniciarSimulacion(Frm_TP7_PantallaSimulacion form, int cant_sim, int desde, int hasta, bool @checked)
         {
 
             //TABLA GENERAL
@@ -156,7 +156,17 @@ namespace TrabajosPracticosSIM.TP_7
                 //Recordar solo las que pide
                 if ((i >= 1 && i <= 500) || (i >= desde && i <= hasta) || i == cant_sim)
                 {
-                    m.AgregarFila(i, ref dtGeneral);
+                    if (@checked) {
+                        if(m.evento != EventosFabrica.Hora)
+                            {
+                              m.AgregarFila(i, ref dtGeneral);
+                            }
+                    }
+                    else
+                    {
+                        m.AgregarFila(i, ref dtGeneral);
+                    }
+                    
                 }
             }
             #endregion

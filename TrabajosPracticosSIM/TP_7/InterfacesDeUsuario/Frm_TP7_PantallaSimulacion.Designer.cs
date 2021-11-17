@@ -47,6 +47,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             this.label1 = new System.Windows.Forms.Label();
             this.dgvSimulacion = new System.Windows.Forms.DataGridView();
             this.btn_simular = new System.Windows.Forms.Button();
+            this.chk_hora = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.pnl_Actividades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActividades)).BeginInit();
@@ -58,6 +59,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.chk_hora);
             this.panel1.Controls.Add(this.tb_hasta);
             this.panel1.Controls.Add(this.tb_desde);
             this.panel1.Controls.Add(this.label6);
@@ -73,7 +75,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             // 
             // tb_hasta
             // 
-            this.tb_hasta.Location = new System.Drawing.Point(142, 149);
+            this.tb_hasta.Location = new System.Drawing.Point(144, 119);
             this.tb_hasta.Name = "tb_hasta";
             this.tb_hasta.Size = new System.Drawing.Size(145, 26);
             this.tb_hasta.TabIndex = 15;
@@ -81,7 +83,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             // 
             // tb_desde
             // 
-            this.tb_desde.Location = new System.Drawing.Point(142, 117);
+            this.tb_desde.Location = new System.Drawing.Point(144, 87);
             this.tb_desde.Name = "tb_desde";
             this.tb_desde.Size = new System.Drawing.Size(145, 26);
             this.tb_desde.TabIndex = 14;
@@ -91,7 +93,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(55, 152);
+            this.label6.Location = new System.Drawing.Point(57, 122);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 21);
             this.label6.TabIndex = 13;
@@ -101,7 +103,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(55, 126);
+            this.label7.Location = new System.Drawing.Point(57, 96);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 21);
             this.label7.TabIndex = 12;
@@ -109,7 +111,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             // 
             // tb_cant_sim
             // 
-            this.tb_cant_sim.Location = new System.Drawing.Point(142, 60);
+            this.tb_cant_sim.Location = new System.Drawing.Point(144, 45);
             this.tb_cant_sim.Name = "tb_cant_sim";
             this.tb_cant_sim.Size = new System.Drawing.Size(145, 26);
             this.tb_cant_sim.TabIndex = 11;
@@ -119,7 +121,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 77);
+            this.label5.Location = new System.Drawing.Point(5, 62);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(134, 21);
             this.label5.TabIndex = 10;
@@ -129,7 +131,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 60);
+            this.label4.Location = new System.Drawing.Point(5, 45);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 21);
             this.label4.TabIndex = 9;
@@ -243,6 +245,16 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
             this.btn_simular.UseVisualStyleBackColor = true;
             this.btn_simular.Click += new System.EventHandler(this.btn_simular_Click);
             // 
+            // chk_hora
+            // 
+            this.chk_hora.AutoSize = true;
+            this.chk_hora.Location = new System.Drawing.Point(44, 160);
+            this.chk_hora.Name = "chk_hora";
+            this.chk_hora.Size = new System.Drawing.Size(267, 22);
+            this.chk_hora.TabIndex = 16;
+            this.chk_hora.Text = "Omitir mostrar Evento Cambio de Hora";
+            this.chk_hora.UseVisualStyleBackColor = true;
+            // 
             // Frm_TP7_PantallaSimulacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -289,5 +301,6 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvSimulacion;
         private System.Windows.Forms.Button btn_simular;
+        private System.Windows.Forms.CheckBox chk_hora;
     }
 }
