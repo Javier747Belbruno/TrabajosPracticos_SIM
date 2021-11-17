@@ -57,7 +57,7 @@ namespace TrabajosPracticosSIM.TP_7.InterfacesDeUsuario
                 {
                     throw (new Exception("El parametro hasta no puede superar la cant de sim"));
                 }
-                ControladorTP7.GetInstance().OpcionIniciarSimulacion(this, cant_sim, desde, hasta);
+                ControladorTP7.GetInstance().OpcionIniciarSimulacion(this, cant_sim, desde, hasta,chk_hora.Checked);
             }
             catch (Exception ex)
             {
